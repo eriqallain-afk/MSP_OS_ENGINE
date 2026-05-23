@@ -68,7 +68,7 @@ $uptimeF = "{0}j {1}h {2}min" -f [int]$uptime.TotalDays, $uptime.Hours, $uptime.
     LastReboot  = $os.LastBootUpTime.ToString("yyyy-MM-dd HH:mm")
     Uptime      = $uptimeF
     UptimeDays  = [math]::Round($uptime.TotalDays, 1)
-} | Format-List
+} | Out-String -Width 300 | Write-Output
 
 if ($uptime.TotalDays -gt 30) {
     Write-Host "  ⚠ UPTIME > 30 JOURS — redémarrage probablement requis depuis longtemps" -ForegroundColor Yellow
@@ -92,7 +92,7 @@ $ramPct = [math]::Round(($ramUsed / $ramTot) * 100, 0)
     UsedGB     = $ramUsed
     FreeGB     = $ramLib
     UsedPct    = "$ramPct%"
-} | Format-List
+} | Out-String -Width 300 | Write-Output
 
 if ($ramPct -gt 90) {
     Write-Host "  ⚠ RAM > 90% — vérifier avant intervention" -ForegroundColor Yellow
@@ -111,7 +111,7 @@ Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Used -gt 0 } |
         @{N='UsedGB';  E={[math]::Round($_.Used/1GB,1)}},
         @{N='FreeGB';  E={[math]::Round($_.Free/1GB,1)}},
         @{N='Free%';   E={[math]::Round($_.Free/($_.Used+$_.Free)*100,0)}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 
 # ─────────────────────────────────────────────────────────────
 # 4. PENDING REBOOT — 4 FLAGS
@@ -132,7 +132,7 @@ $anyPending = $CBS -or $WU -or $PFR -or $CCM
     PendingFileRenameOperations = $PFR
     CCMClientRebootPending      = $CCM
     "-- REBOOT REQUIS --"       = $anyPending
-} | Format-List
+} | Out-String -Width 300 | Write-Output
 
 if ($anyPending) {
     $flagsActifs = @()
@@ -214,7 +214,7 @@ if ($svcDC -and $svcDC.Status -eq 'Running') {
             Infra_Master        = $domain.InfrastructureRoleOwner.Name
             Schema_Master       = $forest.SchemaRoleOwner.Name
             DomainNaming_Master = $forest.NamingRoleOwner.Name
-        } | Format-List
+        } | Out-String -Width 300 | Write-Output
     } catch {
         Write-Host "  [À CONFIRMER] Impossible de lire les rôles FSMO : $_" -ForegroundColor Yellow
     }
@@ -248,11 +248,11 @@ if ($svcSQL) {
     Write-Host $Sep
 
     Write-Host "  >> Instances SQL détectées :"
-    $svcSQL | Select-Object Name, Status, StartType | Format-Table -AutoSize
+    $svcSQL | Select-Object Name, Status, StartType | Out-String -Width 300 | Write-Output
 
     Write-Host "  >> SQL Agent :"
     if ($svcSQLAgent) {
-        $svcSQLAgent | Select-Object Name, Status | Format-Table -AutoSize
+        $svcSQLAgent | Select-Object Name, Status | Out-String -Width 300 | Write-Output
     } else {
         Write-Host "  SQL Agent non détecté" -ForegroundColor Yellow
     }
@@ -265,7 +265,7 @@ if ($svcSQL) {
         Get-SqlDatabase -ServerInstance $instanceName -ErrorAction SilentlyContinue |
             Select-Object Name, Status, RecoveryModel,
                 @{N='SizeMB';E={[math]::Round($_.Size,0)}} |
-            Format-Table -AutoSize
+            Out-String -Width 300 | Write-Output
     } catch {
         Write-Host "  Module SqlServer non disponible — vérification manuelle recommandée" -ForegroundColor Yellow
         Write-Host "  Instances : $($svcSQL.Name -join ', ')"
@@ -307,7 +307,7 @@ if ($svcPrint -and $svcPrint.Status -eq 'Running') {
     try {
         Get-Printer | Where-Object { $_.Shared -eq $true } |
             Select-Object Name, ShareName, DriverName, PortName, PrinterStatus |
-            Format-Table -AutoSize
+            Out-String -Width 300 | Write-Output
     } catch {
         Write-Host "  [À CONFIRMER] Get-Printer non disponible" -ForegroundColor Yellow
     }
@@ -315,7 +315,7 @@ if ($svcPrint -and $svcPrint.Status -eq 'Running') {
     Write-Host "  >> Jobs en attente dans le spooler :"
     try {
         $jobs = Get-PrintJob -PrinterName * -ErrorAction SilentlyContinue
-        if ($jobs) { $jobs | Format-Table -AutoSize }
+        if ($jobs) { $jobs | Out-String -Width 300 | Write-Output }
         else { Write-Host "  Aucun job en attente" }
     } catch { Write-Host "  Impossible de lire le spooler" -ForegroundColor Yellow }
 }
@@ -348,7 +348,7 @@ if ($svcHyperV -and $svcHyperV.Status -eq 'Running') {
         Get-VM | Select-Object Name, State, CPUUsage,
             @{N='MemAssignedGB';E={[math]::Round($_.MemoryAssigned/1GB,1)}},
             @{N='UptimeH';E={[math]::Round($_.Uptime.TotalHours,1)}} |
-            Format-Table -AutoSize
+            Out-String -Width 300 | Write-Output
     } catch {
         Write-Host "  [À CONFIRMER] Get-VM indisponible — vérifier module Hyper-V" -ForegroundColor Yellow
     }
@@ -363,7 +363,7 @@ if ($svcVeeam) {
     Write-Host "  VEEAM BACKUP SERVER — CHECKS SPÉCIFIQUES"
     Write-Host $Sep
 
-    $svcVeeam | Select-Object Name, Status | Format-Table -AutoSize
+    $svcVeeam | Select-Object Name, Status | Out-String -Width 300 | Write-Output
 
     Write-Host "  >> ⚠ Vérifier qu'aucun job de sauvegarde n'est en cours avant le reboot"
     Write-Host "     Console Veeam → Jobs → vérifier statut Running / Idle"
@@ -378,7 +378,7 @@ Write-Host "  SERVICES AUTOMATIQUES NON DÉMARRÉS"
 Write-Host $Sep
 $svcStop = Get-Service | Where-Object { $_.StartType -eq 'Automatic' -and $_.Status -ne 'Running' }
 if ($svcStop) {
-    $svcStop | Select-Object Name, DisplayName, Status | Format-Table -AutoSize
+    $svcStop | Select-Object Name, DisplayName, Status | Out-String -Width 300 | Write-Output
 } else {
     Write-Host "  ✓ Tous les services automatiques sont démarrés"
 }
@@ -393,7 +393,7 @@ Write-Host $Sep
 $cutoff = (Get-Date).AddDays(-30)
 $hotfixes = Get-HotFix | Where-Object { $_.InstalledOn -gt $cutoff } | Sort-Object InstalledOn -Descending
 if ($hotfixes) {
-    $hotfixes | Select-Object HotFixID, InstalledOn, Description | Format-Table -AutoSize
+    $hotfixes | Select-Object HotFixID, InstalledOn, Description | Out-String -Width 300 | Write-Output
 } else {
     Write-Host "  Aucun hotfix installé dans les 30 derniers jours" -ForegroundColor Yellow
 }
@@ -414,7 +414,7 @@ foreach ($log in @('System','Application')) {
         if ($events) {
             $events | Select-Object -First 20 TimeCreated, Id, ProviderName,
                 @{N='Message';E={$_.Message.Substring(0,[math]::Min(120,$_.Message.Length))}} |
-                Format-Table -Wrap
+                Out-String -Width 300 | Write-Output
         } else {
             Write-Host "     ✓ Aucune erreur/critique sur les 2 dernières heures"
         }

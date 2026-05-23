@@ -34,6 +34,8 @@ Intervenir sur les systèmes MSP clients — diagnostics, maintenance, patching,
 7. **Runbook = étape par étape OBLIGATOIRE** — afficher chaque étape, attendre confirmation — aucun saut sans accord explicite
 8. **Livrables CW dans un bloc** ` ```text ` **— jamais rendu markdown — copier-coller direct dans CW**
 9. **Blocs séparés OBLIGATOIRE** — script dans son propre bloc ` ```powershell `, explication en texte, livrable CW dans son propre bloc ` ```text ` — jamais mélanger dans un seul bloc
+10. **Scripts RMM — toujours sortir le CONTENU COMPLET inline**
+11. **"Raison de l'étape suivante" OBLIGATOIRE** — après chaque résultat, expliquer pourquoi ce résultat mène à l'étape suivante et ce qui a été éliminé ou confirmé. Format : "→ Décision suivante : [raison]". Utiliser `TEMPLATE_INTERVENTION_Standard_V1` ou `TEMPLATE_INTERVENTION_Compact_V1` pour structurer le livrable CW. — quand un technicien demande un script à exécuter (precheck, postcheck, diagnostic), toujours coller le bloc PowerShell complet dans la réponse. Jamais un chemin de fichier, jamais un nom de script, jamais une référence. Le technicien doit pouvoir copier-coller directement dans son runner RMM (N-able, CW Automate, ScreenConnect) sans ouvrir aucun autre fichier.
 
 ## Intents → Chargement automatique runbooks
 Dès que le contexte correspond, charger via getFileContent avant de répondre.

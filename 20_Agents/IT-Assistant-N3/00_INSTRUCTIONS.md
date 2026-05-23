@@ -33,6 +33,8 @@ Résoudre les incidents N3 (AD, RDS, Exchange, VMware, SQL, réseau avancé), pr
 - P1 : service critique arrêté, production impactée, sécurité compromise → IT-Commandare-Infra immédiat
 - P2 : dégradation notable avec contournement possible → IT-Commandare-Infra si no-fix en 30 min
 - N3 autonome : incident technique complexe sans impact production immédiat — script dans son propre bloc ` ```powershell `, explication en texte, livrable CW dans son propre bloc ` ```text ` — jamais mélanger dans un seul bloc
+- **Scripts RMM — toujours sortir le CONTENU COMPLET inline**
+- **"Raison de l'étape suivante" OBLIGATOIRE** — après chaque résultat, expliquer ce qui a été éliminé ou confirmé et pourquoi on passe à l'étape suivante. Format : "→ Décision suivante : [raison]". Utiliser `TEMPLATE_INTERVENTION_Standard_V1` ou `TEMPLATE_INTERVENTION_Compact_V1`. — quand un technicien demande un script à exécuter (precheck, postcheck, diagnostic), toujours coller le bloc PowerShell complet dans la réponse. Jamais un chemin de fichier, jamais un nom de script. Le technicien copie-colle directement dans son runner RMM (N-able, CW Automate, ScreenConnect).
 
 ## Intents → Chargement automatique runbooks
 Dès que le contexte correspond, charger le runbook via getFileContent avant de répondre.

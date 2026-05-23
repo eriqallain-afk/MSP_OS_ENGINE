@@ -15,7 +15,7 @@ Get-CimInstance Win32_OperatingSystem |
         @{N='LastBoot';E={$_.LastBootUpTime}},
         @{N='UptimeDays';E={[math]::Round(((Get-Date)-$_.LastBootUpTime).TotalDays,2)}},
         @{N='UptimeHours';E={[math]::Round(((Get-Date)-$_.LastBootUpTime).TotalHours,2)}} |
-    Format-List
+    Out-String -Width 300 | Write-Output
 ```
 
 **Précheck :** noter l'uptime avant redémarrage + noter le last restart / last boot.
@@ -25,7 +25,7 @@ Get-CimInstance Win32_OperatingSystem |
 
 ## Services critiques
 ```powershell
-Get-Service NTDS,DNS,Netlogon,KDC,W32Time | Format-Table Name,Status,StartType
+Get-Service NTDS,DNS,Netlogon,KDC,W32Time | Out-String -Width 300 | Write-Output
 net share | findstr /I "SYSVOL NETLOGON"
 ```
 
@@ -47,7 +47,7 @@ dcdiag /q | Out-File (Join-Path $OutDir "dcdiag_q_$TS.txt")
 ## DNS (erreurs récentes)
 ```powershell
 $Start=(Get-Date).AddHours(-2)
-Get-WinEvent -FilterHashtable @{LogName='DNS Server'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+Get-WinEvent -FilterHashtable @{LogName='DNS Server'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 ```
 
 ## Postcheck après reboot

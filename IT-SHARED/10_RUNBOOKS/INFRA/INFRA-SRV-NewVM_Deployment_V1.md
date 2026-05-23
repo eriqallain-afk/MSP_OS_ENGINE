@@ -39,7 +39,7 @@ Start-Transcript -Path "C:\IT_LOGS\AUDIT\PreProvision_HyperV_$(Get-Date -Format 
 # Ressources hôte : CPU logiques et RAM totale
 Get-VMHost | Select-Object Name,
     @{N='CPU_LogicalProc';    E={$_.LogicalProcessorCount}},
-    @{N='RAM_Total_GB';       E={[math]::Round($_.MemoryCapacity/1GB,1)}} | Format-List
+    @{N='RAM_Total_GB';       E={[math]::Round($_.MemoryCapacity/1GB,1)}} | Out-String -Width 300 | Write-Output
 
 # RAM disponible sur l'hôte
 $os = Get-CimInstance Win32_OperatingSystem
@@ -48,7 +48,7 @@ $os = Get-CimInstance Win32_OperatingSystem
     RAM_Free_GB      = [math]::Round($os.FreePhysicalMemory/1MB, 1)
     RAM_Used_GB      = [math]::Round(($os.TotalVisibleMemorySize - $os.FreePhysicalMemory)/1MB, 1)
     RAM_Used_Pct     = [math]::Round((($os.TotalVisibleMemorySize - $os.FreePhysicalMemory)/$os.TotalVisibleMemorySize)*100, 1)
-} | Format-List
+} | Out-String -Width 300 | Write-Output
 
 # RAM allouée à toutes les VMs (overcommit check)
 $totalAllocated = (Get-VM | Measure-Object -Property MemoryStartup -Sum).Sum / 1GB
@@ -81,7 +81,7 @@ Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Used -gt 0 } |
         @{N='Used_GB';     E={[math]::Round($_.Used/1GB, 1)}},
         @{N='Free_GB';     E={[math]::Round($_.Free/1GB, 1)}},
         @{N='Free_Pct';    E={[math]::Round($_.Free/($_.Used+$_.Free)*100, 1)}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 
 # Espace par dossier de stockage VHD/VHDX
 Get-VMHost | Select-Object -ExpandProperty VirtualHardDiskPath
@@ -105,7 +105,7 @@ Get-VMHost | Select-Object Name,
     @{N='RAM_Used_GB';     E={[math]::Round($_.MemoryUsageGB, 1)}},
     @{N='RAM_Free_GB';     E={[math]::Round($_.MemoryTotalGB - $_.MemoryUsageGB, 1)}},
     @{N='RAM_Used_Pct';    E={[math]::Round($_.MemoryUsageGB/$_.MemoryTotalGB*100, 1)}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 
 # Ratio overcommit RAM par hôte
 Get-VMHost | ForEach-Object {
@@ -121,7 +121,7 @@ Get-VMHost | ForEach-Object {
         Overcommit      = "$ratio : 1"
         Status          = if ($ratio -gt 1.2) { "RISQUE PROD" } else { "OK" }
     }
-} | Format-Table -AutoSize
+} | Out-String -Width 300 | Write-Output
 
 # Datastores disponibles
 Get-Datastore | Select-Object Name,
@@ -130,7 +130,7 @@ Get-Datastore | Select-Object Name,
     @{N='Used_GB';         E={[math]::Round($_.CapacityGB - $_.FreeSpaceGB, 1)}},
     @{N='Free_Pct';        E={[math]::Round($_.FreeSpaceGB/$_.CapacityGB*100, 1)}},
     @{N='Alerte';          E={if ($_.FreeSpaceGB/$_.CapacityGB -lt 0.10) {"CRITIQUE"} elseif ($_.FreeSpaceGB/$_.CapacityGB -lt 0.20) {"ALERTE"} else {"OK"}}} |
-    Sort-Object Free_Pct | Format-Table -AutoSize
+    Sort-Object Free_Pct | Out-String -Width 300 | Write-Output
 ```
 
 ### 1.4 Seuils de décision
@@ -206,11 +206,11 @@ Get-VM | Select-Object Name, State,
     @{N='RAM_GB';    E={[math]::Round($_.MemoryStartup/1GB,1)}},
     @{N='vCPU';      E={$_.ProcessorCount}},
     ComputerName |
-    Sort-Object ComputerName, Name | Format-Table -AutoSize
+    Sort-Object ComputerName, Name | Out-String -Width 300 | Write-Output
 
 # Identifier les DCs présents sur cet hôte
 Get-VM | Where-Object { $_.Name -match "DC|CTRL|DOM" } |
-    Select-Object Name, State, ComputerName | Format-Table -AutoSize
+    Select-Object Name, State, ComputerName | Out-String -Width 300 | Write-Output
 ```
 
 ### 2.3 Vérifier la répartition actuelle des VMs par hôte — VMware PowerCLI
@@ -224,7 +224,7 @@ Get-VMHost | ForEach-Object {
         NumCpu,
         @{N='RAM_GB';    E={$_.MemoryGB}},
         @{N='ESXi_Host'; E={$h.Name}}
-} | Sort-Object ESXi_Host, Name | Format-Table -AutoSize
+} | Sort-Object ESXi_Host, Name | Out-String -Width 300 | Write-Output
 
 # Identifier les DCs par hôte (critique : anti-affinité DC/DC02)
 Get-VMHost | ForEach-Object {
@@ -232,7 +232,7 @@ Get-VMHost | ForEach-Object {
     $dcs = Get-VM -Location $h | Where-Object { $_.Name -match "DC|CTRL|DOM" }
     if ($dcs) {
         Write-Host "Hôte : $($h.Name)" -ForegroundColor Yellow
-        $dcs | Select-Object Name, PowerState | Format-Table
+        $dcs | Select-Object Name, PowerState | Out-String -Width 300 | Write-Output
     }
 }
 ```

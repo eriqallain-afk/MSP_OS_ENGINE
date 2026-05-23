@@ -2,7 +2,7 @@
 **Type :** Bundle Runbook — Assemblage complet
 **Agents :** IT-MaintenanceMaster, IT-Assistant-N3 | IT-SysAdmin
 **Description :** Patching Windows Server — Planification, exécution, WSUS, reboot
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 > Ce bundle regroupe runbooks + templates + checklists liés à ce domaine.
 > Uploader en Knowledge dans les GPTs concernés.
@@ -196,7 +196,7 @@ foreach ($Server in $Servers) {
     $Errors = Get-EventLog -ComputerName $Server -LogName System -EntryType Error -After (Get-Date).AddHours(-1) -ErrorAction SilentlyContinue
     
     if ($Errors) {
-        $Errors | Select TimeGenerated, Source, EventID, Message | Format-Table -AutoSize
+        $Errors | Select TimeGenerated, Source, EventID, Message | Out-String -Width 300 | Write-Output
     } else {
         Write-Host "No errors found" -ForegroundColor Green
     }
@@ -219,7 +219,7 @@ foreach ($Server in $Servers) {
         Write-Host "Patches manquants: $($SearchResult.Updates.Count)" -ForegroundColor $(if($SearchResult.Updates.Count -eq 0){'Green'}else{'Yellow'})
         
         if ($SearchResult.Updates.Count -gt 0) {
-            $SearchResult.Updates | Select Title, IsDownloaded | Format-Table -AutoSize
+            $SearchResult.Updates | Select Title, IsDownloaded | Out-String -Width 300 | Write-Output
         }
     }
     Remove-PSSession $Session
@@ -292,7 +292,7 @@ Start-AzVM -ResourceGroupName "RG-PROD" -Name "SRV01"
 **Uninstall specific patch** (dernier recours)
 ```powershell
 # Lister patches installés récemment
-Get-HotFix -ComputerName "SRV01" | Where-Object {$_.InstalledOn -gt (Get-Date).AddDays(-1)} | Format-Table -AutoSize
+Get-HotFix -ComputerName "SRV01" | Where-Object {$_.InstalledOn -gt (Get-Date).AddDays(-1)} | Out-String -Width 300 | Write-Output
 
 # Uninstall patch spécifique
 wusa /uninstall /kb:5034441 /quiet /norestart
@@ -327,7 +327,7 @@ $Report = foreach ($Server in $Servers) {
     $Result
 }
 
-$Report | Format-Table -AutoSize
+$Report | Out-String -Width 300 | Write-Output
 $Report | Export-Csv "PatchReport-$(Get-Date -Format yyyyMMdd).csv" -NoTypeInformation
 ```
 
@@ -429,15 +429,15 @@ $PFR = (Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Man
 $CCM = Test-Path 'HKLM:\\SOFTWARE\\Microsoft\\CCM\\RebootPending'
 [pscustomobject]@{CBS_RebootPending=$CBS; WU_RebootRequired=$WU; PendingFileRenameOperations=$PFR; CCMClientRebootPending=$CCM; PendingReboot=($CBS -or $WU -or $PFR -or $CCM)}
 
-"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Format-Table -Auto
+"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Out-String -Width 300 | Write-Output
 
 "=== TOP SERVICES (AUTO + NOT RUNNING) ==="
-Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Format-Table -Auto
+Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Out-String -Width 300 | Write-Output
 
 "=== EVENTLOG (System/Application) last 2h: Error/Critical ==="
 $Start=(Get-Date).AddHours(-2)
-Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
-Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
+Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 
 Stop-Transcript
 "PRECHECK log: $OutDir"
@@ -468,15 +468,15 @@ $PFR = (Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Man
 $CCM = Test-Path 'HKLM:\\SOFTWARE\\Microsoft\\CCM\\RebootPending'
 [pscustomobject]@{CBS_RebootPending=$CBS; WU_RebootRequired=$WU; PendingFileRenameOperations=$PFR; CCMClientRebootPending=$CCM; PendingReboot=($CBS -or $WU -or $PFR -or $CCM)}
 
-"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Format-Table -Auto
+"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Out-String -Width 300 | Write-Output
 
 "=== SERVICES (AUTO + NOT RUNNING) ==="
-Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Format-Table -Auto
+Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Out-String -Width 300 | Write-Output
 
 "=== EVENTLOG (System/Application) last 1h: Error/Critical ==="
 $Start=(Get-Date).AddHours(-1)
-Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
-Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
+Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 
 Stop-Transcript
 "POSTCHECK log: $OutDir"
@@ -554,7 +554,7 @@ Rejouer le PRECHECK + valider les services critiques.
 # TEMPLATE_MAINTENANCE_MAJ-CVE-et-Planifiee_V1
 **Agent :** IT-MaintenanceMaster, IT-Assistant-N3
 **Usage :** Communication interne pour mise à jour CVE urgente + briefing pré-maintenance
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -645,7 +645,7 @@ Fin   : Email rapport client dans les [2h] post-maintenance
 # TEMPLATE_COM_Teams-Maintenance_V1
 **Agent :** IT-TicketScribe, IT-MaintenanceMaster
 **Usage :** Annonces Teams — début, fin et incident pendant maintenance
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -722,7 +722,7 @@ Nous nous excusons pour la gêne occasionnée.
 # TEMPLATE_COM_Email-Interruption-Planifiee_V1
 **Agent :** IT-TicketScribe, IT-MaintenanceMaster
 **Usage :** Email client — notification de fenêtre de maintenance planifiée (J-48h)
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -761,7 +761,7 @@ Cordialement,
 # CHECKLIST_MAINTENANCE_Pre-Maintenance_V1
 **Agent :** IT-MaintenanceMaster, IT-Assistant-N3
 **Usage :** Avant toute maintenance planifiée (patching, redémarrage, déploiement)
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 

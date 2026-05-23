@@ -1,5 +1,4 @@
-# MSP Intelligence AI —
-**Dossier TEST de MOdification EN MSP OS ENGINE **
+# MSP Intelligence AI — Plateforme opérationnelle pour MSP
 
 > **33 agents IA spécialisés** — conçus pour automatiser, structurer et accélérer toutes les opérations d'un Managed Service Provider.
 

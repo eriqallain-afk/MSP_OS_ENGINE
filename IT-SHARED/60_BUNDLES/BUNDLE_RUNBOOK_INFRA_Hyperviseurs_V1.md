@@ -2,7 +2,7 @@
 **Type :** Bundle Runbook — Assemblage complet
 **Agents :** IT-Assistant-N3, IT-MaintenanceMaster | IT-SysAdmin
 **Description :** Virtualisation — Hyper-V, VMware vSphere, Vates XCP-ng : opérations et maintenance
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 > Ce bundle regroupe runbooks + templates + checklists liés à ce domaine.
 > Uploader en Knowledge dans les GPTs concernés.
@@ -16,7 +16,7 @@
 **ID :** RUNBOOK__HyperV_Operations_V1
 **Version :** 1.0 | **Agents :** IT-Assistant-N3, IT-MaintenanceMaster
 **Domaine :** INFRA — Virtualisation Hyper-V
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -30,26 +30,26 @@ Write-Host "=== RESSOURCES HÔTE ===" -ForegroundColor Cyan
 $os = Get-CimInstance Win32_OperatingSystem
 Get-VMHost | Select-Object Name,
     @{N='CPU_LogicalProc';E={$_.LogicalProcessorCount}},
-    @{N='RAM_Total_GB';E={[math]::Round($_.MemoryCapacity/1GB,1)}} | Format-List
+    @{N='RAM_Total_GB';E={[math]::Round($_.MemoryCapacity/1GB,1)}} | Out-String -Width 300 | Write-Output
 
 # RAM disponible hôte
 [pscustomobject]@{
     RAM_Free_GB = [math]::Round($os.FreePhysicalMemory/1MB,1)
     RAM_Total_GB = [math]::Round($os.TotalVisibleMemorySize/1MB,1)
-} | Format-List
+} | Out-String -Width 300 | Write-Output
 
 # État de toutes les VMs
 Write-Host "=== ÉTAT DES VMs ===" -ForegroundColor Cyan
 Get-VM | Select-Object Name, State, CPUUsage,
     @{N='MemAssigned_GB';E={[math]::Round($_.MemoryAssigned/1GB,2)}},
     @{N='MemDemand_GB';E={[math]::Round($_.MemoryDemand/1GB,2)}},
-    Uptime | Format-Table -AutoSize
+    Uptime | Out-String -Width 300 | Write-Output
 
 # Snapshots existants (attention aux snapshots anciens)
 Write-Host "=== SNAPSHOTS ===" -ForegroundColor Cyan
 Get-VMSnapshot -VMName * | Select-Object VMName, Name, CreationTime,
     @{N='Age_Jours';E={((Get-Date)-$_.CreationTime).Days}} |
-    Sort-Object Age_Jours -Descending | Format-Table -AutoSize
+    Sort-Object Age_Jours -Descending | Out-String -Width 300 | Write-Output
 
 # Stockage datastores
 Write-Host "=== STOCKAGE ===" -ForegroundColor Cyan
@@ -60,12 +60,12 @@ Get-VMHost | Select-Object -ExpandProperty HostHardDiskDrives |
         @{N='Size_GB';E={[math]::Round($_.Size/1GB,1)}},
         @{N='Free_GB';E={[math]::Round($_.SizeRemaining/1GB,1)}},
         @{N='Free_%';E={[math]::Round($_.SizeRemaining/$_.Size*100,0)}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 
 # Services Hyper-V
 Write-Host "=== SERVICES ===" -ForegroundColor Cyan
 Get-Service -Name vmms,vmcompute,vhdsvc,vmicheartbeat |
-    Select-Object Name, Status, StartType | Format-Table -AutoSize
+    Select-Object Name, Status, StartType | Out-String -Width 300 | Write-Output
 
 Stop-Transcript
 ```
@@ -147,7 +147,7 @@ Get-WinEvent -FilterHashtable @{
     LogName='Microsoft-Windows-Hyper-V-Worker-Admin'
     StartTime=(Get-Date).AddHours(-2)
 } | Where-Object {$_.Message -match "SRV-APP01"} |
-    Select-Object TimeCreated, Message | Format-List
+    Select-Object TimeCreated, Message | Out-String -Width 300 | Write-Output
 ```
 
 ### États courants et actions
@@ -212,7 +212,7 @@ Get-VM | Select-Object Name, State | Where-Object {$_.State -ne 'Off'}
 **ID :** RUNBOOK__VMware_vSphere_Operations_V1
 **Version :** 1.0 | **Agents :** IT-Assistant-N3, IT-MaintenanceMaster
 **Domaine :** INFRA — Virtualisation VMware
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -240,26 +240,26 @@ Get-VMHost | Select-Object Name, ConnectionState, PowerState,
     @{N='CPU_MHz_Total';E={$_.CpuTotalMhz}},
     @{N='RAM_Used_GB';E={[math]::Round($_.MemoryUsageGB,1)}},
     @{N='RAM_Total_GB';E={[math]::Round($_.MemoryTotalGB,1)}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 
 # État de toutes les VMs
 Get-VM | Select-Object Name, PowerState, NumCpu, MemoryGB,
     @{N='Host';E={$_.VMHost.Name}},
     @{N='Datastore';E={($_ | Get-Datastore).Name -join ','}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 
 # Snapshots existants
 Get-VM | Get-Snapshot | Select-Object VM, Name, Created,
     @{N='Age_Jours';E={((Get-Date)-$_.Created).Days}},
     @{N='Size_GB';E={[math]::Round($_.SizeGB,2)}} |
-    Sort-Object Age_Jours -Descending | Format-Table -AutoSize
+    Sort-Object Age_Jours -Descending | Out-String -Width 300 | Write-Output
 
 # Datastores — espace libre
 Get-Datastore | Select-Object Name,
     @{N='Free_GB';E={[math]::Round($_.FreeSpaceGB,1)}},
     @{N='Total_GB';E={[math]::Round($_.CapacityGB,1)}},
     @{N='Free_%';E={[math]::Round($_.FreeSpaceGB/$_.CapacityGB*100,0)}} |
-    Format-Table -AutoSize
+    Out-String -Width 300 | Write-Output
 ```
 
 ---
@@ -355,7 +355,7 @@ Set-VMHost -VMHost $Host -State Connected
 Get-VIEvent -Entity (Get-VM "SRV-APP01") -MaxSamples 50 |
     Where-Object {$_.GetType().Name -match "Event"} |
     Select-Object CreatedTime, FullFormattedMessage |
-    Sort-Object CreatedTime -Descending | Format-List
+    Sort-Object CreatedTime -Descending | Out-String -Width 300 | Write-Output
 ```
 
 ### Erreurs courantes VMware
@@ -415,7 +415,7 @@ $cert = [System.Net.ServicePointManager]::ServerCertificateValidationCallback
 **ID :** RUNBOOK__Vates_XCPng_Operations_V1
 **Version :** 1.0 | **Agents :** IT-Assistant-N3, IT-MaintenanceMaster
 **Domaine :** INFRA — Virtualisation Vates (XCP-ng)
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -637,7 +637,7 @@ xe vm-reset-powerstate uuid=$VM_UUID --force
 # TEMPLATE_MAINTENANCE_MAJ-CVE-et-Planifiee_V1
 **Agent :** IT-MaintenanceMaster, IT-Assistant-N3
 **Usage :** Communication interne pour mise à jour CVE urgente + briefing pré-maintenance
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 
@@ -728,7 +728,7 @@ Fin   : Email rapport client dans les [2h] post-maintenance
 # CHECKLIST_MAINTENANCE_Pre-Maintenance_V1
 **Agent :** IT-MaintenanceMaster, IT-Assistant-N3
 **Usage :** Avant toute maintenance planifiée (patching, redémarrage, déploiement)
-**Mis à jour :** 2026-03-20
+**Mis à jour :** 2026-05-21
 
 ---
 

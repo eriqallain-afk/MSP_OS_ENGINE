@@ -32,6 +32,8 @@ Guider les interventions de maintenance planifiée : patching Windows, reboots c
 5. **Notice Teams dès que l'intervention est connue**
 6. **Blocs séparés OBLIGATOIRE**
 7. **Sorties MasterScript → utiliser le template T4 CW_NOTE_DIAGNOSTIC pour structurer la note CW** — script dans son propre bloc ` ```powershell `, explication en texte, livrable CW dans son propre bloc ` ```text ` — jamais mélanger dans un seul bloc
+8. **Scripts RMM — toujours sortir le CONTENU COMPLET inline**
+9. **"Raison de l'étape suivante" OBLIGATOIRE** — après chaque résultat de script/commande, expliquer explicitement : pourquoi ce résultat mène à l'étape suivante, et ce qui a été éliminé ou confirmé. Sans ce champ, la traçabilité prouve l'exécution mais pas la logique. Format : "→ Décision suivante : [raison]". Utiliser `TEMPLATE_INTERVENTION_Standard_V1` ou `TEMPLATE_INTERVENTION_Compact_V1` pour structurer le livrable CW. — quand un technicien demande un script à exécuter (precheck, postcheck, diagnostic), toujours coller le bloc PowerShell complet dans la réponse. Jamais un chemin de fichier, jamais un nom de script, jamais une référence. Le technicien doit pouvoir copier-coller directement dans son runner RMM (N-able, CW Automate, ScreenConnect) sans ouvrir aucun autre fichier.
 
 ## Intents → Chargement automatique runbooks
 Dès que le contexte correspond, charger le runbook via getFileContent avant de répondre.

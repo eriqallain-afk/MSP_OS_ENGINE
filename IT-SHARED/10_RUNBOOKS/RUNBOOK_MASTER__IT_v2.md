@@ -1068,7 +1068,7 @@ foreach ($Server in $Servers) {
     $Errors = Get-EventLog -ComputerName $Server -LogName System -EntryType Error -After (Get-Date).AddHours(-1) -ErrorAction SilentlyContinue
     
     if ($Errors) {
-        $Errors | Select TimeGenerated, Source, EventID, Message | Format-Table -AutoSize
+        $Errors | Select TimeGenerated, Source, EventID, Message | Out-String -Width 300 | Write-Output
     } else {
         Write-Host "No errors found" -ForegroundColor Green
     }
@@ -1091,7 +1091,7 @@ foreach ($Server in $Servers) {
         Write-Host "Patches manquants: $($SearchResult.Updates.Count)" -ForegroundColor $(if($SearchResult.Updates.Count -eq 0){'Green'}else{'Yellow'})
         
         if ($SearchResult.Updates.Count -gt 0) {
-            $SearchResult.Updates | Select Title, IsDownloaded | Format-Table -AutoSize
+            $SearchResult.Updates | Select Title, IsDownloaded | Out-String -Width 300 | Write-Output
         }
     }
     Remove-PSSession $Session
@@ -1164,7 +1164,7 @@ Start-AzVM -ResourceGroupName "RG-PROD" -Name "SRV01"
 **Uninstall specific patch** (dernier recours)
 ```powershell
 # Lister patches installés récemment
-Get-HotFix -ComputerName "SRV01" | Where-Object {$_.InstalledOn -gt (Get-Date).AddDays(-1)} | Format-Table -AutoSize
+Get-HotFix -ComputerName "SRV01" | Where-Object {$_.InstalledOn -gt (Get-Date).AddDays(-1)} | Out-String -Width 300 | Write-Output
 
 # Uninstall patch spécifique
 wusa /uninstall /kb:5034441 /quiet /norestart
@@ -1199,7 +1199,7 @@ $Report = foreach ($Server in $Servers) {
     $Result
 }
 
-$Report | Format-Table -AutoSize
+$Report | Out-String -Width 300 | Write-Output
 $Report | Export-Csv "PatchReport-$(Get-Date -Format yyyyMMdd).csv" -NoTypeInformation
 ```
 
@@ -1301,15 +1301,15 @@ $PFR = (Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Man
 $CCM = Test-Path 'HKLM:\\SOFTWARE\\Microsoft\\CCM\\RebootPending'
 [pscustomobject]@{CBS_RebootPending=$CBS; WU_RebootRequired=$WU; PendingFileRenameOperations=$PFR; CCMClientRebootPending=$CCM; PendingReboot=($CBS -or $WU -or $PFR -or $CCM)}
 
-"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Format-Table -Auto
+"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Out-String -Width 300 | Write-Output
 
 "=== TOP SERVICES (AUTO + NOT RUNNING) ==="
-Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Format-Table -Auto
+Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Out-String -Width 300 | Write-Output
 
 "=== EVENTLOG (System/Application) last 2h: Error/Critical ==="
 $Start=(Get-Date).AddHours(-2)
-Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
-Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
+Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 
 Stop-Transcript
 "PRECHECK log: $OutDir"
@@ -1340,15 +1340,15 @@ $PFR = (Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Man
 $CCM = Test-Path 'HKLM:\\SOFTWARE\\Microsoft\\CCM\\RebootPending'
 [pscustomobject]@{CBS_RebootPending=$CBS; WU_RebootRequired=$WU; PendingFileRenameOperations=$PFR; CCMClientRebootPending=$CCM; PendingReboot=($CBS -or $WU -or $PFR -or $CCM)}
 
-"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Format-Table -Auto
+"=== DISKS ==="; Get-PSDrive -PSProvider FileSystem | Select-Object Name,Used,Free,@{n='FreeGB';e={[math]::Round($_.Free/1GB,2)}} | Out-String -Width 300 | Write-Output
 
 "=== SERVICES (AUTO + NOT RUNNING) ==="
-Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Format-Table -Auto
+Get-Service | Where-Object {$_.StartType -eq 'Automatic' -and $_.Status -ne 'Running'} | Select-Object Name,Status,StartType | Out-String -Width 300 | Write-Output
 
 "=== EVENTLOG (System/Application) last 1h: Error/Critical ==="
 $Start=(Get-Date).AddHours(-1)
-Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
-Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
+Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 
 Stop-Transcript
 "POSTCHECK log: $OutDir"
@@ -1485,7 +1485,7 @@ w32tm /query /source
 
 ## Services critiques
 ```powershell
-Get-Service NTDS,DNS,Netlogon,KDC,W32Time | Format-Table Name,Status,StartType
+Get-Service NTDS,DNS,Netlogon,KDC,W32Time | Out-String -Width 300 | Write-Output
 net share | findstr /I "SYSVOL NETLOGON"
 ```
 
@@ -1507,7 +1507,7 @@ dcdiag /q | Out-File (Join-Path $OutDir "dcdiag_q_$TS.txt")
 ## DNS (erreurs récentes)
 ```powershell
 $Start=(Get-Date).AddHours(-2)
-Get-WinEvent -FilterHashtable @{LogName='DNS Server'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+Get-WinEvent -FilterHashtable @{LogName='DNS Server'; StartTime=$Start} | Where-Object {$_.LevelDisplayName -in 'Error','Critical'} | Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 ```
 
 ## Postcheck après reboot
@@ -1524,7 +1524,7 @@ Get-WinEvent -FilterHashtable @{LogName='DNS Server'; StartTime=$Start} | Where-
 
 ## Services
 ```powershell
-Get-Service | Where-Object {$_.Name -match '^MSSQL' -or $_.Name -match '^SQL'} | Sort-Object Name | Format-Table Name,Status,StartType
+Get-Service | Where-Object {$_.Name -match '^MSSQL' -or $_.Name -match '^SQL'} | Sort-Object Name | Out-String -Width 300 | Write-Output
 ```
 
 ## Connectivité (local)
@@ -1532,7 +1532,7 @@ Get-Service | Where-Object {$_.Name -match '^MSSQL' -or $_.Name -match '^SQL'} |
 
 ```powershell
 if (Get-Command Invoke-Sqlcmd -ErrorAction SilentlyContinue) {
-  Invoke-Sqlcmd -Query "SELECT @@SERVERNAME AS ServerName, @@VERSION AS Version" | Format-Table -Auto
+  Invoke-Sqlcmd -Query "SELECT @@SERVERNAME AS ServerName, @@VERSION AS Version" | Out-String -Width 300 | Write-Output
 } else {
   "Invoke-Sqlcmd indisponible — fallback .NET"
   $cn = New-Object System.Data.SqlClient.SqlConnection
@@ -1551,7 +1551,7 @@ if (Get-Command Invoke-Sqlcmd -ErrorAction SilentlyContinue) {
 $Start=(Get-Date).AddHours(-2)
 Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} |
   Where-Object { $_.LevelDisplayName -in 'Error','Critical' -and ($_.ProviderName -match 'MSSQL|SQLSERVERAGENT|SQL' -or $_.Message -match 'SQL') } |
-  Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+  Select-Object -First 30 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 ```
 
 ## Postcheck après reboot
@@ -1571,11 +1571,11 @@ Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$Start} |
 
 ## Spooler + queues
 ```powershell
-Get-Service Spooler | Format-Table Name,Status,StartType
+Get-Service Spooler | Out-String -Width 300 | Write-Output
 
 # Requiert module PrintManagement sur serveur / RSAT
 try {
-  Get-Printer | Select-Object Name,Shared,PrinterStatus | Sort-Object Name | Format-Table -Auto
+  Get-Printer | Select-Object Name,Shared,PrinterStatus | Sort-Object Name | Out-String -Width 300 | Write-Output
 } catch {
   "Get-Printer indisponible (module PrintManagement manquant)."
 }
@@ -1586,7 +1586,7 @@ try {
 $Start=(Get-Date).AddHours(-6)
 Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-PrintService/Operational'; StartTime=$Start} |
   Where-Object {$_.LevelDisplayName -in 'Error','Critical','Warning'} |
-  Select-Object -First 50 TimeCreated,Id,ProviderName,Message | Format-Table -Wrap
+  Select-Object -First 50 TimeCreated,Id,ProviderName,Message | Out-String -Width 300 | Write-Output
 ```
 
 ## Postcheck après reboot
@@ -2481,7 +2481,7 @@ $All | Export-Csv "C:\TEMP\Software_Inventory_$(Get-Date -Format 'yyyyMMdd').csv
 # Licences M365 utilisées vs disponibles
 Connect-MsolService
 Get-MsolAccountSku | Select-Object AccountSkuId, ActiveUnits, ConsumedUnits, 
-    @{N='Available';E={$_.ActiveUnits - $_.ConsumedUnits}} | Format-Table
+    @{N='Available';E={$_.ActiveUnits - $_.ConsumedUnits}} | Out-String -Width 300 | Write-Output
 ```
 
 ---

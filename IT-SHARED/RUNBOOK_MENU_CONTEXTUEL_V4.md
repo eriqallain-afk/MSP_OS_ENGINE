@@ -123,6 +123,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 | 38 | `cwrmm-auvik` | | `IT-SHARED/10_RUNBOOKS/NOC/NOC-RMM-CWRMM_Auvik_Operations_V2.md` |
 | 39 | `bckup` | | `IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_BACKUP_Datto-Keepit-DR_V1.md` |
 | 39a | `backup-status` | Validation statut sauvegardes — radar backup NOC | `IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Validation_Statut_Sauvegardes_V1.md` |
+| 39b | `restore-trim` | Test de restauration trimestriel — RTO/RPO, scénarios rotation, conformité | `IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Restore_Test_Trimestriel_V1.md` |
 
 ---
 
@@ -170,6 +171,22 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 | 62 | `dispatch` | | `IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-CW_Dispatch_V2.md` |
 | 62b | `ticket-to-kb` | | `IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-TicketToKB_V2.md` |
 
+### 💻 POSTES DE TRAVAIL (WKS) — Runbooks N2 / FrontLine (52a–52k)
+
+| # | Commande | Alias | Chemin |
+|---|---|---|---|
+| 52a | `wks-lent` | poste-lent, lent, rame, cpu, ram, slow | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Poste_Lent_V1.md` |
+| 52b | `wks-login` | connexion, mdp-windows, compte-bloque, locked | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Login_V1.md` |
+| 52c | `wks-outlook` | outlook, email-client, profil-outlook, ost | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Outlook_V1.md` |
+| 52d | `wks-teams` | teams, audio, video, camera, micro, reunion | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Teams_AV_V1.md` |
+| 52e | `wks-print` | imprimante-client, print-wks, spooler | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Imprimante_V1.md` |
+| 52f | `wks-partage` | lecteur-reseau, partage, smb, unc, P-drive | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Partage_Reseau_V1.md` |
+| 52g | `wks-vpn` | vpn-client, tunnel, acces-distant | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-VPN_Client_V1.md` |
+| 52h | `wks-av` | alerte-av, antivirus, virus, suspect, malware | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Alerte_AV_V1.md` |
+| 52i | `wks-profil` | profil-corrompu, profil-temporaire, ntuser | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Profil_Corrompu_V1.md` |
+| 52j | `wks-onboard` | onboarding-poste, nouveau-poste, deploiement-wks | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Onboarding_Poste_V1.md` |
+| 52k | `wks-offboard` | offboarding, depart-employe, wipe, wks-decommission | `IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Offboarding_V1.md` |
+
 ---
 
 ### 📋 TEMPLATES (80–89f)
@@ -191,6 +208,9 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 | 89d | `tpl-dr-test` | | `IT-SHARED/20_TEMPLATES/07_TEMPLATE_BACKUP/TEMPLATE_BACKUP_DR-Test-et-Restore_V1.md` |
 | 89e | `tpl-post-panne` | | `IT-SHARED/20_TEMPLATES/12_TEMPLATE_DIAG/TEMPLATE_DIAG_PostPanneHQ.md` |
 | 89f | `tpl-naming` | | `IT-SHARED/20_TEMPLATES/13_NAMING_STANDARDS/NAMING_STANDARDS_v1.md` |
+| 89g | `tpl-intervention` | Compte rendu intervention standard — chronologie + raison étapes | `IT-SHARED/20_TEMPLATES/06_TEMPLATE _INCIDENT/TEMPLATE_INTERVENTION_Standard_V1.md` |
+| 89h | `tpl-p1` | Rapport incident majeur P1 — post-mortem, RCA, actions correctives | `IT-SHARED/20_TEMPLATES/06_TEMPLATE _INCIDENT/TEMPLATE_INTERVENTION_P1_PostMortem_V1.md` |
+| 89i | `tpl-compact` | Intervention courte <30 min — traçabilité minimale | `IT-SHARED/20_TEMPLATES/06_TEMPLATE _INCIDENT/TEMPLATE_INTERVENTION_Compact_V1.md` |
 
 ### 📜 SCRIPTS (63–68)
 
@@ -266,7 +286,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 📦 BUNDLES   [B01]b-infra [B04]b-virtualiz [B05]b-ad [B06]b-hyperv [B07]b-m365 [B08]b-rds [B20]b-patching [B21]b-health
 🖥️ INFRA     [01]dc [02]sql [03]srv [04]rds [05]ad-dc [06]ad-user [06b]ad-gpo [06c]ad-folder [07]hyperv [08]vmware [09]xcpng [09b]new-vm [12]linux
 🔄 MAINT     [20]windows-patching [22]pending-reboot [23]server-health [24]wsus [25]audit-trim [26]post-panne [27]print
-💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status
+💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status [39b]restore-trim
 ☁️ CLOUD     [14]m365 [15]m365-exchange [16]m365-intune [17]m365-teams [13]azure [19b]aws [19c]gcp
 🌐 RÉSEAU    [10]fw [10b]net-cfg [10c]net-diag [11]dns
 📜 SCRIPTS   [63]lib [64]precheck-dc [66]precheck-srv [67]health-updates [67c]slow-srv [68]template
@@ -281,7 +301,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 📦 BUNDLES   [B05]b-ad [B06]b-hyperv [B07]b-m365 [B08]b-rds [B09]b-fw-vpn
 🖥️ INFRA     [01]dc [02]sql [04]rds [05]ad-dc [06]ad-user [06b]ad-gpo [06c]ad-folder [07]hyperv [08]vmware [09]xcpng [09b]new-vm
 🌐 RÉSEAU    [10]fw [10b]net-cfg [11]dns
-💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status
+💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status [39b]restore-trim
 ☁️ M365      [13]azure [15]m365-exchange [16]m365-intune [17]m365-teams [18]m365-user [19]m365-onboard [44]m365-compliance
 🛡️ SÉCU      [40]securite-ir [41]alert-response
 🎧 SUPPORT   [50]triage [55]vpn [60]intervention [61]close-cw
@@ -296,7 +316,8 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📦 BUNDLES   [B51]b-n1 [B53]b-triage-kb
 👤 SUPPORT   [51]support-n2 (mdp/compte/wifi/logiciel/app) [53]imprimante [55]vpn [59]onedrive-sync
-💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status
+💻 WKS       [52a]wks-lent [52b]wks-login [52c]wks-outlook [52d]wks-teams [52e]wks-print
+             [52f]wks-partage [52g]wks-vpn [52h]wks-av [52i]wks-profil [52j]wks-onboard [52k]wks-offboard
 🖥️ AD/SRV    [58]srv-ad [05]ad-dc [06]ad-user
 ☁️ M365      [18]m365-user [19]m365-onboard
 🎧 OPS       [50]triage [62]dispatch [60]intervention [61]close-cw [74]kickoff
@@ -308,7 +329,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 📂 RUNBOOKS — Tape le numéro ou le mot-clé
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📦 BUNDLES   [B31]b-backup-dr [B32]b-veeam [B33]b-datto-keepit
-💾 BACKUP    [32]veeam [32b]veeam-diag [32c]veeam-opr [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status
+💾 BACKUP    [32]veeam [32b]veeam-diag [32c]veeam-opr [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status [39b]restore-trim
 ⚡ URGENCE   [30]incident-command
 📜 SCRIPTS   [67d]veeam-jobs
 ✅ CHECKS    [73]dr
@@ -333,7 +354,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📦 BUNDLES   [B30]b-noc [B31]b-backup-dr [B35]b-noc-int
 ⚡ URGENCE   [30]incident-command [31]frontdoor [37]nable [38]cwrmm-auvik [26]post-panne
-💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status
+💾 BACKUP    [32]veeam [33]datto [34]keepit [32b]bckup-cfg [35]dr-plan [36]backup-dr [39]bckup [39a]backup-status [39b]restore-trim
 ✅ CHECKS    [78]noc-handover
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -353,7 +374,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 🧭 DOC/HUDU [96]edocs [94]naming
 🗂️ AUDIT [28]asset [28a]audit-license [28b]audit-cmdb [28c]audit_trimestriel
 🖥️ INFRA [03]srv [07]hyperv [08]vmware [09]xcpng [10]fw [10b]net-cfg [11]dns
-💾 BACKUP [32]veeam [33]datto [34]keepit [35]dr-plan [36]backup-dr
+💾 BACKUP [32]veeam [33]datto [34]keepit [35]dr-plan [36]backup-dr [39b]restore-trim
 ☁️ CLOUD [13]azure [14]m365 [15]m365-exchange [16]m365-intune [17]m365-teams
 📦 BUNDLES [B04]b-virtualiz [B06]b-hyperv [B07]b-m365 [B09]b-fw-vpn [B31]b-backup-dr
 📖 REF [90]sla [92]portails [95]azure
@@ -398,6 +419,8 @@ Numéros B## = bundles (préférer aux runbooks individuels).
 | pl1 | `agent-lifecycle` | Runbook ajout/modification/activation/archivage agent | `IT-SHARED/10_RUNBOOKS/00_POLICIES/RUNBOOK__AGENT_LIFECYCLE_V1.md` |
 | pl2 | `doc-sync` | Matrice DOC_SYNC — quels fichiers mettre à jour selon type de changement | `00_INDEX/DOC_SYNC_MATRIX.md` |
 | pl3 | `guardrails` | Guardrails agents MSP — périmètre, sécurité, refus | `IT-SHARED/10_RUNBOOKS/00_POLICIES/GUARDRAILS__IT_AGENTS_MASTER.md` |
+| pl4 | `prompt-framework` | Framework de prompting MSP Intelligence — 4 couches, Output Policy, gabarits par intent, exemples | `IT-SHARED/10_RUNBOOKS/00_POLICIES/PROMPT_FRAMEWORK_MSP_Intelligence_V1.md` |
+| pl5 | `arch-decisions` | Architecture Decision Log — ADRs, conventions, raisons des choix plateforme | `00_DOCS/ARCHITECTURE_DECISION_LOG.md` |
 
 ---
 
