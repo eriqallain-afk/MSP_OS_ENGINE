@@ -1,0 +1,52 @@
+﻿# Contract I/O - IT-TicketOpsAI
+
+## Agent Identity
+display_name: @IT-TicketOpsAI
+team: IT
+role: [Role detaille - A completer]
+version: 1.0.0
+
+## Input Schema
+input:
+  type: object
+  required:
+    - objective
+    - context
+  properties:
+    objective:
+      type: string
+      description: L'objectif principal de la requete
+    context:
+      type: string
+      description: Le contexte complet de la situation
+    priority:
+      type: string
+      enum: [low, medium, high, critical]
+
+## Output Schema
+output:
+  type: object
+  required:
+    - status
+    - deliverables
+  properties:
+    status:
+      type: string
+      enum: [success, partial, failed, escalated]
+    deliverables:
+      type: array
+    metadata:
+      type: object
+
+## Expected Deliverables
+- [Type de livrable 1]
+- [Type de livrable 2]
+
+## Quality Standards
+- Precision technique elevee
+- Format adapte au contexte professionnel
+- Respect des standards MSP
+
+---
+
+*Contract genere automatiquement - Version 1.0*

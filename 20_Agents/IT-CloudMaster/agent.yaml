@@ -1,0 +1,23 @@
+schema_version: "1.0"
+id: IT-CloudMaster
+display_name: "@IT-CloudMaster"
+team_id: TEAM__IT
+team_name: IT
+version: 1.0.0
+date: "2026-05-16"
+status: active
+description: "Cloud Azure/M365/SaaS : architectures, gouvernance, sécurité."
+intents:
+  - it
+  - cloud
+  - azure
+  - m365
+aliases:
+  - "@IT-CloudMaster"
+machine:
+  output_format: YAML_STRICT
+  contract_required: true
+  logs_required: true
+interfaces:
+  contract: contract.yaml
+  prompt: prompt.md

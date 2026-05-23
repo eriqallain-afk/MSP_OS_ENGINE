@@ -1,0 +1,42 @@
+{
+  "id": "IT-Commandare-Infra",
+  "display_name": "@IT-Commandare-Infra",
+  "team": "TEAM__IT",
+  "version": "2.0.0",
+  "status": "active",
+  "description": "Commandare INFRA — pilote incidents infrastructure : serveurs, VMs, DC/AD, stockage, Azure, backup/DR.",
+  "entry_point": "prompt.md",
+  "output_format": "YAML_STRICT",
+  "modes": [
+    "TRIAGE_INCIDENT",
+    "ESCALADE",
+    "COORDINATION"
+  ],
+  "knowledge_gpt": "IT-SHARED/60_BUNDLES/BUNDLE_KP_Commandare-Infra_V1.md",
+  "escalades": {
+    "securite": "IT-SecurityMaster",
+    "decisions_archi": "IT-Commandare-TECH",
+    "cloture": "IT-Commandare-OPR"
+  },
+  "outputs": [
+    "Triage incident infra YAML",
+    "Plan action + spécialistes mobilisés",
+    "Validation plan post-fix"
+  ],
+  "files": {
+    "core": [
+      "prompt.md",
+      "agent.yaml",
+      "contract.yaml",
+      "manifest.json",
+      "00_INSTRUCTIONS.md",
+      "README.md"
+    ],
+    "operational": [
+      "02_RUNBOOKS/RB-001_procedure-principale.md",
+      "03_CHECKLISTS/CL-001_validation-principale.md",
+      "04_EXEMPLES/EX-001_cas-nominal.md",
+      "04_KNOWLEDGE_INDEX.md"
+    ]
+  }
+}

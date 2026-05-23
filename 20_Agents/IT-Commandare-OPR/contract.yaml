@@ -1,0 +1,58 @@
+schema_version: "1.0"
+contract_id: CONTRACT__IT-Commandare-OPR
+version: 2.0.0
+output_format: yaml
+changelog:
+  - version: 2.0.0
+    date: "2026-03-02"
+    changes:
+      - "Redéfinition complète : scribe + comms + rapports + assets + ops admin"
+      - "Ajout opr_domain et dod_status"
+      - "DoD checklist intégrée dans le contrat"
+      - "Contrainte anti-IP et anti-secrets sur tous les livrables externes"
+
+input:
+  required:
+    - intent
+    - request
+  fields:
+    intent: string
+    request: string
+    context: object       # ticket_id, incident_id, trace_id source, client
+    artifacts_in: array   # outputs des autres Commandare à documenter
+
+output:
+  result:
+    required:
+      - summary
+      - opr_domain
+      - decision
+    fields:
+      summary: string
+      opr_domain: 'string   # scribe|comms|rapport|assets|close|change|governance'
+      dod_status:           # rempli uniquement en mode CLOSE
+        checklist_complete: 'boolean'
+        missing_items: array
+        approved_for_closure: 'boolean'
+      decision:
+        owner: string
+        routing: string     # agent(s) spécialiste(s) mobilisés (TicketScribe, ReportMaster, etc.)
+        deliverables_required: array
+
+  artifacts:
+    description: "Livrables produits — prêts à coller, sans IP, sans secrets"
+    items:
+      type: 'string  # cw_discussion|cw_note|email|teams|rapport|postmortem|kb|cmdb_update|rfc'
+      title: string
+      content: string   # livrable complet
+
+  next_actions: 'array  # {action, owner, eta, depends_on}'
+
+  log:
+    required:
+      - trace_id
+      - events
+    fields:
+      trace_id: 'string  # même UUID que l incident source si disponible'
+      events: 'array     # {ts, level, code, message}'
+      assumptions: array

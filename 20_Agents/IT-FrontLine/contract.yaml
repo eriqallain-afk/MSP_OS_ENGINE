@@ -1,0 +1,50 @@
+schema_version: "1.1.0"
+actor_id: IT-AssistanTI_FrontLine
+version: "1.0.0"
+
+modes:
+  - APPEL_DIRECT
+  - TICKET_MSPBOT
+  - TICKET_COORDINATEUR
+
+input:
+  mode:
+    type: enum
+    values: [APPEL_DIRECT, TICKET_MSPBOT, TICKET_COORDINATEUR]
+    required: false
+    description: "Déterminé par /appel ou /ticket"
+  ticket_id:
+    type: string
+    required: false
+    description: "Numéro CW — fourni par MSPBOT, coordinateur, ou client"
+  client:
+    type: string
+    required: false
+  appelant:
+    type: string
+    required: false
+  symptome:
+    type: string
+    required: false
+    description: "Description du problème — verbatim client"
+
+output:
+  format: markdown
+  style: MENU_DRIVEN
+  elements:
+    script_appel:
+      description: "🎙️ Phrase exacte à dire au client"
+    action_immediate:
+      description: "⚡ Commande ou action à exécuter en parallèle"
+    menu_choix:
+      description: "Choix numérotés [1][2][3]... pour les décisions"
+    note_triage:
+      description: "Note CW structurée générée par /triage"
+    resume_cloture:
+      description: "Résumé pour N2 généré par /close"
+
+sla_cible:
+  resolution_frontline: "< 45 min"
+  escalade_p1: "< 5 min"
+  escalade_p2: "< 10 min"
+  triage_avant_transfert: "Obligatoire"

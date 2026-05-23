@@ -1,0 +1,105 @@
+schema_version: '1.0'
+generated_at: '2026-05-05T15:28:54.305073+00:00'
+repo: eriqallain-afk/IT/IT-SHARED
+description: Index unifié des assets IT-SHARED (templates, runbooks, checklists, références,
+  scripts). Consulté par IT-OPS-RouterIA / agents IT pour retrouver rapidement le
+  bon asset selon le cas d’usage.
+roots:
+  templates: IT/IT-SHARED/20_TEMPLATES
+  runbooks: IT/IT-SHARED/10_RUNBOOKS
+  scripts: IT/IT-SHARED/30_SCRIPTS
+  checklists: IT/IT-SHARED/40_CHECKLISTS
+  references: IT/IT-SHARED/50_REFERENCE
+  indexes_folder: IT/IT-SHARED/00_INDEX
+taxonomies:
+  asset_type:
+  - template
+  - runbook
+  - checklist
+  - reference
+  - script
+  service_area_examples:
+  - M365
+  - ActiveDirectory
+  - Network
+  - Security
+  - Endpoint
+  - Backup
+  - Monitoring
+  - DevOps
+  - Database
+  - Cloud
+  lifecycle:
+  - draft
+  - active
+  - deprecated
+  severity:
+  - low
+  - medium
+  - high
+  - critical
+lookup_contract:
+  query_fields_priority:
+  - use_cases
+  - tags
+  - service_area
+  - signals
+  - title
+  - description
+  - path
+  ranking_hints:
+    prefer_lifecycle: active
+    prefer_most_recent_review: true
+    boost_when_signals_match: true
+assets:
+- asset_id: TPL__EXAMPLE__INCIDENT_REPORT
+  type: template
+  title: Incident Report (post-mortem) — modèle
+  description: Modèle de post-mortem / rapport d’incident (timeline, impacts, RCA,
+    actions).
+  path: IT/IT-SHARED/20_TEMPLATES/INCIDENT/TEMPLATE__INCIDENT_REPORT.md
+  use_cases:
+  - incident
+  - postmortem
+  - communication
+  service_area:
+  - Monitoring
+  - Security
+  tags:
+  - RCA
+  - timeline
+  - actions
+  - stakeholders
+  inputs:
+  - name: incident_summary
+    type: text
+    required: true
+  - name: timeline_events
+    type: list
+    required: true
+  outputs:
+  - name: incident_report_md
+    type: markdown
+  prerequisites:
+  - Avoir le ticket majeur / logs / décisions clés.
+  related_assets:
+  - RBK__EXAMPLE__MAJOR_INCIDENT
+  - CHK__EXAMPLE__INCIDENT_COMMS
+  router_hints:
+    intents:
+    - it_incident_postmortem
+    - it_incident_communication
+    signals:
+    - post-mortem
+    - RCA
+    - root cause
+    - incident report
+    - timeline
+    disambiguation_questions:
+    - Est-ce un incident majeur (SEV1/SEV2) ou mineur ?
+    - Le rapport est-il interne ou destiné à des parties externes ?
+  governance:
+    owner: IT-OPS
+    lifecycle: active
+    last_reviewed: '2026-01-15'
+    source: IT-SHARED

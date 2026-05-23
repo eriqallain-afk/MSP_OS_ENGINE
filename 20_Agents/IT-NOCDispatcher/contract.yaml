@@ -1,0 +1,41 @@
+schema_version: "1.0"
+contract_id: CONTRACT__IT-NOCDispatcher
+output_format: yaml
+input:
+  required:
+  - intent
+  - request
+  fields:
+    intent: string
+    request: string
+    context: object
+    artifacts_in: array
+output:
+  result:
+    required:
+    - summary
+    - severity
+    - decision
+    - actions_now
+    fields:
+      summary: string
+      severity: 'string  # P1|P2|P3|P4|UNKNOWN'
+      decision:
+        owner: string
+        priority: string
+        routing: string
+        escalate_to: string|null
+      actions_now: array
+      actions_next: array
+      risks: array
+  artifacts: 'array  # items: {type, name, content|ref}'
+  next_actions: 'array  # items: {action, owner, eta, depends_on}'
+  log:
+    required:
+    - trace_id
+    - events
+    fields:
+      trace_id: string
+      events: 'array  # {ts, level, code, message}'
+      checks: 'array  # {code, ok, details}'
+      assumptions: array

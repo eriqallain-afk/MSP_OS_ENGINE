@@ -1,0 +1,52 @@
+# SCHÉMA DE RÉFÉRENCE — Opportunité Projet
+# À remplir par l'agent terrain via /escalade-ventes
+# Déposer dans : /ventes/opportunities/OPP-{YYYYMMDD}-{NNN}.yaml
+
+schema_version: "1.0"
+opportunite_id: "OPP-{YYYYMMDD}-{NNN}"  # ex: OPP-20260519-001
+date_detection: "{YYYY-MM-DD}"
+agent_source: "{ID de l'agent qui a détecté l'opportunité}"  # ex: IT-FrontLine
+billet_source: "{#XXXXX}"               # Ticket d'origine (si applicable)
+technicien: "{Initiales}"
+statut: "NOUVEAU"                        # NOUVEAU | EN_ANALYSE | ESTIMATION_PRÊTE | SOUMIS | APPROUVÉ | REFUSÉ
+
+# ── CLIENT ────────────────────────────────────────────────────────
+client:
+  nom: "{Nom du client}"
+  contact_principal: "{Nom du décideur}"
+  email: "{email}"
+  telephone: "{téléphone}"
+  type: "{PME | Entreprise | OBNL | Municipal}"
+  relation_msp: "{Nouveau | Existant}"  # Nouveau = via IT-OnOffBoarder
+
+# ── BESOIN IDENTIFIÉ ──────────────────────────────────────────────
+besoin:
+  titre: "{Titre court du projet}"
+  categorie: "{Infrastructure | Migration | Sécurité | Cloud | Réseau | Backup | VoIP | Autre}"
+  sous_categorie: "{ex: Virtualisation | M365 | Active Directory | Firewall...}"
+  description: |
+    {Description détaillée du besoin, telle que détectée durant l'intervention}
+  declencheur: "{Ce qui a mené à cette détection}"
+  urgence: "{Faible | Normale | Haute | Critique}"
+
+# ── CONTEXTE TECHNIQUE ────────────────────────────────────────────
+contexte_technique:
+  infrastructure_actuelle: |
+    {Ce qui est connu de l'infra actuelle (sans IPs)}
+  lacunes_identifiees:
+    - "{Lacune 1}"
+    - "{Lacune 2}"
+  risques_si_non_adresse: |
+    {Risque business ou technique si le projet n'est pas réalisé}
+
+# ── ESTIMATION PRÉLIMINAIRE ───────────────────────────────────────
+estimation_preliminaire:
+  effort_approximatif: "{Petit <1j | Moyen 1-5j | Grand 5-20j | Majeur >20j}"
+  budget_approximatif: "{<$5K | $5K-$20K | $20K-$100K | >$100K}"
+  type_projet: "{Forfait | Régie | Abonnement | Hybride}"
+
+# ── LIENS ─────────────────────────────────────────────────────────
+liens:
+  handoff_onoffboarder: "{Chemin du handoff IT-OnOffBoarder si applicable}"
+  documentation_client: "{Lien Hudu si applicable}"
+  billet_cw: "{#XXXXX}"

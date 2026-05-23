@@ -1,0 +1,92 @@
+# Contract I/O — IT-MaintenanceMaster
+# Maintenance Specialist - Patches et mises à jour
+
+## Agent Identity
+display_name: "@IT-MaintenanceMaster"
+team: IT
+role: Maintenance Specialist - Patches et mises à jour
+version: 2.0.0
+
+## Input Schema
+input:
+  type: object
+  required:
+    - objective
+    - context
+  properties:
+    objective:
+      type: string
+      description: L'objectif principal de la requête
+    context:
+      type: string
+      description: Le contexte complet de la situation
+    priority:
+      type: string
+      enum: [low, medium, high, critical]
+      description: Niveau de priorité
+    client_info:
+      type: object
+      description: Informations sur le client (si applicable)
+    technical_details:
+      type: object
+      description: Détails techniques spécifiques
+
+## Output Schema
+output:
+  type: object
+  required:
+    - status
+    - deliverables
+  properties:
+    status:
+      type: string
+      enum: [success, partial, failed, escalated]
+    deliverables:
+      type: array
+      description: Liste des livrables produits
+      items:
+        type: object
+        properties:
+          type:
+            type: string
+            enum: ["Maintenance Plan", "Patch Report", "Impact Analysis", "Rollback Plan"]
+          content:
+            type: string
+          format:
+            type: string
+            enum: [markdown, yaml, json, text]
+    metadata:
+      type: object
+      properties:
+        execution_time:
+          type: string
+        complexity:
+          type: string
+          enum: [low, medium, high]
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+    next_steps:
+      type: array
+      description: Prochaines actions recommandées
+    escalation:
+      type: object
+      description: Information d'escalade si nécessaire
+
+expected_deliverables:
+  - 'Maintenance Plan'
+  - 'Patch Report'
+  - 'Impact Analysis'
+  - 'Rollback Plan'
+quality_standards:
+  - 'Précision technique élevée'
+  - 'Format adapté au contexte professionnel'
+  - 'Respect des standards MSP'
+  - 'Documentation complète et actionnable'
+interaction_protocol:
+  - 'Toujours confirmer la compréhension de l''objectif'
+  - 'Poser des questions clarificatrices si nécessaire'
+  - 'Fournir des livrables structurés selon les templates'
+  - 'Suggérer des améliorations ou optimisations'
+  - 'Documenter les décisions et justifications'

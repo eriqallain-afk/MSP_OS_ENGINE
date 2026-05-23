@@ -1,0 +1,5104 @@
+meta:
+  title: MASTER_FILE_INDEX — IT MSP Intelligence
+  version: '1.2'
+  generated: '2026-05-16'
+  total_files: 369
+  active_files: 206
+  archive_files: 55
+files:
+- filename: AJoutdeGithub_InstriuctionAgent.txt
+  path: IT-SHARED/AJoutdeGithub_InstriuctionAgent.txt
+  type: unclassified
+  description: AJoutdeGithub InstriuctionAgent.txt
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CARTE_DEPENDANCES_INTER_AGENTS.md
+  path: IT-SHARED/CARTE_DEPENDANCES_INTER_AGENTS.md
+  type: unclassified
+  description: CARTE DEPENDANCES INTER AGENTS
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: Nouveau document texte.txt
+  path: IT-SHARED/Nouveau document texte.txt
+  type: unclassified
+  description: Nouveau document texte.txt
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: README.md
+  path: IT-SHARED/README.md
+  type: unclassified
+  description: README
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: RUNBOOK_MENU_CONTEXTUEL_V4.md
+  path: IT-SHARED/RUNBOOK_MENU_CONTEXTUEL_V4.md
+  type: unclassified
+  description: RUNBOOK MENU CONTEXTUEL V4
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TABLEAU__Runbooks_par_Agent.md
+  path: IT-SHARED/TABLEAU__Runbooks_par_Agent.md
+  type: unclassified
+  description: TABLEAU  Runbooks par Agent
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: rebuild_it_shared_asset_index.py
+  path: IT-SHARED/rebuild_it_shared_asset_index.py
+  type: unclassified
+  description: rebuild it shared asset index.py
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: INDEX_MASTER_IT-SHARED_V1.md
+  path: IT-SHARED/00_INDEX/INDEX_MASTER_IT-SHARED_V1.md
+  type: unclassified
+  description: INDEX MASTER IT-SHARED
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INTENT_RUNBOOK_MATRIX_V1.md
+  path: IT-SHARED/00_INDEX/INTENT_RUNBOOK_MATRIX_V1.md
+  type: unclassified
+  description: INTENT RUNBOOK MATRIX
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INTENT_RUNBOOK_ROUTING_MATRIX_V1.md
+  path: IT-SHARED/00_INDEX/INTENT_RUNBOOK_ROUTING_MATRIX_V1.md
+  type: unclassified
+  description: INTENT RUNBOOK ROUTING MATRIX
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: IT_SHARED__ASSET_INDEX.yaml
+  path: IT-SHARED/00_INDEX/IT_SHARED__ASSET_INDEX.yaml
+  type: unclassified
+  description: IT SHARED  ASSET INDEX.yaml
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: MASTER_DISPATCH_INDEX_V2.yaml
+  path: IT-SHARED/00_INDEX/MASTER_DISPATCH_INDEX_V2.yaml
+  type: unclassified
+  description: MASTER DISPATCH INDEX.yaml
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MASTER_FILE_INDEX_IT_MSP_INTELLIGENCE.yaml
+  path: IT-SHARED/00_INDEX/MASTER_FILE_INDEX_IT_MSP_INTELLIGENCE.yaml
+  type: unclassified
+  description: MASTER FILE INDEX IT MSP INTELLIGENCE.yaml
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: README__IT_SHARED_INDEX.md
+  path: IT-SHARED/00_INDEX/README__IT_SHARED_INDEX.md
+  type: unclassified
+  description: README  IT SHARED INDEX
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: RUNBOOK_MASTER__IT_v2.md
+  path: IT-SHARED/10_RUNBOOKS/RUNBOOK_MASTER__IT_v2.md
+  type: runbook_master
+  description: RUNBOOK MASTER  IT v2
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: GUARDRAILS__IT_AGENTS_MASTER.md
+  path: IT-SHARED/10_RUNBOOKS/00_POLICIES/GUARDRAILS__IT_AGENTS_MASTER.md
+  type: policy
+  description: GUARDRAILS  IT AGENTS MASTER
+  famille_produit: Core_Guardrails
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-AD-DC_PrePost_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-AD-DC_PrePost_ARCHIVE.md
+  type: archive
+  description: INFRA-AD-DC PrePost ARCHIVE
+  famille_produit: DirectoryOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-BACKUP-Config_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-BACKUP-Config_ARCHIVE.md
+  type: archive
+  description: INFRA-BACKUP-Config ARCHIVE
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-BACKUP-Config_ARCHIVE2.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-BACKUP-Config_ARCHIVE2.md
+  type: archive
+  description: INFRA-BACKUP-Config ARCHIVE2
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-BACKUP-DR_Test_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-BACKUP-DR_Test_ARCHIVE.md
+  type: archive
+  description: INFRA-BACKUP-DR Test ARCHIVE
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-CLOUD-Architecture_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-CLOUD-Architecture_ARCHIVE.md
+  type: archive
+  description: INFRA-CLOUD-Architecture ARCHIVE
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-Onboarding_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-M365-Onboarding_ARCHIVE.md
+  type: archive
+  description: INFRA-M365-Onboarding ARCHIVE
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-UserMgmt_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-M365-UserMgmt_ARCHIVE.md
+  type: archive
+  description: INFRA-M365-UserMgmt ARCHIVE
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-NetworkSetup_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-NET-NetworkSetup_ARCHIVE.md
+  type: archive
+  description: INFRA-NET-NetworkSetup ARCHIVE
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-OPS-AssetLifecycle_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-OPS-AssetLifecycle_ARCHIVE.md
+  type: archive
+  description: INFRA-OPS-AssetLifecycle ARCHIVE
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-OPS-AssetLifecycle_ARCHIVE2.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-OPS-AssetLifecycle_ARCHIVE2.md
+  type: archive
+  description: INFRA-OPS-AssetLifecycle ARCHIVE2
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-PostShutdown_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-SRV-PostShutdown_ARCHIVE.md
+  type: archive
+  description: INFRA-SRV-PostShutdown ARCHIVE
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-PrintServer_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/INFRA-SRV-PrintServer_ARCHIVE.md
+  type: archive
+  description: INFRA-SRV-PrintServer ARCHIVE
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-SRV-AuditTrimestriel_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/MAINT-SRV-AuditTrimestriel_ARCHIVE.md
+  type: archive
+  description: MAINT-SRV-AuditTrimestriel ARCHIVE
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-Patching_Complet_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/MAINT-WIN-Patching_Complet_ARCHIVE.md
+  type: archive
+  description: MAINT-WIN-Patching Complet ARCHIVE
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-Patching_Legacy_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/MAINT-WIN-Patching_Legacy_ARCHIVE.md
+  type: archive
+  description: MAINT-WIN-Patching Legacy ARCHIVE
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-Patching_Process_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/MAINT-WIN-Patching_Process_ARCHIVE.md
+  type: archive
+  description: MAINT-WIN-Patching Process ARCHIVE
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-NET-NetworkDiag_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/NOC-NET-NetworkDiag_ARCHIVE.md
+  type: archive
+  description: NOC-NET-NetworkDiag ARCHIVE
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-SECU-AlertTriage_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/SEC-SECU-AlertTriage_ARCHIVE.md
+  type: archive
+  description: SEC-SECU-AlertTriage ARCHIVE
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-SECU-IncidentResponse_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/SEC-SECU-IncidentResponse_ARCHIVE.md
+  type: archive
+  description: SEC-SECU-IncidentResponse ARCHIVE
+  famille_produit: SecOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-CW_Dispatch_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/SUP-OPS-CW_Dispatch_ARCHIVE.md
+  type: archive
+  description: SUP-OPS-CW Dispatch ARCHIVE
+  famille_produit: Core
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-InterventionLive_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/SUP-OPS-InterventionLive_ARCHIVE.md
+  type: archive
+  description: SUP-OPS-InterventionLive ARCHIVE
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-InterventionLive_ARCHIVE2.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/SUP-OPS-InterventionLive_ARCHIVE2.md
+  type: archive
+  description: SUP-OPS-InterventionLive ARCHIVE2
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-TicketToKB_ARCHIVE.md
+  path: IT-SHARED/10_RUNBOOKS/99_ARCHIVE/SUP-OPS-TicketToKB_ARCHIVE.md
+  type: archive
+  description: SUP-OPS-TicketToKB ARCHIVE
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-AD-DC_Operations_V3.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-AD-DC_Operations_V3.md
+  type: runbook
+  description: INFRA-AD-DC Operations
+  famille_produit: DirectoryOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-AD-DC_PrePost_Validation_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-AD-DC_PrePost_Validation_V2.md
+  type: runbook
+  description: INFRA-AD-DC PrePost Validation
+  famille_produit: DirectoryOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-AD-EntraID_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-AD-EntraID_Operations_V2.md
+  type: runbook
+  description: INFRA-AD-EntraID Operations
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-AD-UserManagement_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-AD-UserManagement_V2.md
+  type: runbook
+  description: INFRA-AD-UserManagement
+  famille_produit: DirectoryOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-BACKUP-Veeam_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-BACKUP-Veeam_Operations_V2.md
+  type: runbook
+  description: INFRA-BACKUP-Veeam Operations
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-CLOUD-Architecture_Review_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-CLOUD-Architecture_Review_V2.md
+  type: runbook
+  description: INFRA-CLOUD-Architecture Review
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-Exchange_Online_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-M365-Exchange_Online_V2.md
+  type: runbook
+  description: INFRA-M365-Exchange Online
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-Intune_Devices_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-M365-Intune_Devices_V2.md
+  type: runbook
+  description: INFRA-M365-Intune Devices
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-Teams_SharePoint_OneDrive_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-M365-Teams_SharePoint_OneDrive_V2.md
+  type: runbook
+  description: INFRA-M365-Teams SharePoint OneDrive
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-UserManagement_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-M365-UserManagement_V2.md
+  type: runbook
+  description: INFRA-M365-UserManagement
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-M365-UserOnboarding_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-M365-UserOnboarding_V2.md
+  type: runbook
+  description: INFRA-M365-UserOnboarding
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-Fortinet_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-Fortinet_Operations_V2.md
+  type: runbook
+  description: INFRA-NET-Fortinet Operations
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-Meraki_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-Meraki_Operations_V2.md
+  type: runbook
+  description: INFRA-NET-Meraki Operations
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-NetworkDiagnostic_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-NetworkDiagnostic_V2.md
+  type: runbook
+  description: INFRA-NET-NetworkDiagnostic
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-NetworkSetup_V1.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-NetworkSetup_V1.md
+  type: runbook
+  description: INFRA-NET-NetworkSetup
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-SonicWall_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-SonicWall_Operations_V2.md
+  type: runbook
+  description: INFRA-NET-SonicWall Operations
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-Unifi_Mikrotik_Operations_V1.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-Unifi_Mikrotik_Operations_V1.md
+  type: runbook
+  description: INFRA-NET-Unifi Mikrotik Operations
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-NET-WatchGuard_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-NET-WatchGuard_Operations_V2.md
+  type: runbook
+  description: INFRA-NET-WatchGuard Operations
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-OPS-QuickStart_V1.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-OPS-QuickStart_V1.md
+  type: runbook
+  description: INFRA-OPS-QuickStart
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-HealthCheck_Template_V1.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-SRV-HealthCheck_Template_V1.md
+  type: runbook
+  description: INFRA-SRV-HealthCheck Template
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-HyperV_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-SRV-HyperV_Operations_V2.md
+  type: runbook
+  description: INFRA-SRV-HyperV Operations
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-RDS_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-SRV-RDS_Operations_V2.md
+  type: runbook
+  description: INFRA-SRV-RDS Operations
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-SQL_PrePost_Validation_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-SRV-SQL_PrePost_Validation_V2.md
+  type: runbook
+  description: INFRA-SRV-SQL PrePost Validation
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-VMware_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-SRV-VMware_Operations_V2.md
+  type: runbook
+  description: INFRA-SRV-VMware Operations
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-SRV-XCPng_Operations_V1.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-SRV-XCPng_Operations_V1.md
+  type: runbook
+  description: INFRA-SRV-XCPng Operations
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INFRA-VOIP-Diagnostic_V2.md
+  path: IT-SHARED/10_RUNBOOKS/INFRA/INFRA-VOIP-Diagnostic_V2.md
+  type: runbook
+  description: INFRA-VOIP-Diagnostic
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-OPS-CMDB_AssetAudit_V1.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-OPS-CMDB_AssetAudit_V1.md
+  type: runbook
+  description: MAINT-OPS-CMDB AssetAudit
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-SRV-AuditTrimestriel_V2.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-SRV-AuditTrimestriel_V2.md
+  type: runbook
+  description: MAINT-SRV-AuditTrimestriel
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-SRV-HealthCheck_V2.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-SRV-HealthCheck_V2.md
+  type: runbook
+  description: MAINT-SRV-HealthCheck
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-SRV-PostShutdown_Electrical_V2.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-SRV-PostShutdown_Electrical_V2.md
+  type: runbook
+  description: MAINT-SRV-PostShutdown Electrical
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-SRV-PrintServer_PrePost_V1.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-SRV-PrintServer_PrePost_V1.md
+  type: runbook
+  description: MAINT-SRV-PrintServer PrePost
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-Patching_CW-RMM_V3.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-WIN-Patching_CW-RMM_V3.md
+  type: runbook
+  description: MAINT-WIN-Patching CW-RMM
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-Patching_Complet_V3.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-WIN-Patching_Complet_V3.md
+  type: runbook
+  description: MAINT-WIN-Patching Complet
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-PendingReboot_V2.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-WIN-PendingReboot_V2.md
+  type: runbook
+  description: MAINT-WIN-PendingReboot
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: MAINT-WIN-WSUS_Maintenance_V2.md
+  path: IT-SHARED/10_RUNBOOKS/MAINTENANCE/MAINT-WIN-WSUS_Maintenance_V2.md
+  type: runbook
+  description: MAINT-WIN-WSUS Maintenance
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-Backup_Configuration_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Backup_Configuration_V2.md
+  type: runbook
+  description: NOC-BACKUP-Backup Configuration
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-DR_Plan_Validation_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-DR_Plan_Validation_V2.md
+  type: runbook
+  description: NOC-BACKUP-DR Plan Validation
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-DR_Test_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-DR_Test_V2.md
+  type: runbook
+  description: NOC-BACKUP-DR Test
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-Datto_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Datto_Operations_V2.md
+  type: runbook
+  description: NOC-BACKUP-Datto Operations
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-Keepit_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Keepit_Operations_V2.md
+  type: runbook
+  description: NOC-BACKUP-Keepit Operations
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-Veeam_Cloud_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Veeam_Cloud_V2.md
+  type: runbook
+  description: NOC-BACKUP-Veeam Cloud
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-BACKUP-Veeam_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-BACKUP-Veeam_Operations_V2.md
+  type: runbook
+  description: NOC-BACKUP-Veeam Operations
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-OPS-CommandCenter_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-OPS-CommandCenter_V2.md
+  type: runbook
+  description: NOC-OPS-CommandCenter
+  famille_produit: NOCOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-OPS-Dispatch_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-OPS-Dispatch_V2.md
+  type: runbook
+  description: NOC-OPS-Dispatch
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-OPS-FrontDoor_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-OPS-FrontDoor_V2.md
+  type: runbook
+  description: NOC-OPS-FrontDoor
+  famille_produit: NOCOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-OPS-IncidentCommand_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-OPS-IncidentCommand_V2.md
+  type: runbook
+  description: NOC-OPS-IncidentCommand
+  famille_produit: NOCOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-RMM-CWRMM_Auvik_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-RMM-CWRMM_Auvik_Operations_V2.md
+  type: runbook
+  description: NOC-RMM-CWRMM Auvik Operations
+  famille_produit: NOCOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: NOC-RMM-NAble_Operations_V2.md
+  path: IT-SHARED/10_RUNBOOKS/NOC/NOC-RMM-NAble_Operations_V2.md
+  type: runbook
+  description: NOC-RMM-NAble Operations
+  famille_produit: NOCOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-CMDB-Reconciliation-CW-Hudu-RMM_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-CMDB-Reconciliation-CW-Hudu-RMM_V1.md
+  type: runbook
+  description: OPR-CMDB-Reconciliation-CW-Hudu-RMM
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-CW-TicketQualityAudit_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-CW-TicketQualityAudit_V1.md
+  type: runbook
+  description: OPR-CW-TicketQualityAudit
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-ClientCommunication-Cadence_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-ClientCommunication-Cadence_V1.md
+  type: runbook
+  description: OPR-ClientCommunication-Cadence
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-EOL-EOS-RiskRegister_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-EOL-EOS-RiskRegister_V1.md
+  type: runbook
+  description: OPR-EOL-EOS-RiskRegister
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-Handoff-ShiftChange_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-Handoff-ShiftChange_V1.md
+  type: runbook
+  description: OPR-Handoff-ShiftChange
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-Monthly-Client-OpsPack_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-Monthly-Client-OpsPack_V1.md
+  type: runbook
+  description: OPR-Monthly-Client-OpsPack
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-PostIncident-Review-P1P2_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-PostIncident-Review-P1P2_V1.md
+  type: runbook
+  description: OPR-PostIncident-Review-P1P2
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-ProblemManagement-CAPA_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-ProblemManagement-CAPA_V1.md
+  type: runbook
+  description: OPR-ProblemManagement-CAPA
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-QBR-DataCollection_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-QBR-DataCollection_V1.md
+  type: runbook
+  description: OPR-QBR-DataCollection
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-SLA-BreachPrevention_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-SLA-BreachPrevention_V1.md
+  type: runbook
+  description: OPR-SLA-BreachPrevention
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: OPR-Weekly-OpsReview_V1.md
+  path: IT-SHARED/10_RUNBOOKS/OPR/OPR-Weekly-OpsReview_V1.md
+  type: runbook
+  description: OPR-Weekly-OpsReview
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: RUNBOOK__DC_PATCHING_PRECHECK.md
+  path: IT-SHARED/10_RUNBOOKS/RUNBOOKS_MD/RUNBOOK__DC_PATCHING_PRECHECK.md
+  type: runbook
+  description: RUNBOOK  DC PATCHING PRECHECK
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: RUNBOOK__SERVER_ROLE_DISCOVERY.md
+  path: IT-SHARED/10_RUNBOOKS/RUNBOOKS_MD/RUNBOOK__SERVER_ROLE_DISCOVERY.md
+  type: runbook
+  description: RUNBOOK  SERVER ROLE DISCOVERY
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-M365-Compliance_Purview_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SECURITY/SEC-M365-Compliance_Purview_V2.md
+  type: runbook
+  description: SEC-M365-Compliance Purview
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-OPS-LicenseAudit_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SECURITY/SEC-OPS-LicenseAudit_V2.md
+  type: runbook
+  description: SEC-OPS-LicenseAudit
+  famille_produit: SecOps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-SECU-AlertResponse_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SECURITY/SEC-SECU-AlertResponse_V2.md
+  type: runbook
+  description: SEC-SECU-AlertResponse
+  famille_produit: SecOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-SECU-IncidentResponse_V3.md
+  path: IT-SHARED/10_RUNBOOKS/SECURITY/SEC-SECU-IncidentResponse_V3.md
+  type: runbook
+  description: SEC-SECU-IncidentResponse
+  famille_produit: SecOps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SEC-SECU-SecurityAudit_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SECURITY/SEC-SECU-SecurityAudit_V2.md
+  type: runbook
+  description: SEC-SECU-SecurityAudit
+  famille_produit: SecOps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-M365-OneDrive_SharePoint_Sync_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-M365-OneDrive_SharePoint_Sync_V2.md
+  type: runbook
+  description: SUP-M365-OneDrive SharePoint Sync
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-N1N2-SupportTriage_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-N1N2-SupportTriage_V2.md
+  type: runbook
+  description: SUP-N1N2-SupportTriage
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-N2-Support_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-N2-Support_V2.md
+  type: runbook
+  description: SUP-N2-Support
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-NET-VPN_Troubleshooting_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-NET-VPN_Troubleshooting_V2.md
+  type: runbook
+  description: SUP-NET-VPN Troubleshooting
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-CW_Dispatch_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-CW_Dispatch_V2.md
+  type: runbook
+  description: SUP-OPS-CW Dispatch
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-CW_InterventionLive_Close_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-CW_InterventionLive_Close_V2.md
+  type: runbook
+  description: SUP-OPS-CW InterventionLive Close
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-CommandareOPR_V1.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-CommandareOPR_V1.md
+  type: runbook
+  description: SUP-OPS-CommandareOPR
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-CommandareTech_V1.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-CommandareTech_V1.md
+  type: runbook
+  description: SUP-OPS-CommandareTech
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: SUP-OPS-TicketToKB_V2.md
+  path: IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-TicketToKB_V2.md
+  type: runbook
+  description: SUP-OPS-TicketToKB
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_MASTER_Library-IT_V1.md
+  path: IT-SHARED/20_TEMPLATES/00_TEMPLATE_MASTER/TEMPLATE_MASTER_Library-IT_V1.md
+  type: template
+  description: TEMPLATE MASTER Library-IT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_BUNDLE_CW_CLOSE.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE_BUNDLE_CW_CLOSE.md
+  type: template
+  description: TEMPLATE BUNDLE CW CLOSE
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_CW_Discussion-STAR_V1.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE_CW_Discussion-STAR_V1.md
+  type: template
+  description: TEMPLATE CW Discussion-STAR
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_CW_Email-Client_V1.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE_CW_Email-Client_V1.md
+  type: template
+  description: TEMPLATE CW Email-Client
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_CW_Intervention-Library_V1.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE_CW_Intervention-Library_V1.md
+  type: template
+  description: TEMPLATE CW Intervention-Library
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_CW_Note-Interne_V1.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE_CW_Note-Interne_V1.md
+  type: template
+  description: TEMPLATE CW Note-Interne
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__CW_DISCUSSION.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE__CW_DISCUSSION.md
+  type: template
+  description: TEMPLATE  CW DISCUSSION
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__CW_DISCUSSION_STAR.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE__CW_DISCUSSION_STAR.md
+  type: template
+  description: TEMPLATE  CW DISCUSSION STAR
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__CW_NOTE_INTERNE.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE__CW_NOTE_INTERNE.md
+  type: template
+  description: TEMPLATE  CW NOTE INTERNE
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__CW_NOTE_INTERNE__PER_ASSET.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE__CW_NOTE_INTERNE__PER_ASSET.md
+  type: template
+  description: TEMPLATE  CW NOTE INTERNE  PER ASSET
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__CW_TEMPLATE_LIBRARY__INTERVENTION_COPILOT.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/TEMPLATE__CW_TEMPLATE_LIBRARY__INTERVENTION_COPILOT.md
+  type: template
+  description: TEMPLATE  CW TEMPLATE LIBRARY  INTERVENTION COPILOT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: EXEMPLES_CLOSE_CW_REELS.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/99_ARCHIVE/EXEMPLES_CLOSE_CW_REELS.md
+  type: archive
+  description: EXEMPLES CLOSE CW REELS
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__EMAIL_CLIENT.md
+  path: IT-SHARED/20_TEMPLATES/01_TEMPLATE_CW/99_ARCHIVE/TEMPLATE__EMAIL_CLIENT.md
+  type: archive
+  description: TEMPLATE  EMAIL CLIENT
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE __TEAMS_NOTICE.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE __TEAMS_NOTICE.md
+  type: template
+  description: TEMPLATE   TEAMS NOTICE
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_COM_Email-Interruption-Planifiee_V1.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE_COM_Email-Interruption-Planifiee_V1.md
+  type: template
+  description: TEMPLATE COM Email-Interruption-Planifiee
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_COM_Teams-Incident-Actif_V1.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE_COM_Teams-Incident-Actif_V1.md
+  type: template
+  description: TEMPLATE COM Teams-Incident-Actif
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_COM_Teams-Maintenance_V1.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE_COM_Teams-Maintenance_V1.md
+  type: template
+  description: TEMPLATE COM Teams-Maintenance
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_CW_LIBRARY__INTERVENTION_COPILOT.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE_CW_LIBRARY__INTERVENTION_COPILOT.md
+  type: template
+  description: TEMPLATE CW LIBRARY  INTERVENTION COPILOT
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__FLAG_UP_AVERTISSEMENT.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE__FLAG_UP_AVERTISSEMENT.md
+  type: template
+  description: TEMPLATE  FLAG UP AVERTISSEMENT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__INTERVENTION_EN_COURS.md
+  path: IT-SHARED/20_TEMPLATES/02_TEMPLATE_COM/TEMPLATE__INTERVENTION_EN_COURS.md
+  type: template
+  description: TEMPLATE  INTERVENTION EN COURS
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_MAINTENANCE_MAJ-CVE-et-Planifiee_V1.md
+  path: IT-SHARED/20_TEMPLATES/03_TEMPLATE_MAINTENANCE/TEMPLATE_MAINTENANCE_MAJ-CVE-et-Planifiee_V1.md
+  type: template
+  description: TEMPLATE MAINTENANCE MAJ-CVE-et-Planifiee
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: INTERVENTION_TEMPLATE_INFRA_AZUREVM.md
+  path: IT-SHARED/20_TEMPLATES/04_TEMPLATE_SUPPORT/INTERVENTION_TEMPLATE_INFRA_AZUREVM.md
+  type: template
+  description: INTERVENTION TEMPLATE INFRA AZUREVM
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: INTERVENTION_TEMPLATE_IT.md
+  path: IT-SHARED/20_TEMPLATES/04_TEMPLATE_SUPPORT/INTERVENTION_TEMPLATE_IT.md
+  type: template
+  description: INTERVENTION TEMPLATE IT
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_SUPPORT_Escalade-et-Service-Restaure_V1.md
+  path: IT-SHARED/20_TEMPLATES/04_TEMPLATE_SUPPORT/TEMPLATE_SUPPORT_Escalade-et-Service-Restaure_V1.md
+  type: template
+  description: TEMPLATE SUPPORT Escalade-et-Service-Restaure
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_KNOWLEDGE_KB-Article-et-Procedure_V1.md
+  path: IT-SHARED/20_TEMPLATES/05_TEMPLATE_KNOWLEDGE/TEMPLATE_KNOWLEDGE_KB-Article-et-Procedure_V1.md
+  type: template
+  description: TEMPLATE KNOWLEDGE KB-Article-et-Procedure
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_INCIDENT_Log-et-Critique_V1.md
+  path: IT-SHARED/20_TEMPLATES/06_TEMPLATE _INCIDENT/TEMPLATE_INCIDENT_Log-et-Critique_V1.md
+  type: template
+  description: TEMPLATE INCIDENT Log-et-Critique
+  famille_produit: SecOps
+  niveau_commercial:
+  - Pro
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__INCIDENT_CRITIQUE.md
+  path: IT-SHARED/20_TEMPLATES/06_TEMPLATE _INCIDENT/TEMPLATE__INCIDENT_CRITIQUE.md
+  type: template
+  description: TEMPLATE  INCIDENT CRITIQUE
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__INCIDENT_LOG.md
+  path: IT-SHARED/20_TEMPLATES/06_TEMPLATE _INCIDENT/TEMPLATE__INCIDENT_LOG.md
+  type: template
+  description: TEMPLATE  INCIDENT LOG
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_BACKUP_DR-Test-et-Restore_V1.md
+  path: IT-SHARED/20_TEMPLATES/07_TEMPLATE_BACKUP/TEMPLATE_BACKUP_DR-Test-et-Restore_V1.md
+  type: template
+  description: TEMPLATE BACKUP DR-Test-et-Restore
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_DIAG_VEEAM
+  path: IT-SHARED/20_TEMPLATES/07_TEMPLATE_BACKUP/TEMPLATE_DIAG_VEEAM
+  type: template
+  description: TEMPLATE DIAG VEEAM
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_DR_TEST.md
+  path: IT-SHARED/20_TEMPLATES/07_TEMPLATE_BACKUP/TEMPLATE_DR_TEST.md
+  type: template
+  description: TEMPLATE DR TEST
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__RESTORE_REQUEST.md
+  path: IT-SHARED/20_TEMPLATES/07_TEMPLATE_BACKUP/TEMPLATE__RESTORE_REQUEST.md
+  type: template
+  description: TEMPLATE  RESTORE REQUEST
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__TEST_RESTORE.md
+  path: IT-SHARED/20_TEMPLATES/07_TEMPLATE_BACKUP/TEMPLATE__TEST_RESTORE.md
+  type: template
+  description: TEMPLATE  TEST RESTORE
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_BACKUP_REPORT.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_BACKUP_REPORT.md
+  type: template
+  description: TEMPLATE BACKUP REPORT
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_REPORT_Azure-Health_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_REPORT_Azure-Health_V1.md
+  type: template
+  description: TEMPLATE REPORT Azure-Health
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_REPORT_Cloud-Health_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_REPORT_Cloud-Health_V1.md
+  type: template
+  description: TEMPLATE REPORT Cloud-Health
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_REPORT_Mensuel_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_REPORT_Mensuel_V1.md
+  type: template
+  description: TEMPLATE REPORT Mensuel
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_REPORT_Postmortem_V2.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_REPORT_Postmortem_V2.md
+  type: template
+  description: TEMPLATE REPORT Postmortem
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_REPORT_QBR_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_REPORT_QBR_V1.md
+  type: template
+  description: TEMPLATE REPORT QBR
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_REPORT_Status-et-Technique_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_REPORT_Status-et-Technique_V1.md
+  type: template
+  description: TEMPLATE REPORT Status-et-Technique
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__INCIDENT_REPORT.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE__INCIDENT_REPORT.md
+  type: template
+  description: TEMPLATE  INCIDENT REPORT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__QBR_REPORT_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE__QBR_REPORT_V1.md
+  type: template
+  description: TEMPLATE  QBR REPORT
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__RAPPORT_MENSUEL_V1.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE__RAPPORT_MENSUEL_V1.md
+  type: template
+  description: TEMPLATE  RAPPORT MENSUEL
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__STATUS_REPORT.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE__STATUS_REPORT.md
+  type: template
+  description: TEMPLATE  STATUS REPORT
+  famille_produit: OPROps
+  niveau_commercial:
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__Technical_Report.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE__Technical_Report.md
+  type: template
+  description: TEMPLATE  Technical Report
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__AZURE_HEALTH_REPORT.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/99_ARCHIVE/TEMPLATE__AZURE_HEALTH_REPORT.md
+  type: archive
+  description: TEMPLATE  AZURE HEALTH REPORT
+  famille_produit: OPROps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__CLOUD_HEALTH_REPORT.md
+  path: IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/99_ARCHIVE/TEMPLATE__CLOUD_HEALTH_REPORT.md
+  type: archive
+  description: TEMPLATE  CLOUD HEALTH REPORT
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_HUDU_Fiche-Objet-IT_V1.md
+  path: IT-SHARED/20_TEMPLATES/09_TEMPLATE_HUDU/TEMPLATE_HUDU_Fiche-Objet-IT_V1.md
+  type: template
+  description: TEMPLATE HUDU Fiche-Objet-IT
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__EDOCS_FICHE_OBJET_IT.md
+  path: IT-SHARED/20_TEMPLATES/09_TEMPLATE_HUDU/TEMPLATE__EDOCS_FICHE_OBJET_IT.md
+  type: template
+  description: TEMPLATE  EDOCS FICHE OBJET IT
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__KB_Article.md
+  path: IT-SHARED/20_TEMPLATES/09_TEMPLATE_HUDU/TEMPLATE__KB_Article.md
+  type: template
+  description: TEMPLATE  KB Article
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_SCRIPT_Header-PS-Standard_V1.md
+  path: IT-SHARED/20_TEMPLATES/10_TEMPLATE_SCRIPT/TEMPLATE_SCRIPT_Header-PS-Standard_V1.md
+  type: template
+  description: TEMPLATE SCRIPT Header-PS-Standard
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: POWERSHELL__Template_Standard_v1.ps1
+  path: IT-SHARED/20_TEMPLATES/10_TEMPLATE_SCRIPT/99_ARCHIVE/POWERSHELL__Template_Standard_v1.ps1
+  type: archive
+  description: POWERSHELL  Template Standard v1
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_SECURITY_Incident-et-Postmortem-SOC_V1.md
+  path: IT-SHARED/20_TEMPLATES/11_TEMPLATE_SECURITY/TEMPLATE_SECURITY_Incident-et-Postmortem-SOC_V1.md
+  type: template
+  description: TEMPLATE SECURITY Incident-et-Postmortem-SOC
+  famille_produit: SecOps
+  niveau_commercial:
+  - Pro
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_DIAG_DFRS
+  path: IT-SHARED/20_TEMPLATES/12_TEMPLATE_DIAG/TEMPLATE_DIAG_DFRS
+  type: template
+  description: TEMPLATE DIAG DFRS
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_DIAG_PostPanneHQ.md
+  path: IT-SHARED/20_TEMPLATES/12_TEMPLATE_DIAG/TEMPLATE_DIAG_PostPanneHQ.md
+  type: template
+  description: TEMPLATE DIAG PostPanneHQ
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: NAMING_STANDARDS_v1.md
+  path: IT-SHARED/20_TEMPLATES/13_NAMING_STANDARDS/NAMING_STANDARDS_v1.md
+  type: template
+  description: NAMING STANDARDS v1
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__Health_Check.md
+  path: IT-SHARED/20_TEMPLATES/14_TEMPLATE_HEALTH/TEMPLATE__Health_Check.md
+  type: template
+  description: TEMPLATE  Health Check
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__Server_Health_Check.md
+  path: IT-SHARED/20_TEMPLATES/14_TEMPLATE_HEALTH/TEMPLATE__Server_Health_Check.md
+  type: template
+  description: TEMPLATE  Server Health Check
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: INTERVENTION_TEMPLATE_IT.md
+  path: IT-SHARED/20_TEMPLATES/14_TEMPLATE_HEALTH/99_ARCHIVE/INTERVENTION_TEMPLATE_IT.md
+  type: archive
+  description: INTERVENTION TEMPLATE IT
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__Azure_Health_Report.md
+  path: IT-SHARED/20_TEMPLATES/14_TEMPLATE_HEALTH/99_ARCHIVE/TEMPLATE__Azure_Health_Report.md
+  type: archive
+  description: TEMPLATE  Azure Health Report
+  famille_produit: OPROps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__Cloud_Health_Report.md
+  path: IT-SHARED/20_TEMPLATES/14_TEMPLATE_HEALTH/99_ARCHIVE/TEMPLATE__Cloud_Health_Report.md
+  type: archive
+  description: TEMPLATE  Cloud Health Report
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_BackupFailed.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_BackupFailed.md
+  type: template
+  description: CLOSE BackupFailed
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_DNS-DHCP.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_DNS-DHCP.md
+  type: template
+  description: CLOSE DNS-DHCP
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_DisquePlein.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_DisquePlein.md
+  type: template
+  description: CLOSE DisquePlein
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_Patching.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_Patching.md
+  type: template
+  description: CLOSE Patching
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_Postcheck.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_Postcheck.md
+  type: template
+  description: CLOSE Postcheck
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_RDSLicensing.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_RDSLicensing.md
+  type: template
+  description: CLOSE RDSLicensing
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_RebootServeur.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_RebootServeur.md
+  type: template
+  description: CLOSE RebootServeur
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_SnapshotVMware.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_SnapshotVMware.md
+  type: template
+  description: CLOSE SnapshotVMware
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: CLOSE_WindowsUpdateMissing.md
+  path: IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/CLOSE_WindowsUpdateMissing.md
+  type: template
+  description: CLOSE WindowsUpdateMissing
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__FLAG_UP_AVERTISSEMENT.md
+  path: IT-SHARED/20_TEMPLATES/99_ARCHIVE/TEMPLATE__FLAG_UP_AVERTISSEMENT.md
+  type: archive
+  description: TEMPLATE  FLAG UP AVERTISSEMENT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__GPT_SETUP_CARD.md
+  path: IT-SHARED/20_TEMPLATES/99_ARCHIVE/TEMPLATE__GPT_SETUP_CARD.md
+  type: archive
+  description: TEMPLATE  GPT SETUP CARD
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__POSTMORTEM_V2.md
+  path: IT-SHARED/20_TEMPLATES/99_ARCHIVE/TEMPLATE__POSTMORTEM_V2.md
+  type: archive
+  description: TEMPLATE  POSTMORTEM
+  famille_produit: OPROps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__QBR_REPORT_V1.md
+  path: IT-SHARED/20_TEMPLATES/99_ARCHIVE/TEMPLATE__QBR_REPORT_V1.md
+  type: archive
+  description: TEMPLATE  QBR REPORT
+  famille_produit: OPROps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE__SERVICE_RESTAURE_OK.md
+  path: IT-SHARED/20_TEMPLATES/99_ARCHIVE/TEMPLATE__SERVICE_RESTAURE_OK.md
+  type: archive
+  description: TEMPLATE  SERVICE RESTAURE OK
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: LIBRARY_BASH_Bash-Snippets_V1.md
+  path: IT-SHARED/30_SCRIPTS/LIBRARY_BASH_Bash-Snippets_V1.md
+  type: script_library
+  description: LIBRARY BASH Bash-Snippets
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: LIBRARY_DIAG_EventLog-Analysis_V1.md
+  path: IT-SHARED/30_SCRIPTS/LIBRARY_DIAG_EventLog-Analysis_V1.md
+  type: script_library
+  description: LIBRARY DIAG EventLog-Analysis
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: LIBRARY_MAINT_Server-Management_V1.md
+  path: IT-SHARED/30_SCRIPTS/LIBRARY_MAINT_Server-Management_V1.md
+  type: script_library
+  description: LIBRARY MAINT Server-Management
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: LIBRARY_PS_PowerShell-Snippets_V1.md
+  path: IT-SHARED/30_SCRIPTS/LIBRARY_PS_PowerShell-Snippets_V1.md
+  type: script_library
+  description: LIBRARY PS PowerShell-Snippets
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: LIBRARY__Bash_Snippets.md
+  path: IT-SHARED/30_SCRIPTS/LIBRARY__Bash_Snippets.md
+  type: script_library
+  description: LIBRARY  Bash Snippets
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: LIBRARY__PowerShell_Snippets.md
+  path: IT-SHARED/30_SCRIPTS/LIBRARY__PowerShell_Snippets.md
+  type: script_library
+  description: LIBRARY  PowerShell Snippets
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: POWERSHELL__Template_Standard_v1.ps1
+  path: IT-SHARED/30_SCRIPTS/POWERSHELL__Template_Standard_v1.ps1
+  type: script_ps1
+  description: POWERSHELL  Template Standard v1
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: LOW_IMPACT_FIX
+  action_recommandee: null
+- filename: SCRIPT_AUDIT_AD-Health_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_AUDIT_AD-Health_V1.ps1
+  type: script_ps1
+  description: SCRIPT AUDIT AD-Health
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_AUDIT_HealthCheck-Server_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_AUDIT_HealthCheck-Server_V1.ps1
+  type: script_ps1
+  description: SCRIPT AUDIT HealthCheck-Server
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_Analyse_Serveur_TicketOps_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_Analyse_Serveur_TicketOps_V1.ps1
+  type: script_ps1
+  description: SCRIPT Analyse Serveur TicketOps
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_BACKUP_Veeam-JobStatus_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_BACKUP_Veeam-JobStatus_V1.ps1
+  type: script_ps1
+  description: SCRIPT BACKUP Veeam-JobStatus
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_Collect-Server-Check_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_Collect-Server-Check_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG Collect-Server-Check
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_DCDIAG-Quick_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_DCDIAG-Quick_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG DCDIAG-Quick
+  famille_produit: DirectoryOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_Health-and-Updates_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_Health-and-Updates_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG Health-and-Updates
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_Pending-Reboot_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_Pending-Reboot_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG Pending-Reboot
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_Precheck-DC-DNS_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_Precheck-DC-DNS_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG Precheck-DC-DNS
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_Precheck-HyperV_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_Precheck-HyperV_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG Precheck-HyperV
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_Precheck-Server-Generic_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_Precheck-Server-Generic_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG Precheck-Server-Generic
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_RAM-TopProcess_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_RAM-TopProcess_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG RAM-TopProcess
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_DIAG_SLOW_SRV_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_DIAG_SLOW_SRV_V1.ps1
+  type: script_ps1
+  description: SCRIPT DIAG SLOW SRV
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_MAINTENANCE_CW-MaintenanceConsole-Launcher_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_MAINTENANCE_CW-MaintenanceConsole-Launcher_V1.ps1
+  type: script_ps1
+  description: SCRIPT MAINTENANCE CW-MaintenanceConsole-Launcher
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: CONTROLLED_CHANGE
+  action_recommandee: null
+- filename: SCRIPT_MAINTENANCE_CW-MaintenanceConsole_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_MAINTENANCE_CW-MaintenanceConsole_V1.ps1
+  type: script_ps1
+  description: SCRIPT MAINTENANCE CW-MaintenanceConsole
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: CONTROLLED_CHANGE
+  action_recommandee: null
+- filename: SCRIPT_MAINT_DISM-SFC-Restore_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_MAINT_DISM-SFC-Restore_V1.ps1
+  type: script_ps1
+  description: SCRIPT MAINT DISM-SFC-Restore
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: CONTROLLED_CHANGE
+  action_recommandee: null
+- filename: SCRIPT_PRECHECK_DC_V3.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_PRECHECK_DC_V3.ps1
+  type: script_ps1
+  description: SCRIPT PRECHECK DC
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_PRECHECK_POSTCHECK_V3.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_PRECHECK_POSTCHECK_V3.ps1
+  type: script_ps1
+  description: SCRIPT PRECHECK POSTCHECK
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_PostCheck_PanneHQ.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_PostCheck_PanneHQ.ps1
+  type: script_ps1
+  description: SCRIPT PostCheck PanneHQ
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: SAFE_READONLY
+  action_recommandee: null
+- filename: SCRIPT_SECU_M365-CompteCompromis_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_SECU_M365-CompteCompromis_V1.ps1
+  type: script_ps1
+  description: SCRIPT SECU M365-CompteCompromis
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: HIGH_RISK_CHANGE
+  action_recommandee: null
+- filename: SCRIPT_TEMPLATE_PS-Standard_V1.ps1
+  path: IT-SHARED/30_SCRIPTS/SCRIPT_TEMPLATE_PS-Standard_V1.ps1
+  type: script_ps1
+  description: SCRIPT TEMPLATE PS-Standard
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: LOW_IMPACT_FIX
+  action_recommandee: null
+- filename: Script_RebootInfoShort_SRV.ps1
+  path: IT-SHARED/30_SCRIPTS/Script_RebootInfoShort_SRV.ps1
+  type: script_ps1
+  description: Script RebootInfoShort SRV
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: LOW_IMPACT_FIX
+  action_recommandee: null
+- filename: BUNDLE_CHECKLISTS_IT_V1.md
+  path: IT-SHARED/40_CHECKLISTS/BUNDLE_CHECKLISTS_IT_V1.md
+  type: checklist
+  description: BUNDLE CHECKLISTS IT
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_BACKUP_DR-Readiness_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_BACKUP_DR-Readiness_V1.md
+  type: checklist
+  description: CHECKLIST BACKUP DR-Readiness
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_CW_Closeout_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_CW_Closeout_V1.md
+  type: checklist
+  description: CHECKLIST CW Closeout
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_CW_Kickoff-Ticket_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_CW_Kickoff-Ticket_V1.md
+  type: checklist
+  description: CHECKLIST CW Kickoff-Ticket
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_INFRA_Azure-VM-Deployment_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_INFRA_Azure-VM-Deployment_V1.md
+  type: checklist
+  description: CHECKLIST INFRA Azure-VM-Deployment
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_INFRA_M365-Configuration_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_INFRA_M365-Configuration_V1.md
+  type: checklist
+  description: CHECKLIST INFRA M365-Configuration
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MAINTENANCE_Postcheck-Generic_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_MAINTENANCE_Postcheck-Generic_V1.md
+  type: checklist
+  description: CHECKLIST MAINTENANCE Postcheck-Generic
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MAINTENANCE_Pre-Maintenance_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_MAINTENANCE_Pre-Maintenance_V1.md
+  type: checklist
+  description: CHECKLIST MAINTENANCE Pre-Maintenance
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MAINTENANCE_Precheck-Generic_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_MAINTENANCE_Precheck-Generic_V1.md
+  type: checklist
+  description: CHECKLIST MAINTENANCE Precheck-Generic
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MASTER_Compliance-et-BestPractices_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_MASTER_Compliance-et-BestPractices_V1.md
+  type: checklist
+  description: CHECKLIST MASTER Compliance-et-BestPractices
+  famille_produit: SecOps
+  niveau_commercial:
+  - Pro
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MASTER_Library-IT_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_MASTER_Library-IT_V1.md
+  type: checklist
+  description: CHECKLIST MASTER Library-IT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_NOC_Shift-Handover_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_NOC_Shift-Handover_V1.md
+  type: checklist
+  description: CHECKLIST NOC Shift-Handover
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_REPORT_KPIs-MSP-Mensuels_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_REPORT_KPIs-MSP-Mensuels_V1.md
+  type: checklist
+  description: CHECKLIST REPORT KPIs-MSP-Mensuels
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_SECURITY_Hardening-et-Audit_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_SECURITY_Hardening-et-Audit_V1.md
+  type: checklist
+  description: CHECKLIST SECURITY Hardening-et-Audit
+  famille_produit: SecOps
+  niveau_commercial:
+  - Pro
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_SUPPORT_Intervention-Steps_V1.md
+  path: IT-SHARED/40_CHECKLISTS/CHECKLIST_SUPPORT_Intervention-Steps_V1.md
+  type: checklist
+  description: CHECKLIST SUPPORT Intervention-Steps
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_INFRA_Azure-VM-Deployment_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_INFRA_Azure-VM-Deployment_V1.md
+  type: archive
+  description: CHECKLIST INFRA Azure-VM-Deployment
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_INFRA_M365-Configuration_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_INFRA_M365-Configuration_V1.md
+  type: archive
+  description: CHECKLIST INFRA M365-Configuration
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MASTER_Compliance-et-BestPractices_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_MASTER_Compliance-et-BestPractices_V1.md
+  type: archive
+  description: CHECKLIST MASTER Compliance-et-BestPractices
+  famille_produit: SecOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_MASTER_Library-IT_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_MASTER_Library-IT_V1.md
+  type: archive
+  description: CHECKLIST MASTER Library-IT
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_NOC_Shift-Handover_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_NOC_Shift-Handover_V1.md
+  type: archive
+  description: CHECKLIST NOC Shift-Handover
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_REPORT_KPIs-MSP-Mensuels_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_REPORT_KPIs-MSP-Mensuels_V1.md
+  type: archive
+  description: CHECKLIST REPORT KPIs-MSP-Mensuels
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST_SECURITY_Hardening-et-Audit_V1.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST_SECURITY_Hardening-et-Audit_V1.md
+  type: archive
+  description: CHECKLIST SECURITY Hardening-et-Audit
+  famille_produit: SecOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST__DR_Readiness.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST__DR_Readiness.md
+  type: archive
+  description: CHECKLIST  DR Readiness
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST__KICKOFF_TICKET.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST__KICKOFF_TICKET.md
+  type: archive
+  description: CHECKLIST  KICKOFF TICKET
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST__POSTCHECK_GENERIC.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST__POSTCHECK_GENERIC.md
+  type: archive
+  description: CHECKLIST  POSTCHECK GENERIC
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST__PRECHECK_GENERIC.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST__PRECHECK_GENERIC.md
+  type: archive
+  description: CHECKLIST  PRECHECK GENERIC
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: CHECKLIST__Security.md
+  path: IT-SHARED/40_CHECKLISTS/99_ARCHIVE/CHECKLIST__Security.md
+  type: archive
+  description: CHECKLIST  Security
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: GUIDE__Azure_Troubleshooting.md
+  path: IT-SHARED/50_REFERENCE/GUIDE__Azure_Troubleshooting.md
+  type: reference
+  description: GUIDE  Azure Troubleshooting
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: GUIDE__Best_Practices.md
+  path: IT-SHARED/50_REFERENCE/GUIDE__Best_Practices.md
+  type: reference
+  description: GUIDE  Best Practices
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: GUIDE__Troubleshooting.md
+  path: IT-SHARED/50_REFERENCE/GUIDE__Troubleshooting.md
+  type: reference
+  description: GUIDE  Troubleshooting
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: GUIDE__VEEAM_Best_Practices.md
+  path: IT-SHARED/50_REFERENCE/GUIDE__VEEAM_Best_Practices.md
+  type: reference
+  description: GUIDE  VEEAM Best Practices
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: GUIDE__Writing_Standards.md
+  path: IT-SHARED/50_REFERENCE/GUIDE__Writing_Standards.md
+  type: reference
+  description: GUIDE  Writing Standards
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: MEM-IT-Comms-Templates.md
+  path: IT-SHARED/50_REFERENCE/MEM-IT-Comms-Templates.md
+  type: reference
+  description: MEM-IT-Comms-Templates
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: MEM-IT-Conventions.md
+  path: IT-SHARED/50_REFERENCE/MEM-IT-Conventions.md
+  type: reference
+  description: MEM-IT-Conventions
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: MEM-IT-REFERENCE-ONEPAGER.md
+  path: IT-SHARED/50_REFERENCE/MEM-IT-REFERENCE-ONEPAGER.md
+  type: reference
+  description: MEM-IT-REFERENCE-ONEPAGER
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: MEM-IT-Routing-Rules.md
+  path: IT-SHARED/50_REFERENCE/MEM-IT-Routing-Rules.md
+  type: reference
+  description: MEM-IT-Routing-Rules
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: MEM-IT-Severity-Matrix.md
+  path: IT-SHARED/50_REFERENCE/MEM-IT-Severity-Matrix.md
+  type: reference
+  description: MEM-IT-Severity-Matrix
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE_LIBRARY__IT_MASTER_v1.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE_LIBRARY__IT_MASTER_v1.md
+  type: reference
+  description: REFERENCE LIBRARY  IT MASTER v1
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE_MASTER_Naming-Standards_V1.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE_MASTER_Naming-Standards_V1.md
+  type: reference
+  description: REFERENCE MASTER Naming-Standards
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Cisco_Commands.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Cisco_Commands.md
+  type: reference
+  description: REFERENCE  Cisco Commands
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Cloud_Admin_Portals.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Cloud_Admin_Portals.md
+  type: reference
+  description: REFERENCE  Cloud Admin Portals
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Commands.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Commands.md
+  type: reference
+  description: REFERENCE  Commands
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Common_Cloud_Commands.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Common_Cloud_Commands.md
+  type: reference
+  description: REFERENCE  Common Cloud Commands
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Common_Commands.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Common_Commands.md
+  type: reference
+  description: REFERENCE  Common Commands
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__EDOCS_STANDARD.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__EDOCS_STANDARD.md
+  type: reference
+  description: REFERENCE  EDOCS STANDARD
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Metrics.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Metrics.md
+  type: reference
+  description: REFERENCE  Metrics
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__SLA_Matrix.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__SLA_Matrix.md
+  type: reference
+  description: REFERENCE  SLA Matrix
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Standards.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Standards.md
+  type: reference
+  description: REFERENCE  Standards
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REFERENCE__Template_Library.md
+  path: IT-SHARED/50_REFERENCE/REFERENCE__Template_Library.md
+  type: reference
+  description: REFERENCE  Template Library
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: REF__GUIDE_INFRA_Azure-Troubleshooting_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__GUIDE_INFRA_Azure-Troubleshooting_V1.md
+  type: reference
+  description: REF  GUIDE INFRA Azure-Troubleshooting
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_COM_Comms-Templates_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_COM_Comms-Templates_V1.md
+  type: reference
+  description: REF  REFERENCE COM Comms-Templates
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_HUDU_Edocs-Standard_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_HUDU_Edocs-Standard_V1.md
+  type: reference
+  description: REF  REFERENCE HUDU Edocs-Standard
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_INFRA_Cloud-Admin-Portals_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_INFRA_Cloud-Admin-Portals_V1.md
+  type: reference
+  description: REF  REFERENCE INFRA Cloud-Admin-Portals
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_INFRA_Commandes-Reseau-et-Systeme_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_INFRA_Commandes-Reseau-et-Systeme_V1.md
+  type: reference
+  description: REF  REFERENCE INFRA Commandes-Reseau-et-Systeme
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_INFRA_Common-Cloud-Commands_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_INFRA_Common-Cloud-Commands_V1.md
+  type: reference
+  description: REF  REFERENCE INFRA Common-Cloud-Commands
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_Conventions_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_Conventions_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER Conventions
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_Library-IT_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_Library-IT_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER Library-IT
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_OnePager_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_OnePager_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER OnePager
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_Routing-Rules_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_Routing-Rules_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER Routing-Rules
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_SLA-Matrix_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_SLA-Matrix_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER SLA-Matrix
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_Severity-Matrix_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_Severity-Matrix_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER Severity-Matrix
+  famille_produit: Reference
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: REF__REFERENCE_MASTER_Writing-Standards-et-Metriques_V1.md
+  path: IT-SHARED/50_REFERENCE/REF__REFERENCE_MASTER_Writing-Standards-et-Metriques_V1.md
+  type: reference
+  description: REF  REFERENCE MASTER Writing-Standards-et-Metriques
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_365.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_365.md
+  type: bundle
+  description: BUNDLE INFRA 365
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_CLOUD_AWS_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_CLOUD_AWS_V1.md
+  type: bundle
+  description: BUNDLE INFRA CLOUD AWS
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_CLOUD_GCP_GoogleWorkspace_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_CLOUD_GCP_GoogleWorkspace_V1.md
+  type: bundle
+  description: BUNDLE INFRA CLOUD GCP GoogleWorkspace
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_DNS_Domains_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_DNS_Domains_V1.md
+  type: bundle
+  description: BUNDLE INFRA DNS Domains
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_FIREWALL.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_FIREWALL.md
+  type: bundle
+  description: BUNDLE INFRA FIREWALL
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_LINUX_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_LINUX_V1.md
+  type: bundle
+  description: BUNDLE INFRA LINUX
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_SERVER.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_SERVER.md
+  type: bundle
+  description: BUNDLE INFRA SERVER
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_INFRA_VIRTUALISATION.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_INFRA_VIRTUALISATION.md
+  type: bundle
+  description: BUNDLE INFRA VIRTUALISATION
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_MASTER_Core-MSP_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_MASTER_Core-MSP_V1.md
+  type: bundle
+  description: BUNDLE MASTER Core-MSP
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_MASTER_Gouvernance_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_MASTER_Gouvernance_V1.md
+  type: bundle
+  description: BUNDLE MASTER Gouvernance
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_NOC_Intervention_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_NOC_Intervention_V1.md
+  type: bundle
+  description: BUNDLE NOC Intervention
+  famille_produit: NOCOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_NOC_SOC_SIEM_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_NOC_SOC_SIEM_V1.md
+  type: bundle
+  description: BUNDLE NOC SOC SIEM
+  famille_produit: NOCOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_BACKUP_DR.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_BACKUP_DR.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT BACKUP DR
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_CLOUD.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_CLOUD.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT CLOUD
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_INFRA.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_INFRA.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT INFRA
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_NOC_URGENCE.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_NOC_URGENCE.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT NOC URGENCE
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_RESEAU_VOIP.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_RESEAU_VOIP.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT RESEAU VOIP
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_SECURITE.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_SECURITE.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT SECURITE
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOKS_IT_SUPPORT.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOKS_IT_SUPPORT.md
+  type: bundle
+  description: BUNDLE RUNBOOKS IT SUPPORT
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_BACKUP_Datto-Keepit-DR_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_BACKUP_Datto-Keepit-DR_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK BACKUP Datto-Keepit-DR
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_BACKUP_Veeam-Operations_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_BACKUP_Veeam-Operations_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK BACKUP Veeam-Operations
+  famille_produit: BackupDROps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_INFRA_AD-Operations_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_INFRA_AD-Operations_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK INFRA AD-Operations
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_INFRA_Firewall-VPN_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_INFRA_Firewall-VPN_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK INFRA Firewall-VPN
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_INFRA_Hyperviseurs_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_INFRA_Hyperviseurs_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK INFRA Hyperviseurs
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_INFRA_M365_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_INFRA_M365_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK INFRA M365
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_INFRA_RDS-Operations_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_INFRA_RDS-Operations_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK INFRA RDS-Operations
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_MAINTENANCE_Patching-Windows_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_MAINTENANCE_Patching-Windows_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK MAINTENANCE Patching-Windows
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_MAINTENANCE_Server-Health_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_MAINTENANCE_Server-Health_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK MAINTENANCE Server-Health
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_NOC_RMM-Monitoring_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_NOC_RMM-Monitoring_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK NOC RMM-Monitoring
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_SECURITY_Incident-Response_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_SECURITY_Incident-Response_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK SECURITY Incident-Response
+  famille_produit: SecOps
+  niveau_commercial:
+  - Pro
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_SUPPORT_Intervention-Live_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_SUPPORT_Intervention-Live_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK SUPPORT Intervention-Live
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_RUNBOOK_SUPPORT_Triage-KB_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_RUNBOOK_SUPPORT_Triage-KB_V1.md
+  type: bundle
+  description: BUNDLE RUNBOOK SUPPORT Triage-KB
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_SUPPORT_N1_UserSupport_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_SUPPORT_N1_UserSupport_V1.md
+  type: bundle
+  description: BUNDLE SUPPORT N1 UserSupport
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_SUPPORT_Print_Diag_V1.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_SUPPORT_Print_Diag_V1.md
+  type: bundle
+  description: BUNDLE SUPPORT Print Diag
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_SUPPORT_SERVER-AD.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_SUPPORT_SERVER-AD.md
+  type: bundle
+  description: BUNDLE SUPPORT SERVER-AD
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE__INFRA_Firewall.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE__INFRA_Firewall.md
+  type: bundle
+  description: BUNDLE  INFRA Firewall
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE__IT_CORE_MSP.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE__IT_CORE_MSP.md
+  type: bundle
+  description: BUNDLE  IT CORE MSP
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE__IT_GOVERNANCE.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE__IT_GOVERNANCE.md
+  type: bundle
+  description: BUNDLE  IT GOVERNANCE
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE__IT_NOC_INTERVENTION.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE__IT_NOC_INTERVENTION.md
+  type: bundle
+  description: BUNDLE  IT NOC INTERVENTION
+  famille_produit: NOCOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE__IT_SECURITY.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE__IT_SECURITY.md
+  type: bundle
+  description: BUNDLE  IT SECURITY
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_vs_AGENT_V3.2.md
+  path: IT-SHARED/60_BUNDLES/BUNDLE_vs_AGENT_V3.2.md
+  type: bundle
+  description: BUNDLE vs AGENT.2
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_AssistanTI-FrontLine_V1.md
+  path: IT-SHARED/60_BUNDLES/99_ARCHIVE/BUNDLE_KP_AssistanTI-FrontLine_V1.md
+  type: archive
+  description: BUNDLE KP AssistanTI-FrontLine
+  famille_produit: Core
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_AssistanTI-N2_V1.md
+  path: IT-SHARED/60_BUNDLES/99_ARCHIVE/BUNDLE_KP_AssistanTI-N2_V1.md
+  type: archive
+  description: BUNDLE KP AssistanTI-N2
+  famille_produit: Core
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_AssistanTI-N3_V1.md
+  path: IT-SHARED/60_BUNDLES/99_ARCHIVE/BUNDLE_KP_AssistanTI-N3_V1.md
+  type: archive
+  description: BUNDLE KP AssistanTI-N3
+  famille_produit: Core
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_SECURITY_Securite_V1.md
+  path: IT-SHARED/60_BUNDLES/99_ARCHIVE/BUNDLE_SECURITY_Securite_V1.md
+  type: archive
+  description: BUNDLE SECURITY Securite
+  famille_produit: Core
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_AssetMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_AssetMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP AssetMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_AssistanTI-FrontLine_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_AssistanTI-FrontLine_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP AssistanTI-FrontLine
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_Assistant-N2_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_Assistant-N2_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP Assistant-N2
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_Assistant-N3_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_Assistant-N3_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP Assistant-N3
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_BackupDRMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_BackupDRMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP BackupDRMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_ClientDocMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_ClientDocMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP ClientDocMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_CloudMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_CloudMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP CloudMaster
+  famille_produit: Cloud_M365Ops
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_Commandare-Infra_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_Commandare-Infra_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP Commandare-Infra
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_Commandare-NOC_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_Commandare-NOC_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP Commandare-NOC
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_Commandare-OPR_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_Commandare-OPR_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP Commandare-OPR
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_Commandare-TECH_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_Commandare-TECH_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP Commandare-TECH
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_FrontLine_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_FrontLine_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP FrontLine
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_KnowledgeKeeper_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_KnowledgeKeeper_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP KnowledgeKeeper
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_MaintenanceMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_MaintenanceMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP MaintenanceMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_MonitoringMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_MonitoringMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP MonitoringMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_NOCDispatcher_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_NOCDispatcher_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP NOCDispatcher
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_NetworkMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_NetworkMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP NetworkMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_ReportMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_ReportMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP ReportMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_ScriptMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_ScriptMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP ScriptMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_SecurityMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_SecurityMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP SecurityMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_SysAdmin_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_SysAdmin_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP SysAdmin
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_TicketScribe_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_TicketScribe_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP TicketScribe
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_UrgenceMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_UrgenceMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP UrgenceMaster
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_KP_VoIPMaster_V1.md
+  path: IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_VoIPMaster_V1.md
+  type: knowledge_pack
+  description: BUNDLE KP VoIPMaster
+  famille_produit: NetworkOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: POWERSHELL__Event_Log_Analysis.md
+  path: IT-SHARED/70_KNOWLEDGE/04_POWERSHELL_LIBRARY/POWERSHELL__Event_Log_Analysis.md
+  type: knowledge_library
+  description: POWERSHELL  Event Log Analysis
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: POWERSHELL__Server_Management.md
+  path: IT-SHARED/70_KNOWLEDGE/04_POWERSHELL_LIBRARY/POWERSHELL__Server_Management.md
+  type: knowledge_library
+  description: POWERSHELL  Server Management
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: POWERSHELL__Template_Standard_v1.ps1
+  path: IT-SHARED/70_KNOWLEDGE/04_POWERSHELL_LIBRARY/99_ARCHIVE/POWERSHELL__Template_Standard_v1.ps1
+  type: archive
+  description: POWERSHELL  Template Standard v1
+  famille_produit: Unclassified
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: NAMING_STANDARDS_v1.md
+  path: IT-SHARED/70_KNOWLEDGE/06_NAMING_STANDARDS/NAMING_STANDARDS_v1.md
+  type: knowledge_library
+  description: NAMING STANDARDS v1
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: EXEMPLES_CLOSE_CW_REELS.md
+  path: IT-SHARED/80_EXEMPLES/EXEMPLES_CLOSE_CW_REELS.md
+  type: example
+  description: EXEMPLES CLOSE CW REELS
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: KB-DATTO-001_Probe-RMM-VMware.md
+  path: IT-SHARED/80_EXEMPLES/KB-DATTO-001_Probe-RMM-VMware.md
+  type: example
+  description: KB-DATTO-001 Probe-RMM-VMware
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: Pending_REBOT_GALIENOVA_002.agent.md
+  path: IT-SHARED/80_EXEMPLES/Pending_REBOT_GALIENOVA_002.agent.md
+  type: example
+  description: Pending REBOT GALIENOVA 002.agent
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_PENDINGREBOOT.md
+  path: IT-SHARED/80_EXEMPLES/TEMPLATE_PENDINGREBOOT.md
+  type: example
+  description: TEMPLATE PENDINGREBOOT
+  famille_produit: Maint_ServerOps
+  niveau_commercial:
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_Perfrormance-PREMIUM.md
+  path: IT-SHARED/80_EXEMPLES/TEMPLATE_Perfrormance-PREMIUM.md
+  type: example
+  description: TEMPLATE Perfrormance-PREMIUM
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: TEMPLATE_Perfrormance-STD.md
+  path: IT-SHARED/80_EXEMPLES/TEMPLATE_Perfrormance-STD.md
+  type: example
+  description: TEMPLATE Perfrormance-STD
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: KB-VEEAM-001_Probe-RMM-VMware.md
+  path: IT-SHARED/80_EXEMPLES/99_ARCHIVE/KB-VEEAM-001_Probe-RMM-VMware.md
+  type: archive
+  description: KB-VEEAM-001 Probe-RMM-VMware
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: KB-WU-001_Windows-Update-Missing-DC.md
+  path: IT-SHARED/80_EXEMPLES/99_ARCHIVE/KB-WU-001_Windows-Update-Missing-DC.md
+  type: archive
+  description: KB-WU-001 Windows-Update-Missing-DC
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - archive
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: archive
+  risque: N/A
+  action_recommandee: null
+- filename: KB-VEEAM-001_Probe-RMM-VMware.md
+  path: IT-SHARED/90_KB/KB-VEEAM-001_Probe-RMM-VMware.md
+  type: kb_article
+  description: KB-VEEAM-001 Probe-RMM-VMware
+  famille_produit: VirtualizationOps
+  niveau_commercial:
+  - MSP_Suite
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: KB-WU-001_Windows-Update-Missing-DC.md
+  path: IT-SHARED/90_KB/KB-WU-001_Windows-Update-Missing-DC.md
+  type: kb_article
+  description: KB-WU-001 Windows-Update-Missing-DC
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: KB_DHCP_DIAG
+  path: IT-SHARED/90_KB/KB_DHCP_DIAG
+  type: kb_article
+  description: KB DHCP DIAG
+  famille_produit: Support_TicketOps
+  niveau_commercial:
+  - Starter
+  - Pro
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: BUNDLE_vs_AGENT_V2.md
+  path: IT-SHARED/99_ARCHIVE/BUNDLE_vs_AGENT_V2.md
+  type: unclassified
+  description: BUNDLE vs AGENT
+  famille_produit: Core
+  niveau_commercial:
+  - Starter
+  - Pro
+  - MSP_Suite
+  - Enterprise
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: active
+  risque: N/A
+  action_recommandee: null
+- filename: API_UPDATE_TEST.md
+  path: IT-SHARED/99_SANDBOX/API_UPDATE_TEST.md
+  type: unclassified
+  description: API UPDATE TEST
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null
+- filename: API_TEST_UPDATEITFILE.md
+  path: IT-SHARED/99_TEMP/API_TEST_UPDATEITFILE.md
+  type: unclassified
+  description: API TEST UPDATEITFILE
+  famille_produit: Unclassified
+  niveau_commercial:
+  - Unclassified
+  agent_proprietaire: null
+  agents_consommateurs: []
+  bundle_associe: null
+  statut: review
+  risque: N/A
+  action_recommandee: null

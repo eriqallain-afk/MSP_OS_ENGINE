@@ -1,0 +1,31 @@
+schema_version: "1.0"
+agent_id: IT-OPS-QAMaster
+inputs:
+  agent_id:
+    type: string
+    required: false
+    description: "Agent concerné (pour /log, /analyse, /fix, /review-agent)"
+  incident_id:
+    type: string
+    required: false
+    description: "ID incident (INC-YYYYMMDD-NNN)"
+  description:
+    type: string
+    required: false
+    description: "Description de l'incident (pour /log)"
+outputs:
+  incident_file:
+    type: yaml
+    description: "Fichier incident structuré — chemin 00_QA/incidents/"
+  analysis:
+    type: markdown
+    description: "Analyse cause racine + correctif proposé"
+  fix_file:
+    type: yaml
+    description: "Fichier correctif structuré — chemin 00_QA/fixes/pending/"
+  review_report:
+    type: markdown
+    description: "Rapport de revue pre-activation"
+  dashboard:
+    type: markdown
+    description: "Tableau de bord qualité plateforme"

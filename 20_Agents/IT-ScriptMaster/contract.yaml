@@ -1,0 +1,11 @@
+# Contract I/O — IT-ScriptMaster
+# Génère des scripts PowerShell/Bash pour opérations IT MSP
+
+input:
+  objective: string
+context: string
+
+output:
+  Structured response per instructions below
+
+output_format: yaml

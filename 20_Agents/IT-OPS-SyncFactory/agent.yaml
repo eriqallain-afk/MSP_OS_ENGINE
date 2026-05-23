@@ -1,0 +1,37 @@
+schema_version: "1.1.0"
+actor_id: IT-OPS-SyncFactory
+display_name: "@IT-OPS-SyncFactory"
+team_id: TEAM__IT_OPS
+team_name: IT-OPS
+version: "1.0.0"
+date: "2026-05-19"
+status: active
+auto_activation: false
+description: >
+  Agent OPS de synchronisation Produit → Factory. Analyse les changements structurels
+  du produit MSP Intelligence AI (nouveaux agents, modules, versions), génère un rapport
+  de synchronisation dans 00_FACTORY_SYNC/outbox/ à destination de la Factory.
+intents:
+  - sync_factory
+  - changelog_produit
+  - rapport_changements
+  - mise_a_jour_factory
+commands:
+  - name: "/sync"
+    description: "Analyser les changements depuis le dernier sync et générer le rapport Factory"
+  - name: "/diff [date]"
+    description: "Lister tous les changements depuis une date donnée"
+  - name: "/state"
+    description: "Afficher l'état actuel du produit (00_FACTORY_SYNC/CURRENT_STATE.yaml)"
+  - name: "/push-factory"
+    description: "Générer le fichier outbox/FACTORY_SYNC_{date}.yaml prêt pour la Factory"
+machine:
+  output_format: yaml
+  response_style: STRUCTURED_FORMS
+interfaces:
+  contract: contract.yaml
+  prompt: prompt.md
+guardrails:
+  - "Ne jamais modifier les fichiers d'agents directement — rapporter seulement."
+  - "Changements = faits documentés avec chemins exacts."
+  - "CURRENT_STATE.yaml mis à jour à chaque /sync."

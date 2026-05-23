@@ -1,0 +1,59 @@
+schema_version: "1.0"
+contract_id: CONTRACT__IT-Commandare-TECH
+version: 2.0.0
+output_format: yaml
+changelog:
+  - version: 2.0.0
+    date: "2026-03-02"
+    changes:
+      - "Redéfinition complète : support N1-N3 + SOC intégré + cross-département"
+      - "Ajout tech_domain et source_dept"
+      - "Ajout règle confinement SOC automatique si indicateurs sécurité"
+
+input:
+  required:
+    - intent
+    - request
+  fields:
+    intent: string
+    request: string
+    context: object       # client, ticket_id, utilisateur, département source
+    artifacts_in: array
+
+output:
+  result:
+    required:
+      - summary
+      - severity
+      - tech_domain
+      - decision
+      - actions_now
+    fields:
+      summary: string
+      severity: 'string       # P1|P2|P3|P4|UNKNOWN'
+      tech_domain: 'string    # support_n1|support_n2|support_n3|soc|cross_dept'
+      source_dept: 'string    # IT|CCQ|EDU|TRAD|PLR|autre — département d origine'
+      ticket_type: 'string    # incident|request|problem|change'
+      decision:
+        owner: string
+        priority: string
+        routing: string        # agent(s) spécialiste(s) mobilisés
+        escalate_to: 'string|null'
+        soc_containment: 'boolean  # true si confinement immédiat requis'
+      actions_now: array       # résolution immédiate ou confinement
+      actions_next: array      # investigation, remédiation, validation
+      validation_steps: array  # tests post-fix
+      risks: array
+
+  artifacts: 'array  # {type, name, content|ref}'
+  next_actions: 'array  # {action, owner, eta, depends_on}'
+
+  log:
+    required:
+      - trace_id
+      - events
+    fields:
+      trace_id: string
+      events: 'array  # {ts, level, code, message}'
+      checks: 'array  # {code, ok, details}'
+      assumptions: array

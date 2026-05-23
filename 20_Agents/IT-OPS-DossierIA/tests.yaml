@@ -1,0 +1,32 @@
+unit_tests:
+- name: create_dossier_structure
+  input:
+    operation: create
+    playbook_id: PBK_TEST
+    metadata:
+      subject: demo
+  expected:
+    result.status: success
+    result.dossier.status: open
+- name: append_step_archive
+  input:
+    operation: append
+    workflow_id: WF1
+    metadata:
+      dossier_id: DOSSIER__...
+    inputs:
+      x: 1
+    outputs:
+      y: 2
+    logs:
+      step: ok
+  expected:
+    result.status: success
+- name: search_returns_scored_results
+  input:
+    operation: search
+    search_query:
+      keywords:
+      - PBK_TEST
+  expected:
+    result.search_results[0].score: 0.0-1.0

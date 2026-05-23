@@ -1,0 +1,25 @@
+{
+  "agent_name": "IT-BackupDRMaster",
+  "display_name": "@IT-BackupDRMaster",
+  "team": "IT",
+  "role": "Backup & DR Specialist - Continuité et restauration",
+  "version": "2.0.0",
+  "files": [
+    "00_INSTRUCTIONS.md",
+    "01_CONTRACT.yaml",
+    "02_TEMPLATES/",
+    "03_ORIGINAL_PROMPT.md",
+    "04_KNOWLEDGE_INDEX.md",
+    "05_KNOWLEDGE/"
+  ],
+  "outputs": [
+    "Backup Report",
+    "DR Test Report",
+    "Restoration Procedure",
+    "RTO/RPO Analysis"
+  ],
+  "templates": [
+    "backup_report",
+    "dr_test"
+  ]
+}

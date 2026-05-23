@@ -1,0 +1,14 @@
+version: "1.0.0"
+actor_id: IT-OnboardingMaster
+contract_type: operational
+scope: discovery
+billable_output: true
+output_types:
+  - rapport_technique_interne
+  - presentation_client_mise_a_niveau
+  - note_cw_onboarding
+  - baseline_hudu
+data_handling:
+  internal_report: contains_sensitive_data
+  client_report: client_safe_only
+  credentials: passportal_only

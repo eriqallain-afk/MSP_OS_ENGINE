@@ -1,0 +1,51 @@
+schema_version: "1.0"
+contract_id: CONTRACT__IT-Commandare-Infra
+output_format: yaml
+
+input:
+  required:
+    - intent
+    - request
+  fields:
+    intent: string
+    request: string
+    context: object       # assets affectés, alertes, données monitoring
+    artifacts_in: array   # logs, screenshots, outputs RMM
+
+output:
+  result:
+    required:
+      - summary
+      - severity
+      - infra_domain
+      - decision
+      - actions_now
+    fields:
+      summary: string
+      severity: 'string  # P1|P2|P3|P4|UNKNOWN'
+      infra_domain: 'string  # server|vm|cloud|network|storage|dc|backup|multi'
+      affected_assets: 'array  # assets confirmés ou suspectés'
+      decision:
+        owner: string
+        priority: string
+        routing: string           # agent(s) spécialiste(s) mobilisés
+        escalate_to: 'string|null # IT-CTOMaster si architecture, IT-SecurityMaster si sécurité'
+        parallel_tracks: array    # si multi-domaines simultanés
+      actions_now: array          # 0–15 min : containment, diagnostics immédiats
+      actions_next: array         # 15 min–2h : investigation, remédiation
+      validation_plan: array      # tests post-fix à réaliser
+      risks: array
+      rollback_trigger: 'string|null  # condition qui déclenche rollback'
+
+  artifacts: 'array  # {type, name, content|ref}'
+  next_actions: 'array  # {action, owner, eta, depends_on}'
+
+  log:
+    required:
+      - trace_id
+      - events
+    fields:
+      trace_id: string
+      events: 'array  # {ts, level, code, message}'
+      checks: 'array  # {code, ok, details}'
+      assumptions: array

@@ -1,0 +1,43 @@
+schema_version: "1.0"
+product_id: IT
+display_name: "MSP Intelligence AI"
+repo: "eriqallain-afk/IT"
+branch_prod: main
+manifest_version: "4.2"
+last_sync: "2026-05-19"
+generated_by: "IT-OPS-SyncFactory"
+
+stats:
+  total_agents: 32
+  ops_agents: 4
+  metier_agents: 28
+  modules_staging: 1    # MODULE_PROJETS
+  active_playbooks: 11
+
+agents_active:
+  ops: [IT-OPS-RouterIA, IT-OPS-PlaybookRunner, IT-OPS-DossierIA, IT-OPS-QAMaster]
+  metier: [IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3, IT-SysAdmin, IT-TechOPS,
+           IT-MaintenanceMaster, IT-MonitoringMaster, IT-NetworkMaster, IT-SecurityMaster,
+           IT-BackupDRMaster, IT-CloudMaster, IT-VoIPMaster, IT-AssetMaster, IT-ScriptMaster,
+           IT-TicketOpsAI, IT-TicketScribe, IT-NOCDispatcher, IT-UrgenceMaster,
+           IT-Commandare-NOC, IT-Commandare-TECH, IT-Commandare-Infra, IT-Commandare-OPR,
+           IT-OnboardingMaster, IT-OnOffBoarder, IT-ComplianceMaster, IT-ClientDocMaster,
+           IT-ReportMaster, IT-KnowledgeKeeper]
+
+modules_staging:
+  - id: MODULE_PROJETS
+    path: 99_STAGING/Draft/MODULE_PROJETS/
+    agents: [IT-ProjetSOW]
+    status: staging
+    ready_for_activation: false
+
+shared_resources:
+  runbooks: "IT-SHARED/10_RUNBOOKS/"
+  templates: "IT-SHARED/20_TEMPLATES/"
+  scripts: "IT-SHARED/30_SCRIPTS/"
+  knowledge: "IT-SHARED/60_BUNDLES/"
+
+pipeline_ventes:
+  path: "ventes/"
+  status: active
+  linked_module: MODULE_PROJETS

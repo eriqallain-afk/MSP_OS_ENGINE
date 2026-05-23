@@ -1,0 +1,40 @@
+{
+  "id": "IT-AssistanTI_N2",
+  "display_name": "@IT-AssistanTI_N2",
+  "team": "TEAM__IT",
+  "version": "2.0.0",
+  "status": "active",
+  "description": "Technicien MSP N1/N2 — support téléphonique helpdesk. Guide étape par étape, escalade P2→P1 automatique vers IT-Commandare-TECH ou IT-Commandare-NOC.",
+  "entry_point": "prompt.md",
+  "scope": "N1/N2 helpdesk — MDP, imprimante, Outlook, VPN utilisateur, OneDrive, RDS utilisateur",
+  "hors_scope": "Maintenance planifiée, patching serveurs → IT-MaintenanceMaster",
+  "escalades": {
+    "P1_infra": "IT-Commandare-NOC",
+    "P2_technique": "IT-Commandare-TECH",
+    "securite": "IT-SecurityMaster"
+  },
+  "commands": ["/start", "/close", "/escalade"],
+  "outputs": [
+    "Guide étapes helpdesk N1/N2 numérotées",
+    "Commandes PowerShell/AD simples",
+    "Bloc escalade structuré P2→P1",
+    "CW Note Interne + Discussion client-safe"
+  ],
+  "knowledge_gpt": "IT-SHARED/60_BUNDLES/BUNDLE_KP_AssistanTI-N2_V1.md",
+  "files": {
+    "core": [
+      "prompt.md",
+      "agent.yaml",
+      "contract.yaml",
+      "manifest.json",
+      "00_INSTRUCTIONS.md",
+      "README.md"
+    ],
+    "operational": [
+      "02_RUNBOOKS/RB-001_procedure-principale.md",
+      "03_CHECKLISTS/CL-001_validation-principale.md",
+      "04_EXEMPLES/EX-001_cas-nominal.md",
+      "04_KNOWLEDGE_INDEX.md"
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+﻿schema_version: "1.1.0"
+agent_id: IT-AssistanTI_N3
+
+input:
+  billet:
+    type: string
+    required: false
+    description: "Numero ConnectWise (ex: T12345)"
+  client:
+    type: string
+    required: false
+    description: "Nom du client MSP"
+  serveurs:
+    type: list
+    required: false
+    description: "Liste des serveurs concernes"
+  contexte:
+    type: string
+    required: false
+    description: "Description de la problematique ou de la tache"
+  priorite:
+    type: enum
+    values: [P1, P2, P3, P4]
+    required: false
+    default: P3
+  contraintes:
+    type: list
+    required: false
+    description: "Contraintes : VIP, pas-toucher, fenetre, budget"
+  ressources:
+    type: list
+    required: false
+    description: "Captures, logs, sorties de commandes, fichiers"
+
+output:
+  format: markdown
+  triage:
+    categorie: string
+    priorite: string
+    risques: list
+  plan:
+    ordre: list
+    checklist: list
+  scripts:
+    type: list
+    items:
+      - type: powershell
+        filename: string
+        content: string
+      - type: bash
+        filename: string
+        content: string
+  livrables_cw:
+    discussion: string
+    note_interne: string
+    email_client: string
+    annonce_teams: string
+  next_actions: list
+
+constraints:
+  - "Scope IT uniquement. Refus immediat hors IT."
+  - "Jamais de mots de passe, tokens, cles API dans les livrables."
+  - "Jamais d'IP dans les livrables clients."
+  - "Validation explicite avant toute action destructrice."
+  - "Lecture seule avant remediation."
+  - "1 serveur a la fois pour les reboots."
+
+success_criteria:
+  - "Billet documente dans CW"
+  - "Probleme resolu ou chemin de resolution identifie"
+  - "4 livrables CW generes sur /close"
+  - "Aucune donnee sensible dans les livrables"
+
+sla:
+  P1: "Reponse < 5 min"
+  P2: "Reponse < 30 min"
+  P3: "Reponse < 4h"
+  P4: "Reponse < 24h"

@@ -1,0 +1,23 @@
+schema_version: "1.0"
+id: IT-AssetMaster
+display_name: "@IT-AssetMaster"
+team_id: TEAM__IT
+team_name: IT
+version: 1.0.0
+date: "2026-05-16"
+status: active
+description: "Inventaire IT & CMDB : structure, maintient et exploite actifs HW/SW."
+intents:
+  - it
+  - cmdb
+  - assets
+aliases:
+  - "@IT-AssetMaster"
+  - IT-AssetMaster
+machine:
+  output_format: YAML_STRICT
+  contract_required: true
+  logs_required: true
+interfaces:
+  contract: contract.yaml
+  prompt: prompt.md

@@ -1,0 +1,29 @@
+schema_version: "1.0"
+input:
+  objective: string
+  context: "string|yaml|json"
+  constraints:
+    - string
+  resources:
+    - string
+  expected_output: string
+  priority: "low|medium|high"
+  deadline: string (optional)
+output:
+  result:
+    summary: string
+    details: string
+  artifacts:
+    - type: string
+      title: string
+      path: string
+      content: string
+  next_actions:
+    - string
+  log:
+    decisions:
+      - string
+    risks:
+      - string
+    assumptions:
+      - string

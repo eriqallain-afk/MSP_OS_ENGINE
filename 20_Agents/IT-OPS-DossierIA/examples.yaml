@@ -1,0 +1,12 @@
+examples:
+- input:
+    operation: close
+    workflow_id: WF123
+    playbook_id: PBK_BUILD_ARMY_FACTORY
+    outputs:
+      deliverable: '...'
+  output_snippet:
+    result:
+      status: success
+      export:
+        format: yaml

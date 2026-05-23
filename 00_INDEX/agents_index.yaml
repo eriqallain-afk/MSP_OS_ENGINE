@@ -1,0 +1,466 @@
+schema_version: '1.0'
+generated_at: '2026-04-06T00:00:00Z'
+product_id: IT
+agents:
+  IT-OPS-RouterIA:
+    display_name: '@IT-OPS-RouterIA'
+    team_id: TEAM__IT
+    team_name: IT
+    description: Routeur IT (sélectionne le playbook IT + fournit une fiche runbook
+      aux agents).
+    intents:
+    - ops
+    - router
+    - routing
+    - it
+    - runbook
+  IT-OPS-PlaybookRunner:
+    display_name: '@IT-OPS-PlaybookRunner'
+    team_id: TEAM__IT
+    team_name: IT
+    description: Exécuteur de playbook IT (déroule les étapes, assemble les handoffs).
+    intents:
+    - ops
+    - runner
+    - playbook
+    - it
+  IT-OPS-DossierIA:
+    display_name: '@IT-OPS-DossierIA'
+    team_id: TEAM__IT
+    team_name: IT
+    description: Dossier IA IT (archivage, packaging livrables, traçabilité).
+    intents:
+    - ops
+    - dossier
+    - archive
+    - it
+  IT-AssetMaster:
+    display_name: "@IT-AssetMaster"
+    team_id: TEAM__IT
+    role: operations
+    status: active
+    description:  >
+     Tu es @IT-AssetMaster, responsable de la gestion des actifs IT (CMDB) pour un MSP.
+    intents:
+      - assets
+      - cmdb
+      - licences
+      - inventaire
+  IT-FrontLine:
+    display_name: "@IT-FrontLine"
+    team_id: TEAM__IT
+    role: support
+    status: active
+    description: >
+      Tu es @IT-FrontLine, technicien N2 MSP de première ligne.
+    intents:
+      - support_n1
+      - frontline
+      - tickets
+      - triage
+      - msp_live
+  IT-Assistant-N2:
+    display_name: "@IT-Assistant-N2"
+    team_id: TEAM__IT
+    role: support
+    status: active
+    description: >
+      Tu es @IT-Assistant-N2, assistant technique MSP pour techniciens N1 et N2 en support téléphonique.
+    intents:
+      - support_n2
+      - tickets
+      - incident
+      - remote_assist
+      - msp_live
+  IT-Assistant-N3:
+    display_name: "@IT-Assistant-N3"
+    team_id: TEAM__IT
+    role: support
+    status: active
+    description: >
+      Ces erreurs sont fréquentes en contexte N-able / CW RMM. S'applique à **tout script ou commande PS généré** :
+    intents:
+      - support_n3
+      - incident_critique
+      - architecture
+      - diagnostic
+  IT-BackupDRMaster:
+    display_name: "@IT-BackupDRMaster"
+    team_id: TEAM__IT
+    role: infra
+    status: active
+    description: >
+      Tu es @IT-BackupDRMaster, expert Backup & DR pour un MSP.
+    intents:
+      - backup
+      - dr
+      - veeam
+      - datto
+      - keepit
+      - restauration
+  IT-ClientDocMaster:
+    display_name: "@IT-ClientDocMaster"
+    team_id: TEAM__IT
+    role: documentation
+    status: active
+    description: >
+      Tu es @IT-ClientDocMaster, responsable de la documentation opérationnelle
+    intents:
+      - documentation
+      - hudu
+      - edocs
+      - fiche_client
+  IT-CloudMaster:
+    display_name: "@IT-CloudMaster"
+    team_id: TEAM__IT
+    role: infra
+    status: active
+    description: >
+      Tu es @IT-CloudMaster, expert Cloud/M365 pour un MSP.
+    intents:
+      - cloud
+      - m365
+      - azure
+      - exchange
+      - intune
+      - teams
+  IT-Commandare-Infra:
+    display_name: "@IT-Commandare-Infra"
+    team_id: TEAM__IT
+    role: commandare
+    status: active
+    description: >
+      Tu es @IT-Commandare-Infra, Commandare MSP responsable des incidents d'infrastructure.
+    intents:
+      - infra
+      - incident_infra
+      - coordination
+      - serveur
+      - vm
+  IT-Commandare-NOC:
+    display_name: "@IT-Commandare-NOC"
+    team_id: TEAM__IT
+    role: commandare
+    status: active
+    description: >
+      Tu es @IT-Commandare-NOC, Commandare MSP responsable des opérations NOC.
+    intents:
+      - noc
+      - alertes
+      - monitoring
+      - escalade
+      - coordination_noc
+  IT-Commandare-OPR:
+    display_name: "@IT-Commandare-OPR"
+    team_id: TEAM__IT
+    role: commandare
+    status: active
+    description: >
+      Tu es @IT-Commandare-OPR, Commandare MSP responsable des opérations administratives et documentaires.
+    intents:
+      - opr
+      - clôture_cw
+      - rapports
+      - comms_client
+  IT-Commandare-TECH:
+    display_name: "@IT-Commandare-TECH"
+    team_id: TEAM__IT
+    role: commandare
+    status: active
+    description: >
+      Tu es @IT-Commandare-TECH, Commandare MSP responsable du support technique N1-N3 et du SOC.
+    intents:
+      - tech
+      - support_tech
+      - soc_confinement
+      - escalade_securite
+  IT-KnowledgeKeeper:
+    display_name: "@IT-KnowledgeKeeper"
+    team_id: TEAM__IT
+    role: knowledge
+    status: active
+    description: >
+      Gestionnaire de la base de connaissances MSP. Transforme les incidents résolus
+      en articles KB réutilisables. Détecte les patterns récurrents, suggère des
+      intents à RouterIA via /suggest-intent → QAMaster → EA.
+    intents:
+      - kb
+      - knowledge
+      - procedures
+      - articles
+      - capitalisation
+      - search_kb
+      - pattern_kb
+      - suggest_intent
+  IT-MaintenanceMaster:
+    display_name: '@IT-MaintenanceMaster'
+    team_id: TEAM__IT
+    role: infra
+    status: active
+    description: 'Maintenance & audits : patching, plans, conformité, Engineering.'
+    intents:
+    - it
+    - maintenance
+    - patching      
+    - windows_update
+    - sysadmin
+    - scripts
+  IT-MonitoringMaster:
+    display_name: "@IT-MonitoringMaster"
+    team_id: TEAM__IT
+    role: noc
+    status: active
+    description: >
+      Tu es @IT-MonitoringMaster, expert en supervision IT pour un MSP.
+    intents:
+      - monitoring
+      - rmm
+      - nable
+      - alertes_rmm
+      - supervision
+  IT-NOCDispatcher:
+    display_name: "@IT-NOCDispatcher"
+    team_id: TEAM__IT
+    role: noc
+    status: active
+    description: >
+      Tu es @IT-NOCDispatcher, premier point de qualification des alertes et tickets entrants.
+    intents:
+      - dispatch
+      - qualification
+      - sla
+      - routing
+      - prioritisation
+  IT-NetworkMaster:
+    display_name: "@IT-NetworkMaster"
+    team_id: TEAM__IT
+    role: infra
+    status: active
+    description: >
+      Tu es @IT-NetworkMaster, expert réseau pour un MSP.
+    intents:
+      - reseau
+      - lan
+      - wan
+      - firewall
+      - wifi
+      - vpn_infra
+  IT-ReportMaster:
+    display_name: "@IT-ReportMaster"
+    team_id: TEAM__IT
+    role: reporting
+    status: active
+    description: >
+      Tu es @IT-ReportMaster, spécialiste en rédaction de rapports IT pour un MSP.
+    intents:
+      - rapports
+      - qbr
+      - postmortem
+      - rapport_mensuel
+      - kpis
+  IT-ScriptMaster:
+    display_name: "@IT-ScriptMaster"
+    team_id: TEAM__IT
+    role: automation
+    status: active
+    description: >
+      Tu es @IT-ScriptMaster, expert en scripting pour opérations IT MSP Windows/Linux.
+    intents:
+      - scripting
+      - powershell
+      - automatisation
+      - rmm_scripts
+  IT-SecurityMaster:
+    display_name: "@IT-SecurityMaster"
+    team_id: TEAM__IT
+    role: security
+    status: active
+    description: >
+      Tu es @IT-SecurityMaster, expert cybersécurité pour un MSP. Tu analyses les risques,
+    intents:
+      - securite
+      - soc
+      - siem
+      - edr
+      - incident_response
+      - audit
+  IT-TicketScribe:
+    display_name: "@IT-TicketScribe"
+    team_id: TEAM__IT
+    role: operations
+    status: active
+    description: >
+      Tu es @IT-TicketScribe, rédacteur professionnel pour ConnectWise Manage
+    intents:
+      - scribe
+      - cw_note
+      - cw_discussion
+      - email_client
+      - documentation_cw
+  IT-UrgenceMaster:
+    display_name: "@IT-UrgenceMaster"
+    team_id: TEAM__IT
+    role: urgence
+    status: active
+    description: >
+      Tu es @IT-UrgenceMaster, copilote MSP dédié aux urgences P1/P2 en contexte live.
+    intents:
+      - urgence
+      - p1
+      - panne_hq
+      - go_nogo
+      - incident_critique
+  IT-VoIPMaster:
+    display_name: "@IT-VoIPMaster"
+    team_id: TEAM__IT
+    role: infra
+    status: active
+    description: >
+      Tu es @IT-VoIPMaster, expert en téléphonie IP et communications unifiées pour un MSP.
+    intents:
+      - voip
+      - telephonie
+      - teams_phone
+      - 3cx
+      - uc
+      - sip
+  IT-SysAdmin:
+    display_name: "@IT-SysAdmin"
+    team_id: TEAM__IT
+    role: infra
+    status: active
+    description: >
+      Administrateur système généraliste senior MSP — serveurs, VMs, Hyper-V,
+      VMware, Veeam, SentinelOne, CVE, firewalls, patching, M365, Azure, Linux.
+    intents:
+      - sysadmin
+      - maintenance
+      - patching
+      - infra
+  IT-TicketOpsAI:
+    display_name: "@IT-TicketOpsAI"
+    commercial_name: "MSP TicketOps AI"
+    team_id: TEAM__IT
+    role: ticket_ops
+    status: active
+    description: >
+      Agent de triage, documentation et fermeture de billets TI — MSP TicketOps AI.
+      Couvre le cycle complet : triage, analyse, clôture CW, mémo, Teams, rapports, script-check, risques.
+    intents:
+      - ticket_ops
+      - triage_ticket
+      - close_ticket
+      - rapport_client
+      - rapport_coordo
+      - script_check
+      - risques_intervention
+  IT-OnOffBoarder:
+    display_name: "@IT-OnOffBoarder"
+    team_id: TEAM__IT
+    role: transitions
+    status: active
+    description: >
+      Agent de gestion des transitions MSP — onboarding et offboarding dans les deux sens :
+      nouveau client MSP (découverte infra, mise à niveau, SOC, déploiement outils),
+      départ client MSP (inventaire, remise, révocation, handover),
+      nouvel employé chez un client (AD, M365, équipements, accès),
+      départ employé chez un client (révocation accès, récupération, données).
+    intents:
+      - onboarding
+      - offboarding
+      - nouveau_client
+      - depart_client
+      - nouvel_employe
+      - depart_employe
+      - decouverte_infra
+      - baseline
+      - mise_a_niveau
+      - soc_onboarding
+      - deploiement_outils
+      - handover
+      - inventaire
+  IT-ComplianceMaster:
+    display_name: "@IT-ComplianceMaster"
+    team_id: TEAM__IT
+    role: compliance
+    status: active
+    description: >
+      Conformité réglementaire MSP — 3 périmètres : client (Loi 25, PCI-DSS, HIPAA,
+      cyber-assurance), MSP interne (Loi 25 sous-traitant, SOC 2), MSP chez le client
+      (accès, Passportal, moindre privilège, trail d'audit). Rapports facturables.
+    intents:
+      - conformite
+      - compliance
+      - loi25
+      - pci_dss
+      - hipaa
+      - cyber_assurance
+      - audit_conformite
+      - remediation
+      - donnees_personnelles
+  IT-OPS-QAMaster:
+    display_name: "@IT-OPS-QAMaster"
+    team_id: TEAM__IT-OPS
+    role: qa_ops
+    status: active
+    description: >
+      Agent OPS qualité plateforme. Analyse incidents 00_QA/, détecte patterns systémiques,
+      propose correctifs soumis à EA, revue pre-activation des nouveaux agents.
+    intents:
+      - qa
+      - qualite
+      - incident_agent
+      - review_agent
+      - pre_activation
+      - pattern_detection
+
+  IT-OnboardingMaster:
+    display_name: "@IT-OnboardingMaster"
+    team_id: TEAM__IT
+    role: onboarding
+    status: legacy
+    superseded_by: IT-OnOffBoarder
+    description: >
+      LEGACY — Remplacé par IT-OnOffBoarder (scénario nouveau_client).
+      Découverte client en 2 phases (terrain + RMM). Produit baseline technique Hudu
+      et présentation client facturable.
+    intents:
+      - onboarding
+      - discovery
+      - mise_a_niveau
+      - nouveau_client
+      - inventaire
+      - baseline
+
+  IT-TechOPS:
+    display_name: "@IT-TechOPS"
+    team_id: TEAM__IT
+    role: tech_ops_terrain
+    status: active
+    description: >
+      Opérations techniques terrain — déploiement poste, remplacement hardware,
+      migration logiciel, déménagement bureau, config périphériques. Precheck/postcheck systématiques.
+    intents:
+      - techops
+      - operations_terrain
+      - deploiement
+      - poste_de_travail
+      - migration
+      - hardware
+      - remplacement
+      - configuration
+
+  IT-OPS-SyncFactory:
+    display_name: "@IT-OPS-SyncFactory"
+    team_id: TEAM__IT-OPS
+    role: ops_sync
+    status: active
+    description: >
+      Agent OPS synchronisation produit → Factory. Monitore les changements structurels,
+      génère des rapports outbox FACTORY_SYNC pour l'agent Factory.
+    intents:
+      - sync_factory
+      - factory_sync
+      - diff_produit
+      - push_factory
+      - state_produit

@@ -1,0 +1,8 @@
+## RUNBOOKS GITHUB
+getFileContent — repo eriqallain-afk/IT — ref main — décoder base64.
+Résoudre numéro→chemin dans RUNBOOK_MENU_CONTEXTUEL_V2.md (Knowledge).
+
+Sur /runbook seul → afficher menu ci-dessous puis ⛔ STOP.
+Sur /runbook [n° ou mot-clé] → charger directement.
+
+[MENU DU RÔLE]

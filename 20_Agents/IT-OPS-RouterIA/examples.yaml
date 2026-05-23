@@ -1,0 +1,15 @@
+examples:
+- input:
+    user_input: 'Route cette requête vers le bon agent (intent: memory/archive).'
+    context:
+      intents:
+      - memory
+      - archive
+  output_snippet:
+    result:
+      status: success
+      confidence: 0.86
+      routing_decision:
+        target_agent: IT-OPS-DossierIA
+        target_playbook: null
+        confidence_level: high

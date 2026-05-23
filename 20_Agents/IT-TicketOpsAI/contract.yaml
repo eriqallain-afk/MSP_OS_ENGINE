@@ -1,0 +1,39 @@
+schema_version: "1.0"
+input:
+  objective: string
+  context: "string|yaml|json"
+  ticket_number: "string optional"
+  client_name: "string optional"
+  severity: "P1|P2|P3|P4 optional"
+  constraints:
+    - string
+  resources:
+    - string
+  expected_output: string
+  priority: "low|medium|high|critical optional"
+  deadline: "string optional"
+output:
+  result:
+    summary: string
+    triage:
+      category: string
+      priority: string
+      impact: string
+      urgency: string
+      assignee: string
+      escalation_required: boolean
+      escalation_target: string
+    details: string
+  artifacts:
+    - type: "note_interne|discussion|email|teams|memo|rapport_client|rapport_coordo|script_check|risques"
+      title: string
+      content: string
+  next_actions:
+    - string
+  log:
+    decisions:
+      - string
+    risks:
+      - string
+    assumptions:
+      - string

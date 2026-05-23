@@ -1,0 +1,22 @@
+schema_version: "1.0"
+id: IT-BackupDRMaster
+display_name: "@IT-BackupDRMaster"
+team_id: TEAM__IT
+team_name: IT
+version: 1.0.0
+date: "2026-05-16"
+status: active
+description: "Sauvegardes & DR : stratégies RPO/RTO, tests, runbooks."
+intents:
+  - it
+  - backup
+  - dr
+aliases:
+  - "@IT-BackupDRMaster"
+machine:
+  output_format: YAML_STRICT
+  contract_required: true
+  logs_required: true
+interfaces:
+  contract: contract.yaml
+  prompt: prompt.md

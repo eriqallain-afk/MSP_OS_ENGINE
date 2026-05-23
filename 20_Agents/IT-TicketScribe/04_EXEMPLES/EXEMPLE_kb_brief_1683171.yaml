@@ -1,0 +1,93 @@
+# ══════════════════════════════════════════════════════
+# BRIEF KB — Exemple genere par /kb sur ticket #1683171
+# A COLLER DANS @IT-KnowledgeKeeper
+# ══════════════════════════════════════════════════════
+
+kb_brief:
+  ticket_id: "#1683171"
+  client: "[CLIENT]"
+  type_incident: performance
+  systeme_concerne: Windows Server
+  os_version: Windows Server 2019
+  niveau_technicien_requis: N2
+  temps_resolution_estime: 25min
+  recurrence_connue: oui
+
+  symptomes_observes:
+    - "CPU a 100% sur serveur applicatif"
+    - "Application Fidelio lente / inaccessible"
+    - "Multiples processus gpupdate.exe visibles dans Task Manager"
+
+  cause_racine_identifiee: >
+    Une tache planifiee (GPO ou RMM) lançait gpupdate.exe /force
+    toutes les 4 heures. Comme le traitement GPO prenait 30-35s
+    (extensions Software Installation + Registry), les executions
+    se chevauchaient et s'empilaient -> 8 processus simultanes
+    -> CPU 100%.
+
+  actions_realisees:
+    - seq: 1
+      action: "Capture Win32_Process gpupdate (PID/ParentPID/CommandLine)"
+      outil: PowerShell
+      resultat: "8 instances confirmees avec pattern /force toutes ~4h"
+    - seq: 2
+      action: "Stop-Process -Force sur tous les gpupdate runaway"
+      outil: PowerShell
+      resultat: "CPU redescendue a 27-46% immediatement"
+    - seq: 3
+      action: "Audit Process Creation active (4688 + cmdline)"
+      outil: PowerShell / auditpol
+      resultat: "Tracage en place pour capturer la prochaine occurrence"
+    - seq: 4
+      action: "Reboot controle apres stabilisation"
+      outil: Console Windows
+      resultat: "Serveur stable post-reboot, gpupdate absent"
+
+  commandes_cles:
+    - description: "Capturer les gpupdate actifs avec commandline et parent PID"
+      type: powershell
+      code: |
+        Get-CimInstance Win32_Process -Filter "Name='gpupdate.exe'" |
+        Select ProcessId, ParentProcessId, CreationDate, CommandLine |
+        Sort CreationDate | Format-Table -Auto
+
+    - description: "Stopper tous les gpupdate runaway"
+      type: powershell
+      code: |
+        Get-Process gpupdate -ErrorAction SilentlyContinue | Stop-Process -Force
+
+    - description: "Activer audit ProcessCreation avec commandline pour tracage"
+      type: cmd
+      code: |
+        auditpol /set /subcategory:"Process Creation" /success:enable
+        reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled /t REG_DWORD /d 1 /f
+
+    - description: "Rechercher la tache planifiee qui lance gpupdate /force"
+      type: powershell
+      code: |
+        Get-ChildItem "$env:windir\System32\Tasks" -Recurse -File |
+        Select-String -Pattern "gpupdate|/force" -SimpleMatch |
+        Select Path, LineNumber, Line
+
+  validations_effectuees:
+    - "CPU apres stop gpupdate : 27-46% (vs 100%) — confirme"
+    - "IO disque : latence 0.4ms, queue 0 — storage non contributif"
+    - "Disques : C: 18% libre, E: 47% libre — OK"
+    - "Reboot controle : uptime reset confirme"
+
+  resultat_final: Resolu
+  impact_evite: "Continuite de service application Fidelio restauree. Sans intervention, CPU resterait a 100% indefiniment jusqu'au prochain reboot non planifie."
+
+  points_attention:
+    - "TOUJOURS capturer Win32_Process avant de tuer les processus (preuve pour CW et investigation)"
+    - "Ne pas rebooter sans neutraliser le trigger : recidive immediate garantie"
+    - "gpupdate.exe = outil de test ponctuel. Plusieurs instances persistantes = anomalie a investiguer"
+    - "Le pattern horaire regulier (~4h) = signature d'une tache planifiee ou RMM"
+
+  runbook_recommande: oui
+  runbook_titre: "RUNBOOK__Windows_CPU_Sature_Processus_Empiles.md"
+
+# ══════════════════════════════════════════════════════
+# INSTRUCTIONS : Coller ce YAML dans @IT-KnowledgeKeeper
+# Commande : MODE=RUNBOOK (car recurrence_connue=oui et N2)
+# ══════════════════════════════════════════════════════

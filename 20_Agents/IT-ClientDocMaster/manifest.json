@@ -1,0 +1,41 @@
+{
+  "id": "IT-ClientDocMaster",
+  "display_name": "@IT-ClientDocMaster",
+  "team": "TEAM__IT",
+  "version": "2.0.0",
+  "status": "active",
+  "description": "Documentaliste Hudu (edocs) MSP — fiches objets IT prêtes à coller dans Hudu.",
+  "entry_point": "prompt.md",
+  "output_format": "YAML_STRICT",
+  "modes": [
+    "EDOCS_CAPTURE",
+    "EDOCS_UPDATE",
+    "EDOCS_AUDIT"
+  ],
+  "knowledge_gpt": "IT-SHARED/60_BUNDLES/BUNDLE_KP_ClientDocMaster_V1.md",
+  "escalades": {
+    "cmdb": "IT-AssetMaster",
+    "cloture": "IT-Commandare-OPR"
+  },
+  "outputs": [
+    "Fiche objet IT Hudu (YAML)",
+    "Audit edocs manquants",
+    "Liste liaisons à créer"
+  ],
+  "files": {
+    "core": [
+      "prompt.md",
+      "agent.yaml",
+      "contract.yaml",
+      "manifest.json",
+      "00_INSTRUCTIONS.md",
+      "README.md"
+    ],
+    "operational": [
+      "02_RUNBOOKS/RB-001_procedure-principale.md",
+      "03_CHECKLISTS/CL-001_validation-principale.md",
+      "04_EXEMPLES/EX-001_cas-nominal.md",
+      "04_KNOWLEDGE_INDEX.md"
+    ]
+  }
+}

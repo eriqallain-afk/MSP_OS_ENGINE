@@ -1,0 +1,30 @@
+﻿{
+    "team":  "IT",
+    "version":  "1.0.0",
+    "outputs":  [
+                    "[Type de livrable 1]",
+                    "[Type de livrable 2]"
+                ],
+    "files":  [
+                  "README.md",
+                  "00_REFERENCE_DATA/README.md",
+                  "01_TEMPLATES/",
+                  "02_RUNBOOKS/README.md",
+                  "03_CHECKLISTS/README.md",
+                  "04_EXEMPLES/README.md",
+                  "05_KNOWLEDGE/",
+                  "10_MEMORY/README.md",
+                  "65_TEST/README.md",
+                  "05_KNOWLEDGE/",
+                  "00_INSTRUCTIONS.md",
+                  "01_CONTRACT.yaml",
+                  "03_ORIGINAL_PROMPT.md",
+                  "04_KNOWLEDGE_INDEX.md"
+              ],
+    "templates":  [
+
+                  ],
+    "agent_name":  "IT-TicketScribe",
+    "role":  "[Role de l\u0027agent - A completer]",
+    "display_name":  "@IT-TicketScribe"
+}

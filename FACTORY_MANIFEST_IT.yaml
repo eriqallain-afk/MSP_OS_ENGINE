@@ -1,0 +1,697 @@
+schema_version: '2.0'
+manifest_version: '4.2'
+generated_at: '2026-05-16T00:00:00Z'
+generated_by: 'Claude Sonnet 4.6 — Audit et correction manifest v4.2'
+product_id: IT
+display_name: '@IT — MSP Intelligence Platform'
+
+# ════════════════════════════════════════════════════════════════
+# FACTORY MANIFEST — PRODUIT @IT
+#
+# ⚠️  LA FACTORY DOIT LIRE CE FICHIER EN ENTIER AVANT TOUTE
+#     CRÉATION D'AGENT, DE RUNBOOK OU DE LIVRABLE POUR LE
+#     PRODUIT @IT.
+#
+# Ce fichier est la SOURCE DE VÉRITÉ du produit IT.
+# Il décrit l'état complet : agents actifs, intents couverts,
+# playbooks, knowledge packs, règles factory, intents manquants.
+#
+# OBJECTIF : éviter les doublons, combler les vrais trous,
+# intégrer les nouveaux agents dans les bons playbooks.
+# ════════════════════════════════════════════════════════════════
+
+staging_zone: 99_STAGING/INCOMING/
+validation_required: true
+activation_authority: EA            # Validation manuelle obligatoire
+auto_activation: false              # Jamais d'activation automatique
+
+# ── STATISTIQUES ─────────────────────────────────────────────────
+stats:
+  total_agents: 32
+  ops_agents: 4
+  metier_agents: 28
+  agents_with_knowledge_pack: 8
+  active_playbooks: 11
+  intents_covered_count: 87
+  intents_gap_count: 5
+  last_manifest_update: '2026-05-19'
+  last_full_audit: '2026-05-16'
+
+# ════════════════════════════════════════════════════════════════
+# AGENTS ACTIFS — 33 (5 OPS + 28 MÉTIER)
+# ════════════════════════════════════════════════════════════════
+agents_count: 33
+
+agents:
+
+  # ── OPS (équipe interne IT-OPS) ──────────────────────────────
+  - id: IT-OPS-RouterIA
+    team: TEAM__IT_OPS
+    status: active
+    role: routing
+    tier: ops
+    description: Routeur produit — analyse intent et sélectionne agent + playbook
+    intents: [ops, router, routing]
+    path: 20_Agents/IT-OPS-RouterIA/
+    required_files: [agent.yaml, prompt.md, contract.yaml, 00_INSTRUCTIONS.md]
+    completeness: 100%
+
+  - id: IT-OPS-PlaybookRunner
+    team: TEAM__IT_OPS
+    status: active
+    role: execution
+    tier: ops
+    description: Exécuteur playbook — déroule les étapes, valide, assemble livrable
+    intents: [ops, runner, playbook]
+    path: 20_Agents/IT-OPS-PlaybookRunner/
+    required_files: [agent.yaml, prompt.md, contract.yaml, tests.yaml, 00_INSTRUCTIONS.md]
+    completeness: 100%
+
+  - id: IT-OPS-DossierIA
+    team: TEAM__IT_OPS
+    status: active
+    role: archiving
+    tier: ops
+    description: Archiviste — package les livrables en dossier structuré (Dossier IA)
+    intents: [ops, dossier, deliverable, archive]
+    path: 20_Agents/IT-OPS-DossierIA/
+    required_files: [agent.yaml, prompt.md, contract.yaml, tests.yaml, 00_INSTRUCTIONS.md]
+    completeness: 100%
+
+  # ── COMMANDARE (orchestrateurs opérationnels) ─────────────────
+  - id: IT-Commandare-NOC
+    team: TEAM__IT
+    status: active
+    role: noc_orchestrator
+    tier: commandare
+    description: Chef de quart NOC — triage alertes, sévérité P1-P4, escalade
+    intents: [noc, monitoring, incident, triage, it_commandare_noc, noc_triage, alert_triage]
+    path: 20_Agents/IT-Commandare-NOC/
+    knowledge_pack: IT_Commandare_NOC_KnowledgePack_v1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-Commandare-OPR
+    team: TEAM__IT
+    status: active
+    role: ops_orchestrator
+    tier: commandare
+    description: Gouvernance back-office — fermeture tickets, RFC, change management
+    intents: [it_commandare_opr, it_governance_change, it_ops_control,
+              governance, change_management, change_exec]
+    path: 20_Agents/IT-Commandare-OPR/
+    knowledge_pack: IT_Commandare_OPR_KnowledgePack_v1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-Commandare-TECH
+    team: TEAM__IT
+    status: active
+    role: tech_orchestrator
+    tier: commandare
+    description: Chef d'exécution technique — RCA, troubleshooting, remédiation, post-fix
+    intents: [it_commandare_tech, root_cause, tech_escalation, rca, troubleshoot]
+    path: 20_Agents/IT-Commandare-TECH/
+    knowledge_pack: IT_Commandare_TECH_KnowledgePack_v1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-Commandare-Infra
+    team: TEAM__IT
+    status: active
+    role: infra_orchestrator
+    tier: commandare
+    description: Incidents infra/cloud — serveurs, VM, DC, stockage, réseau critique
+    intents: [it_commandare_infra, infra_incident, server_down, dc_incident, vm_incident, azure_incident]
+    path: 20_Agents/IT-Commandare-Infra/
+    knowledge_pack: BUNDLE_KP_Commandare-Infra_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  # ── TERRAIN / OPÉRATIONNEL ────────────────────────────────────
+  - id: IT-FrontLine
+    team: TEAM__IT
+    status: active
+    role: support_n1
+    tier: terrain
+    description: Support N1 — premier contact, triage, MDP, comptes, imprimantes, escalade
+    intents: [mspbot, appel_client, support_n1, triage_telephonique, frontline, phrases_client]
+    path: 20_Agents/IT-FrontLine/
+    knowledge_pack: BUNDLE_KP_FrontLine_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 90%
+
+  - id: IT-Assistant-N2
+    team: TEAM__IT
+    status: active
+    role: support_n2
+    tier: terrain
+    description: Support N2 — diagnostic, AD/M365, VPN, maintenance préventive, escalade N3
+    intents: [support_n2, diagnostic, intervention, remote_assist, helpdesk, tickets]
+    path: 20_Agents/IT-Assistant-N2/
+    knowledge_pack: BUNDLE_KP_Assistant-N2_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 90%
+
+  - id: IT-Assistant-N3
+    team: TEAM__IT
+    status: active
+    tier: terrain
+    description: Support TI N3 — diagnostic avancé, résolution, escalade, standards
+    intents: [it, support, incident, support_n3]
+    path: 20_Agents/IT-Assistant-N3/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 75%
+
+  - id: IT-SysAdmin
+    team: TEAM__IT
+    status: active
+    role: sysadmin
+    tier: terrain
+    description: Administrateur système senior — interventions tous domaines IT, copilote technique
+    intents: [sysadmin, admin_sys, infra, servers, vms, hyperv, vmware, linux_admin, sysadmin_live]
+    path: 20_Agents/IT-SysAdmin/
+    knowledge_pack: BUNDLE_KP_SysAdmin_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-TechOPS
+    team: TEAM__IT
+    status: active
+    role: tech_ops
+    tier: terrain
+    description: Opérations techniques terrain — exécution interventions, procédures, outils MSP
+    intents: [techops, tech_ops, terrain, intervention_terrain, ops_execution]
+    path: 20_Agents/IT-TechOPS/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 80%
+
+  - id: IT-NOCDispatcher
+    team: TEAM__IT
+    status: active
+    role: dispatch
+    tier: terrain
+    description: Dispatcher NOC — affectation billets, SLA, coordination, handover
+    intents: [dispatch, noc_dispatch, it_noc_dispatch, noc_dispatcher, sla, handover, qualification, prioritisation]
+    path: 20_Agents/IT-NOCDispatcher/
+    knowledge_pack: BUNDLE_KP_NOCDispatcher_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 90%
+
+  - id: IT-TicketOpsAI
+    commercial_name: MSP TicketOps AI
+    team: TEAM__IT
+    status: active
+    role: ticket_ops
+    tier: terrain
+    description: >
+      Triage, documentation et fermeture de billets TI — cycle complet /start→/close.
+      10 commandes : /start /triage /analyse /close /memo /teams /rapport-client /rapport-coordo /script-check /risques.
+      9 templates de fermeture (patching, snapshot, Windows Update, backup, disque plein, DNS/DHCP, RDS, reboot, postcheck).
+    intents: [ticket_ops, triage_ticket, close_ticket, rapport_client, rapport_coordo, script_check, risques_intervention]
+    path: 20_Agents/IT-TicketOpsAI/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-TicketScribe
+    team: TEAM__IT
+    status: active
+    tier: terrain
+    description: Rédacteur CW — notes brutes → compte-rendu structuré + actions
+    intents: [it, ticket, writing, cw_ticket, connectwise]
+    path: 20_Agents/IT-TicketScribe/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 80%
+
+  - id: IT-UrgenceMaster
+    team: TEAM__IT
+    status: active
+    role: urgence
+    tier: terrain
+    description: Urgences P1/P2 — panne HQ, incidents critiques, GO/NO-GO, flag up
+    intents: [urgence, p1, p2, panne, panne_hq, go_nogo, flagup, avertissement, incident_p1, incident_p2]
+    path: 20_Agents/IT-UrgenceMaster/
+    knowledge_pack: BUNDLE_KP_UrgenceMaster_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-KnowledgeKeeper
+    team: TEAM__IT
+    status: active
+    tier: terrain
+    description: Gestionnaire KB — tickets résolus → articles KB + runbooks
+    intents: [it, knowledge, kb, runbook]
+    path: 20_Agents/IT-KnowledgeKeeper/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 75%
+
+  # ── INFRASTRUCTURE ────────────────────────────────────────────
+  - id: IT-CloudMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Cloud Azure/M365/AWS/GCP — architectures, gouvernance, sécurité cloud
+    intents: [it, cloud, azure, m365, aws, gcp]
+    path: 20_Agents/IT-CloudMaster/
+    knowledge_pack: IT_CloudMaster_shared
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 90%
+
+  - id: IT-NetworkMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Réseau LAN/WAN/VPN/WiFi/routage/QoS/firewalls
+    intents: [it, network, firewall]
+    path: 20_Agents/IT-NetworkMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 75%
+
+  - id: IT-MaintenanceMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Maintenance MSP — patching, health checks, DC/DNS/SQL/PrintServer
+    intents: [it, maintenance, patching, health_check]
+    path: 20_Agents/IT-MaintenanceMaster/
+    knowledge_pack: IT_MaintenanceMaster_KnowledgePack_v1
+    context_aware: true
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 95%
+
+  - id: IT-MonitoringMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Supervision/observabilité — KPIs, alertes, rapports disponibilité
+    intents: [it, monitoring, observability, alerting]
+    path: 20_Agents/IT-MonitoringMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 70%
+
+  - id: IT-BackupDRMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Sauvegardes & DR — RPO/RTO, tests, Veeam, Datto BCDR
+    intents: [it, backup, dr, disaster_recovery]
+    path: 20_Agents/IT-BackupDRMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 90%
+
+  - id: IT-SecurityMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Cybersécurité MSP — triage SOC, risques, posture, remédiations
+    intents: [it, security, risk, soc, cybersecurity]
+    path: 20_Agents/IT-SecurityMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 75%
+
+  - id: IT-ScriptMaster
+    team: TEAM__IT
+    status: active
+    tier: infrastructure
+    description: Scripts PowerShell/Bash — génération, validation, documentation MSP
+    intents: [it, script, powershell, automation]
+    path: 20_Agents/IT-ScriptMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 80%
+
+  - id: IT-VoIPMaster
+    team: TEAM__IT
+    status: active
+    tier: governance
+    description: Téléphonie IP & UC — Teams Phone, FreePBX, QoS, SIP trunking
+    intents: [it, voip, uc]
+    path: 20_Agents/IT-VoIPMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 70%
+
+  # ── GOUVERNANCE / GESTION ─────────────────────────────────────
+  - id: IT-AssetMaster
+    team: TEAM__IT
+    status: active
+    tier: governance
+    description: Inventaire IT & CMDB — actifs HW/SW, cycle de vie, conformité
+    intents: [it, cmdb, assets]
+    path: 20_Agents/IT-AssetMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 75%
+
+  - id: IT-ReportMaster
+    team: TEAM__IT
+    status: active
+    tier: governance
+    description: Rapports IT — postmortem, mensuel, QBR, dashboards clients
+    intents: [it, report]
+    path: 20_Agents/IT-ReportMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 75%
+
+  - id: IT-OnOffBoarder
+    team: TEAM__IT
+    status: active
+    role: transitions
+    tier: governance
+    description: >
+      Agent de transitions MSP — 4 scénarios : onboarding client MSP (découverte infra 10 domaines,
+      mise à niveau, SOC, déploiement outils), offboarding client MSP (inventaire, remise, révocation,
+      handover), onboarding employé (AD, M365, équipements, VoIP, accès), offboarding employé
+      (révocation accès, récupération équipement, données, rétention légale). Une équipe, deux directions.
+    intents: [onboarding, offboarding, nouveau_client, depart_client, nouvel_employe, depart_employe,
+              decouverte_infra, baseline, mise_a_niveau, soc_onboarding, deploiement_outils, handover, inventaire]
+    path: 20_Agents/IT-OnOffBoarder/
+    required_files: [agent.yaml, prompt.md, contract.yaml, 04_KNOWLEDGE_INDEX.md, 00_INSTRUCTIONS.md]
+    completeness: 100%
+
+  - id: IT-ComplianceMaster
+    team: TEAM__IT
+    status: active
+    role: compliance
+    tier: governance
+    description: >
+      Conformité réglementaire MSP — 3 périmètres : client (Loi 25, PCI-DSS, HIPAA, cyber-assurance),
+      MSP interne (Loi 25 sous-traitant, SOC 2), MSP chez le client (accès, Passportal, moindre
+      privilège, trail d'audit). Rapports facturables + plans de remédiation.
+    intents: [conformite, compliance, loi25, pci_dss, hipaa, cyber_assurance, audit_conformite,
+              remediation, soc2, donnees_personnelles, vie_privee]
+    path: 20_Agents/IT-ComplianceMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, 00_INSTRUCTIONS.md]
+    completeness: 100%
+
+  - id: IT-OPS-QAMaster
+    team: TEAM__IT-OPS
+    status: active
+    role: qa_ops
+    tier: ops
+    description: >
+      Agent OPS qualité plateforme MSP Intelligence AI. Analyse incidents 00_QA/incidents/,
+      détecte patterns systémiques, propose correctifs soumis à EA, valide nouveaux agents
+      en pre-activation. 4e membre équipe OPS.
+    intents: [qa, qualite, incident_agent, review_agent, pre_activation, pattern_detection]
+    path: 20_Agents/IT-OPS-QAMaster/
+    required_files: [agent.yaml, prompt.md, contract.yaml, 00_INSTRUCTIONS.md, 04_KNOWLEDGE_INDEX.md]
+    completeness: 100%
+
+  - id: IT-OPS-SyncFactory
+    team: TEAM__IT-OPS
+    status: active
+    role: ops_sync
+    tier: ops
+    description: >
+      Agent OPS synchronisation Produit → Factory. Monitore les changements structurels,
+      génère des rapports outbox FACTORY_SYNC pour l'agent Factory. 5e membre équipe OPS.
+    intents: [sync_factory, factory_sync, diff_produit, push_factory, state_produit]
+    path: 20_Agents/IT-OPS-SyncFactory/
+    required_files: [agent.yaml, prompt.md, contract.yaml, 00_INSTRUCTIONS.md, 04_KNOWLEDGE_INDEX.md]
+    completeness: 100%
+
+  - id: IT-ClientDocMaster
+    team: TEAM__IT
+    status: active
+    role: documentation
+    tier: governance
+    description: Documentaliste MSP — fiches objets IT Hudu/edocs, audit documentation client
+    intents: [documentation, documentation_client, edocs, hudu, fiche_client, fiche_objet, analyse_brief]
+    path: 20_Agents/IT-ClientDocMaster/
+    knowledge_pack: BUNDLE_KP_ClientDocMaster_V1
+    required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
+    completeness: 90%
+
+# ════════════════════════════════════════════════════════════════
+# INTENTS COUVERTS — NE PAS RECRÉER UN AGENT POUR CES INTENTS
+# ════════════════════════════════════════════════════════════════
+intents_covered:
+  - ops, router, routing, playbook, runner, dossier, deliverable, archive
+  - noc, monitoring, incident, triage, it_commandare_noc, noc_triage, alert_triage
+  - it_commandare_opr, ops_control, it_governance_change, it_commandare_tech
+  - tech_escalation, rca, root_cause, troubleshoot
+  - connectwise, cw_ticket, triage, diagnostic, guidance, handoff, msp_ops
+  - it, msp, orchestrate, intervention, ticket_live, closeout
+  - noc_dispatch, it_noc_dispatch, noc_dispatcher, dispatch, sla
+  - ticket, writing, support, comms, client_comms, knowledge, kb, runbook
+  - cloud, azure, m365, aws, gcp, network, firewall, infrastructure, servers
+  - maintenance, patching, health_check, monitoring, observability, alerting
+  - backup, dr, disaster_recovery, security, risk, soc, cybersecurity
+  - script, powershell, automation, devops
+  - cmdb, assets, licenses, software, report, voip, uc
+  - onboarding, onboarding_client, client_setup, new_client, msp_onboarding
+  - techops, tech_ops, terrain, intervention_terrain, ops_execution
+
+# ════════════════════════════════════════════════════════════════
+# INTENTS NON COUVERTS — OPPORTUNITÉS POUR LA FACTORY
+# ════════════════════════════════════════════════════════════════
+intents_gaps:
+  - id: itsm_change_advisory
+    description: Change Advisory Board formalisé (CAB IT)
+    suggested_agent: IT-CABMaster
+    priority: high
+
+  - id: vendor_management
+    description: Gestion fournisseurs IT (contrats, SLA, évaluation)
+    suggested_agent: IT-VendorMaster
+    priority: medium
+
+  - id: contract_renewal
+    description: Renouvellement contrats MSP (alertes, négociation, escalade)
+    suggested_agent: IT-ContractMaster
+    priority: medium
+
+  - id: offboarding_client
+    description: Offboarding client MSP (export données, révocation accès)
+    suggested_agent: IT-OffboardingMaster
+    priority: medium
+
+  - id: capacity_planning
+    description: Planification capacité infrastructure (prévisions, ROI)
+    suggested_agent: IT-CapacityMaster
+    priority: medium
+
+  - id: compliance_audit
+    description: Audit conformité (SOC2, ISO27001, CIS)
+    suggested_agent: IT-ComplianceMaster
+    priority: high
+
+  - id: license_optimization
+    description: Optimisation licences IT (ROI, surlicenciement, audit)
+    suggested_agent: IT-LicenseOptimizer
+    priority: medium
+
+  - id: cost_analysis_it
+    description: Analyse coûts IT par client (rentabilité, alertes dépassement)
+    suggested_agent: IT-CostAnalyzer
+    priority: medium
+
+# ════════════════════════════════════════════════════════════════
+# PLAYBOOKS DISPONIBLES
+# ════════════════════════════════════════════════════════════════
+playbooks:
+  - id: IT_MSP_TICKET_TO_KB
+    description: Ticket → diagnostic → comms → KB
+    actors: [IT_Frontline, IT-Assistant-N2, IT-Assistant-N3, IT-SysAdmin, IT-TicketScribe, IT-KnowledgeKeeper, IT-TicketScribe]
+    trigger_intents: [ticket, writing, support, knowledge]
+
+  - id: IT_INCIDENT_TRIAGE
+    description: NOC triage → dispatch → remédiation → report → archive
+    actors: [IT-Commandare-NOC, IT-NOCDispatcher, IT-Commandare-TECH,
+             IT-ReportMaster, IT-OPS-DossierIA]
+    trigger_intents: [incident, triage, noc]
+
+  - id: IT_COMMANDARE_NOC
+    description: Triage/diagnostic NOC direct
+    actors: [IT-Commandare-NOC]
+    trigger_intents: [noc_triage, alert_triage, it_commandare_noc]
+
+  - id: IT_COMMANDARE_TECH
+    description: RCA + remédiation
+    actors: [IT-Commandare-NOC, IT-Commandare-TECH, IT-OPS-DossierIA]
+    trigger_intents: [rca, root_cause, tech_escalation, troubleshoot]
+
+  - id: IT_COMMANDARE_OPR
+    description: Gouvernance ops, coordination & contrôle
+    actors: [IT-Commandare-OPR]
+    trigger_intents: [it_commandare_opr, governance, change_management]
+
+  - id: IT_CHANGE_EXEC
+    description: Change management complet
+    actors: [IT-Commandare-TECH, IT-NOCDispatcher, IT-ReportMaster, IT-OPS-DossierIA]
+    trigger_intents: [change_exec, change_management]
+
+  - id: IT_NOC_DISPATCH
+    description: Dispatch NOC initial
+    actors: [IT-Commandare-NOC]
+    trigger_intents: [noc_dispatch, it_noc_dispatch]
+
+  - id: IT_MSP_LIVE_ASSIST
+    description: Assistance live temps réel
+    actors: [IT_Frontline, IT-Assistant-N2, IT-Assistant-N3, IT-SysAdmin, IT-MaintenanceMaster]
+    trigger_intents: [msp_live, live_assist, on_call_assist]
+
+  - id: IT_CW_INTERVENTION_LIVE_CLOSE
+    description: Intervention live CW → KB
+    actors: [IT-MaintenanceMaster, IT-KnowledgeKeeper]
+    trigger_intents: [intervention, live_close, kb]
+
+  - id: INTAKE_ROUTE_EXECUTE
+    description: Flux standard route → execute → archive
+    actors: [IT-OPS-RouterIA, IT-OPS-PlaybookRunner, IT-OPS-DossierIA]
+    trigger_intents: [any]
+
+  - id: IT_CLIENT_ONBOARDING
+    description: Onboarding nouveau client MSP
+    actors: [IT-OnOffboarder, IT-AssetMaster, IT-ClientDocMaster]
+    trigger_intents: [onboarding, onboarding_client, new_client]
+
+# ════════════════════════════════════════════════════════════════
+# KNOWLEDGE PACKS EXISTANTS — NE PAS RECRÉER
+# ════════════════════════════════════════════════════════════════
+knowledge_packs:
+  - id: IT_Commandare_NOC_KnowledgePack_v1
+    version: v1
+    path: 20_Agents/IT-Commandare-NOC/IT_Commandare_NOC_KnowledgePack_v1/
+    consumer: IT-Commandare-NOC
+    status: complete
+
+  - id: IT_Commandare_OPR_KnowledgePack_v1
+    version: v1
+    path: 20_Agents/IT-Commandare-OPR/IT_Commandare_OPR_KnowledgePack_v1/
+    consumer: IT-Commandare-OPR
+    status: complete
+
+  - id: IT_Commandare_TECH_KnowledgePack_v1
+    version: v1
+    path: 20_Agents/IT-Commandare-TECH/IT_Commandare_TECH_KnowledgePack_v1/
+    consumer: IT-Commandare-TECH
+    status: complete
+
+  - id: IT_MaintenanceMaster_KnowledgePack_v1
+    version: v1
+    path: 20_Agents/IT-MaintenanceMaster/IT_MaintenanceMaster_KnowledgePack_v1/
+    consumer: IT-MaintenanceMaster
+    status: complete
+    context_aware: true
+
+  - id: IT_CloudMaster_shared
+    version: v1
+    path: IT-SHARED/BUNDLES/IT-CloudMaster/
+    consumer: IT-CloudMaster
+    status: partial
+    note: Compléter avec runbooks Azure avancés
+
+  - id: IT_InterventionLive_knowledge
+    version: v1
+    path: 20_Agents/IT-SysAdmin/05_KNOWLEDGE/
+    consumer: IT-SysAdmin
+    status: complete
+
+# ════════════════════════════════════════════════════════════════
+# RÈGLES POUR LA FACTORY
+# ════════════════════════════════════════════════════════════════
+factory_rules:
+
+  before_creating_agent:
+    - Vérifier que l'id n'existe pas dans agents[] ci-dessus
+    - Vérifier que les intents ne sont pas dans intents_covered[]
+    - Si intent déjà couvert → enrichir l'agent existant, ne pas créer un doublon
+    - Prioriser intents_gaps[] pour les nouveaux agents
+    - Tout nouvel agent doit avoir completeness >= 90% à la livraison
+
+  required_agent_package:
+    mandatory:
+      - agent.yaml          # Métadonnées agent (actor_id, team, role, intents)
+      - prompt.md           # Prompt système complet
+      - contract.yaml       # Contrat (inputs, outputs, SLA, comportements)
+      - README.md           # Documentation utilisateur
+    recommended:
+      - tests.yaml          # Tests de validation
+      - examples.yaml       # Exemples d'usage
+      - 05_KNOWLEDGE/       # Fichiers de connaissance spécifiques
+
+  naming_convention:
+    metier_prefix: IT-
+    metier_team_id: TEAM__IT
+    ops_prefix: IT-OPS-
+    ops_team_id: TEAM__IT_OPS
+    forbidden_team: TEAM__OPS   # Utiliser TEAM__IT_OPS à la place
+    ops_path_prefix: 20_Agents/IT-OPS-
+    metier_path_prefix: 20_Agents/IT-
+
+  quality_standards:
+    min_prompt_lines: 50        # Prompt.md minimum 50 lignes
+    min_completeness: 90%       # Score completeness minimum livraison
+    required_sla_defined: true  # SLA doit être défini dans contract.yaml
+    bilingual_support: [fr, en] # Support FR et EN obligatoire
+
+  delivery:
+    destination: 99_STAGING/INCOMING/
+    format: agent_package
+    status_on_delivery: staging
+    activation_requires: manual_validation_by_EA
+
+  when_adding_to_playbook:
+    - Vérifier que le playbook_id existe dans playbooks[] ci-dessus
+    - Proposer l'étape et l'ordre dans le livrable YAML
+    - Ne pas modifier playbooks.yaml directement (EA valide)
+
+  forbidden:
+    - Créer un agent avec team_id TEAM__OPS (utiliser TEAM__IT_OPS)
+    - Nommer un agent OPS- au lieu de IT-OPS-
+    - Pointer le fallback vers HUB-AgentMO ou FACTORY
+    - Modifier hub_routing.yaml directement
+    - Modifier les agents OPS existants sans validation EA
+    - Créer un doublon d'intent déjà couvert dans intents_covered[]
+    - Activer un agent sans validation EA (auto_activation=false)
+
+# ════════════════════════════════════════════════════════════════
+# TABLEAU DE BORD COMPLETENESS
+# ════════════════════════════════════════════════════════════════
+completeness_dashboard:
+  description: Score de complétude de chaque agent (prompt enrichi, knowledge, tests)
+  target_score: 95%
+
+  tiers:
+    excellent:    # >= 95%
+      - IT-OPS-RouterIA
+      - IT-OPS-PlaybookRunner
+      - IT-OPS-DossierIA
+      - IT-Commandare-NOC
+      - IT-Commandare-OPR
+      - IT-Commandare-TECH
+      - IT-Commandare-Infra
+      - IT-MaintenanceMaster
+      - IT-SysAdmin
+      - IT-TicketOpsAI
+      - IT-UrgenceMaster
+
+    good:         # 85% - 94%
+      - IT-CloudMaster
+      - IT-BackupDRMaster
+      - IT-NOCDispatcher
+      - IT-Assistant-N2
+      - IT-FrontLine
+      - IT-ClientDocMaster
+
+    needs_work:   # 70% - 84%
+      - IT-TicketScribe
+      - IT-ScriptMaster
+      - IT-NetworkMaster
+      - IT-SecurityMaster
+      - IT-AssetMaster
+      - IT-ReportMaster
+      - IT-TechOPS
+      - IT-OnboardingMaster
+      - IT-Assistant-N3
+      - IT-KnowledgeKeeper
+
+    incomplete:   # < 70%
+      - IT-MonitoringMaster
+      - IT-VoIPMaster
+
+  priority_enrichment:
+    - IT-SecurityMaster       # Critique — SOC/Cybersécurité
+    - IT-MonitoringMaster     # Critique — observabilité
+    - IT-NetworkMaster        # Critique — réseau
+    - IT-Commandare-Infra     # Important — infra serveurs
+    - IT-TechOPS              # Important — opérations terrain

@@ -1,0 +1,44 @@
+schema_version: "1.0"
+input:
+  runbook_path: string
+  runbook_text: string (optional)   # si déjà fourni
+  route:
+    intent_id: string
+    server_name: string (optional)
+    risk_level: "low|medium|high" (optional)
+  execution_context: "yaml|json|string"  # infos: window, change_id, tools (WSUS/SCCM/RMM), constraints
+  constraints:
+    - string
+output:
+  result:
+    summary: string
+    execution_plan:
+      phases:
+        - name: string
+          steps:
+            - step_id: string
+              instruction: string
+              verify: string
+              expected: string
+              stop_if: string (optional)
+    handoff_to_dossier:
+      capture_fields:
+        - string
+    sources:
+      - string
+  artifacts:
+    - type: string
+      title: string
+      content: string
+  next_actions:
+    - string
+  log:
+    decisions:
+      - string
+    risks:
+      - string
+    assumptions:
+      facts:
+        - string
+      hypotheses:
+        - string

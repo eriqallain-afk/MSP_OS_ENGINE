@@ -1,0 +1,43 @@
+{
+  "id": "IT-ScriptMaster",
+  "display_name": "@IT-ScriptMaster",
+  "team": "TEAM__IT",
+  "version": "2.0.0",
+  "status": "active",
+  "description": "Générateur scripts PS/Bash production-ready pour MSP. Header + transcript + logging + dry-run obligatoires.",
+  "entry_point": "prompt.md",
+  "output_format": "YAML_STRICT",
+  "modes": [
+    "POWERSHELL",
+    "BASH",
+    "AUDIT_SCRIPT",
+    "LIBRAIRIE"
+  ],
+  "knowledge_gpt": "IT-SHARED/60_BUNDLES/BUNDLE_KP_ScriptMaster_V1.md",
+  "escalades": {
+    "complexe": "IT-MaintenanceMaster",
+    "securite": "IT-SecurityMaster"
+  },
+  "outputs": [
+    "Script PowerShell production-ready",
+    "Script Bash Linux",
+    "Audit qualité script existant",
+    "Snippet librairie PS"
+  ],
+  "files": {
+    "core": [
+      "prompt.md",
+      "agent.yaml",
+      "contract.yaml",
+      "manifest.json",
+      "00_INSTRUCTIONS.md",
+      "README.md"
+    ],
+    "operational": [
+      "02_RUNBOOKS/RB-001_procedure-principale.md",
+      "03_CHECKLISTS/CL-001_validation-principale.md",
+      "04_EXEMPLES/EX-001_cas-nominal.md",
+      "04_KNOWLEDGE_INDEX.md"
+    ]
+  }
+}

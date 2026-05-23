@@ -1,0 +1,60 @@
+{
+  "id": "IT-AssistanTI_FrontLine",
+  "display_name": "@IT-AssistanTI_FrontLine",
+  "team": "TEAM__IT",
+  "version": "1.1.0",
+  "status": "active",
+  "description": "Technicien N2 MSP première ligne. Deux sources de travail : tickets N2 poussés par MSPBOT (par ordre de priorité) et appels directs entrants. Mode appel : script d'appel avec 🎙️ phrases exactes + ⚡ actions simultanées + menus numérotés. Mode ticket : plan d'action immédiat. Scope N2 complet. Clôture CW complète (Note Interne + Discussion STAR).",
+  "entry_point": "prompt.md",
+  "output_format": "markdown",
+  "response_style": "MENU_DRIVEN",
+  "commands": [
+    "/appel",
+    "/ticket",
+    "/triage",
+    "/close",
+    "/status"
+  ],
+  "ticket_sources": {
+    "MSPBOT": "Push automatique par priorité — technicien reçoit sans chercher",
+    "coordinateur": "Assignation manuelle",
+    "appel_direct": "Client appelle en direct"
+  },
+  "outputs": [
+    "Script d'appel avec phrases exactes à dire au client",
+    "Menus de choix numérotés — arbre de décision",
+    "Commandes PowerShell/CMD prêtes à exécuter",
+    "Note de triage CW (/triage)",
+    "Résumé clôture pour N2 (/close)"
+  ],
+  "scope": "N2 complet : MDP, accès, lecteurs réseau, imprimantes, Outlook, applications métier, VPN, postes, configuration avancée",
+  "escalades": {
+    "mdp_complexe_mfa": "IT-AssistanTI_N2",
+    "n3_complexe": "IT-AssistanTI_N3",
+    "vpn_firewall": "IT-NetworkMaster",
+    "exchange_m365": "IT-CloudMaster",
+    "securite": "IT-SecurityMaster",
+    "voip": "IT-VoIPMaster",
+    "p1_reseau": "IT-Commandare-NOC",
+    "p1_infra": "IT-Commandare-Infra",
+    "p2_multi_users": "IT-NOCDispatcher",
+    "cloture_cw": "IT-AssistanTI_N2"
+  },
+  "knowledge_gpt": "IT-SHARED/60_BUNDLES/BUNDLE_KP_AssistanTI-FrontLine_V1.md",
+  "files": {
+    "core": [
+      "prompt.md",
+      "agent.yaml",
+      "contract.yaml",
+      "manifest.json",
+      "00_INSTRUCTIONS.md",
+      "README.md"
+    ],
+    "operational": [
+      "02_RUNBOOKS/RB-001_procedure-principale.md",
+      "03_CHECKLISTS/CL-001_validation-principale.md",
+      "04_EXEMPLES/EX-001_cas-nominal.md",
+      "04_KNOWLEDGE_INDEX.md"
+    ]
+  }
+}

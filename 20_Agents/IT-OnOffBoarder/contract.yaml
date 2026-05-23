@@ -1,0 +1,38 @@
+schema_version: "1.0"
+agent_id: IT-OnOffBoarder
+inputs:
+  scenario:
+    type: enum
+    values: [ONBOARD_CLIENT, OFFBOARD_CLIENT, ONBOARD_USER, OFFBOARD_USER]
+    required: true
+  client:
+    type: string
+    required: true
+  subject:
+    type: string
+    description: "Nom de l'employé (scénarios user) ou nom du client MSP"
+    required: false
+  urgence:
+    type: enum
+    values: [PLANIFIE, IMMEDIATE, CONFIDENTIEL]
+    required: false
+    default: PLANIFIE
+  ticket_cw:
+    type: string
+    required: false
+outputs:
+  checklist:
+    type: markdown
+    description: "Checklist interactive par phase"
+  rapport:
+    type: markdown
+    description: "Livrable structuré selon le type de rapport"
+  hudu_fiches:
+    type: markdown
+    description: "Fiches Hudu prêtes à coller"
+  brief_noc:
+    type: markdown
+    description: "Brief de handover pour l'équipe NOC/OPS"
+  note_cw:
+    type: markdown
+    description: "Note interne CW de clôture"

@@ -1,0 +1,345 @@
+schema_version: '1.0'
+generated_at: '2026-04-18T00:00:00Z'
+playbooks:
+  INTAKE_ROUTE_EXECUTE:
+    description: 'Flux standard : route -> exécute -> archive'
+    steps:
+    - step: route
+      actor_id: OPS-RouterIA
+    - step: execute
+      actor_id: OPS-PlaybookRunner
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_ASSET_LOOKUP_V1:
+    description: "Trouver et livrer le bon asset IT-SHARED (template/runbook/checklist/reference/script)."
+    steps:
+    - step: execute
+      actor_id: IT-OPS-AssetFinderIA
+  IT_CHANGE_EXEC:
+    description: Planifier/exécuter un change -> validations -> reporting -> archive
+    steps:
+    - step: assess
+      actor_id: IT-Commandare-TECH
+    - step: dispatch
+      actor_id: IT-NOCDispatcher
+    - step: implement
+      actor_id: IT-Commandare-TECH
+    - step: report
+      actor_id: IT-ReportMaster
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_COMMANDARE_NOC:
+    description: 'Commandare NOC: triage/diagnostic initial, sévérité, plan de réponse.'
+    steps:
+    - step: execute
+      actor_id: IT-Commandare-NOC
+  IT_COMMANDARE_OPR:
+    description: 'Commandare OPR: gouvernance ops, communication, coordination & contrôle.'
+    steps:
+    - step: execute
+      actor_id: IT-Commandare-OPR
+  IT_COMMANDARE_TECH:
+    description: 'Commandare TECH: troubleshooting/RCA, plan de remediation, risques.'
+    steps:
+    - step: cadrage
+      actor_id: IT-Commandare-TECH
+    - step: execute
+      actor_id: IT-Commandare-TECH
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_CW_INTERVENTION_LIVE_CLOSE:
+    description: 'ConnectWise : LIVE journal + closeout CW + KB'
+    steps:
+    - step: intervention
+      actor_id: IT-MaintenanceMaster
+    - step: closeout
+      actor_id: IT-TicketScribe
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+  IT_INCIDENT_TRIAGE:
+    description: NOC triage -> dispatch -> remediation -> reporting -> archive
+    steps:
+    - step: triage
+      actor_id: IT-Commandare-NOC
+    - step: dispatch
+      actor_id: IT-NOCDispatcher
+    - step: execute
+      actor_id: IT-Commandare-TECH
+    - step: report
+      actor_id: IT-ReportMaster
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_MSP_LIVE_ASSIST:
+    description: 'Assistance MSP temps réel (appel/chat/remote) : triage guidé, notes
+      ticket, comms, escalade, KB draft.'
+    steps:
+    - step: execute
+      actor_id: IT-MaintenanceMaster
+  IT_MSP_TICKET_TO_KB:
+    description: Ticket MSP -> diagnostic -> communication -> knowledge
+    steps:
+    - step: support
+      actor_id: IT-Assistant-N3
+    - step: closeout
+      actor_id: IT-TicketScribe
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+  IT_NOC_DISPATCH:
+    description: 'NOC dispatch: prioriser/assigner/escalader et suivre SLA.'
+    steps:
+    - step: triage
+      actor_id: IT-Commandare-NOC
+    - step: dispatch
+      actor_id: IT-NOCDispatcher
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_NOC_HANDOFF:
+    description: Handoff NOC (fin de quart/escalade) -> synthèse -> reporting -> archive
+    steps:
+    - step: summarize
+      actor_id: IT-Commandare-NOC
+    - step: dispatch
+      actor_id: IT-NOCDispatcher
+    - step: report
+      actor_id: IT-ReportMaster
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_MAINT_PATCH_REBOOT_VALIDATE:
+    description: 'Maintenance Windows (patching via CW RMM) : plan -> precheck ->
+      patch -> reboot (si requis) -> postcheck -> closeout.'
+    steps:
+    - step: plan_et_live
+      actor_id: IT-MaintenanceMaster
+    - step: closeout
+      actor_id: IT-TicketScribe
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_POST_SHUTDOWN_VALIDATE:
+    description: 'Post-shutdown électrique : baseline réseau/stockage/virtualisation
+      -> services critiques -> monitoring -> rapport.'
+    steps:
+    - step: triage
+      actor_id: IT-Commandare-NOC
+    - step: validate
+      actor_id: IT-MaintenanceMaster
+    - step: report
+      actor_id: IT-ReportMaster
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_N2_SUPPORT_TELEPHONIQUE:
+    description: 'Support N1/N2 téléphonique : guide étape-par-étape → escalade si
+      P2→P1'
+    steps:
+    - step: execute
+      actor_id: IT-Assistant-N2
+    - step: escalade_si_requis
+      actor_id: IT-Assistant-N3
+    - step: closeout
+      actor_id: IT-TicketScribe
+  IT_SECURITY_INCIDENT_RESPONSE:
+    description: 'Réponse incident sécurité : triage → containment → investigation
+      → remédiation → postmortem'
+    steps:
+    - step: triage
+      actor_id: IT-Commandare-NOC
+    - step: response
+      actor_id: IT-SecurityMaster
+    - step: infrastructure
+      actor_id: IT-Commandare-Infra
+    - step: report
+      actor_id: IT-ReportMaster
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_FRONTLINE_CALL_TO_CLOSE:
+    description: 'Flux première ligne (FrontLine) : réception billet MSPBOT ou appel
+      direct -> triage -> résolution N2 -> clôture CW -> KB si P1/P2.
+
+      '
+    steps:
+    - step: receive
+      actor_id: IT-FrontLine
+    - step: triage_and_resolve
+      actor_id: IT-FrontLine
+    - step: closeout
+      actor_id: IT-FrontLine
+    - step: kb_if_needed
+      actor_id: IT-KnowledgeKeeper
+      condition: P1 ou P2 ou nouveau_type
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_URGENCE_P1P2:
+    description: 'Flux urgence P1/P2 en live : qualification -> notice Teams -> escalade
+      spécialiste -> validation GO/NO-GO -> clôture ou Flag Up -> KB -> archive.
+
+      '
+    steps:
+    - step: qualification
+      actor_id: IT-UrgenceMaster
+    - step: escalade_noc
+      actor_id: IT-Commandare-NOC
+      condition: réseau, VPN, backup, VoIP
+    - step: escalade_infra
+      actor_id: IT-Commandare-Infra
+      condition: serveur, VM, cloud, DC
+    - step: escalade_securite
+      actor_id: IT-SecurityMaster
+      condition: breach, ransomware, phishing
+    - step: validation_retour
+      actor_id: IT-UrgenceMaster
+    - step: closeout
+      actor_id: IT-UrgenceMaster
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+    - step: report
+      actor_id: IT-ReportMaster
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_URGENCE_PANNE_HQ:
+    description: 'Panne électrique HQ : alerte -> validation HQ -> surveillance ->
+      retour courant -> GO/NO-GO -> correctif ou Flag Up -> cloture CW.
+
+      '
+    steps:
+    - step: receive
+      actor_id: IT-UrgenceMaster
+      description: Reception alerte + validation Hydro-Quebec
+    - step: monitor
+      actor_id: IT-UrgenceMaster
+      description: Surveillance panne + notices Teams
+    - step: validate
+      actor_id: IT-UrgenceMaster
+      description: Validation retour courant — GO/NO-GO
+    - step: closeout
+      actor_id: IT-UrgenceMaster
+      description: Cloture CW — Note Interne + Discussion + Teams
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+      description: Capitalisation si P1 ou nouveau type
+      condition: P1 ou nouveau_type
+  IT_COMMANDARE_INFRA:
+    description: 'Commandare INFRA : triage incident infra/cloud, mobilise les spécialistes,
+      coordination résolution.'
+    steps:
+    - step: triage
+      actor_id: IT-Commandare-Infra
+    - step: execute
+      actor_id: IT-Commandare-Infra
+  IT_BACKUP_DR_TRIAGE:
+    description: 'Backup/DR : triage job → diagnostic → restauration → rapport → archive'
+    steps:
+    - step: triage
+      actor_id: IT-BackupDRMaster
+    - step: closeout
+      actor_id: IT-TicketScribe
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_PROJET_SOW:
+    description: "Opportunité projet détectée → escalade ventes → analyse → estimation → SOW → validation EA → soumission client"
+    trigger: "Agent terrain détecte un besoin de projet ou migration via /escalade-ventes"
+    steps:
+      - step: detect
+        actor_id: IT-FrontLine
+        description: "Détection du besoin — /escalade-ventes → écriture ventes/opportunities/OPP-{date}-{NNN}.yaml"
+      - step: analyze
+        actor_id: IT-ProjetSOW
+        description: "/lire + /analyser — lecture opportunité, analyse besoins, portée, risques"
+      - step: estimate
+        actor_id: IT-ProjetSOW
+        description: "/estimer — fourchette effort/coût avec hypothèses documentées"
+      - step: sow
+        actor_id: IT-ProjetSOW
+        description: "/sow — rédaction SOW complet client-ready (7 sections)"
+      - step: validate
+        actor_id: EA
+        description: "Validation EA obligatoire avant soumission — prix + portée"
+      - step: submit
+        actor_id: IT-ProjetSOW
+        description: "/soumettre — email client + document SOW"
+      - step: report
+        actor_id: IT-ReportMaster
+        description: "Rapport projet pour dossier client + suivi pipeline"
+      - step: archive
+        actor_id: IT-OPS-DossierIA
+        description: "Archivage dossier complet dans ventes/approved/ si accepté"
+    linked_module: MODULE_PROJETS
+    linked_agent: IT-ProjetSOW
+    status: staging
+  IT_CLOUD_SUPPORT:
+    description: 'Cloud/M365 : diagnostic → résolution → communication client → KB'
+    steps:
+    - step: execute
+      actor_id: IT-CloudMaster
+    - step: closeout
+      actor_id: IT-TicketScribe
+    - step: kb_if_needed
+      actor_id: IT-KnowledgeKeeper
+  IT_MONITORING_ALERT:
+    description: 'Alerte monitoring : analyse → dispatch → validation → rapport'
+    steps:
+    - step: analyze
+      actor_id: IT-MonitoringMaster
+    - step: dispatch
+      actor_id: IT-NOCDispatcher
+    - step: archive
+      actor_id: OPS-DossierIA
+  IT_SCRIPT_REQUEST:
+    description: 'Demande script : conception → validation → documentation → déploiement'
+    steps:
+    - step: create
+      actor_id: IT-ScriptMaster
+    - step: document
+      actor_id: IT-TicketScribe
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+  IT_VOIP_SUPPORT:
+    description: 'VoIP : diagnostic → résolution → validation → clôture CW'
+    steps:
+    - step: execute
+      actor_id: IT-VoIPMaster
+    - step: closeout
+      actor_id: IT-TicketScribe
+  IT_ASSET_MANAGEMENT:
+    description: 'Asset/CMDB : inventaire → audit → rapport → mise à jour CMDB'
+    steps:
+    - step: execute
+      actor_id: IT-AssetMaster
+    - step: report
+      actor_id: IT-ReportMaster
+  IT_DOC_PRODUCTION:
+    description: 'Documentation client : analyse → fiches Hudu → validation → publication'
+    steps:
+    - step: execute
+      actor_id: IT-ClientDocMaster
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+  IT_TICKETOPS_FULL_FLOW:
+    description: 'MSP TicketOps AI — cycle complet : start → triage → analyse → close → rapport → archive'
+    steps:
+    - step: start
+      actor_id: IT-TicketOpsAI
+      description: Capturer le contexte du billet (/start)
+    - step: triage
+      actor_id: IT-TicketOpsAI
+      description: Triage structuré — catégorie, priorité, assignation (/triage)
+    - step: analyse
+      actor_id: IT-TicketOpsAI
+      description: Analyse technique approfondie (/analyse)
+    - step: script_check
+      actor_id: IT-TicketOpsAI
+      description: Validation script si applicable (/script-check)
+      condition: script_requis
+    - step: close
+      actor_id: IT-TicketOpsAI
+      description: Génération livrables CW — Note + Discussion (/close 1+2)
+    - step: rapport
+      actor_id: IT-TicketOpsAI
+      description: Rapport client ou coordo selon contexte (/rapport-client ou /rapport-coordo)
+      condition: rapport_requis
+    - step: kb
+      actor_id: IT-KnowledgeKeeper
+      description: Capitalisation KB si nouvel incident résolu
+      condition: nouveau_type_incident
+    - step: archive
+      actor_id: OPS-DossierIA

@@ -1,0 +1,58 @@
+{
+  "package_name": "IT-UrgenceMaster",
+  "package_version": "1.2.0",
+  "updated_at": "2026-03-28",
+  "team": "IT",
+  "display_name": "@IT-UrgenceMaster",
+  "agent_name": "IT-UrgenceMaster",
+  "role": "Copilote MSP pour urgences IT P1/P2 en intervention live",
+  "status": "active",
+  "primary_files": {
+    "instructions": "00_INSTRUCTIONS.md",
+    "prompt": "prompt.md",
+    "contract": "contract.yaml",
+    "agent": "agent.yaml",
+    "setup_card": "GPT_SETUP_CARD__IT-UrgenceMaster.md",
+    "knowledge_index": "04_KNOWLEDGE_INDEX.md"
+  },
+  "knowledge_files_recommended": [
+    "prompt.md",
+    "knowledge/BUNDLE_KP_UrgenceMaster_V1.md",
+    "knowledge/TEMPLATE_DIAG_PostPanneHQ.md",
+    "knowledge/TEMPLATE__FLAG_UP_AVERTISSEMENT.md",
+    "02_RUNBOOKS/RB-001_procedure-principale.md",
+    "03_CHECKLISTS/CL-001_validation-principale.md",
+    "04_EXEMPLES/EX-001_cas-nominal.md"
+  ],
+  "files": [
+    "00_INSTRUCTIONS.md",
+    "00_REFERENCE_DATA/README.md",
+    "01_CONTRACT.yaml",
+    "01_TEMPLATES/template_document.md",
+    "02_RUNBOOKS/RB-001_procedure-principale.md",
+    "02_RUNBOOKS/README.md",
+    "03_CHECKLISTS/CL-001_validation-principale.md",
+    "03_CHECKLISTS/README.md",
+    "03_ORIGINAL_PROMPT.md",
+    "04_EXEMPLES/EX-001_cas-nominal.md",
+    "04_EXEMPLES/README.md",
+    "04_KNOWLEDGE_INDEX.md",
+    "05_KNOWLEDGE/README.md",
+    "10_MEMORY/README.md",
+    "65_TEST/README.md",
+    "GPT_SETUP_CARD__IT-UrgenceMaster.md",
+    "README.md",
+    "agent.yaml",
+    "contract.yaml",
+    "knowledge/BUNDLE_KP_UrgenceMaster_V1.md",
+    "knowledge/TEMPLATE_DIAG_PostPanneHQ.md",
+    "knowledge/TEMPLATE__FLAG_UP_AVERTISSEMENT.md",
+    "manifest.json",
+    "prompt.md"
+  ],
+  "notes": [
+    "01_CONTRACT.yaml est conservé pour compatibilité legacy.",
+    "03_ORIGINAL_PROMPT.md est un fichier d'archive documentaire.",
+    "Le package est optimisé pour un usage GPT Editor + référentiel documentaire."
+  ]
+}

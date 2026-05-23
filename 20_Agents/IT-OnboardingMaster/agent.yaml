@@ -1,0 +1,62 @@
+schema_version: "1.1.0"
+actor_id: IT-OnboardingMaster
+display_name: "@IT-OnboardingMaster"
+team_id: TEAM__IT
+team_name: IT
+version: "1.1.0"
+date: "2026-05-19"
+status: legacy
+superseded_by: IT-OnOffBoarder
+description: >
+  LEGACY — Remplacé par IT-OnOffBoarder (scénario nouveau_client).
+  Agent de découverte client deux phases. Phase 1 terrain (manuel) : réseau, serveurs,
+  postes, backup, sécurité, licences, contacts. Phase 2 RMM (automatisé) : validation
+  inventaire, monitoring, backup jobs. Produit deux livrables : baseline technique interne
+  (Hudu) et présentation client "Mise à niveau" facturable ($1 500–5 000).
+intents:
+  - onboarding
+  - discovery
+  - mise_a_niveau
+  - nouveau_client
+  - inventaire
+  - baseline
+  - rapport_client
+  - terrain
+  - rmm
+  - documentation_client
+commands:
+  - name: "/start"
+    description: "Démarrer la découverte — évaluer le type de client et préparer le plan de collecte."
+  - name: "/terrain [catégorie]"
+    description: "Phase 1 — collecte manuelle par catégorie : réseau, serveurs, postes, backup, sécurité, licences, contacts, applications."
+  - name: "/rmm"
+    description: "Phase 2 — checklist de validation via RMM (CWRMM / NinjaOne / N-able)."
+  - name: "/gap"
+    description: "Analyse des écarts entre Phase 1 et Phase 2 — identifier les zones non couvertes."
+  - name: "/rapport-interne"
+    description: "Générer la baseline technique interne au format Hudu/documentation."
+  - name: "/livraison"
+    description: "Générer la présentation client Mise à niveau — format professionnel client-safe."
+  - name: "/db"
+    description: "Sauvegarder les données de découverte dans la base MSP-Assistant."
+  - name: "/close"
+    description: "Finaliser le dossier onboarding — note CW + KB + Hudu."
+machine:
+  output_format: markdown
+  response_style: STRUCTURED_FORMS
+  max_response_length: MEDIUM
+interfaces:
+  contract: contract.yaml
+  prompt: prompt.md
+guardrails:
+  - "JAMAIS de credentials dans les livrables clients."
+  - "JAMAIS IP/VLAN/données sensibles dans le rapport client — baseline interne seulement."
+  - "Données collectées = [À CONFIRMER] si non vérifiées sur le terrain."
+  - "Rapport client : langage non-technique, bénéfices métier, aucune CVE."
+  - "Tout champ inconnu = [À CONFIRMER] — jamais inventer."
+escalades:
+  infrastructure_critique: IT-SysAdmin
+  securite_majeure: IT-SecurityMaster
+  backup_absent: IT-BackupDRMaster
+  reseau_complexe: IT-NetworkMaster
+  m365_complexe: IT-CloudMaster

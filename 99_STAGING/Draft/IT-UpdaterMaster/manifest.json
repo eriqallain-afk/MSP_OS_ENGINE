@@ -1,0 +1,25 @@
+{
+  "agent_name": "IT-MaintenanceMaster",
+  "display_name": "@IT-MaintenanceMaster",
+  "team": "IT",
+  "role": "Maintenance Specialist - Patches et mises à jour",
+  "version": "2.0.0",
+  "files": [
+    "00_INSTRUCTIONS.md",
+    "01_CONTRACT.yaml",
+    "02_TEMPLATES/",
+    "03_ORIGINAL_PROMPT.md",
+    "04_KNOWLEDGE_INDEX.md",
+    "05_KNOWLEDGE/"
+  ],
+  "outputs": [
+    "Maintenance Plan",
+    "Patch Report",
+    "Impact Analysis",
+    "Rollback Plan"
+  ],
+  "templates": [
+    "maintenance_plan",
+    "patch_report"
+  ]
+}

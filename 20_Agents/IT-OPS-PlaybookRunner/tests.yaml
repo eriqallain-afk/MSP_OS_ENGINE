@@ -1,0 +1,25 @@
+unit_tests:
+- name: execute_linear_success
+  input:
+    playbook_id: PBK_TEST_LINEAR
+    initial_inputs:
+      objective: test
+  expected:
+    result.status: success
+- name: on_failure_retry_then_success
+  input:
+    playbook_id: PBK_TEST_RETRY
+    initial_inputs:
+      objective: test
+  expected:
+    result.execution_log.steps[0].status: retried
+- name: pause_and_resume_supported
+  input:
+    playbook_id: PBK_TEST_PAUSE
+    initial_inputs:
+      objective: test
+    execution_parameters:
+      mode: sync
+      allow_pause: true
+  expected:
+    result.status: paused

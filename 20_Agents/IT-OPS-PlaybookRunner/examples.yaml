@@ -1,0 +1,12 @@
+examples:
+- input:
+    playbook_id: PBK_BUILD_ARMY_FACTORY
+    initial_inputs:
+      objective: Créer une armée GPT pour support client
+    environment: stage
+  output_snippet:
+    result:
+      status: success
+      execution_log:
+        playbook_id: PBK_BUILD_ARMY_FACTORY
+        status: success

@@ -1,0 +1,58 @@
+schema_version: "1.0"
+
+input:
+  source_ticket: string           # Numéro billet CW (#XXXXXX) ou "N/A"
+  client: string                  # Nom du client
+  objet_type: "SERVEUR|APPLICATION|BACKUP|LICENCE|RESEAU|COMPTE|PROCEDURE"
+  objet_nom: string               # Nom exact de l'objet dans Hudu
+  infos_decouvertes: string       # Informations extraites du billet ou de l'intervention
+  action: "CREER|METTRE_A_JOUR"   # Créer une nouvelle fiche ou mettre à jour une existante
+  confiance: "CONFIRME|PARTIEL|A_VALIDER"
+
+output:
+  result:
+    summary: string               # Résumé 1 ligne : objet + action
+    objet_type: string
+    objet_nom: string
+    action: string
+    confiance: string
+
+  artifacts:
+    # Artifact 1 — Contenu Notes-Editor (toujours présent)
+    - type: hudu_notes
+      title: string               # "Notes-Editor — [NomObjet]"
+      content: string             # HTML/texte riche prêt à coller dans Hudu Notes-Editor
+
+    # Artifact 2 — Services à cocher (si objet type SERVEUR)
+    - type: hudu_services
+      title: string               # "Services — [NomObjet]"
+      content: string             # Liste des services à activer + descriptions
+
+    # Artifact 3 — Champs Hudu (si des champs structurés sont à remplir)
+    - type: hudu_fields
+      title: string               # "Champs — [NomObjet]"
+      content: string             # Paires champ: valeur à saisir
+
+  liaisons:
+    a_lier:
+      - objet: string             # Nom de l'objet à lier
+        type: string              # Type Hudu : SERVEUR / APPLICATION / etc.
+        relation: string          # "dépend de" | "héberge" | "protège" | "utilise"
+    a_creer:
+      - objet: string             # Nom de fiche à créer si inexistante
+        type: string
+
+  champs_inconnus:
+    - champ: string               # Champ qu'on n'a pas pu remplir
+      pourquoi: string            # Raison
+
+  next_actions:
+    - string
+
+  log:
+    decisions:
+      - string
+    risks:
+      - string
+    assumptions:
+      - string

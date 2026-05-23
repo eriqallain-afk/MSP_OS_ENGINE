@@ -1,0 +1,631 @@
+Voici une **KB interne standardisée** que tu peux réutiliser telle quelle.
+
+---
+
+# KB INTERNE — NOC / DHCP Scope Saturé (Analyse structurée MSP)
+
+**Type :** KB interne — diagnostic
+**Domaine :** Réseau / DHCP / Capacity
+**Usage :** Alerte NOC ou RMM indiquant une étendue DHCP pleine, proche de 100 %, ou critique
+**Mode opératoire :** **Lecture seule d’abord**. Aucune remédiation tant que la cause principale n’est pas confirmée. Les garde-fous MSP imposent la distinction stricte entre observation, conclusion et changement appliqué.
+
+---
+
+## 1) Quand utiliser
+
+Utiliser cette KB quand un monitor NOC/RMM remonte un symptôme de type :
+
+* **DHCP Scope 100%**
+* **DHCP scope nearly full**
+* **Available addresses critically low**
+* nouveaux appareils qui n’obtiennent plus d’IP
+* intermittence d’attribution d’adresse sur un site
+* présence de `Declined` / `BAD_ADDRESS` dans le scope
+
+Cette KB est adaptée quand il faut déterminer si l’on est devant :
+
+* une **panne du service DHCP**
+* une **saturation réelle du scope**
+* un **conflit IP ponctuel**
+* ou un **problème structurel de design d’adressage** (ex. trop d’équipements dans un même /24)
+
+Dans l’intervention de référence, l’analyse a montré que le service DHCP n’était pas en panne, mais que le scope était **structurellement saturé**, avec en plus une anomalie secondaire de type `BAD_ADDRESS`.
+
+---
+
+## 2) Prérequis
+
+* Accès admin au serveur DHCP
+* Module DHCP Server disponible sur le serveur ou poste d’admin
+* Accès RMM ou PowerShell distant
+* Si corrélation requise :
+
+  * accès DNS
+  * accès AD
+  * accès aux logs DHCP (`C:\Windows\System32\dhcp`)
+  * accès RMM au poste concerné si une machine cliente est impliquée
+
+### Garde-fous
+
+* **Lecture seule d’abord**
+* **1 action à la fois**
+* ne pas supprimer de lease, réservation, exclusion ou `BAD_ADDRESS` sans confirmation
+* ne pas conclure qu’une réservation inactive est obsolète sans validation terrain
+* ne pas confondre **symptôme secondaire** et **cause racine**
+* les sorties CW officielles sont à utiliser **au `/close`**, avec le template exact approprié. Le bundle de clôture mappe la **Discussion client** vers **Template 1 — CW_DISCUSSION** et la **Note interne** vers **Template 3 — CW_NOTE_INTERNE**.
+
+---
+
+## 3) Étapes d’analyse — séquence exacte
+
+## Étape 0 — Qualifier le billet
+
+### Objectif
+
+Confirmer s’il s’agit d’un incident de service ou d’un risque de capacité.
+
+### À noter
+
+* client
+* site
+* serveur DHCP
+* heure de l’alerte
+* impact confirmé ou non
+* scope concerné
+
+### Décision rapide
+
+* **P3** si aucune panne utilisateur n’est confirmée
+* **P2** si des postes/téléphones/appareils ne reçoivent plus d’adresse
+
+---
+
+## Étape 1 — Valider l’état réel du scope
+
+### Quand utiliser
+
+Toujours en premier.
+
+### But
+
+Confirmer si le scope est encore saturé, presque saturé, ou si l’alerte était transitoire.
+
+```powershell
+$ScopeId = '10.10.50.0'
+
+Write-Host "=== SCOPE ==="
+Get-DhcpServerv4Scope -ScopeId $ScopeId | Format-List *
+
+Write-Host " "
+Write-Host "=== STATISTICS ==="
+Get-DhcpServerv4ScopeStatistics -ScopeId $ScopeId | Format-List *
+
+Write-Host " "
+Write-Host "=== EXCLUSIONS ==="
+Get-DhcpServerv4ExclusionRange -ScopeId $ScopeId | Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== RESERVATIONS COUNT ==="
+(Get-DhcpServerv4Reservation -ScopeId $ScopeId | Measure-Object).Count
+
+Write-Host " "
+Write-Host "=== LEASE STATES ==="
+Get-DhcpServerv4Lease -ScopeId $ScopeId |
+    Group-Object AddressState |
+    Select-Object Name, Count |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== NEXT EXPIRING LEASES ==="
+Get-DhcpServerv4Lease -ScopeId $ScopeId |
+    Sort-Object LeaseExpiryTime |
+    Select-Object -First 20 IPAddress, HostName, ClientId, AddressState, LeaseExpiryTime |
+    Format-Table -AutoSize
+```
+
+### Interprétation
+
+* `Free = 0 à 10` sur un scope utilisateur : état critique
+* beaucoup de `Reserved` : partie du /24 consommée structurellement
+* présence de `Declined` : suspicion de conflits ou IP statiques dans la plage DHCP
+* si l’alerte était à 100 % mais que `Free` remonte à 3–5, ne pas classer “faux positif” trop vite
+
+Dans le cas de référence, le scope est passé de `0` libre à `5` libres, mais est resté à **~97.84 % d’utilisation**, donc l’alerte n’était pas un faux positif.
+
+---
+
+## Étape 2 — Valider la plage, la taille réelle du pool et les `Declined`
+
+### Quand utiliser
+
+Après confirmation d’une tension réelle du scope.
+
+### But
+
+Déterminer si le problème est dû à :
+
+* une plage trop petite
+* une durée de bail trop longue
+* ou des IP en conflit
+
+```powershell
+$ScopeId = '10.10.50.0'
+
+Write-Host "=== SCOPE RANGE / LEASE DURATION ==="
+Get-DhcpServerv4Scope -ScopeId $ScopeId |
+    Select-Object ScopeId, Name, StartRange, EndRange, SubnetMask, LeaseDuration, State |
+    Format-List
+
+Write-Host " "
+Write-Host "=== DECLINED LEASES ==="
+Get-DhcpServerv4Lease -ScopeId $ScopeId |
+    Where-Object { $_.AddressState -eq 'Declined' } |
+    Select-Object IPAddress, HostName, ClientId, AddressState, LeaseExpiryTime |
+    Format-Table -AutoSize
+```
+
+### Interprétation
+
+* si le scope est déjà presque tout le `/24`, il n’y a plus beaucoup de marge d’expansion locale
+* si `LeaseDuration` est déjà courte (ex. `4:00:00`), la durée des baux n’est probablement **pas** la cause principale
+* si `Declined / BAD_ADDRESS` existe, documenter chaque IP avant toute action
+
+Dans le cas de référence, la plage était `10.10.50.2 → 10.10.50.254` avec un bail de `4h`, donc la durée de bail n’était pas la cause racine. 
+
+---
+
+## Étape 3 — Vérifier les IP en conflit, sans rien exclure en bloc
+
+### Quand utiliser
+
+Quand des IP `Declined / BAD_ADDRESS` sont présentes.
+
+### But
+
+Vérifier si les IP en conflit sont réellement vues sur le réseau et si elles correspondent à des réservations DHCP.
+
+```powershell
+$ScopeId = '10.10.50.0'
+$IPs = @(
+    '10.10.50.26',
+    '10.10.50.57',
+    '10.10.50.73',
+    '10.10.50.124',
+    '10.10.50.130',
+    '10.10.50.132',
+    '10.10.50.254'
+)
+
+Write-Host "=== DHCP ROUTER OPTION ==="
+Get-DhcpServerv4OptionValue -ScopeId $ScopeId -OptionId 3 |
+    Format-List *
+
+Write-Host " "
+Write-Host "=== RESERVATIONS MATCHING DECLINED IPs ==="
+Get-DhcpServerv4Reservation -ScopeId $ScopeId |
+    Where-Object { $IPs -contains $_.IPAddress.IPAddressToString } |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== CONFLICT IP CHECK ==="
+$Results = foreach ($IP in $IPs) {
+    $Ping = Test-Connection -ComputerName $IP -Count 1 -Quiet -ErrorAction SilentlyContinue
+    $Neighbor = Get-NetNeighbor -IPAddress $IP -ErrorAction SilentlyContinue | Select-Object -First 1
+
+    [pscustomobject]@{
+        IPAddress      = $IP
+        PingResponds   = $Ping
+        MacAddress     = if ($Neighbor) { $Neighbor.LinkLayerAddress } else { '[none]' }
+        NeighborState  = if ($Neighbor) { $Neighbor.State } else { '[none]' }
+        InterfaceAlias = if ($Neighbor) { $Neighbor.InterfaceAlias } else { '[none]' }
+    }
+}
+
+$Results | Format-Table -AutoSize
+```
+
+### Règle d’interprétation
+
+* **ne jamais exclure en bloc** toutes les IP `BAD_ADDRESS`
+* une entrée `Get-NetNeighbor` seule ne prouve pas qu’une IP est réellement “bonne à exclure”
+* si une IP n’est pas confirmée sur le terrain, elle sort de la liste candidate
+* cette étape sert à **documenter**, pas à corriger
+
+Dans l’intervention de référence, cette étape a aidé à isoler le fait que certaines IP suspectes n’étaient pas toutes de bons candidats à exclusion, ce qui a évité un faux mouvement. 
+
+---
+
+## Étape 4 — Valider la marge réelle restante
+
+### Quand utiliser
+
+Quand il faut mesurer si le scope respire encore ou non.
+
+### But
+
+Voir combien d’IP libres sont encore réellement récupérables.
+
+```powershell
+$ScopeId = '10.10.50.0'
+
+Write-Host "=== FREE DHCP IPs ==="
+Get-DhcpServerv4FreeIPAddress -ScopeId $ScopeId -NumAddress 15 |
+    Format-Table -AutoSize
+```
+
+### Interprétation
+
+* si le serveur ne trouve pas 15 IP libres et n’en retourne que 3–5, le scope est en **tension critique**
+* ce résultat a plus de valeur opérationnelle qu’un simple pourcentage
+
+Dans le cas de référence, seulement **5 IP libres** ont pu être retournées. 
+
+---
+
+## Étape 5 — Branche optionnelle : réservations inactives
+
+### Quand utiliser
+
+Seulement si quelqu’un propose de “nettoyer” des réservations inactives pour récupérer de la place.
+
+### But
+
+Valider sans casser.
+
+```powershell
+$IPs = @(
+    '10.10.50.121',
+    '10.10.50.140',
+    '10.10.50.174',
+    '10.10.50.183',
+    '10.10.50.193',
+    '10.10.50.194',
+    '10.10.50.195',
+    '10.10.50.200'
+)
+
+Write-Host "=== INACTIVE RESERVATION CHECK ==="
+$Results = foreach ($IP in $IPs) {
+    $Ping = Test-Connection -ComputerName $IP -Count 2 -Quiet -ErrorAction SilentlyContinue
+    $Neighbor = Get-NetNeighbor -IPAddress $IP -ErrorAction SilentlyContinue | Select-Object -First 1
+
+    [pscustomobject]@{
+        IPAddress      = $IP
+        PingResponds   = $Ping
+        MacAddress     = if ($Neighbor) { $Neighbor.LinkLayerAddress } else { '[none]' }
+        NeighborState  = if ($Neighbor) { $Neighbor.State } else { '[none]' }
+        InterfaceAlias = if ($Neighbor) { $Neighbor.InterfaceAlias } else { '[none]' }
+    }
+}
+
+$Results | Format-Table -AutoSize
+```
+
+### Règle d’interprétation
+
+* **ne pas supprimer** une réservation uniquement parce qu’elle est “inactive”
+* une réservation inactive peut correspondre à un serveur ou équipement en **IP statique**
+* cette branche est informative seulement
+
+Dans le cas de référence, l’hypothèse la plus saine a été de considérer que plusieurs réservations inactives pouvaient correspondre à des équipements statiques, donc **non candidates au nettoyage automatique**. 
+
+---
+
+## Étape 6 — Si une IP `BAD_ADDRESS` persiste, corréler avec les logs DHCP
+
+### Quand utiliser
+
+Quand il reste un `BAD_ADDRESS` actif et qu’il faut savoir s’il s’agit d’un vrai conflit répété ou d’un artefact transitoire.
+
+### But
+
+Retracer l’IP dans les logs DHCP, DNS et l’AD.
+
+```powershell
+$IP = '10.10.50.73'
+$ScopeId = '10.10.50.0'
+
+Write-Host "=== BAD ADDRESS DETAILS ==="
+Get-DhcpServerv4Lease -ScopeId $ScopeId |
+    Where-Object { $_.IPAddress -eq $IP } |
+    Select-Object IPAddress, HostName, ClientId, AddressState, LeaseExpiryTime, Description |
+    Format-List
+
+Write-Host " "
+Write-Host "=== NEIGHBOR CHECK ==="
+Get-NetNeighbor -IPAddress $IP -ErrorAction SilentlyContinue |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== DNS CHECK ==="
+Resolve-DnsName $IP -ErrorAction SilentlyContinue
+
+Write-Host " "
+Write-Host "=== DHCP AUDIT LOG QUICK CHECK ==="
+$AuditPath = 'C:\Windows\System32\dhcp'
+Get-ChildItem $AuditPath -Filter 'DhcpSrvLog-*.log' -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 2 |
+    ForEach-Object {
+        Write-Host "----- $($_.Name) -----"
+        Select-String -Path $_.FullName -Pattern '10.10.50.73' -SimpleMatch -ErrorAction SilentlyContinue
+    }
+```
+
+### Interprétation
+
+* si la même IP a été assignée à plusieurs clients distincts avant `Conflict`, il s’agit d’un vrai conflit d’usage
+* si un hostname connu revient avec plusieurs MAC, envisager un poste multi-interface, dock, USB-C, Wi-Fi, etc.
+
+Dans l’intervention de référence, le `BAD_ADDRESS` sur `.73` a été relié à l’historique d’un laptop vu avec **plusieurs MAC**, donc retenu comme **symptôme secondaire**, pas cause principale.
+
+---
+
+## Étape 7 — Corrélation AD / DNS / machine cliente
+
+### Quand utiliser
+
+Quand une machine précise semble liée à l’IP en conflit.
+
+### But
+
+Vérifier si l’objet est encore actif, quelle IP il utilise aujourd’hui, et si la MAC conflictuelle est encore l’interface active.
+
+```powershell
+$HostName = 'AJ-LT-I3E79FI'
+$ZoneName = 'tc.lan'
+$Mac = 'F0D415992A4B'
+$AuditPath = 'C:\Windows\System32\dhcp'
+
+Write-Host "=== AD COMPUTER ==="
+Get-ADComputer -Identity $HostName -Properties DNSHostName, Enabled, LastLogonDate, IPv4Address, whenChanged -ErrorAction SilentlyContinue |
+    Select-Object Name, DNSHostName, Enabled, LastLogonDate, IPv4Address, whenChanged |
+    Format-List
+
+Write-Host " "
+Write-Host "=== DNS A RECORD ==="
+Get-DnsServerResourceRecord -ZoneName $ZoneName -Name $HostName -RRType A -ErrorAction SilentlyContinue |
+    Select-Object HostName, Timestamp,
+        @{N='IPAddress';E={$_.RecordData.IPv4Address.IPAddressToString}} |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== DHCP LEASE BY HOSTNAME ==="
+Get-DhcpServerv4Lease -ScopeId '10.10.50.0' -ErrorAction SilentlyContinue |
+    Where-Object { $_.HostName -like "$HostName*" } |
+    Select-Object IPAddress, HostName, ClientId, AddressState, LeaseExpiryTime |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== DHCP AUDIT SEARCH BY MAC / HOST ==="
+Get-ChildItem $AuditPath -Filter 'DhcpSrvLog-*.log' -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 3 |
+    ForEach-Object {
+        Write-Host "----- $($_.Name) -----"
+        Select-String -Path $_.FullName -Pattern $Mac, $HostName -SimpleMatch -ErrorAction SilentlyContinue
+    }
+```
+
+### Si le poste est en ligne, compléter avec :
+
+```powershell
+Write-Host "=== LOCAL NIC INVENTORY ==="
+Get-NetAdapter |
+    Select-Object Name, InterfaceDescription, MacAddress, Status, LinkSpeed |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== ADVANCED NIC INFO ==="
+Get-CimInstance Win32_NetworkAdapter |
+    Where-Object { $_.MACAddress } |
+    Select-Object NetConnectionID, Name, MACAddress, Manufacturer, PhysicalAdapter |
+    Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== CURRENT IP CONFIG ==="
+Get-NetIPConfiguration |
+    Select-Object InterfaceAlias, IPv4Address, IPv4DefaultGateway, DNSServer |
+    Format-List
+```
+
+### Interprétation
+
+* si l’AD/DNS montrent que la machine utilise aujourd’hui une autre IP et une autre MAC, l’ancienne MAC devient une piste d’interface secondaire
+* si le RMM confirme un adaptateur de type dock/USB-C, on retient **historique multi-interface**, pas “mauvais serveur DHCP”
+
+Dans le cas de référence, le poste était actif sur `.71` via un **ThinkPad Hybrid USB-C and USB-A Dock Ethernet**, avec une MAC différente de la MAC vue sur `.73`. 
+
+---
+
+## 4) Critères de diagnostic
+
+## A. Ce n’est **pas** une panne DHCP si :
+
+* le scope répond
+* les statistiques sont lisibles
+* des baux actifs continuent d’exister
+* aucune interruption de service DHCP n’est observée
+
+## B. C’est une **saturation structurelle** si :
+
+* il reste très peu d’IP libres
+* le scope est déjà presque tout le `/24`
+* plusieurs catégories d’équipements partagent le même scope
+* les réservations consomment une part importante du pool
+* le problème persiste même avec une durée de bail déjà courte
+
+C’est exactement la conclusion du cas de référence.
+
+## C. Un `BAD_ADDRESS` est **secondaire** si :
+
+* il ne représente qu’une petite partie du problème
+* l’analyse montre que la cause principale est la capacité du scope
+* l’IP en conflit est liée à un client multi-interface ou à un historique de bail
+
+## D. Ne pas conclure trop vite que :
+
+* une réservation inactive est obsolète
+* une entrée `Get-NetNeighbor` = IP à exclure
+* une seule IP `BAD_ADDRESS` explique toute l’alerte
+
+---
+
+## 5) Décision de sortie
+
+## Sortie A — Billet P3 / Surveillance
+
+À utiliser si :
+
+* pas d’impact utilisateur confirmé
+* DHCP toujours fonctionnel
+* capacité faible mais pas de panne
+
+## Sortie B — Monter en P2
+
+À utiliser si :
+
+* postes/téléphones/appareils n’obtiennent plus d’IP
+* impact opérationnel actif
+* scope retombe à 0 libre avec symptômes réels
+
+## Sortie C — Recommandation de changement planifié
+
+À utiliser si :
+
+* diagnostic terminé
+* cause principale = design du scope / plan d’adressage
+* remédiation durable requiert segmentation ou agrandissement
+
+---
+
+## 6) Sorties CW prêtes à coller
+
+**À utiliser au `/close` seulement.**
+
+* **Discussion client** → **Template 1 — CW_DISCUSSION**
+* **Note interne** → **Template 3 — CW_NOTE_INTERNE**
+
+---
+
+## [1] Note Interne CW — prêt à coller
+
+```text
+────────────────────────────────────────────────────────
+        DHCP / SATURATION D’ÉTENDUE / ANALYSE
+────────────────────────────────────────────────────────
+
+BILLET: #[XXXXX]
+CLIENT: [Nom du client]
+DATE: [YYYY-MM-DD]
+
+PRÉPARATION ET DÉCOUVERTE
+---------
+Prise de connaissance de la demande et consultation de la documentation du client.
+
+Réception et analyse d’une alerte NOC concernant une saturation d’étendue DHCP sur [serveur/site].
+Investigation effectuée en lecture seule uniquement.
+Validation des statistiques du scope, des exclusions, des réservations, des états de baux, des éventuelles entrées BAD_ADDRESS et des éléments complémentaires requis selon le contexte.
+
+RÉSUMÉ
+---------
+L’étendue DHCP analysée est active et non en panne, mais demeure en forte tension de capacité.
+Le scope observé est pratiquement saturé avec très peu d’adresses libres disponibles.
+La cause principale retenue est [saturation structurelle / design de scope / autre].
+[Le cas échéant : Une anomalie ponctuelle de type BAD_ADDRESS a également été observée.]
+
+TRAVAUX EFFECTUÉS
+---------
+- Validation des statistiques du scope DHCP.
+- Vérification de la plage, de la durée des baux, des exclusions et des réservations.
+- Revue des états de baux incluant Active / Reservation / Declined / BAD_ADDRESS.
+- Analyse ciblée des éléments en conflit.
+- Vérification complémentaire via journaux DHCP, DNS, AD et/ou RMM selon le contexte.
+- Aucun changement appliqué durant la phase d’analyse.
+
+AVERTISSEMENTS OBSERVÉS
+---------
+- Scope proche de la saturation ou critique.
+- Risque de défaut d’attribution IP si la consommation augmente.
+- [Le cas échéant : Présence de BAD_ADDRESS ou conflit d’adressage observé.]
+
+ÉVÉNEMENT OBSERVÉ APRÈS L’INTERVENTION
+---------
+Aucune panne du service DHCP confirmée au moment des vérifications.
+Le risque observé est principalement lié à la capacité du scope et/ou à l’hygiène d’adressage.
+
+CONSTAT TECHNIQUE
+---------
+Cause principale retenue : [compléter].
+Cause(s) secondaire(s) observée(s) : [compléter].
+Conclusion : [résumé technique court].
+
+STATUT
+---------
+Diagnostic complété en lecture seule.
+[Aucun changement appliqué / correctif temporaire appliqué / escalade recommandée].
+Billet prêt pour [coordination / changement planifié / surveillance].
+
+SUIVI RECOMMANDÉ
+---------
+- Surveiller l’étendue DHCP.
+- Réévaluer la priorité si des appareils cessent d’obtenir une adresse IP.
+- Planifier une correction durable du plan d’adressage.
+- Évaluer une segmentation réseau ou un agrandissement du sous-réseau si requis.
+```
+
+---
+
+## [2] Discussion CW (client) — prêt à coller
+
+```text
+  ────────────────────────────────────────────────────────
+          Analyse d’alerte DHCP — Capacité d’adressage
+  ────────────────────────────────────────────────────────
+
+DATE: [YYYY-MM-DD]
+TECHNICIEN: [À CONFIRMER]
+---------
+
+PRÉPARATION ET DÉCOUVERTE:
+---------
+• Prendre connaissance de la demande et consultation de la documentation.
+• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+
+TRAVAUX EFFECTUÉS:
+---------
+• Validation effectuée à la suite d’une alerte de capacité DHCP signalée sur le site.
+• Vérification de l’état général du service d’attribution d’adresses réseau.
+• Analyse de l’utilisation de l’étendue et revue des éléments d’adressage actifs.
+• [Le cas échéant : Investigation d’une anomalie ponctuelle d’adressage observée durant les vérifications.]
+• Aucune modification appliquée en production pendant l’analyse.
+
+RÉSULTAT:
+---------
+• Le service analysé répondait au moment de la vérification.
+• Aucune panne générale n’a été confirmée.
+• Le constat principal est une capacité d’adressage très serrée sur le segment réseau actuel.
+
+RECOMMANDATION:
+---------
+• Maintenir la surveillance de l’étendue.
+• Planifier une correction durable du plan d’adressage afin de limiter la récurrence de l’alerte.
+• Réévaluer rapidement la priorité si des appareils cessent d’obtenir une adresse réseau.
+```
+
+---
+
+## 7) Conclusion standard à retenir dans ce type de billet
+
+```text
+Ne pas laisser un BAD_ADDRESS voler le diagnostic.
+Toujours distinguer :
+1. panne DHCP,
+2. conflit ponctuel,
+3. saturation structurelle.
+Dans un scope presque plein utilisé par plusieurs types d’équipements, la cause racine la plus probable est souvent la capacité / le design du segment, pas le service DHCP lui-même.
+```
+
+Le cas de référence illustre exactement ce point.
+
+Je peux te le convertir ensuite en **format KB markdown final propre**, avec **titre, tags, version, owner, révision, mots-clés, procédure, annexes scripts**, prêt à déposer dans votre base documentaire.

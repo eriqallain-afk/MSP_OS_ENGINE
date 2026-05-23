@@ -1,0 +1,57 @@
+schema_version: "1.0"
+contract_id: CONTRACT__IT-Commandare-NOC
+version: 2.0.0
+output_format: yaml
+changelog:
+  - version: 2.0.0
+    date: "2026-03-02"
+    changes:
+      - "Ajout noc_domain (réseau|vpn|backup|monitoring|voip|urgence|multi)"
+      - "Ajout result.correlation pour corrélation multi-alertes"
+      - "Scope élargi : backup, VPN, routage, VoIP"
+
+input:
+  required:
+    - intent
+    - request
+  fields:
+    intent: string
+    request: string
+    context: object       # alertes, assets, source monitoring, client
+    artifacts_in: array
+
+output:
+  result:
+    required:
+      - summary
+      - severity
+      - noc_domain
+      - decision
+      - actions_now
+    fields:
+      summary: string
+      severity: 'string      # P1|P2|P3|P4|UNKNOWN'
+      noc_domain: 'string    # réseau|vpn|backup|monitoring|voip|urgence|multi'
+      affected_assets: array
+      correlation: 'array    # liens entre alertes si multi — {alert_id, relation, note}'
+      decision:
+        owner: string
+        priority: string
+        routing: string       # agent(s) spécialiste(s) mobilisés
+        escalate_to: 'string|null'
+      actions_now: array      # 0–5 min : containment, diagnostics immédiats
+      actions_next: array     # 5–30 min : investigation, remédiation
+      risks: array
+
+  artifacts: 'array  # {type, name, content|ref}'
+  next_actions: 'array  # {action, owner, eta, depends_on}'
+
+  log:
+    required:
+      - trace_id
+      - events
+    fields:
+      trace_id: string
+      events: 'array  # {ts, level, code, message}'
+      checks: 'array  # {code, ok, details}'
+      assumptions: array

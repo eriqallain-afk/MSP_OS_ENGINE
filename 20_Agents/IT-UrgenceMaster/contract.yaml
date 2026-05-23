@@ -1,0 +1,157 @@
+schema_version: "1.1.0"
+agent_id: IT-UrgenceMaster
+version: "1.2.0"
+purpose: >
+  Définir les entrées minimales, les sorties attendues, les modes d'opération
+  et les garde-fous de l'agent IT-UrgenceMaster.
+
+operating_modes:
+  - PANNE_HQ
+  - URGENCE_P1
+  - URGENCE_P2
+  - RETOUR_VALIDATION
+  - FLAG_UP
+  - CLOTURE
+  - STATUS
+  - TEAMS_ONLY
+  - ESCALADE
+
+input:
+  required:
+    - billet_cw
+    - client
+  optional:
+    - site
+    - type_urgence
+    - priorite
+    - symptome
+    - impact
+    - heure_detection
+    - actifs_critiques
+    - equipe_deja_mobilisee
+    - contexte
+  field_definitions:
+    billet_cw:
+      type: string
+      description: "Numéro du billet ConnectWise."
+      example: "#T1710002"
+    client:
+      type: string
+      description: "Nom du client ou de l'organisation."
+    site:
+      type: string
+      description: "Site ou emplacement impacté."
+    type_urgence:
+      type: enum
+      values:
+        - PANNE_HQ
+        - RESEAU_DOWN
+        - SERVEUR_CRITIQUE
+        - MULTI_SERVICES
+        - BACKUP
+        - CLOUD
+        - TELEPHONIE
+        - SECURITE
+        - AUTRE
+    priorite:
+      type: enum
+      values: [P1, P2]
+    symptome:
+      type: string
+      description: "Description verbatim ou reformulée du problème."
+    impact:
+      type: string
+      description: "Services, utilisateurs ou périmètre affectés."
+    heure_detection:
+      type: string
+      description: "Heure de début ou de détection, timezone locale si connue."
+    actifs_critiques:
+      type: list
+      description: "Liste des actifs critiques impliqués ou à valider."
+    equipe_deja_mobilisee:
+      type: list
+      description: "Équipes déjà impliquées dans l'incident."
+    contexte:
+      type: string
+      description: "Informations complémentaires utiles."
+
+output:
+  primary_format: markdown
+  deliverables:
+    - name: notice_teams
+      description: "Titre + contenu conforme au format NOC."
+    - name: plan_action
+      description: "Étapes immédiates ordonnées et sûres."
+    - name: checklist_go_nogo
+      description: "Validation par serveur ou par service."
+    - name: bloc_escalade
+      description: "Bloc ConnectWise de transfert vers une équipe cible."
+    - name: flag_up
+      description: "Note interne complète pour intervention incomplète."
+    - name: cw_note_interne
+      description: "Chronologie technique horodatée."
+    - name: cw_discussion
+      description: "Résumé client-safe, facturable."
+    - name: email_client
+      description: "Communication synthétique post-incident."
+    - name: status
+      description: "Résumé de l'intervention en cours."
+  quality_requirements:
+    - "Réponse orientée action immédiate."
+    - "Aucune donnée sensible dans les livrables client-facing."
+    - "Une prochaine étape explicite dans chaque réponse opérationnelle."
+    - "Notice Teams obligatoire dès que l'urgence est qualifiée."
+    - "Mention [À CONFIRMER] si une donnée n'est pas vérifiable."
+
+commands:
+  /panne:
+    objective: "Piloter une panne électrique ou un doute Hydro-Québec / local."
+    default_mode: PANNE_HQ
+  /urgence:
+    objective: "Qualifier une urgence P1/P2 et déclencher l'escalade si nécessaire."
+    default_mode: URGENCE_P1
+  /retour:
+    objective: "Valider le retour du courant ou des services."
+    default_mode: RETOUR_VALIDATION
+  /flagup:
+    objective: "Produire la passation structurée d'un incident non clôturable."
+    default_mode: FLAG_UP
+  /teams:
+    objective: "Générer uniquement la notice Teams adaptée au moment choisi."
+    default_mode: TEAMS_ONLY
+  /escalade:
+    objective: "Générer le bloc de transfert vers la bonne équipe."
+    default_mode: ESCALADE
+  /status:
+    objective: "Résumer l'état courant de l'intervention."
+    default_mode: STATUS
+  /close:
+    objective: "Afficher le menu de clôture puis générer les livrables demandés."
+    default_mode: CLOTURE
+
+escalation_matrix:
+  reseau_site_wan: IT-Commandare-NOC
+  serveur_vm_hyperviseur: IT-Commandare-Infra
+  securite_breach_ransomware: IT-SecurityMaster
+  backup_donnees: IT-BackupDRMaster
+  cloud_m365_azure: IT-CloudMaster
+  telephonie: IT-VoIPMaster
+  firewall_reseau_avance: IT-NetworkMaster
+  monitoring_rmm: IT-MonitoringMaster
+  rca_n3: IT-Commandare-TECH
+  cloture_comms: IT-Commandare-OPR
+
+sla_targets:
+  notice_teams_initiale: "Dès que le type d'urgence est identifié"
+  escalade_p1: "< 5 minutes"
+  mise_a_jour_intermediaire: "Toutes les 30 minutes si incident toujours actif"
+  validation_retour: "À chaque retour de service ou de courant"
+  cloture: "Dès GO confirmé ou passation validée"
+
+guardrails:
+  - "P1 = escalade immédiate."
+  - "Sécurité suspectée = IT-SecurityMaster immédiatement."
+  - "Lecture seule avant remédiation."
+  - "Un seul serveur à la fois pour reboot ou action risquée."
+  - "Aucune IP, credential ou commande technique dans les livrables client-facing."
+  - "Sur /close, afficher le menu et attendre le choix."

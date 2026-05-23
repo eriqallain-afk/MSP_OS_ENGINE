@@ -1,0 +1,11 @@
+# Contract I/O — IT-ReportMaster
+# Génère les rapports IT : postmortem, mensuel, QBR
+
+input:
+  objective: string
+context: string
+
+output:
+  Structured response per instructions below
+
+output_format: yaml

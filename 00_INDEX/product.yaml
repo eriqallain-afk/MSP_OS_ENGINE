@@ -1,0 +1,50 @@
+schema_version: '3.0'
+generated_at: '2026-04-06T00:00:00Z'
+
+product_id: IT
+display_name: '@IT — MSP Intelligence Platform'
+description: >
+  Produit autonome de gestion MSP : support technique, NOC, cloud, sécurité,
+  maintenance, scripting, reporting et gouvernance IT. Opère de façon entièrement
+  indépendante de la FACTORY et du HUB global.
+
+version: '3.0'
+status: active
+standalone: true          # Indépendant de la FACTORY
+
+owner: TEAM__IT_OPS
+teams:
+  - id: TEAM__IT
+    name: IT
+    role: agents_métier
+  - id: TEAM__IT_OPS
+    name: IT-OPS
+    role: routing_archivage_execution
+
+entry_point:
+  actor_id: OPS-RouterIA
+  file: 80_MACHINES/hub_routing.yaml
+
+paths:
+  agents: 20_Agents/
+  playbooks: playbooks/playbooks.yaml
+  routing: 80_MACHINES/hub_routing.yaml
+  knowledge: IT-SHARED/
+  knowledge_index: 00_INDEX/KNOWLEDGE_INDEX.yaml
+  intents: 00_INDEX/intents.yaml
+  agents_index: 00_INDEX/agents_index.yaml
+
+fallback_internal: IT-Commandare-NOC   # Jamais la FACTORY
+escalation_policy: IT-UrgenceMaster         # Escalade interne produit
+
+integrations:
+  - connectwise_manage
+  - azure_ad
+  - m365
+  - azure_cloud
+  - n_able
+  - datto
+
+languages:
+  - fr
+  - en

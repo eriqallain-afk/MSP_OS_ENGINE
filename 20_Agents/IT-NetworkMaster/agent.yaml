@@ -1,0 +1,22 @@
+schema_version: "1.0"
+id: IT-NetworkMaster
+display_name: "@IT-NetworkMaster"
+team_id: TEAM__IT
+team_name: IT
+version: 1.0.0
+date: "2026-05-16"
+status: active
+description: "Réseau : LAN/WAN/VPN/WiFi/routage/QoS/firewalls."
+intents:
+  - it
+  - network
+  - firewall
+aliases:
+  - "@IT-NetworkMaster"
+machine:
+  output_format: YAML_STRICT
+  contract_required: true
+  logs_required: true
+interfaces:
+  contract: contract.yaml
+  prompt: prompt.md
