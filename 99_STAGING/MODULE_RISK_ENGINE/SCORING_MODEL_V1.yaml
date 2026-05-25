@@ -1,0 +1,299 @@
+# SCORING_MODEL_V1.yaml
+# Modèle mathématique de scoring Risk Engine — MODULE_RISK_ENGINE
+# Version 1.0 — Phase A
+
+document_id: SCORING_MODEL_RISK_ENGINE_V1
+version: 1.0.0
+created_at: '2026-05-25'
+status: staging
+
+# ─────────────────────────────────────────────
+# PHILOSOPHIE DU SCORING
+# ─────────────────────────────────────────────
+philosophy: >
+  Le score mesure la maturité structurelle de l'infrastructure, pas son état en temps réel.
+  Un score bas ne signifie pas qu'il y a un incident — il signifie que l'infrastructure
+  est construite de façon à rendre un incident probable ou à en amplifier l'impact.
+  Score 100 = infrastructure sans dette structurelle détectable.
+  Score 0 = infrastructure en situation d'échec probable à court terme.
+
+scale:
+  min: 0
+  max: 100
+  inverted: true  # Pénalités soustraites de 100 — score = 100 - total_penalties
+
+classification:
+  - range: [80, 100]
+    label: LOW
+    color: green
+    description: Infrastructure mature. Risques résiduels mineurs.
+  - range: [60, 79]
+    label: MODERATE
+    color: yellow
+    description: Dette technique présente. Actions recommandées sous 90 jours.
+  - range: [40, 59]
+    label: HIGH
+    color: orange
+    description: Risques structurels significatifs. Actions prioritaires sous 30 jours.
+  - range: [0, 39]
+    label: CRITICAL
+    color: red
+    description: Infrastructure en situation de risque élevé d'incident majeur.
+
+# ─────────────────────────────────────────────
+# LES 5 PILIERS — POIDS ET DÉTECTIONS
+# ─────────────────────────────────────────────
+pillars:
+
+  lifecycle_risk:
+    id: P1
+    display_name: Lifecycle Risk
+    weight: 0.25
+    feeding_agent: IT-SysAdmin, IT-MaintenanceMaster
+    description: Gestion du cycle de vie des composants (OS, hyperviseur, firmware, appliances)
+    detections:
+      - id: LR-01
+        label: OS EOL détecté
+        severity: high
+        penalty: 10
+        per_occurrence: true
+        max_penalty: 25
+        condition: OS hors support Microsoft/éditeur sans plan de migration documenté
+      - id: LR-02
+        label: Hyperviseur EOL
+        severity: critical
+        penalty: 20
+        per_occurrence: false
+        condition: VMware/Hyper-V en version hors support actif
+      - id: LR-03
+        label: Firmware réseau EOL
+        severity: medium
+        penalty: 8
+        per_occurrence: true
+        max_penalty: 16
+        condition: Switch/Firewall/WAP sur firmware sans support actif
+      - id: LR-04
+        label: Dérive de patch > 30 jours
+        severity: medium
+        penalty: 5
+        per_occurrence: false
+        condition: Plus de 20% des serveurs avec patches en retard > 30 jours
+      - id: LR-05
+        label: Dérive de patch > 90 jours
+        severity: high
+        penalty: 12
+        per_occurrence: false
+        condition: Plus de 10% des serveurs avec patches en retard > 90 jours
+
+  governance_integrity:
+    id: P2
+    display_name: Governance Integrity
+    weight: 0.20
+    feeding_agent: IT-ComplianceMaster, IT-GovernanceAnalyst
+    description: Cohérence des contrôles de gouvernance, conformité et segmentation
+    detections:
+      - id: GI-01
+        label: Violation Tier-0
+        severity: critical
+        penalty: 20
+        per_occurrence: true
+        max_penalty: 40
+        condition: VM ou service critique sur infrastructure non redondante ou non protégée
+      - id: GI-02
+        label: Absence segmentation VLAN
+        severity: high
+        penalty: 12
+        per_occurrence: false
+        condition: Réseau plat sans segmentation entre postes, serveurs et périphériques
+      - id: GI-03
+        label: Comptes Admin sans MFA
+        severity: critical
+        penalty: 15
+        per_occurrence: false
+        condition: Comptes avec droits domaine/admin locaux sans MFA actif
+      - id: GI-04
+        label: Politique mot de passe non conforme
+        severity: medium
+        penalty: 6
+        per_occurrence: false
+        condition: GPO mot de passe < 12 caractères ou rotation > 90 jours
+      - id: GI-05
+        label: Accès tiers non tracés
+        severity: high
+        penalty: 10
+        per_occurrence: false
+        condition: Accès fournisseurs/MSP sans journal d'accès ou sans MFA dédié
+
+  continuity_assurance:
+    id: P3
+    display_name: Continuity Assurance
+    weight: 0.25
+    feeding_agent: IT-BackupDRMaster, IT-ContinuityValidator
+    description: Capacité de continuité et de récupération après incident
+    detections:
+      - id: CA-01
+        label: Backup non validé > 30 jours
+        severity: high
+        penalty: 15
+        per_occurrence: false
+        condition: Aucun test ou validation de restauration dans les 30 derniers jours
+      - id: CA-02
+        label: Backup co-localisé avec production
+        severity: critical
+        penalty: 20
+        per_occurrence: false
+        condition: Backup primaire sur même site physique que la production sans copie offsite
+      - id: CA-03
+        label: SPOF identifié sur composant critique
+        severity: high
+        penalty: 12
+        per_occurrence: true
+        max_penalty: 24
+        condition: DC unique, SAN unique, lien WAN unique sans redondance pour service critique
+      - id: CA-04
+        label: Absence plan DR documenté
+        severity: medium
+        penalty: 8
+        per_occurrence: false
+        condition: Pas de plan de reprise documenté et testé dans les 12 derniers mois
+      - id: CA-05
+        label: RTO/RPO non définis
+        severity: low
+        penalty: 4
+        per_occurrence: false
+        condition: Objectifs de reprise non formalisés pour services critiques
+
+  exposure_surface:
+    id: P4
+    display_name: Exposure Surface
+    weight: 0.20
+    feeding_agent: IT-SecurityMaster, IT-NetworkMaster, IT-ExposureMapper
+    description: Surface d'exposition périmétrique et interne au risque cyber
+    detections:
+      - id: ES-01
+        label: Port admin exposé sur WAN
+        severity: critical
+        penalty: 20
+        per_occurrence: true
+        max_penalty: 40
+        condition: RDP/SSH/RPC accessible directement depuis Internet sans VPN
+      - id: ES-02
+        label: EDR absent ou inactif
+        severity: high
+        penalty: 15
+        per_occurrence: false
+        condition: Endpoints (serveurs ou postes) sans EDR actif et à jour
+      - id: ES-03
+        label: WAN exposé sans inspection applicative
+        severity: high
+        penalty: 10
+        per_occurrence: false
+        condition: Lien WAN sans UTM/NGFW avec inspection applicative active
+      - id: ES-04
+        label: Comptes de service surprivilégiés
+        severity: medium
+        penalty: 8
+        per_occurrence: true
+        max_penalty: 16
+        condition: Comptes de service avec droits Domain Admin ou Local Admin non justifiés
+      - id: ES-05
+        label: DNS public exposant topologie interne
+        severity: low
+        penalty: 4
+        per_occurrence: false
+        condition: Enregistrements DNS publics révélant noms/IPs d'infrastructure interne
+
+  operational_drift:
+    id: P5
+    display_name: Operational Drift
+    weight: 0.10
+    feeding_agent: IT-MaintenanceMaster, IT-MonitoringMaster
+    description: Dérive opérationnelle — configuration, cohérence, standardisation
+    detections:
+      - id: OD-01
+        label: Variance de configuration serveurs
+        severity: medium
+        penalty: 6
+        per_occurrence: false
+        condition: > 20% de variance de configuration entre serveurs du même rôle
+      - id: OD-02
+        label: Monitoring lacunaire
+        severity: medium
+        penalty: 8
+        per_occurrence: false
+        condition: Services critiques sans alerte monitoring configurée
+      - id: OD-03
+        label: Documentation infrastructure absente
+        severity: low
+        penalty: 4
+        per_occurrence: false
+        condition: Absence de documentation à jour (Hudu ou équivalent) pour l'infrastructure
+      - id: OD-04
+        label: Dérive nommage/standardisation
+        severity: low
+        penalty: 3
+        per_occurrence: false
+        condition: Nommage incohérent des objets AD, GPO, serveurs — indicateur de dette organisationnelle
+
+# ─────────────────────────────────────────────
+# CALCUL GLOBAL
+# ─────────────────────────────────────────────
+calculation:
+  method: weighted_pillar_average
+  formula: >
+    Pour chaque pilier P :
+      pillar_score(P) = 100 - sum(penalties détectées dans P)
+      pillar_score(P) = max(0, pillar_score(P))  # plancher à 0
+
+    risk_index_global = sum(pillar_score(P) * weight(P)) pour P in pillars
+    risk_index_global = round(risk_index_global, 1)
+
+  example:
+    lifecycle_risk: 70      # 2 OS EOL (-20) + patch drift (-10)
+    governance_integrity: 45 # Tier-0 x2 (-40) + no MFA (-15)
+    continuity_assurance: 65 # Backup non validé (-15) + SPOF (-12) + no DR (-8)
+    exposure_surface: 60    # RDP exposé (-20) + pas EDR (-15) + surprivilèges (-8)
+    operational_drift: 89   # Monitoring lacunaire (-8) + nommage (-3)
+    global_weighted: 63.0
+    classification: MODERATE
+
+# ─────────────────────────────────────────────
+# FORMAT DE SORTIE STANDARD
+# ─────────────────────────────────────────────
+output_format:
+  header: |
+    ══════════════════════════════════════════
+    RISK INTELLIGENCE REPORT
+    Client     : {client_name}
+    Date       : {date}
+    Analysé par: MSP Intelligence AI — Risk Engine
+    ══════════════════════════════════════════
+
+  scores_block: |
+    SCORES PAR PILIER
+    ├── Lifecycle Risk       : {P1_score}/100
+    ├── Governance Integrity : {P2_score}/100
+    ├── Continuity Assurance : {P3_score}/100
+    ├── Exposure Surface     : {P4_score}/100
+    └── Operational Drift    : {P5_score}/100
+
+    RISK INDEX GLOBAL : {global_score}/100
+    CLASSIFICATION    : {classification}
+
+  detections_block: |
+    DÉTECTIONS ({total_detections} anomalies)
+    CRITIQUES ({critical_count})
+    {critical_detections_list}
+    ÉLEVÉES ({high_count})
+    {high_detections_list}
+    MOYENNES ({medium_count})
+    {medium_detections_list}
+
+  action_plan_block: |
+    PLAN D'ACTION
+    Priorité 1 — Immédiat (0-30 jours)
+    {immediate_actions}
+    Priorité 2 — Court terme (30-60 jours)
+    {short_term_actions}
+    Priorité 3 — Moyen terme (60-90 jours)
+    {medium_term_actions}
