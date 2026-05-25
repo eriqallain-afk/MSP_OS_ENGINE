@@ -21,12 +21,22 @@
 
 ### Nouvel agent créé
 
+> Procédure complète : `00_DOCS/PROCEDURE_CREATION_AGENT_V1.md`
+
 | Document à mettre à jour | Champ concerné | Responsable |
 |---|---|---|
+| `20_Agents/[id]/agent.yaml` | Créer avec status: staging | Auteur du changement |
+| `20_Agents/[id]/00_INSTRUCTIONS.md` | Guardrails + rôle + commandes + RUNBOOKS GITHUB | Auteur du changement |
+| `20_Agents/[id]/GPT_SETUP_CARD__[Nom]_v1.md` | Fiche config GPT Editor — nom, description <300 chars, knowledge files | Auteur du changement |
+| `20_Agents/[id]/GUIDE_UTILISATION__[Nom]_v1.md` | Guide technicien — quand utiliser, commandes, périmètre | Auteur du changement |
+| `IT-SHARED/60_BUNDLES/KNOWLEDGEPACK/BUNDLE_KP_[Nom]_V1.md` | Bundle KP chargé dans GPT Editor — fallback si GitHub inaccessible | Auteur du changement |
 | `00_INDEX/agents_index.yaml` | Ajouter entrée complète | Auteur du changement |
 | `FACTORY_MANIFEST_IT.yaml` | Ajouter entrée + incrémenter `stats.total_agents` | Auteur du changement |
 | `CLAUDE.md` | Tableau agents section 3 + compteur total | Auteur du changement |
 | `00_QA/scores/quality_dashboard.yaml` | Incrémenter `platform.total_agents` | IT-OPS-QAMaster |
+| `IT-SHARED/00_INDEX/INTENT_RUNBOOK_MATRIX_V1.md` | Ajouter intents selon le rôle de l'agent | Auteur du changement |
+| `IT-SHARED/RUNBOOK_MENU_CONTEXTUEL_V4.md` | Ajouter section MENU de l'agent | Auteur du changement |
+| `IT-SHARED/00_INDEX/MASTER_DISPATCH_INDEX_V2.yaml` | Ajouter signals[] pour chaque intent | Auteur du changement |
 
 ---
 
@@ -149,4 +159,4 @@ Si une règle manque ou est obsolète :
 - Ajouter la règle dans la section appropriée
 - Incrémenter la date de mise à jour ci-dessous
 
-*Dernière mise à jour : 2026-05-19 | Maintenu par : IT-OPS-QAMaster*
+*Dernière mise à jour : 2026-05-23 | Maintenu par : IT-OPS-QAMaster*

@@ -27,15 +27,18 @@ auto_activation: false              # Jamais d'activation automatique
 
 # ── STATISTIQUES ─────────────────────────────────────────────────
 stats:
-  total_agents: 32
-  ops_agents: 4
+  total_agents: 33
+  ops_agents: 5
   metier_agents: 28
   agents_with_knowledge_pack: 8
-  active_playbooks: 11
+  active_playbooks: 26
+  total_runbooks: 120
+  total_templates: 90
+  total_scripts: 24
   intents_covered_count: 87
   intents_gap_count: 5
-  last_manifest_update: '2026-05-19'
-  last_full_audit: '2026-05-16'
+  last_manifest_update: '2026-05-23'
+  last_full_audit: '2026-05-23'
 
 # ════════════════════════════════════════════════════════════════
 # AGENTS ACTIFS — 33 (5 OPS + 28 MÉTIER)

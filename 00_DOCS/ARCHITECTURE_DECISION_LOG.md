@@ -238,6 +238,117 @@ Si un runbook n'est pas enregistré dans la matrix → le RouterIA ne le trouve 
 
 ---
 
+## ADR-011 | 2026-05-23 | ACTIF
+### Architecture de tiering produit — double axe commercial + compétence + Commandare fusion
+
+**Contexte :**
+Avec 33 agents et l'ajout des agents compliance/audit, la question du regroupement pour le lancement commercial devient critique. Deux problèmes simultanés : (1) comment packager les agents par niveau de forfait, (2) comment empêcher un tech junior de se lancer dans des interventions qu'il ne maîtrise pas même s'il a accès à l'agent.
+
+**Décision :**
+Architecture à deux axes indépendants :
+
+**Axe 1 — Commercial (ce que le MSP paie) :**
+```
+Starter     → Agents support quotidien — granulaires, scope limité
+Pro         → Support technique complet N2→N3
+MSP         → Routing automatique + NOC + rapports clients
+Enterprise  → Commandare fusion + compliance/audit + Claude API
+```
+
+**Axe 2 — Compétence (ce que le tech est qualifié pour faire) :**
+```
+N1/FrontLine  → FrontLine, TicketOpsAI, TicketScribe
+N2            → + Assistant-N2
+N3/Technique  → + Assistant-N3, TechOPS, SysAdmin, MaintenanceMaster...
+Architecte    → Commandare agents (vision cross-domaine)
+```
+
+**Regroupement agents par forfait :**
+
+| Forfait | Agents inclus | Principe |
+|---|---|---|
+| Starter | FrontLine, Assistant-N2, TicketOpsAI, TicketScribe | Tickets quotidiens — routing manuel |
+| Pro | + Assistant-N3, SysAdmin, TechOPS, MaintenanceMaster, BackupDRMaster, NetworkMaster | Support technique complet |
+| MSP | + RouterIA (routing auto), NOCDispatcher, MonitoringMaster, CloudMaster, UrgenceMaster, OnOffBoarder, ReportMaster, AssetMaster, ClientDocMaster | Automatisation + NOC + livrables clients |
+| Enterprise | + Commandare-Infra, Commandare-NOC, Commandare-TECH, Commandare-OPR, Commandare-Compliance (nouveau), ComplianceMaster, SecurityMaster, ScriptMaster | Fusion cross-domaine + compliance + Claude API optionnel |
+
+**Vision Commandare fusion (Enterprise) :**
+
+Les Commandare deviennent des agents de synthèse cross-domaine — non pas une concaténation de prompts, mais des agents avec une identité propre (architecte senior) qui chargent dynamiquement les runbooks de leurs domaines via `getFileContent`.
+
+| Commandare | Couvre les domaines de |
+|---|---|
+| Commandare-Infra | SysAdmin + CloudMaster + NetworkMaster + VoIPMaster |
+| Commandare-NOC | MaintenanceMaster + BackupDRMaster + MonitoringMaster + NOCDispatcher + UrgenceMaster |
+| Commandare-TECH | FrontLine + N2 + N3 + TechOPS + ScriptMaster |
+| Commandare-OPR | ReportMaster + AssetMaster + ClientDocMaster + KnowledgeKeeper + OnOffBoarder + TicketScribe |
+| Commandare-Compliance *(à créer)* | ComplianceMaster + SecurityMaster + ReportMaster |
+
+**OPS (RouterIA, PlaybookRunner, DossierIA, QAMaster, SyncFactory) = infrastructure plateforme — jamais exposés directement aux techniciens.**
+
+**Protection compétence — 3 couches :**
+1. **Accès** : le MSP partage seulement les GPTs du niveau du tech — un N2 ne voit jamais Commandare-Infra
+2. **Déclaration `/start`** : chaque agent évalue la compétence déclarée au démarrage et adapte ce qu'il guide
+3. **Garde-fou agent** : les agents avancés détectent un profil junior et bloquent les actions hors compétence avec redirect vers chef d'équipe
+
+**Raison :**
+La granularité en bas protège naturellement par scope limité — un agent FrontLine ne peut pas guider une intervention serveur. La polyvalence en haut (Commandare) est réservée aux techs senior qui savent interpréter les résultats cross-domaine. Sans l'axe compétence, un junior avec accès Enterprise pourrait tenter des interventions destructives guidées par un Commandare qui ne sait pas qu'il parle à un N1.
+
+**Conséquences :**
+- Le tiering commercial et le tiering compétence sont orthogonaux — un grand MSP peut avoir des N1 (accès Starter) et des architectes (accès Enterprise) simultanément
+- Les Commandare actuels (Infra, NOC, TECH, OPR) sont à refactorer en agents fusion lors de la phase Enterprise — pas avant
+- Commandare-Compliance est un nouvel agent à créer (ComplianceMaster + SecurityMaster + ReportMaster)
+- La contrainte ChatGPT (pas d'inter-agent natif) fait que la fusion est la solution pragmatique aux tiers inférieurs ; Claude API (Enterprise+) permet la vraie orchestration
+- Chaque Commandare charge ses runbooks via `getFileContent` dynamiquement — la fusion est au niveau du raisonnement, pas de l'embarquement de contenu
+
+---
+
+## ADR-012 | 2026-05-23 | ACTIF
+### Experts chevronnés — niveau Pro/MSP — conditionnel au test RouterIA
+
+**Contexte :**
+Le tiering Starter→Pro→MSP→Enterprise nécessite un niveau intermédiaire entre les spécialistes granulaires (Starter) et les futurs Commandare (Enterprise/Claude API). Les Commandare actuels ne fonctionnent pas bien en ChatGPT GPT sans vraie orchestration inter-agents. Il faut un niveau "Pro" qui donne de la puissance sans surcharger le prompt.
+
+**Vision : 6 Experts chevronnés**
+
+| Expert | Domaine | Agents absorbés |
+|---|---|---|
+| `IT-Expert-Support` | Support avancé N2→N3, tickets complexes | Assistant-N2, N3, FrontLine, TechOPS, ScriptMaster |
+| `IT-Expert-Infra` | Serveurs, AD, HyperV, SQL, Azure, M365, réseau, cloud | SysAdmin, CloudMaster, NetworkMaster, VoIPMaster, ScriptMaster |
+| `IT-Expert-NOC` | Maintenance, patching, backup/DR, monitoring | MaintenanceMaster, BackupDRMaster, MonitoringMaster, NOCDispatcher, UrgenceMaster, ScriptMaster |
+| `IT-Expert-SOC` | Incidents sécurité, forensics, threat hunting, hardening | SecurityMaster, ScriptMaster |
+| `IT-Expert-Compliance` | Audit 5 piliers, Entra, Purview, Loi 25, PCI, rapports | ComplianceMaster, ReportMaster |
+| `IT-Expert-OPR` | Documentation, assets, knowledge, onboarding/offboarding | AssetMaster, ClientDocMaster, KnowledgeKeeper, OnOffBoarder, TicketScribe, ReportMaster |
+
+ScriptMaster = compétence transversale aux 4 premiers experts — chaque Expert sort des scripts PowerShell inline sans agent séparé.
+
+**Principe de conception :** l'Expert est **léger dans son prompt de base** — il ne charge pas tous les runbooks à l'avance. Il sait *quoi* charger via `getFileContent` selon le contexte. L'expertise est dans le raisonnement cross-domaine, pas dans la mémoire embarquée.
+
+**Condition de déclenchement — VALIDATION ROUTERIA REQUISE AVANT CONSTRUCTION :**
+
+Cette vision est conditionnelle au résultat des tests RouterIA en conditions réelles.
+
+- Si RouterIA route bien → spécialistes légers suffisent, Experts chevronnés moins urgents
+- Si RouterIA rate → Experts chevronnés deviennent la solution pragmatique immédiate
+
+**Contexte test :** les tests RouterIA antérieurs au 2026-05-23 étaient sur une version sans les 11 runbooks WKS ni les 4 intents compliance (matrix incomplète). Les tests valides commencent après le merge PR #53 sur main (2026-05-22).
+
+**Gamme produit cible :**
+```
+Starter     → Spécialistes granulaires (agents actuels)
+Pro         → 1 Expert chevronné au choix (ou à la carte)
+MSP         → Plusieurs Experts + RouterIA automatique
+Enterprise  → Tous Experts + Commandare fusion (Claude API)
+```
+
+**Conséquences :**
+- Construction des 6 Experts suspendue jusqu'aux résultats des tests RouterIA
+- Si RouterIA validé → Pro = spécialistes + RouterIA, Experts optionnels
+- Si RouterIA insuffisant → construire les 6 Experts en priorité
+- Les Commandare actuels restent en staging — valeur réelle uniquement avec Claude API
+
+---
+
 ## DÉCISIONS EN ATTENTE / À DOCUMENTER
 
 | Sujet | Décision requise | Assigné à |
@@ -245,6 +356,9 @@ Si un runbook n'est pas enregistré dans la matrix → le RouterIA ne le trouve 
 | Format des Knowledge Packs agents | Standardiser ou laisser flexible par agent ? | EA |
 | Versioning des bundles | Quand bumper la version d'un bundle ? | EA |
 | Archivage ADR | Après combien de temps une ADR REMPLACÉE peut-elle être archivée ? | EA |
+| Commandare-Compliance | Créer l'agent — périmètre exact et prompt à définir | EA |
+| Tiering compétence dans /start | Standardiser le bloc de déclaration compétence pour tous les agents | EA |
+| **RouterIA test réel** | **Valider sur 5-10 cas (support, serveur, compliance, backup) — résultat détermine si Experts chevronnés sont prioritaires** | **EA — priorité lancement** |
 
 ---
 

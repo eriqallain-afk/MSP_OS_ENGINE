@@ -144,6 +144,10 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 | 42 | `ransomware` | soc-triage, threat-hunting | `IT-SHARED/60_BUNDLES/BUNDLE_NOC_SOC_SIEM_V1.md` |
 | 43 | `security-audit` | | `IT-SHARED/10_RUNBOOKS/SECURITY/SEC-SECU-SecurityAudit_V2.md` |
 | 44 | `m365-compliance` | | `IT-SHARED/10_RUNBOOKS/SECURITY/SEC-M365-Compliance_Purview_V2.md` |
+| 44b | `5piliers` | compliance-framework, audit-score | `IT-SHARED/10_RUNBOOKS/SECURITY/SEC-COMPLIANCE-5Piliers_Framework_V1.md` |
+| 44c | `audit-entra` | entra-compliance, entra-securite | `IT-SHARED/10_RUNBOOKS/SECURITY/SEC-ENTRA-SecurityCompliance_V1.md` |
+| 44d | `audit-purview` | purview-compliance, dlp-audit | `IT-SHARED/10_RUNBOOKS/SECURITY/SEC-PURVIEW-ComplianceAudit_V1.md` |
+| 44e | `tpl-compliance-5p` | rapport-compliance, rapport-5piliers | `IT-SHARED/20_TEMPLATES/08_TEMPLATE_REPORTS/TEMPLATE_RAPPORT_Compliance_5Piliers_V1.md` |
 
 ---
 
@@ -342,6 +346,7 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📦 BUNDLES   [B40]b-secu [B41]b-ir [B42]b-soc-siem
 🛡️ SÉCU      [40]securite-ir [41]alert-response [42]ransomware [43]security-audit [44]m365-compliance
+🔍 COMPLIANCE [44b]5piliers [44c]audit-entra [44d]audit-purview [44e]tpl-compliance-5p
 ⚡ URGENCE   [30]incident-command
 📜 SCRIPTS   [67e]m365-compromis
 ✅ CHECKS    [77]security
@@ -387,11 +392,22 @@ Si `/runbook` seul → afficher le menu du rôle (section MENUS), puis ⛔ STOP 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📦 BUNDLES   [B02]b-cloud [B07]b-m365
 ☁️ M365      [14]m365 [15]m365-exchange [16]m365-intune [17]m365-teams [13]azure [44]m365-compliance [34]keepit
+🔍 COMPLIANCE [44b]5piliers [44c]audit-entra [44d]audit-purview
 🟠 AWS/GCP   [19b]aws [19c]gcp
 🌐 DNS       [11]dns
 📖 REF       [92]portails [95]azure
 ✅ CHECKS    [76]m365
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### MENU — IT-ComplianceMaster
+```
+📂 RUNBOOKS — /runbook [n° ou mot-clé]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 COMPLIANCE [44b]5piliers [44c]audit-entra [44d]audit-purview [44e]tpl-compliance-5p
+📋 RÉGLEMENTAIRE [80]loi25 [81]pci-dss [82]hipaa [83]cyber-assurance [84]soc2
+📜 TEMPLATES  [89c]tpl-audit-client [89r]tpl-rapport-gap
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---

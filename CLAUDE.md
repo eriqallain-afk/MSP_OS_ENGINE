@@ -15,7 +15,7 @@
 | **Version manifest** | 4.2 |
 | **Responsable** | EA (validation manuelle obligatoire pour toute activation) |
 
-MSP Intelligence AI est une plateforme de **32 agents IA** pour les opérations MSP (Managed Service Provider). Elle automatise la gestion de tickets, les interventions terrain, le NOC, la maintenance, la sécurité et le reporting.
+MSP Intelligence AI est une plateforme de **33 agents IA** pour les opérations MSP (Managed Service Provider). Elle automatise la gestion de tickets, les interventions terrain, le NOC, la maintenance, la sécurité et le reporting.
 
 ---
 
@@ -35,7 +35,7 @@ IT/
 │   ├── incidents/               ← Incidents loggués par agents et techniciens
 │   ├── scores/                  ← Dashboard qualité
 │   └── fixes/                   ← Correctifs pending (EA) et applied
-├── 20_Agents/                   ← Tous les agents (32 total)
+├── 20_Agents/                   ← Tous les agents (33 total)
 ├── IT-SHARED/                   ← Ressources partagées (runbooks, templates, checklists)
 ├── playbooks/                   ← Playbooks YAML d'exécution
 │   └── playbooks.yaml
@@ -47,9 +47,9 @@ IT/
 
 ---
 
-## 3. LES 32 AGENTS
+## 3. LES 33 AGENTS
 
-### Équipe OPS (4 agents — infrastructure interne)
+### Équipe OPS (5 agents — infrastructure interne)
 
 | Agent | Rôle |
 |---|---|
@@ -57,6 +57,7 @@ IT/
 | `IT-OPS-PlaybookRunner` | Exécute les playbooks step by step |
 | `IT-OPS-DossierIA` | Archive chaque run, produit les livrables traçables |
 | `IT-OPS-QAMaster` | Qualité plateforme — incidents, patterns, correctifs, revue pre-activation |
+| `IT-OPS-SyncFactory` | Synchronisation Produit → Factory — analyse les changements, génère les rapports de sync |
 
 ### Équipe Métier (28 agents)
 
@@ -91,7 +92,7 @@ IT/
 | `IT-ReportMaster` | Rapports et KPIs |
 | `IT-KnowledgeKeeper` | Base de connaissance, documentation interne |
 
-> **Total : 32 agents (4 OPS + 28 métier)**
+> **Total : 33 agents (5 OPS + 28 métier)**
 
 ---
 
@@ -111,10 +112,14 @@ IT/
 
 ## 5. RÈGLES ABSOLUES
 
+> **Procédure canonique complète (création / modification / suppression) :**
+> `00_DOCS/PROCEDURE_CREATION_AGENT_V1.md` — lire avant toute action sur un agent.
+
 ### Avant de créer un agent
 1. **Lire `FACTORY_MANIFEST_IT.yaml`** en entier — source de vérité
 2. **Vérifier `00_INDEX/agents_index.yaml`** — l'agent n'existe pas déjà ?
 3. **Passer par `99_STAGING/`** — jamais d'activation directe sans validation EA
+4. **Suivre `00_DOCS/PROCEDURE_CREATION_AGENT_V1.md`** — 20 étapes, 6 phases
 
 ### Avant de modifier un agent
 1. Vérifier le `status` dans `agent.yaml` — ne jamais modifier un agent `archived`
@@ -200,4 +205,4 @@ Règle : **aucun correctif n'est appliqué sans validation EA explicite.**
 
 ---
 
-*CLAUDE.md v2.0 — MSP Intelligence AI — Mis à jour le 2026-05-17*
+*CLAUDE.md v2.1 — MSP Intelligence AI — Mis à jour le 2026-05-23*
