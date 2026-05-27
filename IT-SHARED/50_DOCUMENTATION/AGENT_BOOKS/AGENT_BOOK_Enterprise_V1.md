@@ -7,7 +7,7 @@
 
 ## Ce tier comprend
 
-Le tier Enterprise couvre les urgences P1/P2 en live, la téléphonie VoIP, la gestion complète du cycle de vie des billets (TicketOpsAI), et l'infrastructure d'orchestration interne (RouterIA, PlaybookRunner, DossierIA). Ce dernier groupe est la couche d'automatisation sous-jacente du système — il n'est pas utilisé directement par les techniciens.
+Le tier Enterprise couvre les urgences P1/P2 en live, la téléphonie VoIP, la gestion complète du cycle de vie des billets (TicketOpr), et l'infrastructure d'orchestration interne (RouterIA, PlaybookRunner, DossierIA). Ce dernier groupe est la couche d'automatisation sous-jacente du système — il n'est pas utilisé directement par les techniciens.
 
 | Agent | Rôle | Audience |
 |---|---|---|

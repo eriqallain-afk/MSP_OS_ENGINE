@@ -267,7 +267,7 @@ routing_table:
     default_actor_id: IT-Commandare-OPR
     default_playbook_id: IT_MSP_TICKET_TO_KB
 
-  # ── 20. TICKET OPS (TicketOpsAI — cycle complet triage→clôture) ─
+  # ── 20. TICKET OPS (TicketOpr — cycle complet triage→clôture) ─
   - match_any_intents:
       - ticket_ops
       - triage_ticket

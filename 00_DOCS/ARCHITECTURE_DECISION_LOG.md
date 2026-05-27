@@ -257,7 +257,7 @@ Enterprise  → Commandare fusion + compliance/audit + Claude API
 
 **Axe 2 — Compétence (ce que le tech est qualifié pour faire) :**
 ```
-N1/FrontLine  → FrontLine, TicketOpsAI, TicketScribe
+N1/FrontLine  → FrontLine, TicketOpr, TicketScribe
 N2            → + Assistant-N2
 N3/Technique  → + Assistant-N3, TechOPS, SysAdmin, MaintenanceMaster...
 Architecte    → Commandare agents (vision cross-domaine)
@@ -267,7 +267,7 @@ Architecte    → Commandare agents (vision cross-domaine)
 
 | Forfait | Agents inclus | Principe |
 |---|---|---|
-| Starter | FrontLine, Assistant-N2, TicketOpsAI, TicketScribe | Tickets quotidiens — routing manuel |
+| Starter | FrontLine, Assistant-N2, TicketOpr, TicketScribe | Tickets quotidiens — routing manuel |
 | Pro | + Assistant-N3, SysAdmin, TechOPS, MaintenanceMaster, BackupDRMaster, NetworkMaster | Support technique complet |
 | MSP | + RouterIA (routing auto), NOCDispatcher, MonitoringMaster, CloudMaster, UrgenceMaster, OnOffBoarder, ReportMaster, AssetMaster, ClientDocMaster | Automatisation + NOC + livrables clients |
 | Enterprise | + Commandare-Infra, Commandare-NOC, Commandare-TECH, Commandare-OPR, Commandare-Compliance (nouveau), ComplianceMaster, SecurityMaster, ScriptMaster | Fusion cross-domaine + compliance + Claude API optionnel |

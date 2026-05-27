@@ -30,7 +30,7 @@
 
 | Inclus | Starter | Pro | MSP | Enterprise |
 |---|:---:|:---:|:---:|:---:|
-| Agents support (FrontLine, N2, TicketOpsAI, TicketScribe) | ✅ | ✅ | ✅ | ✅ |
+| Agents support (FrontLine, N2, TicketOpr, TicketScribe) | ✅ | ✅ | ✅ | ✅ |
 | Agents infra (N3, SysAdmin, TechOPS, Maintenance, Backup, Réseau) | — | ✅ | ✅ | ✅ |
 | RouterIA (routing automatique d'intent) | — | — | ✅ | ✅ |
 | NOC (Dispatcher, Monitoring, Urgences) | — | — | ✅ | ✅ |

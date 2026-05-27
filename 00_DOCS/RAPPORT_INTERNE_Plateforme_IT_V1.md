@@ -70,7 +70,7 @@ MSP Intelligence AI est une plateforme de 33 agents IA spécialisés couvrant l'
 │  FrontLine           SysAdmin            NOCDispatcher               │
 │  Assistant-N2        TechOPS             MonitoringMaster            │
 │  Assistant-N3        CloudMaster         UrgenceMaster               │
-│  TicketOpsAI         MaintenanceMaster                               │
+│  TicketOpr         MaintenanceMaster                               │
 │                      BackupDRMaster      SÉCURITÉ (2)                │
 │                      NetworkMaster       SecurityMaster              │
 │                                          ComplianceMaster            │
@@ -249,7 +249,7 @@ Le **RouterIA** est le point d'entrée de toute interaction. Il :
 
 | Domaine | Niveau de couverture | Justification |
 |---|---|---|
-| **Support N1-N3** | Fort | 4 agents dédiés (FrontLine, N2, N3, TicketOpsAI) + 11 runbooks WKS + routing complet. Cycle ticket complet du triage à la clôture KB |
+| **Support N1-N3** | Fort | 4 agents dédiés (FrontLine, N2, N3, TicketOpr) + 11 runbooks WKS + routing complet. Cycle ticket complet du triage à la clôture KB |
 | **Maintenance / Patching** | Fort | MaintenanceMaster + runbooks V3 (CW RMM, WSUS, PendingReboot 2-phases). Standard precheck/postcheck unifié (ADR-003/004/005) |
 | **Backup / DR** | Fort | BackupDRMaster couvre Veeam, Datto, Keepit, Veeam Cloud. 9 runbooks NOC-BACKUP dédiés incluant DR_Plan_Validation et Restore_Test |
 | **Réseau** | Fort | NetworkMaster couvre 6 constructeurs firewall (Fortinet, Meraki, SonicWall, WatchGuard, UniFi, MikroTik). Runbooks V2 pour chacun |

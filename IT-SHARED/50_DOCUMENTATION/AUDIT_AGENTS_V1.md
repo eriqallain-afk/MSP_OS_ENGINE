@@ -519,10 +519,10 @@
 | **Règle "1 serveur à la fois" dépassée** | 5/27 | Assistant-N3, Commandare-Infra, MaintenanceMaster (x2), SysAdmin, UrgenceMaster |
 | **Description `agent.yaml` incorrecte/copiée** | 2/27 | IT-SysAdmin et IT-MaintenanceMaster (descriptions identiques) |
 | **Fichiers locaux en doublon avec IT-SHARED** | 5/27 | SysAdmin (5 fichiers), MaintenanceMaster (2 fichiers), ClientDocMaster (KP), UrgenceMaster (KP), BackupDRMaster (checklist) |
-| **Structure de dossiers anormale** | 2/27 | ScriptMaster (dossiers numérotés dupliqués), TicketOpsAI (99_TEST en plus de 65_TEST) |
+| **Structure de dossiers anormale** | 2/27 | ScriptMaster (dossiers numérotés dupliqués), TicketOpr (99_TEST en plus de 65_TEST) |
 | **`PromptInterneActuel.rtf` (format non standard)** | 2/27 | OPS-DossierIA, OPS-PlaybookRunner |
 | **`05_KNOWLEDGE` absent** | 4/27 | FrontLine, OPS-DossierIA, OPS-PlaybookRunner, OPS-RouterIA |
-| **00_INSTRUCTIONS proche de 8000 chars (>7000)** | 2/27 | SysAdmin (7303 c), TicketOpsAI (7034 c) |
+| **00_INSTRUCTIONS proche de 8000 chars (>7000)** | 2/27 | SysAdmin (7303 c), TicketOpr (7034 c) |
 
 ### Priorités d'action recommandées
 
