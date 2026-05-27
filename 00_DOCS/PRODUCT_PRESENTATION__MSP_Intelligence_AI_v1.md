@@ -52,7 +52,7 @@ Prix élevé   GitHub Copilot              Concurrents à bâtir
 | `IT-OPS-DossierIA` | Archive chaque run — dossier complet prêt pour l'ITSM |
 | `IT-FrontLine` | Premier contact client — triage, qualification, script d'appel N1 |
 | `IT-Assistant-N2` | Support technique N2 — diagnostic, résolution incidents courants |
-| `IT-TicketOpsAI` | Analyse les tickets entrants — priorité, routing, risques |
+| `IT-TicketOpr` | Analyse les tickets entrants — priorité, routing, risques |
 | `IT-TicketScribe` | Rédige les notes CW et discussions facturables en 30 secondes |
 | `IT-NOCDispatcher` | Qualifie et dispatche les alertes et tickets entrants |
 

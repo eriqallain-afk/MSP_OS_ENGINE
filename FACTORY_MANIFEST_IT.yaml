@@ -178,14 +178,14 @@ agents:
     required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
     completeness: 95%
 
-  - id: IT-TechOPS
+  - id: IT-TechOnsite
     team: TEAM__IT
     status: active
     role: tech_ops
     tier: terrain
     description: Opérations techniques terrain — exécution interventions, procédures, outils MSP
     intents: [techops, tech_ops, terrain, intervention_terrain, ops_execution]
-    path: 20_Agents/IT-TechOPS/
+    path: 20_Agents/IT-TechOnsite/
     required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
     completeness: 80%
 
@@ -201,7 +201,7 @@ agents:
     required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
     completeness: 90%
 
-  - id: IT-TicketOpsAI
+  - id: IT-TicketOpr
     commercial_name: MSP TicketOps AI
     team: TEAM__IT
     status: active
@@ -212,7 +212,7 @@ agents:
       10 commandes : /start /triage /analyse /close /memo /teams /rapport-client /rapport-coordo /script-check /risques.
       9 templates de fermeture (patching, snapshot, Windows Update, backup, disque plein, DNS/DHCP, RDS, reboot, postcheck).
     intents: [ticket_ops, triage_ticket, close_ticket, rapport_client, rapport_coordo, script_check, risques_intervention]
-    path: 20_Agents/IT-TicketOpsAI/
+    path: 20_Agents/IT-TicketOpr/
     required_files: [agent.yaml, prompt.md, contract.yaml, README.md, 00_INSTRUCTIONS.md]
     completeness: 95%
 
@@ -665,7 +665,7 @@ completeness_dashboard:
       - IT-Commandare-Infra
       - IT-MaintenanceMaster
       - IT-SysAdmin
-      - IT-TicketOpsAI
+      - IT-TicketOpr
       - IT-UrgenceMaster
 
     good:         # 85% - 94%
@@ -683,7 +683,7 @@ completeness_dashboard:
       - IT-SecurityMaster
       - IT-AssetMaster
       - IT-ReportMaster
-      - IT-TechOPS
+      - IT-TechOnsite
       - IT-OnboardingMaster
       - IT-Assistant-N3
       - IT-KnowledgeKeeper
@@ -697,4 +697,4 @@ completeness_dashboard:
     - IT-MonitoringMaster     # Critique — observabilité
     - IT-NetworkMaster        # Critique — réseau
     - IT-Commandare-Infra     # Important — infra serveurs
-    - IT-TechOPS              # Important — opérations terrain
+    - IT-TechOnsite              # Important — opérations terrain

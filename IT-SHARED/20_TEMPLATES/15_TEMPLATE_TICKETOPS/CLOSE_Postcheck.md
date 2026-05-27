@@ -1,5 +1,5 @@
 # CLOSE_Postcheck — Fermeture Postcheck post-intervention
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-SysAdmin | IT-MaintenanceMaster
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-SysAdmin | IT-MaintenanceMaster
 **Usage :** Clôture avec liste de vérification complète post-intervention (tout type)
 **Version :** 1.0 — 2026-05-08
 

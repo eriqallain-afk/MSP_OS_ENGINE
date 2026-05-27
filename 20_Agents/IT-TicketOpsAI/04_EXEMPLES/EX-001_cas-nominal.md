@@ -1,5 +1,5 @@
 ﻿# EX-001 - Exemple : Rapport de Service Mensuel
-**Agent:** @IT-TicketOpsAI | **Type:** MSP | **Statut:** PASS (cas nominal)
+**Agent:** @IT-TicketOpr | **Type:** MSP | **Statut:** PASS (cas nominal)
 
 ## INPUT
 ```yaml
@@ -37,4 +37,4 @@ l'objectif contractuel de 95%. Deux incidents P2 resolus dans les delais.
 ```
 
 ---
-*EX-001 - IT-TicketOpsAI - Version 1.0*
+*EX-001 - IT-TicketOpr - Version 1.0*

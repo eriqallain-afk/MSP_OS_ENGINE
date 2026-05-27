@@ -1,5 +1,5 @@
 ﻿# RB-001 - Gestion Incident P1/P2 (Critique/Majeur)
-**Agent:** @IT-TicketOpsAI | **Type:** MSP Support
+**Agent:** @IT-TicketOpr | **Type:** MSP Support
 
 ## Objectif
 Gerer un incident de haute priorite de l'ouverture jusqu'a la resolution en respectant les SLA et en maintenant une communication fluide avec le client.
@@ -40,4 +40,4 @@ Gerer un incident de haute priorite de l'ouverture jusqu'a la resolution en resp
 - Si non resolu en 80% du SLA : notifier le gestionnaire MSP et le client
 
 ---
-*RB-001 - IT-TicketOpsAI - Version 1.0*
+*RB-001 - IT-TicketOpr - Version 1.0*

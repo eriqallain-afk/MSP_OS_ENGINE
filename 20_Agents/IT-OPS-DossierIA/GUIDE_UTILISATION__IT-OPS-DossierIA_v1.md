@@ -127,13 +127,13 @@ Après tout changement de plateforme (nouvel agent, nouveau runbook, nouveau pla
 **Usage :**
 ```
 Quels documents DOC_SYNC dois-je mettre à jour ?
-Changement effectué : ajout de l'agent IT-TicketOpsAI à la plateforme.
+Changement effectué : ajout de l'agent IT-TicketOpr à la plateforme.
 ```
 
 **Ce que tu obtiens :**
 ```yaml
 next_actions:
-  - "[DOC_SYNC] agents_index.yaml — ajouter IT-TicketOpsAI"
+  - "[DOC_SYNC] agents_index.yaml — ajouter IT-TicketOpr"
   - "[DOC_SYNC] FACTORY_MANIFEST_IT.yaml — stats.total_agents"
   - "[DOC_SYNC] CLAUDE.md — section 3 Les 32 agents"
   - "[DOC_SYNC] MASTER_DISPATCH_INDEX_V2.yaml — si nouveaux intents"

@@ -1,5 +1,5 @@
 # TEMPLATE_INTERVENTION_Compact_V1
-**Agent :** IT-MaintenanceMaster | IT-SysAdmin | IT-TechOPS | IT-Assistant-N2 | IT-Assistant-N3
+**Agent :** IT-MaintenanceMaster | IT-SysAdmin | IT-TechOnsite | IT-Assistant-N2 | IT-Assistant-N3
 **Usage :** Intervention courte < 30 min — traçabilité minimale sans surcharge
 **Mis à jour :** 2026-05-21
 

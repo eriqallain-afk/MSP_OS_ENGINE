@@ -269,7 +269,7 @@
 | `/runbook [n°\|sujet]` | Charger un runbook GitHub | Procédure spécifique |
 | `/close` | Menu de clôture CW | Fin d'intervention |
 
-### IT-TicketOpsAI — Cycle de vie complet du billet MSP
+### IT-TicketOpr — Cycle de vie complet du billet MSP
 
 | Commande | Description | Déclencheur |
 |---|---|---|
@@ -318,7 +318,7 @@
 | Alerte sécurité / EDR | IT-SecurityMaster | → Coordonnateur + SOC si breach |
 | Panne électrique / site | IT-UrgenceMaster | → IT-Commandare-Infra + NOC |
 | VoIP / qualité voix | IT-VoIPMaster | → IT-NetworkMaster si infra |
-| Documentation billet | IT-TicketScribe / IT-TicketOpsAI | — |
+| Documentation billet | IT-TicketScribe / IT-TicketOpr | — |
 | Fiche Hudu | IT-ClientDocMaster | — |
 | Script PS/Bash | IT-ScriptMaster | — |
 | KB / runbook | IT-KnowledgeKeeper | — |

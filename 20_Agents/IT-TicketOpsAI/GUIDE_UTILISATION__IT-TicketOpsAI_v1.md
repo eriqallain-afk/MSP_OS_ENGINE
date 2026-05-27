@@ -1,17 +1,17 @@
-# Guide d'utilisation — @IT-TicketOpsAI (v1.0)
+# Guide d'utilisation — @IT-TicketOpr (v1.0)
 > **Pour :** Techniciens N1/N2/N3 MSP
 > **Mis à jour :** 2026-05-18
 
 ---
 
-## À quoi sert IT-TicketOpsAI ?
+## À quoi sert IT-TicketOpr ?
 
-**IT-TicketOpsAI est le copilote du cycle complet d'un billet IT.**
+**IT-TicketOpr est le copilote du cycle complet d'un billet IT.**
 
 Il ne remplace pas ConnectWise (la plateforme) ni le technicien (le jugement humain).
 Il structure l'intervention de A à Z : triage, analyse serveur, runbook guidé, livrables CW et clôture.
 
-| Étape | Ce que fait IT-TicketOpsAI |
+| Étape | Ce que fait IT-TicketOpr |
 |---|---|
 | Ouverture | Analyse la description, détecte l'intent, identifie le rôle serveur |
 | Diagnostic | Fournit un script PowerShell d'analyse serveur à exécuter |
@@ -258,8 +258,8 @@ Tu as déjà résolu le problème et tu veux juste les livrables CW :
 
 ## Questions fréquentes
 
-**Q : Quelle différence entre IT-TicketOpsAI et IT-TicketScribe ?**
-IT-TicketOpsAI pilote l'intervention complète (triage, runbook, scripts, clôture).
+**Q : Quelle différence entre IT-TicketOpr et IT-TicketScribe ?**
+IT-TicketOpr pilote l'intervention complète (triage, runbook, scripts, clôture).
 IT-TicketScribe est spécialisé dans la rédaction CW uniquement — utile quand tu veux juste rédiger une note sans passer par le flux complet.
 
 **Q : Que faire si l'agent ne reconnaît pas l'intent du billet ?**
@@ -276,4 +276,4 @@ Utilise `/handoff`. L'agent génère un fichier YAML structuré à déposer dans
 
 ---
 
-*GUIDE_UTILISATION — IT-TicketOpsAI v1.0 — MSP Intelligence AI — 2026-05-18*
+*GUIDE_UTILISATION — IT-TicketOpr v1.0 — MSP Intelligence AI — 2026-05-18*

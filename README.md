@@ -70,7 +70,7 @@ Couvre 3 périmètres distincts sur 4 cadres réglementaires :
 | Domaine | Agents |
 |---|---|
 | **Support** | IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3 |
-| **Infrastructure** | IT-SysAdmin, IT-TechOPS, IT-MaintenanceMaster, IT-NetworkMaster |
+| **Infrastructure** | IT-SysAdmin, IT-TechOnsite, IT-MaintenanceMaster, IT-NetworkMaster |
 | **Sécurité & Conformité** | IT-SecurityMaster, **IT-ComplianceMaster** |
 | **Backup & Cloud** | IT-BackupDRMaster, IT-CloudMaster |
 | **Supervision** | IT-MonitoringMaster, IT-NOCDispatcher |
@@ -78,7 +78,7 @@ Couvre 3 périmètres distincts sur 4 cadres réglementaires :
 | **Urgences** | IT-UrgenceMaster |
 | **Transitions** | **IT-OnOffBoarder** *(IT-OnboardingMaster : legacy)* |
 | **Documentation** | IT-ClientDocMaster, IT-TicketScribe, IT-KnowledgeKeeper |
-| **Tickets & Rapports** | IT-TicketOpsAI, IT-ReportMaster |
+| **Tickets & Rapports** | IT-TicketOpr, IT-ReportMaster |
 | **Automatisation** | IT-ScriptMaster |
 | **Assets & VoIP** | IT-AssetMaster, IT-VoIPMaster |
 # MSP Intelligence AI — Platform

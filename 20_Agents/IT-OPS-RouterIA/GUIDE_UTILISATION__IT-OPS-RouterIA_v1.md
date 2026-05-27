@@ -97,7 +97,7 @@ Alerte N-able : CPU 95% depuis 20 min sur SRV-SQL01. Processus sqlservr.exe domi
 
 ### Usage avec ticketops_hint
 
-Si IT-TicketOpsAI a analysé le ticket et fourni un `ticketops_hint`, RouterIA l'utilise directement pour un routing instantané sans analyse manuelle.
+Si IT-TicketOpr a analysé le ticket et fourni un `ticketops_hint`, RouterIA l'utilise directement pour un routing instantané sans analyse manuelle.
 
 **Exemple :**
 ```

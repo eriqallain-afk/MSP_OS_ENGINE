@@ -1,8 +1,8 @@
-﻿# Donnees de Reference - IT-TicketOpsAI
+﻿# Donnees de Reference - IT-TicketOpr
 
 ## Description
 
-Ce dossier centralise toutes les **donnees de reference statiques** utilisees par IT-TicketOpsAI pour prendre des decisions et produire ses livrables.
+Ce dossier centralise toutes les **donnees de reference statiques** utilisees par IT-TicketOpr pour prendre des decisions et produire ses livrables.
 
 ## Contenu type
 
@@ -20,4 +20,4 @@ Toute mise a jour doit etre validee avant remplacement.
 
 ---
 
-*Reference Data - IT-TicketOpsAI v1.0*
+*Reference Data - IT-TicketOpr v1.0*

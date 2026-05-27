@@ -1,6 +1,6 @@
 # SUP-WKS-Imprimante_V1
 **Version :** 1.0 | **Date :** 2026-05-22 | **Statut :** ACTIF
-**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOPS
+**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOnsite
 **Département :** SUP-WKS | **Source :** IT MSP Intelligence Platform
 
 ---
@@ -181,7 +181,7 @@ RÉSULTAT : [Résolu / Escalade]
 
 | Situation | Vers | Délai |
 |---|---|---|
-| Spooler crashe en boucle | IT-SysAdmin (serveur print) / IT-TechOPS | Selon SLA |
+| Spooler crashe en boucle | IT-SysAdmin (serveur print) / IT-TechOnsite | Selon SLA |
 | Imprimante réseau non joignable (ping échoue) | IT-NetworkMaster | Selon SLA |
 | Plusieurs utilisateurs impactés | Runbook [27] MAINT-SRV-PrintServer_PrePost_V1 | Priorité |
 

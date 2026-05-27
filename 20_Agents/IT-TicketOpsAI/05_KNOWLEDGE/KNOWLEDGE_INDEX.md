@@ -1,4 +1,4 @@
-# KNOWLEDGE_INDEX — IT-TicketOpsAI
+# KNOWLEDGE_INDEX — IT-TicketOpr
 
 ## À importer
 - 00_INSTRUCTIONS.md

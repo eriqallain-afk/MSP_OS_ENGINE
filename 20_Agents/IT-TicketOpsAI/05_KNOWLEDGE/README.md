@@ -1,8 +1,8 @@
-﻿# Base de Connaissances - IT-TicketOpsAI
+﻿# Base de Connaissances - IT-TicketOpr
 
 ## Description
 
-Ce dossier contient les fichiers de connaissances pour IT-TicketOpsAI.
+Ce dossier contient les fichiers de connaissances pour IT-TicketOpr.
 
 ## Contenu
 

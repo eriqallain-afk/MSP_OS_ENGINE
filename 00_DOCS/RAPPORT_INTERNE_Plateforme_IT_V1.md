@@ -162,7 +162,7 @@ Le **RouterIA** est le point d'entrée de toute interaction. Il :
 | `IT-FrontLine` | Premier contact, triage N1 | `active` | Premier contact client — réception billets MSPBOT ou appel, triage guidé, escalade si hors scope | `/start`, `/triage`, `/escalade`, `/close` | SUP-N1N2-SupportTriage_V2, SUP-OPS-CW_Dispatch_V2, SUP-WKS-* (11) |
 | `IT-Assistant-N2` | Mentorat N2 | `active` | Guide les techniciens N1/N2 étape par étape en support téléphonique, garde-fous hors-scope, message chef d'équipe | `/chef`, `/escalade`, `/plan` | SUP-N2-Support_V2, runbooks WKS |
 | `IT-Assistant-N3` | Analyse technique avancée | `active` | Incidents complexes, diagnostic multi-domaines, architecture, scripts PowerShell inline (compatibles RMM) | `/diagnostic`, `/script`, `/rca` | Tous runbooks INFRA, SUPPORT, SEC |
-| `IT-TicketOpsAI` | Cycle complet ticket | `active` | Triage, analyse, clôture CW, mémo Teams, rapports, vérification scripts, analyse risques — cycle complet ticket MSP | `/start`, `/analyse`, `/script`, `/close`, `/risques`, `/rapport-client`, `/rapport-coordo`, `/kb-check` | SUP-OPS-CW_InterventionLive_Close_V2, SUP-OPS-TicketToKB_V2 |
+| `IT-TicketOpr` | Cycle complet ticket | `active` | Triage, analyse, clôture CW, mémo Teams, rapports, vérification scripts, analyse risques — cycle complet ticket MSP | `/start`, `/analyse`, `/script`, `/close`, `/risques`, `/rapport-client`, `/rapport-coordo`, `/kb-check` | SUP-OPS-CW_InterventionLive_Close_V2, SUP-OPS-TicketToKB_V2 |
 
 ---
 
@@ -171,7 +171,7 @@ Le **RouterIA** est le point d'entrée de toute interaction. Il :
 | ID | Rôle | Statut | Description | Commandes clés | Runbooks clés |
 |---|---|---|---|---|---|
 | `IT-SysAdmin` | Administration systèmes | `active` | Serveurs, AD, Hyper-V, VMware, Veeam, SentinelOne, CVE, firewalls, patching, M365, Azure, Linux — généraliste senior | Scripts inline RMM obligatoires | INFRA-AD-DC_Operations_V3, INFRA-SRV-HyperV_Operations_V2, INFRA-SRV-SQL_PrePost_Validation_V2, MAINT-WIN-PendingReboot_V2 |
-| `IT-TechOPS` | Opérations terrain | `active` | Déploiement postes, remplacement hardware, migration logicielle, déménagement, config périphériques. Precheck/postcheck systématiques | `/precheck`, `/postcheck`, `/deploy` | INFRA-SRV-HealthCheck_Template_V1, SUP-WKS-Onboarding_Poste_V1 |
+| `IT-TechOnsite` | Opérations terrain | `active` | Déploiement postes, remplacement hardware, migration logicielle, déménagement, config périphériques. Precheck/postcheck systématiques | `/precheck`, `/postcheck`, `/deploy` | INFRA-SRV-HealthCheck_Template_V1, SUP-WKS-Onboarding_Poste_V1 |
 | `IT-CloudMaster` | Cloud / M365 | `active` | Azure, Exchange Online, Intune, Teams, SharePoint, OneDrive — gestion complète tenant M365 | `/diagnostic`, `/remediation` | INFRA-M365-UserManagement_V2, INFRA-M365-Exchange_Online_V2, INFRA-M365-Intune_Devices_V2, INFRA-M365-Teams_SharePoint_OneDrive_V2 |
 | `IT-MaintenanceMaster` | Maintenance planifiée | `active` | Patching Windows planifié, snapshots, prechecks, postchecks, rapports maintenance. Standard CW RMM | `/precheck`, `/patch`, `/postcheck`, `/rapport` | MAINT-WIN-Patching_CW-RMM_V3, MAINT-WIN-Patching_Complet_V3, MAINT-SRV-AuditTrimestriel_V2 |
 | `IT-BackupDRMaster` | Backup / DR | `active` | Veeam, Datto, Keepit, Veeam Cloud — validation jobs, restauration, tests DR, conformité rétention | `/validation`, `/restore`, `/dr-test` | NOC-BACKUP-Veeam_Operations_V2, NOC-BACKUP-Datto_Operations_V2, NOC-BACKUP-DR_Test_V2, NOC-BACKUP-DR_Plan_Validation_V2 |
@@ -293,7 +293,7 @@ Un grand MSP peut avoir des N1 (accès Starter) et des architectes (accès Enter
 |---|---|
 | IT-FrontLine | Triage, premier contact, escalade |
 | IT-Assistant-N2 | Mentorat N2, guide étape par étape |
-| IT-TicketOpsAI | Cycle complet ticket — triage à clôture KB |
+| IT-TicketOpr | Cycle complet ticket — triage à clôture KB |
 | IT-TicketScribe | Rédaction CW Notes, discussions, emails |
 
 **Principe :** accès aux agents de support quotidien. Routing manuel (le tech choisit son agent). Pas de RouterIA automatique.
@@ -308,7 +308,7 @@ Contient tout le Starter, plus :
 |---|---|
 | IT-Assistant-N3 | Analyse avancée, incidents complexes |
 | IT-SysAdmin | Serveurs, AD, GPO, DNS/DHCP, Hyper-V, SQL |
-| IT-TechOPS | Opérations terrain, déploiement, migration |
+| IT-TechOnsite | Opérations terrain, déploiement, migration |
 | IT-MaintenanceMaster | Patching planifié, préchecks, postchecks |
 | IT-BackupDRMaster | Veeam, Datto, Keepit, restauration, DR |
 | IT-NetworkMaster | Réseau, firewalls multi-constructeurs, VPN |

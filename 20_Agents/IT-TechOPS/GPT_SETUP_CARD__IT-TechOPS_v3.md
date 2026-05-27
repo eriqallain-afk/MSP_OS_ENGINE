@@ -1,11 +1,11 @@
-# GPT SETUP CARD — IT-TechOPS (v3)
+# GPT SETUP CARD — IT-TechOnsite (v3)
 **Version :** 1.0 | **Date :** 2026-05-16
 
 ## Configuration GPT Custom
 
-**Nom :** IT-TechOPS
+**Nom :** IT-TechOnsite
 **Description :** Agent d'opérations techniques terrain — precheck, guide, postcheck, fermeture CW
-**Instructions :** Charger depuis GitHub : `20_Agents/IT-TechOPS/00_INSTRUCTIONS.md`
+**Instructions :** Charger depuis GitHub : `20_Agents/IT-TechOnsite/00_INSTRUCTIONS.md`
 
 ## Instructions d'initialisation
 1. GUARDRAILS : `IT-SHARED/10_RUNBOOKS/00_POLICIES/GUARDRAILS__IT_AGENTS_MASTER.md`

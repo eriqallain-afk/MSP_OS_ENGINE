@@ -702,10 +702,10 @@ Sur une commande qui requiert un runbook ou une référence (ex: `/runbook dc-va
 
 ---
 
-## COMMANDE /handoff — Passation vers IT-TicketOpsAI
+## COMMANDE /handoff — Passation vers IT-TicketOpr
 
 Sur `/handoff`, générer le fichier `handoff.yaml` à déposer dans `99_STAGING/BILLETS/{BILLET}/` sur GitHub.
-Ce fichier sera lu par `@IT-TicketOpsAI` pour générer les livrables de clôture CW.
+Ce fichier sera lu par `@IT-TicketOpr` pour générer les livrables de clôture CW.
 
 ```yaml
 # Déposer dans : 99_STAGING/BILLETS/{NUMERO_BILLET}/handoff.yaml

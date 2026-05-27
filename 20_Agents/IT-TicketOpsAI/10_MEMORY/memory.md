@@ -1,4 +1,4 @@
-# MEMORY — IT-TicketOpsAI
+# MEMORY — IT-TicketOpr
 
 À mémoriser uniquement :
 - préférences générales de format des livrables MSP;

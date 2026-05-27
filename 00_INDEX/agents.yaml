@@ -1,11 +1,11 @@
 agents:
-- actor_id: IT-TicketOpsAI
+- actor_id: IT-TicketOpr
   team_id: TEAM__IT
-  name: '@IT-TicketOpsAI'
+  name: '@IT-TicketOpr'
   commercial_name: 'MSP TicketOps AI'
   status: active
   role: ticket_ops
-  path: 20_Agents/IT-TicketOpsAI
+  path: 20_Agents/IT-TicketOpr
 - actor_id: IT-AssetMaster
   team_id: TEAM__IT
   name: '@IT-AssetMaster'

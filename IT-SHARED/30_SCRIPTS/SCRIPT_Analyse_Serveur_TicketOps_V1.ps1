@@ -3,7 +3,7 @@
 # Script  : SCRIPT_Analyse_Serveur_TicketOps_V1.ps1
 # Desc    : Analyse rôle + ressources serveur — lecture seule
 #           Produit un role_profile + resource_summary YAML
-#           pour @IT-OPS-RouterIA / @IT-TicketOpsAI
+#           pour @IT-OPS-RouterIA / @IT-TicketOpr
 # Usage   : .\SCRIPT_Analyse_Serveur_TicketOps_V1.ps1
 #           .\SCRIPT_Analyse_Serveur_TicketOps_V1.ps1 -Ticket "12345"
 # Output  : Console YAML + log C:\IT_LOGS\TICKETOPS\
@@ -139,7 +139,7 @@ elseif ($pendingReboot)                         { $templateSuggere = "CLOSE_Rebo
 
 # ── Output YAML ───────────────────────────────────────────────
 $yaml = @"
-# ── COLLER CE BLOC DANS @IT-TicketOpsAI / @IT-OPS-RouterIA ──
+# ── COLLER CE BLOC DANS @IT-TicketOpr / @IT-OPS-RouterIA ──
 # Ticket : #$Ticket | Généré : $(Get-Date -Format 'yyyy-MM-dd HH:mm') | Lecture seule
 
 role_profile:
@@ -182,7 +182,7 @@ Stop-Transcript | Out-Null
 Write-Host "`n[Log sauvegardé : $LogFile]" -ForegroundColor DarkGray
 <#
 .SYNOPSIS
-    Analyse du serveur pour IT-TicketOpsAI — rôle, ressources, alertes.
+    Analyse du serveur pour IT-TicketOpr — rôle, ressources, alertes.
 .DESCRIPTION
     Collecte en lecture seule le rôle, les ressources et les alertes d'un serveur.
     Produit un bloc YAML (role_profile + ticketops_hint) utilisable directement
@@ -194,7 +194,7 @@ Write-Host "`n[Log sauvegardé : $LogFile]" -ForegroundColor DarkGray
 .NOTES
     Read-only. Aucune modification système. Aucune élévation requise.
     Version : 1.0 — 2026-05-09
-    Agent   : IT-TicketOpsAI (MSP TicketOps AI)
+    Agent   : IT-TicketOpr (MSP TicketOps AI)
 #>
 
 [CmdletBinding()]
@@ -405,7 +405,7 @@ $yaml = @"
 # SCRIPT_Analyse_Serveur_TicketOps_V1 — Output YAML
 # Billet  : #$Ticket
 # Généré  : $ts
-# Usage   : Coller dans IT-OPS-RouterIA ou IT-TicketOpsAI /start
+# Usage   : Coller dans IT-OPS-RouterIA ou IT-TicketOpr /start
 
 role_profile:
   server_name: "$serverName"

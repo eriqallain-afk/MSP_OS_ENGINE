@@ -572,7 +572,7 @@ VALIDATION AVANT LIVRAISON — NOTICE TEAMS
 | Incident sécurité dans la documentation | IT-SecurityMaster | Immédiat | Note P1 + Notice Teams Escalade |
 | Problème technique non documenté | IT-SysAdmin ou IT-Assistant-N3 | Selon priorité | Brief KB + Note Interne |
 | Mise à jour doc environnement client | IT-ClientDocMaster | Dans la journée | Brief Hudu |
-| Post-mortem incident P1 | Chef d'équipe + IT-TicketOpsAI | Dans 24h | Email client + Note P1 complète |
+| Post-mortem incident P1 | Chef d'équipe + IT-TicketOpr | Dans 24h | Email client + Note P1 complète |
 | Création nouvelle KB | IT-KnowledgeKeeper | Dans la semaine | Brief KB |
 
 ---

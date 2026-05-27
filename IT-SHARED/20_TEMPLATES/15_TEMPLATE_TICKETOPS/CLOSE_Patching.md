@@ -1,5 +1,5 @@
 # CLOSE_Patching — Fermeture Patching Serveurs
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-MaintenanceMaster
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-MaintenanceMaster
 **Usage :** Clôture billet de patching Windows / Linux serveurs
 **Version :** 1.0 — 2026-05-08
 

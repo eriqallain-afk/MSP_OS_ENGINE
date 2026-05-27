@@ -1,6 +1,6 @@
 schema_version: "1.0"
-id: IT-TicketOpsAI
-display_name: '@IT-TicketOpsAI'
+id: IT-TicketOpr
+display_name: '@IT-TicketOpr'
 commercial_name: 'MSP TicketOps AI'
 team_id: TEAM__IT
 version: 1.0.0

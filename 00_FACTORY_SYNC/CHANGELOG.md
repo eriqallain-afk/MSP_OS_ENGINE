@@ -34,7 +34,7 @@
 - [ADDED] `ventes/` — répertoire pipeline avec SCHEMA_OPPORTUNITY, ACCESS_CONTROL, 3 sous-dossiers
 - [ADDED] `99_STAGING/Draft/MODULE_PROJETS/` — spec + agent + template ESCALADE_VENTES
 - [ADDED] `IT-SHARED/20_TEMPLATES/15_TEMPLATE_TICKETOPS/ESCALADE_VENTES.md`
-- [MODIFIED] `00_INDEX/agents_index.yaml` — 32 agents (IT-OnboardingMaster + IT-TechOPS ajoutés)
+- [MODIFIED] `00_INDEX/agents_index.yaml` — 32 agents (IT-OnboardingMaster + IT-TechOnsite ajoutés)
 - [MODIFIED] `00_INDEX/gpt_catalog.yaml` — 27/27 agents avec chemins complets + instructions
 - [MODIFIED] `00_INDEX/DOC_SYNC_MATRIX.md` — règle 00_INSTRUCTIONS.md ajoutée
 - [FIXED] Audit 11 findings : chemins Azure, compteurs, fichiers manquants

@@ -1,6 +1,6 @@
 # OPR-SLA-BreachPrevention_V1
 **Version :** V1 | **Statut :** active | **Domaine :** OPR | **Date :** 2026-05-23
-**Agents :** @IT-NOCDispatcher | @IT-TicketOpsAI | @IT-Commandare-OPR | @IT-FrontLine
+**Agents :** @IT-NOCDispatcher | @IT-TicketOpr | @IT-Commandare-OPR | @IT-FrontLine
 **Scope :** Prévention des brèches SLA — identifier les tickets à risque, escalader avant dépassement, documenter les exceptions
 
 ---

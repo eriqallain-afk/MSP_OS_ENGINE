@@ -337,8 +337,8 @@ agents:
       - maintenance
       - patching
       - infra
-  IT-TicketOpsAI:
-    display_name: "@IT-TicketOpsAI"
+  IT-TicketOpr:
+    display_name: "@IT-TicketOpr"
     commercial_name: "MSP TicketOps AI"
     team_id: TEAM__IT
     role: ticket_ops
@@ -432,8 +432,8 @@ agents:
       - inventaire
       - baseline
 
-  IT-TechOPS:
-    display_name: "@IT-TechOPS"
+  IT-TechOnsite:
+    display_name: "@IT-TechOnsite"
     team_id: TEAM__IT
     role: tech_ops_terrain
     status: active

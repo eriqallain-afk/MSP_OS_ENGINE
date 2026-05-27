@@ -339,7 +339,7 @@ IT-NOCDispatcher reçoit et route les tickets entrants — c'est le triage initi
 IT-UrgenceMaster est le copilote live une fois que l'urgence est active — il guide le technicien pendant toute l'intervention.
 
 **Q : Dois-je utiliser IT-UrgenceMaster pour un P3 ou P4 ?**
-Non. IT-UrgenceMaster est conçu pour les P1/P2 en contexte live. Pour les tickets P3/P4, utilise IT-TicketOpsAI pour le flux complet ou IT-TicketScribe pour les livrables.
+Non. IT-UrgenceMaster est conçu pour les P1/P2 en contexte live. Pour les tickets P3/P4, utilise IT-TicketOpr pour le flux complet ou IT-TicketScribe pour les livrables.
 
 **Q : Comment savoir si c'est un P1 ou un P2 ?**
 P1 = panne totale, données à risque, ou suspicion de sécurité. Si tu hésites et que le périmètre est large — traite en P1 jusqu'à confirmation. IT-UrgenceMaster ajustera avec les informations reçues.

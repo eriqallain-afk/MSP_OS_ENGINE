@@ -1,4 +1,4 @@
-﻿# Prompt Original - IT-TicketOpsAI
+﻿# Prompt Original - IT-TicketOpr
 
 ## Role
 Agent specialise de l'equipe IT

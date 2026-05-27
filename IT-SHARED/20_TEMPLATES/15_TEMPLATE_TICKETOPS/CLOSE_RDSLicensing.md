@@ -1,5 +1,5 @@
 # CLOSE_RDSLicensing — Fermeture Licences RDS
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-SysAdmin
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-SysAdmin
 **Usage :** Clôture billet licences RDS épuisées, expirées ou mal configurées
 **Version :** 1.0 — 2026-05-08
 

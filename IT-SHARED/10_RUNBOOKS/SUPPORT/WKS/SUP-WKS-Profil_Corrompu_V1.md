@@ -1,6 +1,6 @@
 # SUP-WKS-Profil_Corrompu_V1
 **Version :** 1.0 | **Date :** 2026-05-22 | **Statut :** ACTIF
-**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOPS
+**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOnsite
 **Département :** SUP-WKS | **Source :** IT MSP Intelligence Platform
 
 ---

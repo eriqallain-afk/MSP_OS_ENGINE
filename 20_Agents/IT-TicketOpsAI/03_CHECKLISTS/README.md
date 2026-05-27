@@ -1,8 +1,8 @@
-﻿# Checklists de Validation - IT-TicketOpsAI
+﻿# Checklists de Validation - IT-TicketOpr
 
 ## Description
 
-Ce dossier regroupe les **checklists de controle qualite** utilisees par IT-TicketOpsAI avant, pendant et apres la production de livrables.
+Ce dossier regroupe les **checklists de controle qualite** utilisees par IT-TicketOpr avant, pendant et apres la production de livrables.
 
 ## Types de checklists
 
@@ -20,4 +20,4 @@ Chaque item de checklist doit inclure :
 
 ---
 
-*Checklists - IT-TicketOpsAI v1.0*
+*Checklists - IT-TicketOpr v1.0*

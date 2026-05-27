@@ -1,4 +1,4 @@
-# Tests — IT-TicketOpsAI
+# Tests — IT-TicketOpr
 
 ## Test 1 — Triage
 Input: `/triage Billet #12345, client ABC, Outlook ne reçoit plus de courriels pour 3 utilisateurs.`

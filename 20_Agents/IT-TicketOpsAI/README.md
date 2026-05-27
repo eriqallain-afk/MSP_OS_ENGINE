@@ -1,4 +1,4 @@
-# IT-TicketOpsAI — MSP TicketOps AI
+# IT-TicketOpr — MSP TicketOps AI
 
 Agent de triage, documentation et fermeture de billets TI pour MSP.
 

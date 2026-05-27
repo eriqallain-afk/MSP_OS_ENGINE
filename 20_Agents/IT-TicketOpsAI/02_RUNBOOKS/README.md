@@ -1,8 +1,8 @@
-﻿# Runbooks Operationnels - IT-TicketOpsAI
+﻿# Runbooks Operationnels - IT-TicketOpr
 
 ## Description
 
-Ce dossier contient les **runbooks** de IT-TicketOpsAI : procedures pas-a-pas pour executer les taches recurrentes de maniere reproductible et sans ambiguite.
+Ce dossier contient les **runbooks** de IT-TicketOpr : procedures pas-a-pas pour executer les taches recurrentes de maniere reproductible et sans ambiguite.
 
 ## Structure recommandee
 
@@ -21,4 +21,4 @@ Chaque runbook suit le format :
 
 ---
 
-*Runbooks - IT-TicketOpsAI v1.0*
+*Runbooks - IT-TicketOpr v1.0*

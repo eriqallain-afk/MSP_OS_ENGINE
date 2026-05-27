@@ -95,12 +95,12 @@ Après installation des outils RMM : scan automatisé, validation de la Phase 1,
 ---
 
 ### OPERATIONS — *"Le quotidien, à tous les niveaux"*
-**Agents :** IT-FrontLine · IT-TechOps · IT-UrgenceMaster · IT-SecurityMaster
+**Agents :** IT-FrontLine · IT-TechOnsite · IT-UrgenceMaster · IT-SecurityMaster
 
 **IT-FrontLine** — Queue téléphonique + billets MSPBOT (Teams)
 Client au téléphone · Script d'accueil · Triage N2 · Escalade structurée
 
-**IT-TechOps** — L'agent polyvalent terrain
+**IT-TechOnsite** — L'agent polyvalent terrain
 Calibré selon le niveau du tech (junior/intermédiaire/senior)
 Couvre : AD · Windows Server · M365 · Réseau · Cloud · Backup · Virtualisation
 Charge automatiquement le bon runbook selon le contexte

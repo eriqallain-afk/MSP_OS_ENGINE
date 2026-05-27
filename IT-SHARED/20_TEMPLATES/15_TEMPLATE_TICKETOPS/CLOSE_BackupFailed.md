@@ -1,5 +1,5 @@
 # CLOSE_BackupFailed — Fermeture Backup échoué
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-BackupDRMaster
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-BackupDRMaster
 **Usage :** Clôture billet de sauvegarde en échec (Veeam, Backup Exec, Windows Backup, autre)
 **Version :** 1.0 — 2026-05-08
 

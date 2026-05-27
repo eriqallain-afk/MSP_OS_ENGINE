@@ -1,5 +1,5 @@
 # CLOSE_SnapshotVMware — Fermeture Snapshot VMware
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-SysAdmin
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-SysAdmin
 **Usage :** Clôture billet de création / suppression / restauration de snapshot VMware
 **Version :** 1.0 — 2026-05-08
 

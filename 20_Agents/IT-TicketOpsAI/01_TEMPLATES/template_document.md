@@ -1,6 +1,6 @@
 ﻿# [Nom du Template]
 
-**Agent:** @IT-TicketOpsAI
+**Agent:** @IT-TicketOpr
 
 ## Sections
 
@@ -12,4 +12,4 @@
 
 ---
 
-*Template genere automatiquement pour IT-TicketOpsAI*
+*Template genere automatiquement pour IT-TicketOpr*

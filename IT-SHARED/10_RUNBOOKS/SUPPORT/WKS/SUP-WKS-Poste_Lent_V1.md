@@ -1,6 +1,6 @@
 # SUP-WKS-Poste_Lent_V1
 **Version :** 1.0 | **Date :** 2026-05-22 | **Statut :** ACTIF
-**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOPS
+**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOnsite
 **Département :** SUP-WKS | **Source :** IT MSP Intelligence Platform
 
 ---
@@ -225,8 +225,8 @@ RÉSULTAT : [Amélioré / Pas résolu → escalade]
 | Situation | Vers | Délai |
 |---|---|---|
 | Processus inconnu à 100% CPU / comportement suspect | IT-SecurityMaster | Immédiat |
-| SMART fail / disque défectueux | IT-TechOPS (hardware) | Urgent |
+| SMART fail / disque défectueux | IT-TechOnsite (hardware) | Urgent |
 | Même lenteur sur plusieurs postes | IT-N3 (infra réseau/serveur) | Selon SLA |
-| RAM insuffisante — upgrade requis | IT-TechOPS via ticket | Planifié |
+| RAM insuffisante — upgrade requis | IT-TechOnsite via ticket | Planifié |
 
 *SUP-WKS-Poste_Lent_V1 — 2026-05-22*

@@ -1,7 +1,7 @@
 # AGENT BOOK — Tier Enterprise
 **ID :** AGENT_BOOK_Enterprise_V1
 **Version :** 1.0 | **Date :** 2026-05-14
-**Agents couverts :** IT-UrgenceMaster · IT-VoIPMaster · IT-TicketOpsAI · IT-OPS-RouterIA · IT-OPS-PlaybookRunner · IT-OPS-DossierIA
+**Agents couverts :** IT-UrgenceMaster · IT-VoIPMaster · IT-TicketOpr · IT-OPS-RouterIA · IT-OPS-PlaybookRunner · IT-OPS-DossierIA
 
 ---
 
@@ -13,7 +13,7 @@ Le tier Enterprise couvre les urgences P1/P2 en live, la téléphonie VoIP, la g
 |---|---|---|
 | IT-UrgenceMaster | Copilote urgences P1/P2 en live | Technicien d'urgence / On-call |
 | IT-VoIPMaster | Expert VoIP : voix, qualité, SIP, QoS | Spécialiste VoIP / Réseau |
-| IT-TicketOpsAI | Cycle de vie complet du billet MSP | Tous les techniciens |
+| IT-TicketOpr | Cycle de vie complet du billet MSP | Tous les techniciens |
 | IT-OPS-RouterIA | Moteur de routing interne (YAML) | Infrastructure IA interne |
 | IT-OPS-PlaybookRunner | Moteur d'exécution de playbooks (YAML) | Infrastructure IA interne |
 | IT-OPS-DossierIA | Hub mémoire d'exécution (YAML) | Infrastructure IA interne |
@@ -135,7 +135,7 @@ Le tier Enterprise couvre les urgences P1/P2 en live, la téléphonie VoIP, la g
 
 ---
 
-## IT-TicketOpsAI
+## IT-TicketOpr
 
 > **Rôle :** Agent MSP du cycle de vie complet du billet. Du premier contact à la clôture : triage, analyse technique, livrables CW, validation de scripts, évaluation des risques, rapports.
 
@@ -283,16 +283,16 @@ Le tier Enterprise couvre les urgences P1/P2 en live, la téléphonie VoIP, la g
 | IT-VoIPMaster | `/qualite` | Analyse qualité : MOS, jitter, packet loss |
 | IT-VoIPMaster | `/runbook [n°\|sujet]` | Charger un runbook GitHub |
 | IT-VoIPMaster | `/close` | Menu de clôture CW |
-| IT-TicketOpsAI | `/start [contexte]` | Initialiser le billet |
-| IT-TicketOpsAI | `/triage` | Catégoriser, prioriser, assigner |
-| IT-TicketOpsAI | `/analyse` | Analyse technique structurée |
-| IT-TicketOpsAI | `/memo [destinataire]` | Mémo interne court |
-| IT-TicketOpsAI | `/teams` | Notice Teams client-safe |
-| IT-TicketOpsAI | `/rapport-client` | Rapport client sans jargon |
-| IT-TicketOpsAI | `/rapport-coordo` | Rapport opérationnel coordonnateur |
-| IT-TicketOpsAI | `/script-check [script]` | Vérifier script avant exécution |
-| IT-TicketOpsAI | `/risques` | Évaluation des risques + mitigations |
-| IT-TicketOpsAI | `/close` | Menu de clôture CW |
+| IT-TicketOpr | `/start [contexte]` | Initialiser le billet |
+| IT-TicketOpr | `/triage` | Catégoriser, prioriser, assigner |
+| IT-TicketOpr | `/analyse` | Analyse technique structurée |
+| IT-TicketOpr | `/memo [destinataire]` | Mémo interne court |
+| IT-TicketOpr | `/teams` | Notice Teams client-safe |
+| IT-TicketOpr | `/rapport-client` | Rapport client sans jargon |
+| IT-TicketOpr | `/rapport-coordo` | Rapport opérationnel coordonnateur |
+| IT-TicketOpr | `/script-check [script]` | Vérifier script avant exécution |
+| IT-TicketOpr | `/risques` | Évaluation des risques + mitigations |
+| IT-TicketOpr | `/close` | Menu de clôture CW |
 
 ---
 

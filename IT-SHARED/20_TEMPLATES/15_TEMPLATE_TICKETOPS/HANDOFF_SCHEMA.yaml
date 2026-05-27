@@ -1,6 +1,6 @@
-# HANDOFF_SCHEMA.yaml — Schéma de passation inter-agents IT-TicketOpsAI
+# HANDOFF_SCHEMA.yaml — Schéma de passation inter-agents IT-TicketOpr
 # Généré par : IT-MaintenanceMaster | IT-SysAdmin (via /handoff)
-# Consommé par : IT-TicketOpsAI (via /start #XXXXX)
+# Consommé par : IT-TicketOpr (via /start #XXXXX)
 # Chemin de dépôt : 99_STAGING/BILLETS/{NUMERO_BILLET}/handoff.yaml
 # Version : 1.0 — 2026-05-08
 

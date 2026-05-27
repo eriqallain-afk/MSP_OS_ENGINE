@@ -37,8 +37,8 @@ Pas de formation de 3 mois. Pas de consultant externe. Tu as les outils d'un MSP
 | Agent | Rôle | Commande clé |
 |---|---|---|
 | **IT-FrontLine** | Support utilisateur — appels, billets, reset MDP, Outlook, imprimantes | `/appel`, `/ticket` |
-| **IT-TechOPS** | Opérations terrain — déploiements, migrations, configs, precheck/postcheck | `/start deploiement` |
-| **IT-TicketOpsAI** | Qualité des billets — triage, notes CW, fermeture propre, Definition of Done | `/triage`, `/close` |
+| **IT-TechOnsite** | Opérations terrain — déploiements, migrations, configs, precheck/postcheck | `/start deploiement` |
+| **IT-TicketOpr** | Qualité des billets — triage, notes CW, fermeture propre, Definition of Done | `/triage`, `/close` |
 | **IT-OPS-RouterIA** | Intelligence de routage — sélectionne le bon agent ou runbook automatiquement | automatique |
 | **IT-KnowledgeKeeper** | Capitalisation — transforme chaque intervention résolue en article KB | `/capture` |
 | **IT-ClientDocMaster** | Documentation client — fiches client, procédures, synchronisation Hudu | `/doc` |
@@ -49,10 +49,10 @@ Pas de formation de 3 mois. Pas de consultant externe. Tu as les outils d'un MSP
 #### IT-FrontLine
 L'agent de première ligne. Il gère les appels entrants, guide le tech pendant une intervention en direct, et produit une note CW structurée à la fin. Il connaît les scénarios les plus fréquents : reset de mot de passe, problèmes Outlook, imprimante déconnectée, OneDrive qui ne synchronise pas. Il ne remplace pas le tech — il l'assiste en temps réel.
 
-#### IT-TechOPS
-L'agent opérationnel terrain. Quand il faut déployer un poste, migrer un utilisateur, configurer un appareil réseau ou valider une installation, IT-TechOPS guide le tech étape par étape avec des prechecks, des étapes claires, et des postchecks. Il réduit les erreurs et garantit que chaque intervention est traçable.
+#### IT-TechOnsite
+L'agent opérationnel terrain. Quand il faut déployer un poste, migrer un utilisateur, configurer un appareil réseau ou valider une installation, IT-TechOnsite guide le tech étape par étape avec des prechecks, des étapes claires, et des postchecks. Il réduit les erreurs et garantit que chaque intervention est traçable.
 
-#### IT-TicketOpsAI
+#### IT-TicketOpr
 L'agent qualité. Il analyse un ticket brut, le classe, détecte les informations manquantes, et produit une note CW conforme aux standards professionnels. Il applique la Definition of Done à chaque fermeture de billet : la note est complète, le client a été informé, la KB est à jour.
 
 #### IT-OPS-RouterIA
@@ -117,16 +117,16 @@ Chaque agent dispose de templates de communication prêts à l'emploi. En Starte
 
 | Template | Usage | Agent |
 |---|---|---|
-| **CW Note Interne** | Note technique pour les billets ConnectWise — détails techniques, actions, résolution | IT-TicketOpsAI |
+| **CW Note Interne** | Note technique pour les billets ConnectWise — détails techniques, actions, résolution | IT-TicketOpr |
 | **CW Discussion (client-safe)** | Note visible par le client — langage simplifié, sans jargon technique | IT-FrontLine |
 | **Email client simple** | Confirmation d'intervention, suivi, fermeture — ton professionnel et clair | IT-FrontLine |
-| **Teams Notice — Maintenance** | Avis de maintenance planifiée pour le channel Teams du client | IT-TechOPS |
+| **Teams Notice — Maintenance** | Avis de maintenance planifiée pour le channel Teams du client | IT-TechOnsite |
 | **Teams Notice — Incident** | Communication d'incident en cours — transparence et mise à jour | IT-FrontLine |
 | **KB Article** | Article de base de connaissances structuré — titre, symptômes, solution, prévention | IT-KnowledgeKeeper |
 | **Rapport Discovery Interne** | Baseline technique complète pour usage interne et Hudu | IT-OnboardingMaster |
 | **Présentation "Mise à niveau" Client** | Rapport Discovery formalisé, livrable au client — facturable | IT-OnboardingMaster |
 | **Fiche Client Hudu** | Fiche structurée pour Hudu — contacts, matériel, licences, procédures | IT-ClientDocMaster |
-| **Precheck/Postcheck Déploiement** | Checklist avant et après intervention terrain | IT-TechOPS |
+| **Precheck/Postcheck Déploiement** | Checklist avant et après intervention terrain | IT-TechOnsite |
 
 ---
 

@@ -30,7 +30,7 @@
     "templates":  [
 
                   ],
-    "agent_name":  "IT-TicketOpsAI",
+    "agent_name":  "IT-TicketOpr",
     "role":  "[Role de l\u0027agent - A completer]",
-    "display_name":  "@IT-TicketOpsAI"
+    "display_name":  "@IT-TicketOpr"
 }

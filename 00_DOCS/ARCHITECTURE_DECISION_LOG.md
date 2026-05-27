@@ -147,7 +147,7 @@ Quand un technicien demande un script à exécuter, l'agent sort le contenu Powe
 Le technicien copie-colle directement dans son runner RMM (N-able, CW Automate, ScreenConnect) sans ouvrir aucun autre fichier. Réduit le risque d'erreur et le temps d'exécution.
 
 **Conséquences :**
-- Règle ajoutée dans les instructions de 5 agents : IT-SysAdmin, IT-MaintenanceMaster, IT-BackupDRMaster, IT-Assistant-N3, IT-TechOPS
+- Règle ajoutée dans les instructions de 5 agents : IT-SysAdmin, IT-MaintenanceMaster, IT-BackupDRMaster, IT-Assistant-N3, IT-TechOnsite
 - Les scripts GitHub restent la source de vérité — l'agent les charge via getFileContent puis les sort inline
 - Pas de dépendance au runtime sur les fichiers GitHub
 

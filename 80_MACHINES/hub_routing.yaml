@@ -276,7 +276,7 @@ routing_table:
       - rapport_coordo
       - script_check
       - risques_intervention
-    default_actor_id: IT-TicketOpsAI
+    default_actor_id: IT-TicketOpr
     default_playbook_id: IT_TICKETOPS_FULL_FLOW
 
   # ── 21. TICKET / SCRIBE ──────────────────────────────────

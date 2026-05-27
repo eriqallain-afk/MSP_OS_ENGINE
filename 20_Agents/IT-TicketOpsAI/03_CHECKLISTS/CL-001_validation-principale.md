@@ -1,5 +1,5 @@
 ﻿# CL-001 - Checklist Qualite Rapport de Service Mensuel
-**Agent:** @IT-TicketOpsAI | **Type:** MSP Support
+**Agent:** @IT-TicketOpr | **Type:** MSP Support
 
 ## DONNEES A VALIDER
 - [ ] Periode couverte clairement indiquee (du JJ/MM au JJ/MM)
@@ -28,4 +28,4 @@
 - [ ] Copie archivee dans le dossier client
 
 ---
-*CL-001 - IT-TicketOpsAI - Version 1.0*
+*CL-001 - IT-TicketOpr - Version 1.0*

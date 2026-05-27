@@ -467,8 +467,8 @@ catalog:
       prompt: 20_Agents/IT-OnboardingMaster/prompt.md
       instructions: 20_Agents/IT-OnboardingMaster/00_INSTRUCTIONS.md
 
-  IT-TechOPS:
-    display_name: '@IT-TechOPS'
+  IT-TechOnsite:
+    display_name: '@IT-TechOnsite'
     team_id: TEAM__IT
     status: active
     description: >
@@ -481,10 +481,10 @@ catalog:
     - migration
     - hardware
     paths:
-      agent: 20_Agents/IT-TechOPS/agent.yaml
-      contract: 20_Agents/IT-TechOPS/contract.yaml
-      prompt: 20_Agents/IT-TechOPS/prompt.md
-      instructions: 20_Agents/IT-TechOPS/00_INSTRUCTIONS.md
+      agent: 20_Agents/IT-TechOnsite/agent.yaml
+      contract: 20_Agents/IT-TechOnsite/contract.yaml
+      prompt: 20_Agents/IT-TechOnsite/prompt.md
+      instructions: 20_Agents/IT-TechOnsite/00_INSTRUCTIONS.md
 
   IT-OPS-SyncFactory:
     display_name: '@IT-OPS-SyncFactory'
@@ -506,8 +506,8 @@ catalog:
       prompt: 20_Agents/IT-OPS-SyncFactory/prompt.md
     instructions: 20_Agents/IT-OPS-SyncFactory/00_INSTRUCTIONS.md
 
-  IT-TicketOpsAI:
-    display_name: '@IT-TicketOpsAI'
+  IT-TicketOpr:
+    display_name: '@IT-TicketOpr'
     commercial_name: 'MSP TicketOps AI'
     team_id: TEAM__IT
     status: active
@@ -522,7 +522,7 @@ catalog:
     - script_check
     - risques_intervention
     paths:
-      agent: 20_Agents/IT-TicketOpsAI/agent.yaml
-      contract: 20_Agents/IT-TicketOpsAI/contract.yaml
-      prompt: 20_Agents/IT-TicketOpsAI/prompt.md
-      instructions: 20_Agents/IT-TicketOpsAI/00_INSTRUCTIONS.md
+      agent: 20_Agents/IT-TicketOpr/agent.yaml
+      contract: 20_Agents/IT-TicketOpr/contract.yaml
+      prompt: 20_Agents/IT-TicketOpr/prompt.md
+      instructions: 20_Agents/IT-TicketOpr/00_INSTRUCTIONS.md

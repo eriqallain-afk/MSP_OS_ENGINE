@@ -1,6 +1,6 @@
 schema_version: "1.1.0"
-actor_id: IT-TechOPS
-display_name: "@IT-TechOPS"
+actor_id: IT-TechOnsite
+display_name: "@IT-TechOnsite"
 team_id: TEAM__IT
 team_name: IT
 version: "1.0.0"

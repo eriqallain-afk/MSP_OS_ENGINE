@@ -138,7 +138,7 @@
 | Intent ID | Title | Agent | Risk |
 |---|---|---|---|
 | it.opr.cmdb.reconciliation_cw_hudu_rmm | Réconciliation CMDB — CW / Hudu / RMM [DRAFT] | @IT-AssetMaster | medium |
-| it.opr.cw.ticket_quality_audit | Audit Qualité Ticket CW avant Clôture [DRAFT] | @IT-TicketOpsAI | low |
+| it.opr.cw.ticket_quality_audit | Audit Qualité Ticket CW avant Clôture [DRAFT] | @IT-TicketOpr | low |
 | it.opr.client_communication.cadence | Cadence Communication Client [DRAFT] | @IT-Commandare-OPR | low |
 | it.opr.eol_eos.risk_register | Registre Risques EOL/EOS Équipements et Logiciels [DRAFT] | @IT-AssetMaster | medium |
 | it.opr.handoff.shift_change | Handoff / Passation de Quart [DRAFT] | @IT-Commandare-OPR | low |
@@ -186,7 +186,7 @@
 | it.support.n2.support | Support N2 — Poste / Compte / Réseau / VPN / Logiciels | @IT-Assistant-N2 | low |
 | it.support.net.vpn_troubleshooting | Dépannage VPN — Firewalls (Fortinet / WatchGuard / SonicWall) | @IT-NetworkMaster | medium |
 | it.support.ops.cw_dispatch | Dispatch CW — Standardisation Billets | @IT-NOCDispatcher | low |
-| it.support.ops.cw_intervention_live_close | Intervention Live et Clôture Billet ConnectWise | @IT-TechOPS | medium |
+| it.support.ops.cw_intervention_live_close | Intervention Live et Clôture Billet ConnectWise | @IT-TechOnsite | medium |
 | it.support.ops.commandare_opr | Commandement OPR — Clôture Billet et Templates CW | @IT-Commandare-OPR | low |
 | it.support.ops.commandare_tech | Commandement Tech — Réception Incident et Troubleshooting | @IT-Commandare-TECH | medium |
 | it.support.ops.ticket_to_kb | Ticket MSP vers Diagnostic → Communication → Knowledge Base | @IT-KnowledgeKeeper | low |
@@ -196,14 +196,14 @@
 | Intent ID | Title | Agent | Risk |
 |---|---|---|---|
 | it.support.wks.alerte_av | Triage Alerte Antivirus / Comportement Suspect Poste | @IT-FrontLine | high |
-| it.support.wks.imprimante | Dépannage Imprimante Locale / Réseau Poste Client | @IT-TechOPS | low |
+| it.support.wks.imprimante | Dépannage Imprimante Locale / Réseau Poste Client | @IT-TechOnsite | low |
 | it.support.wks.login | Problème de Connexion Windows / M365 / Azure AD | @IT-FrontLine | medium |
-| it.support.wks.offboarding | Offboarding Employé — Désactivation Compte et Poste | @IT-TechOPS | high |
-| it.support.wks.onboarding_poste | Onboarding Nouveau Poste de Travail | @IT-TechOPS | medium |
+| it.support.wks.offboarding | Offboarding Employé — Désactivation Compte et Poste | @IT-TechOnsite | high |
+| it.support.wks.onboarding_poste | Onboarding Nouveau Poste de Travail | @IT-TechOnsite | medium |
 | it.support.wks.outlook | Dépannage Outlook / M365 — Profil / Sync / Plantage | @IT-Assistant-N2 | low |
 | it.support.wks.partage_reseau | Dépannage Lecteurs Réseau / Partages SMB | @IT-Assistant-N2 | low |
-| it.support.wks.poste_lent | Diagnostic Poste Lent — Matériel / Ressources / Réseau | @IT-TechOPS | low |
-| it.support.wks.profil_corrompu | Réparation Profil Utilisateur Windows Corrompu | @IT-TechOPS | medium |
+| it.support.wks.poste_lent | Diagnostic Poste Lent — Matériel / Ressources / Réseau | @IT-TechOnsite | low |
+| it.support.wks.profil_corrompu | Réparation Profil Utilisateur Windows Corrompu | @IT-TechOnsite | medium |
 | it.support.wks.teams_av | Dépannage Teams Audio/Vidéo — Son / Caméra / Réunions | @IT-Assistant-N2 | low |
 | it.support.wks.vpn_client | Dépannage VPN Client — GlobalProtect / AnyConnect / FortiClient | @IT-Assistant-N2 | low |
 
@@ -1030,7 +1030,7 @@ matrix:
       - "note interne manquante"
       - "ticket P1 clôture artefacts"
     runbook_path: "IT-SHARED/10_RUNBOOKS/OPR/OPR-CW-TicketQualityAudit_V1.md"
-    agent_recommande: "@IT-TicketOpsAI"
+    agent_recommande: "@IT-TicketOpr"
     risk_level: low
     domaine: OPR
     note: "DRAFT — squelette Factory en attente d'enrichissement"
@@ -1395,7 +1395,7 @@ matrix:
       - "journal intervention"
       - "fermer billet ConnectWise"
     runbook_path: "IT-SHARED/10_RUNBOOKS/SUPPORT/SUP-OPS-CW_InterventionLive_Close_V2.md"
-    agent_recommande: "@IT-TechOPS"
+    agent_recommande: "@IT-TechOnsite"
     risk_level: medium
     domaine: SUPPORT
 
@@ -1466,7 +1466,7 @@ matrix:
       - "impossible d'imprimer"
       - "driver imprimante"
     runbook_path: "IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Imprimante_V1.md"
-    agent_recommande: "@IT-TechOPS"
+    agent_recommande: "@IT-TechOnsite"
     risk_level: low
     domaine: SUPPORT
 
@@ -1494,7 +1494,7 @@ matrix:
       - "wipe poste départ"
       - "redirection email employé quitte"
     runbook_path: "IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Offboarding_V1.md"
-    agent_recommande: "@IT-TechOPS"
+    agent_recommande: "@IT-TechOnsite"
     risk_level: high
     domaine: SUPPORT
 
@@ -1508,7 +1508,7 @@ matrix:
       - "checklist nouveau ordinateur"
       - "installer apps nouveau poste"
     runbook_path: "IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Onboarding_Poste_V1.md"
-    agent_recommande: "@IT-TechOPS"
+    agent_recommande: "@IT-TechOnsite"
     risk_level: medium
     domaine: SUPPORT
 
@@ -1550,7 +1550,7 @@ matrix:
       - "tout est lent depuis ce matin"
       - "poste lagge"
     runbook_path: "IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Poste_Lent_V1.md"
-    agent_recommande: "@IT-TechOPS"
+    agent_recommande: "@IT-TechOnsite"
     risk_level: low
     domaine: SUPPORT
 
@@ -1564,7 +1564,7 @@ matrix:
       - "paramètres disparaissent"
       - "profil se réinitialise"
     runbook_path: "IT-SHARED/10_RUNBOOKS/SUPPORT/WKS/SUP-WKS-Profil_Corrompu_V1.md"
-    agent_recommande: "@IT-TechOPS"
+    agent_recommande: "@IT-TechOnsite"
     risk_level: medium
     domaine: SUPPORT
 

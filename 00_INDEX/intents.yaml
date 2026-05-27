@@ -285,10 +285,10 @@ intents:
   ransomware:
     - IT-SecurityMaster
   rapport_client:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
     - IT-ReportMaster
   rapport_coordo:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
     - IT-ReportMaster
   rapport_mensuel:
     - IT-ReportMaster
@@ -318,7 +318,7 @@ intents:
   scribe:
     - IT-TicketScribe
   script_check:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
     - IT-ScriptMaster
   script_maint:
     - IT-MaintenanceMaster
@@ -377,7 +377,7 @@ intents:
   threat_hunting:
     - IT-SecurityMaster
   ticket_ops:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
   ticket_to_kb:
     - IT-KnowledgeKeeper
   ticket_writing:
@@ -385,11 +385,11 @@ intents:
   tickets:
     - IT-Assistant-N2
   triage_ticket:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
   close_ticket:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
   risques_intervention:
-    - IT-TicketOpsAI
+    - IT-TicketOpr
   triage_telephonique:
     - IT-FrontLine
   troubleshoot:

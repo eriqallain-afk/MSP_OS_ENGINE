@@ -32,7 +32,7 @@
 | IT-ScriptMaster | ✅ 6108 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ⚠️ Dupe instructions + _prompt.md + dossiers dupliqués |
 | IT-SecurityMaster | ✅ 6502 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ⚠️ Dupe instructions + _prompt.md |
 | IT-SysAdmin | ✅ 7303 c | ⚠️ Contenu différent | ❌ Non | ❌ Desc = MaintenanceMaster | ⚠️ Règle "1 serveur" + fichiers locaux IT-SHARED |
-| IT-TicketOpsAI | ✅ 7034 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ⚠️ 00_INDEX dupliqué + 99_TEST |
+| IT-TicketOpr | ✅ 7034 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ⚠️ 00_INDEX dupliqué + 99_TEST |
 | IT-TicketScribe | ✅ 5869 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ✅ Minimal |
 | IT-UrgenceMaster | ✅ 5816 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ⚠️ Dupe instructions + règle "1 serveur" |
 | IT-VoIPMaster | ✅ 5735 c | ⚠️ Contenu différent | ❌ Non | ⚠️ Sans date | ⚠️ Dupe instructions + _prompt.md |
@@ -438,12 +438,12 @@
 
 ---
 
-### IT-TicketOpsAI
+### IT-TicketOpr
 **00_INSTRUCTIONS.md :** 7 034 chars ✅ OK (à surveiller — proche de 8000)
 **prompt.md :** Présent — contenu unique (16 594 chars)
 **Doublons instructions :** Aucun
 **agent.yaml :** Version 1.0.0 — aucune date dans le fichier
-**GPT_SETUP_CARD :** 1 version — `GPT_SETUP_CARD__IT-TicketOpsAI.md` ✅
+**GPT_SETUP_CARD :** 1 version — `GPT_SETUP_CARD__IT-TicketOpr.md` ✅
 **Dossiers supplémentaires :** `00_INDEX/` et `01_CONTRACT.yaml` (fichiers supplémentaires spécifiques à cet agent) + `99_TEST/` (dossier de test en plus de `65_TEST/`)
 **05_KNOWLEDGE :** `KNOWLEDGE_INDEX.md` (394 chars) + `README.md` — plus structuré que la moyenne
 **Fichiers locaux à archiver :** `99_TEST/` (doublon de `65_TEST/` ?)
@@ -529,7 +529,7 @@
 **CRITIQUE (à faire en priorité) :**
 1. ❌ Corriger les descriptions identiques dans `agent.yaml` de IT-SysAdmin et IT-MaintenanceMaster
 2. ⚠️ Mettre à jour la règle "1 serveur à la fois" dans les 5 agents concernés (Assistant-N3, Commandare-Infra, MaintenanceMaster, SysAdmin, UrgenceMaster)
-3. ⚠️ Surveiller IT-SysAdmin (7303 c) et IT-TicketOpsAI (7034 c) — prochaine mise à jour risque de dépasser 8000 c
+3. ⚠️ Surveiller IT-SysAdmin (7303 c) et IT-TicketOpr (7034 c) — prochaine mise à jour risque de dépasser 8000 c
 
 **NETTOYAGE (par batch) :**
 4. Archiver les 16 fichiers `{agent}_00_INSTRUCTIONS.md` en doublon

@@ -110,7 +110,7 @@ Même tests que GPT Editor (section 6 de la Setup Card).
 | `IT-VoIPMaster` | Téléphonie VoIP | `GPT_SETUP_CARD__IT-VoIPMaster.md` |
 | `IT-AssetMaster` | CMDB, actifs | `GPT_SETUP_CARD__IT-AssetMaster_v3.md` |
 | `IT-ScriptMaster` | Scripts PowerShell/Bash | `GPT_SETUP_CARD__IT-ScriptMaster.md` |
-| `IT-TicketOpsAI` | Triage et traitement tickets | `GPT_SETUP_CARD__IT-TicketOpsAI.md` |
+| `IT-TicketOpr` | Triage et traitement tickets | `GPT_SETUP_CARD__IT-TicketOpr.md` |
 | `IT-TicketScribe` | Rédaction CW, emails | `GPT_SETUP_CARD__IT-TicketScribe.md` |
 | `IT-NOCDispatcher` | Dispatch NOC, escalades | `GPT_SETUP_CARD__IT-NOCDispatcher.md` |
 | `IT-UrgenceMaster` | Urgences P1/P2 | `GPT_SETUP_CARD__IT-UrgenceMaster.md` |

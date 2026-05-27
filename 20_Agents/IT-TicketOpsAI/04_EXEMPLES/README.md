@@ -1,8 +1,8 @@
-﻿# Exemples de Reference - IT-TicketOpsAI
+﻿# Exemples de Reference - IT-TicketOpr
 
 ## Description
 
-Ce dossier contient des **exemples concrets** illustrant les inputs acceptes et les outputs produits par IT-TicketOpsAI.
+Ce dossier contient des **exemples concrets** illustrant les inputs acceptes et les outputs produits par IT-TicketOpr.
 
 ## Nomenclature des fichiers
 
@@ -13,4 +13,4 @@ Exemple : EX-001_nominal_rapport-patching-mensuel.md
 
 ---
 
-*Exemples - IT-TicketOpsAI v1.0*
+*Exemples - IT-TicketOpr v1.0*

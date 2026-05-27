@@ -1,6 +1,6 @@
 # SUP-WKS-Offboarding_V1
 **Version :** 1.0 | **Date :** 2026-05-22 | **Statut :** ACTIF
-**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOPS
+**Agents :** @IT-FrontLine | @IT-Assistant-N2 | @IT-TechOnsite
 **Département :** SUP-WKS | **Source :** IT MSP Intelligence Platform
 
 ---
@@ -180,7 +180,7 @@ Asset Hudu/RMM mis à jour : [Oui]
 | Situation | Vers | Délai |
 |---|---|---|
 | Désactivation compte AD / M365 | IT-SysAdmin / IT-CloudMaster | Selon date départ |
-| Effacement certifié (conformité) | IT-TechOPS | Planifié |
+| Effacement certifié (conformité) | IT-TechOnsite | Planifié |
 | Boîte mail en litige (légal) | IT-CloudMaster + coordonnateur | Selon instruction légale |
 | Données critiques non sauvegardées | IT-SysAdmin + gestionnaire client | Avant toute action |
 

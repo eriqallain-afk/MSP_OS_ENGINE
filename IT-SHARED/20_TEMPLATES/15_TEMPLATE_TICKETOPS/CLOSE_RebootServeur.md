@@ -1,5 +1,5 @@
 # CLOSE_RebootServeur — Fermeture Reboot serveur
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-SysAdmin
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-SysAdmin
 **Usage :** Clôture billet de redémarrage planifié ou d'urgence d'un serveur
 **Version :** 1.0 — 2026-05-08
 

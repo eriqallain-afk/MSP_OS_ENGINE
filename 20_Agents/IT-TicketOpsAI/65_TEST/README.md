@@ -1,8 +1,8 @@
-﻿# Zone de Test et Validation - IT-TicketOpsAI
+﻿# Zone de Test et Validation - IT-TicketOpr
 
 ## Description
 
-Ce dossier est la **zone de QA et de validation** de IT-TicketOpsAI. Il contient les scenarios de test, les resultats d'execution et les rapports de conformite.
+Ce dossier est la **zone de QA et de validation** de IT-TicketOpr. Il contient les scenarios de test, les resultats d'execution et les rapports de conformite.
 
 ## Structure
 
@@ -27,4 +27,4 @@ Ce dossier est la **zone de QA et de validation** de IT-TicketOpsAI. Il contient
 
 ---
 
-*Test Zone - IT-TicketOpsAI v1.0*
+*Test Zone - IT-TicketOpr v1.0*

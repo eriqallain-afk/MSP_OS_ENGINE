@@ -1,5 +1,5 @@
 # CLOSE_WindowsUpdateMissing — Fermeture Windows Update manquantes
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-MaintenanceMaster
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-MaintenanceMaster
 **Usage :** Clôture billet Windows Update en retard, manquantes ou bloquées
 **Version :** 1.0 — 2026-05-08
 

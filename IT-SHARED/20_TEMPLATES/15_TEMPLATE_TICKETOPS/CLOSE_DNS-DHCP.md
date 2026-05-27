@@ -1,5 +1,5 @@
 # CLOSE_DNS-DHCP — Fermeture Problème DNS/DHCP
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-NetworkMaster
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-NetworkMaster
 **Usage :** Clôture billet DNS en panne, DHCP épuisé, résolution nom défaillante
 **Version :** 1.0 — 2026-05-08
 

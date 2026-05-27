@@ -1,4 +1,4 @@
-﻿# Knowledge Index - IT-TicketOpsAI
+﻿# Knowledge Index - IT-TicketOpr
 
 ## Vue d'Ensemble
 

@@ -16,10 +16,10 @@ stats:
 
 agents_active:
   ops: [IT-OPS-RouterIA, IT-OPS-PlaybookRunner, IT-OPS-DossierIA, IT-OPS-QAMaster]
-  metier: [IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3, IT-SysAdmin, IT-TechOPS,
+  metier: [IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3, IT-SysAdmin, IT-TechOnsite,
            IT-MaintenanceMaster, IT-MonitoringMaster, IT-NetworkMaster, IT-SecurityMaster,
            IT-BackupDRMaster, IT-CloudMaster, IT-VoIPMaster, IT-AssetMaster, IT-ScriptMaster,
-           IT-TicketOpsAI, IT-TicketScribe, IT-NOCDispatcher, IT-UrgenceMaster,
+           IT-TicketOpr, IT-TicketScribe, IT-NOCDispatcher, IT-UrgenceMaster,
            IT-Commandare-NOC, IT-Commandare-TECH, IT-Commandare-Infra, IT-Commandare-OPR,
            IT-OnboardingMaster, IT-OnOffBoarder, IT-ComplianceMaster, IT-ClientDocMaster,
            IT-ReportMaster, IT-KnowledgeKeeper]

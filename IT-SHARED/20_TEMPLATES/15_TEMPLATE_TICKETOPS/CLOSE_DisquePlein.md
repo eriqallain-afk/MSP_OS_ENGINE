@@ -1,5 +1,5 @@
 # CLOSE_DisquePlein — Fermeture Disque plein
-**Agent :** IT-TicketOpsAI | IT-TicketScribe | IT-SysAdmin
+**Agent :** IT-TicketOpr | IT-TicketScribe | IT-SysAdmin
 **Usage :** Clôture billet disque plein ou espace disque critique (serveur ou poste)
 **Version :** 1.0 — 2026-05-08
 

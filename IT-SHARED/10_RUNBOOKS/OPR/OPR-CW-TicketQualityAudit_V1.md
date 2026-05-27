@@ -1,6 +1,6 @@
 # OPR-CW-TicketQualityAudit_V1
 **Version :** V1 | **Statut :** active | **Domaine :** OPR | **Date :** 2026-05-23
-**Agents :** @IT-TicketOpsAI | @IT-TicketScribe | @IT-OPS-QAMaster | @IT-Commandare-OPR
+**Agents :** @IT-TicketOpr | @IT-TicketScribe | @IT-OPS-QAMaster | @IT-Commandare-OPR
 **Scope :** Audit qualité ticket ConnectWise avant fermeture — applicable à tous les agents et techniciens
 
 ---
@@ -236,7 +236,7 @@ PROCHAINES ACTIONS :
 
 - Ce runbook est un **contrat de qualité** — tout ticket fermé sans satisfaire ce DoD génère un incident QA
 - La phrase d'ouverture CW ("Prise de connaissance de la demande...") est **non négociable** dans toute Note Interne
-- Les agents IA (IT-TicketOpsAI, IT-TicketScribe) appliquent ce runbook automatiquement lors de toute clôture
+- Les agents IA (IT-TicketOpr, IT-TicketScribe) appliquent ce runbook automatiquement lors de toute clôture
 - Un ticket avec une bonne Note Interne et une mauvaise Discussion bloque quand même la fermeture
 - **Règle d'or :** si un technicien junior reprend le ticket demain sans contexte, la note doit lui permettre de comprendre en 2 minutes ce qui s'est passé
 

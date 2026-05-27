@@ -67,7 +67,7 @@ IT/
 | `IT-Assistant-N2` | Support niveau 2 |
 | `IT-Assistant-N3` | Support niveau 3 |
 | `IT-SysAdmin` | Administration systèmes |
-| `IT-TechOPS` | Opérations techniques terrain |
+| `IT-TechOnsite` | Opérations techniques terrain |
 | `IT-MaintenanceMaster` | Maintenance planifiée, patching |
 | `IT-MonitoringMaster` | Supervision NOC, alertes |
 | `IT-NetworkMaster` | Réseau, VLAN, VPN, WiFi |
@@ -77,7 +77,7 @@ IT/
 | `IT-VoIPMaster` | Téléphonie VoIP |
 | `IT-AssetMaster` | CMDB, gestion des actifs |
 | `IT-ScriptMaster` | Automatisation, scripts PowerShell/Bash |
-| `IT-TicketOpsAI` | Analyse et traitement intelligent des tickets |
+| `IT-TicketOpr` | Analyse et traitement intelligent des tickets |
 | `IT-TicketScribe` | Rédaction et documentation tickets |
 | `IT-NOCDispatcher` | Dispatch NOC, escalades |
 | `IT-UrgenceMaster` | Urgences P0/P1, gestion de crise |

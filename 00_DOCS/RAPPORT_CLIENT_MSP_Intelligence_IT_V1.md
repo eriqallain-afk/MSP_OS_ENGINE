@@ -132,11 +132,11 @@ Les agents MSP Intelligence IT résolvent ce problème : ils connaissent déjà 
 |---|---|
 | **IT-FrontLine** | Premier contact client — triage tickets entrants, classification priorité, premier diagnostic |
 | **IT-Assistant-N2** | Support niveau 2 — résolution tickets standard avec mentorat intégré et garde-fous hors-scope |
-| **IT-TicketOpsAI** | Analyse et traitement intelligent des tickets — triage, runbook suggéré, scripts PowerShell inline, menus de clôture CW |
+| **IT-TicketOpr** | Analyse et traitement intelligent des tickets — triage, runbook suggéré, scripts PowerShell inline, menus de clôture CW |
 | **IT-TicketScribe** | Rédaction et documentation — notes CW, discussions client, rapports post-intervention |
 
 **Ce que ça change dès la semaine 1 :**
-- Le technicien ouvre `IT-TicketOpsAI` sur le ticket, tape `/start`, reçoit une analyse structurée avec le runbook suggéré.
+- Le technicien ouvre `IT-TicketOpr` sur le ticket, tape `/start`, reçoit une analyse structurée avec le runbook suggéré.
 - À la fermeture, `/close` génère le menu de clôture CW complet, prêt à coller.
 - `IT-TicketScribe` produit la note interne et la communication client en parallèle.
 
@@ -152,7 +152,7 @@ Les agents MSP Intelligence IT résolvent ce problème : ils connaissent déjà 
 |---|---|
 | **IT-Assistant-N3** | Support niveau 3 — escalades complexes, AD/Azure/M365/Hyper-V/VMware |
 | **IT-SysAdmin** | Administration systèmes — AD, GPO, M365, Entra ID, politiques |
-| **IT-TechOPS** | Opérations terrain — interventions sur site, procédures de dépannage avancées |
+| **IT-TechOnsite** | Opérations terrain — interventions sur site, procédures de dépannage avancées |
 | **IT-MaintenanceMaster** | Maintenance planifiée — prechecks, snapshots, patching, postchecks, rapports |
 | **IT-BackupDRMaster** | Backup et reprise après sinistre — validation Veeam/Datto, tests DR, procédures |
 | **IT-NetworkMaster** | Réseau — VLAN, VPN, WiFi, Firewall, configuration Switch |
@@ -224,9 +224,9 @@ Les modules regroupent les agents par domaine opérationnel. Un MSP peut identif
 
 **Couverture :** Triage tickets entrants, résolution N2 standard avec mentorat, escalades N3 complexes.
 
-**Agents :** IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3, IT-TicketOpsAI, IT-TicketScribe
+**Agents :** IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3, IT-TicketOpr, IT-TicketScribe
 
-**Cas d'usage :** Ticket entrant — IT-FrontLine classe, IT-TicketOpsAI analyse et suggère le runbook, IT-Assistant-N2 guide la résolution avec garde-fous, IT-TicketScribe documente.
+**Cas d'usage :** Ticket entrant — IT-FrontLine classe, IT-TicketOpr analyse et suggère le runbook, IT-Assistant-N2 guide la résolution avec garde-fous, IT-TicketScribe documente.
 
 ---
 
@@ -284,9 +284,9 @@ Les modules regroupent les agents par domaine opérationnel. Un MSP peut identif
 
 **Couverture :** Scripts PowerShell pour RMM (N-able, ConnectWise Automate, Datto RMM), automatisation opérationnelle.
 
-**Agents :** IT-ScriptMaster, IT-TicketOpsAI (commande `/script`)
+**Agents :** IT-ScriptMaster, IT-TicketOpr (commande `/script`)
 
-**Cas d'usage :** IT-TicketOpsAI — commande `/script` sur un ticket de nettoyage disque. Génère un script PowerShell complet, signé pour déploiement RMM, avec gestion d'erreurs et logging.
+**Cas d'usage :** IT-TicketOpr — commande `/script` sur un ticket de nettoyage disque. Génère un script PowerShell complet, signé pour déploiement RMM, avec gestion d'erreurs et logging.
 
 ---
 
@@ -312,7 +312,7 @@ Les modules regroupent les agents par domaine opérationnel. Un MSP peut identif
 
 ## 6. Ce que l'agent produit concrètement
 
-### IT-TicketOpsAI — Exemple de flux complet
+### IT-TicketOpr — Exemple de flux complet
 
 **Commandes disponibles :**
 
@@ -467,7 +467,7 @@ Intégration directe dans les outils internes du MSP via l'API Anthropic. Possib
 ```
 1. Ticket entrant dans ConnectWise
    ↓
-2. Technicien ouvre IT-TicketOpsAI → commande /start
+2. Technicien ouvre IT-TicketOpr → commande /start
    ↓
 3. Triage structuré + runbook suggéré affiché (< 30 secondes)
    ↓
@@ -537,11 +537,11 @@ Un kit de démarrage est fourni : 1 fiche de référence rapide par agent (comma
 |---|---|---|---|
 | IT-FrontLine | Premier contact, triage tickets entrants | 02 | STARTER |
 | IT-Assistant-N2 | Support N2 avec mentorat et garde-fous | 02 | STARTER |
-| IT-TicketOpsAI | Traitement intelligent des tickets, scripts inline | 02 | STARTER |
+| IT-TicketOpr | Traitement intelligent des tickets, scripts inline | 02 | STARTER |
 | IT-TicketScribe | Rédaction notes CW, discussions, rapports | 02/06 | STARTER |
 | IT-Assistant-N3 | Support N3 — escalades complexes | 02 | PRO |
 | IT-SysAdmin | Administration AD, Azure, M365, Entra | 03 | PRO |
-| IT-TechOPS | Opérations terrain, interventions sur site | 02 | PRO |
+| IT-TechOnsite | Opérations terrain, interventions sur site | 02 | PRO |
 | IT-MaintenanceMaster | Maintenance planifiée, patching, rapports | 04 | PRO |
 | IT-BackupDRMaster | Backup, DR, Veeam, Datto | 04 | PRO |
 | IT-NetworkMaster | Réseau, VLAN, VPN, Firewall, Switch | 07 | PRO |

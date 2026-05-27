@@ -1,8 +1,8 @@
-﻿# Memoire Persistante - IT-TicketOpsAI
+﻿# Memoire Persistante - IT-TicketOpr
 
 ## Description
 
-Ce dossier constitue la **memoire operationnelle persistante** de IT-TicketOpsAI. Il conserve le contexte accumule, les decisions passees et les preferences apprises pour assurer la continuite entre les sessions.
+Ce dossier constitue la **memoire operationnelle persistante** de IT-TicketOpr. Il conserve le contexte accumule, les decisions passees et les preferences apprises pour assurer la continuite entre les sessions.
 
 ## Contenu type
 
@@ -20,4 +20,4 @@ Ce dossier constitue la **memoire operationnelle persistante** de IT-TicketOpsAI
 
 ---
 
-*Memory Store - IT-TicketOpsAI v1.0*
+*Memory Store - IT-TicketOpr v1.0*

@@ -318,23 +318,23 @@ playbooks:
     description: 'MSP TicketOps AI — cycle complet : start → triage → analyse → close → rapport → archive'
     steps:
     - step: start
-      actor_id: IT-TicketOpsAI
+      actor_id: IT-TicketOpr
       description: Capturer le contexte du billet (/start)
     - step: triage
-      actor_id: IT-TicketOpsAI
+      actor_id: IT-TicketOpr
       description: Triage structuré — catégorie, priorité, assignation (/triage)
     - step: analyse
-      actor_id: IT-TicketOpsAI
+      actor_id: IT-TicketOpr
       description: Analyse technique approfondie (/analyse)
     - step: script_check
-      actor_id: IT-TicketOpsAI
+      actor_id: IT-TicketOpr
       description: Validation script si applicable (/script-check)
       condition: script_requis
     - step: close
-      actor_id: IT-TicketOpsAI
+      actor_id: IT-TicketOpr
       description: Génération livrables CW — Note + Discussion (/close 1+2)
     - step: rapport
-      actor_id: IT-TicketOpsAI
+      actor_id: IT-TicketOpr
       description: Rapport client ou coordo selon contexte (/rapport-client ou /rapport-coordo)
       condition: rapport_requis
     - step: kb
