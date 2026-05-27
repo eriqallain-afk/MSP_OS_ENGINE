@@ -1,4 +1,4 @@
-# 04_KNOWLEDGE_INDEX — IT-OPS-QAMaster
+# 04_KNOWLEDGE_INDEX — IT-QAMaster
 
 ## Sources de connaissance actives
 

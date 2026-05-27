@@ -243,7 +243,7 @@ Sur `/suggest-intent [kb-id]`, analyser l'article KB et proposer un nouvel inten
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   SUGGESTION INTENT — depuis [KB-ID]
-  Soumis à : IT-OPS-QAMaster → EA pour validation
+  Soumis à : IT-QAMaster → EA pour validation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 KB SOURCE : [KB-ID] — [Titre]
@@ -268,12 +268,12 @@ VÉRIFICATION PRÉ-SOUMISSION
 □ Signals distincts d'un intent existant
 □ Agent cible approprié
 
-STATUT : EN ATTENTE VALIDATION EA via IT-OPS-QAMaster
+STATUT : EN ATTENTE VALIDATION EA via IT-QAMaster
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 > ⛔ MASTER_DISPATCH_INDEX_V2.yaml n'est jamais modifié directement.
-> Toute suggestion passe par IT-OPS-QAMaster → validation EA.
+> Toute suggestion passe par IT-QAMaster → validation EA.
 
 ---
 
@@ -408,8 +408,8 @@ et lister les questions dans `log.risks`.
 | Runbook infra complexe (Hyper-V, SAN, DC) | @IT-MaintenanceMaster | Selon besoin |
 | KB à transformer en fiche Hudu client | @IT-ClientDocMaster | Selon besoin |
 | Postmortem P1/P2 à documenter | @IT-ReportMaster | < 48h |
-| Pattern systémique → incident qualité agent | @IT-OPS-QAMaster | Selon sévérité |
-| Intent manquant → amélioration routage | @IT-OPS-QAMaster via /suggest-intent | Asynchrone |
+| Pattern systémique → incident qualité agent | @IT-QAMaster | Selon sévérité |
+| Intent manquant → amélioration routage | @IT-QAMaster via /suggest-intent | Asynchrone |
 
 ---
 

@@ -1,6 +1,6 @@
 # OPR-PostIncident-Review-P1P2_V1
 **Version :** V1 | **Statut :** active | **Domaine :** OPR | **Date :** 2026-05-23
-**Agents :** @IT-ReportMaster | @IT-Commandare-OPR | @IT-UrgenceMaster | @IT-OPS-QAMaster
+**Agents :** @IT-ReportMaster | @IT-Commandare-OPR | @IT-UrgenceMaster | @IT-QAMaster
 **Scope :** Revue post-incident P1/P2 — timeline, cause racine, facteurs contributifs, CAPA, rapport client-safe
 
 ---
@@ -249,8 +249,8 @@ Nous nous excusons pour la gêne occasionnée. N'hésitez pas à nous contacter 
 | Situation | Vers | Délai |
 |---|---|---|
 | CAPA non assigné 24h après clôture de l'incident | @IT-Commandare-OPR | Immédiat |
-| CAPA non exécuté > 2 semaines | @IT-OPS-QAMaster | Incident QA |
-| Incident récurrent malgré CAPA antérieur | @IT-Commandare-OPR + @IT-OPS-QAMaster | Revue d'urgence |
+| CAPA non exécuté > 2 semaines | @IT-QAMaster | Incident QA |
+| Incident récurrent malgré CAPA antérieur | @IT-Commandare-OPR + @IT-QAMaster | Revue d'urgence |
 | Client insatisfait du rapport ou demande un appel | @IT-Commandare-OPR + gestionnaire de compte | 4h |
 | Incident de sécurité confirmé | @IT-SecurityMaster | Immédiat — processus parallèle |
 

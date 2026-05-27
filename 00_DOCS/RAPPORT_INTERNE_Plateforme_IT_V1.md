@@ -57,7 +57,7 @@ MSP Intelligence AI est une plateforme de 33 agents IA spécialisés couvrant l'
 │  IT-OPS-RouterIA          ← Point d'entrée — détecte l'intent        │
 │  IT-OPS-PlaybookRunner    ← Exécute les playbooks step by step       │
 │  IT-OPS-DossierIA         ← Archive chaque run                       │
-│  IT-OPS-QAMaster          ← Qualité plateforme                       │
+│  IT-QAMaster          ← Qualité plateforme                       │
 │  IT-OPS-SyncFactory       ← Sync Produit → Factory                   │
 └─────────────────────────────────────────────────────────────────────┘
                                 │
@@ -150,7 +150,7 @@ Le **RouterIA** est le point d'entrée de toute interaction. Il :
 | `IT-OPS-RouterIA` | Point d'entrée | `active` | Détecte l'intent entrant, résout le runbook via MASTER_DISPATCH_INDEX_V2.yaml, route vers l'agent métier en injectant le runbook | 87 intents couverts, routing Discovery-first si rôle serveur non confirmé |
 | `IT-OPS-PlaybookRunner` | Exécuteur playbooks | `active` | Déroule les playbooks step by step, assemble les handoffs inter-agents | 26 playbooks actifs |
 | `IT-OPS-DossierIA` | Archivage | `active` | Archive chaque run, produit les livrables traçables, packaging dossier client | Traçabilité complète par intervention |
-| `IT-OPS-QAMaster` | Qualité plateforme | `active` | Analyse incidents 00_QA/, détecte patterns systémiques, propose correctifs soumis à EA, revue pre-activation des nouveaux agents | Dashboard `00_QA/scores/quality_dashboard.yaml` |
+| `IT-QAMaster` | Qualité plateforme | `active` | Analyse incidents 00_QA/, détecte patterns systémiques, propose correctifs soumis à EA, revue pre-activation des nouveaux agents | Dashboard `00_QA/scores/quality_dashboard.yaml` |
 | `IT-OPS-SyncFactory` | Sync Factory | `active` | Monitore les changements structurels du produit, génère rapports outbox FACTORY_SYNC pour l'agent Factory | Sync Produit → `eriqallain-afk/Factory` |
 
 ---

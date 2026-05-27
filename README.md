@@ -62,7 +62,7 @@ Couvre 3 périmètres distincts sur 4 cadres réglementaires :
 | `IT-OPS-RouterIA` | Point d'entrée — détecte l'intent, route vers le bon runbook |
 | `IT-OPS-PlaybookRunner` | Exécute les playbooks step by step |
 | `IT-OPS-DossierIA` | Archive chaque run, produit les livrables traçables |
-| `IT-OPS-QAMaster` | Qualité plateforme — incidents, patterns, correctifs |
+| `IT-QAMaster` | Qualité plateforme — incidents, patterns, correctifs |
 | `IT-OPS-SyncFactory` | Synchronisation produit → Factory |
 
 ### Équipe Métier (28 agents)

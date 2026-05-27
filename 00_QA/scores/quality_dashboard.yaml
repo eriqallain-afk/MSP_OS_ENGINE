@@ -1,6 +1,6 @@
 schema_version: "1.0"
 generated_at: "2026-05-17"
-generated_by: IT-OPS-QAMaster
+generated_by: IT-QAMaster
 
 platform:
   total_agents: 32

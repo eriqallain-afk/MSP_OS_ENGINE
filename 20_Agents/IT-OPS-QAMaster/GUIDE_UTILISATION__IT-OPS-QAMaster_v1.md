@@ -1,12 +1,12 @@
-# Guide d'utilisation — @IT-OPS-QAMaster (v1.0)
+# Guide d'utilisation — @IT-QAMaster (v1.0)
 > **Pour :** Techniciens N1/N2/N3 MSP + Équipe OPS
 > **Mis à jour :** 2026-05-18
 
 ---
 
-## À quoi sert IT-OPS-QAMaster ?
+## À quoi sert IT-QAMaster ?
 
-**IT-OPS-QAMaster est l'agent de qualité interne de la plateforme MSP Intelligence AI.**
+**IT-QAMaster est l'agent de qualité interne de la plateforme MSP Intelligence AI.**
 
 Il ne travaille pas sur les clients — il travaille sur les **agents eux-mêmes**.
 Son rôle : détecter les erreurs, analyser les causes, proposer des correctifs, et valider les nouveaux agents avant activation.
@@ -302,4 +302,4 @@ Non. QAMaster *propose* la modification via `/fix` — il génère le diff AVANT
 
 ---
 
-*GUIDE_UTILISATION — IT-OPS-QAMaster v1.0 — MSP Intelligence AI — 2026-05-18*
+*GUIDE_UTILISATION — IT-QAMaster v1.0 — MSP Intelligence AI — 2026-05-18*

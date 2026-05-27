@@ -221,7 +221,7 @@ L'équipe [Nom MSP]"
 | P2 en brèche confirmée | @IT-Commandare-OPR | Immédiat |
 | Technicien propriétaire introuvable sur ticket P1 | @IT-Commandare-NOC | Immédiat |
 | Même client avec > 3 brèches SLA ce mois | @IT-Commandare-OPR + QAMaster | Revue prioritaire |
-| Brèche causée par un processus interne défaillant | @IT-OPS-QAMaster | Ouvrir Problem Record |
+| Brèche causée par un processus interne défaillant | @IT-QAMaster | Ouvrir Problem Record |
 
 ---
 

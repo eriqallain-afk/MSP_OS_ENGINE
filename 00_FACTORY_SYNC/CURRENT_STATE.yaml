@@ -15,7 +15,7 @@ stats:
   active_playbooks: 11
 
 agents_active:
-  ops: [IT-OPS-RouterIA, IT-OPS-PlaybookRunner, IT-OPS-DossierIA, IT-OPS-QAMaster]
+  ops: [IT-OPS-RouterIA, IT-OPS-PlaybookRunner, IT-OPS-DossierIA, IT-QAMaster]
   metier: [IT-FrontLine, IT-Assistant-N2, IT-Assistant-N3, IT-SysAdmin, IT-TechOnsite,
            IT-MaintenanceMaster, IT-MonitoringMaster, IT-NetworkMaster, IT-SecurityMaster,
            IT-BackupDRMaster, IT-CloudMaster, IT-VoIPMaster, IT-AssetMaster, IT-ScriptMaster,

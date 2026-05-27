@@ -1,4 +1,4 @@
-# GPT SETUP CARD — @IT-OPS-QAMaster
+# GPT SETUP CARD — @IT-QAMaster
 > **Usage :** Fiche de configuration pour le GPT Editor (OpenAI) ou Claude Project.
 > **Version :** 1.0.0 | **Mise à jour :** 2026-05-18
 
@@ -8,7 +8,7 @@
 
 | Champ | Valeur |
 |---|---|
-| **Name** | IT-OPS-QAMaster |
+| **Name** | IT-QAMaster |
 | **Description courte** | Agent OPS de qualité plateforme — surveille les 32 agents MSP Intelligence AI, analyse les incidents loggués, détecte les patterns d'erreurs systémiques, propose des correctifs à EA, et valide les nouveaux agents avant activation. Usage interne uniquement. |
 | **Tagline** | *Plateforme saine. Agents fiables. Chaque correctif validé par EA.* |
 
@@ -16,7 +16,7 @@
 
 ## 2. INSTRUCTIONS (System Prompt)
 
-**Source :** `20_Agents/IT-OPS-QAMaster/prompt.md`
+**Source :** `20_Agents/IT-QAMaster/prompt.md`
 Coller le contenu intégral dans le champ **Instructions** du GPT Editor.
 
 > `prompt.md` est le système complet. Il contient la chaîne de valeur QA, les formats d'incidents INC-YYYYMMDD-NNN, les formats de correctifs FIX-YYYYMMDD-NNN, la revue pre-activation et le dashboard.
@@ -41,12 +41,12 @@ Coller le contenu intégral dans le champ **Instructions** du GPT Editor.
 ### CRITIQUE — EN PREMIER (obligatoire)
 | Fichier | Chemin repo | Contenu |
 |---|---|---|
-| `prompt.md` | `20_Agents/IT-OPS-QAMaster/prompt.md` | Système complet — formats incidents, correctifs, revue pre-activation, dashboard |
+| `prompt.md` | `20_Agents/IT-QAMaster/prompt.md` | Système complet — formats incidents, correctifs, revue pre-activation, dashboard |
 
 ### IMPORTANT
 | Fichier | Chemin repo | Contenu |
 |---|---|---|
-| `agent.yaml` | `20_Agents/IT-OPS-QAMaster/agent.yaml` | Identité, commandes, équipe OPS |
+| `agent.yaml` | `20_Agents/IT-QAMaster/agent.yaml` | Identité, commandes, équipe OPS |
 | `agents_index.yaml` | `00_INDEX/agents_index.yaml` | Index officiel des 32 agents — requis pour /review-agent et détection de doublons |
 | `DOC_SYNC_MATRIX.md` | `00_INDEX/DOC_SYNC_MATRIX.md` | Matrice de synchronisation documentaire — co-responsabilité QAMaster |
 
@@ -95,12 +95,12 @@ Coller le contenu intégral dans le champ **Instructions** du GPT Editor.
 
 | Élément | Valeur |
 |---|---|
-| **Prompt** | `20_Agents/IT-OPS-QAMaster/prompt.md` |
-| **Agent config** | `20_Agents/IT-OPS-QAMaster/agent.yaml` |
-| **Guide utilisation** | `20_Agents/IT-OPS-QAMaster/GUIDE_UTILISATION__IT-OPS-QAMaster_v1.md` |
+| **Prompt** | `20_Agents/IT-QAMaster/prompt.md` |
+| **Agent config** | `20_Agents/IT-QAMaster/agent.yaml` |
+| **Guide utilisation** | `20_Agents/IT-QAMaster/GUIDE_UTILISATION__IT-QAMaster_v1.md` |
 | **Dossier incidents** | `00_QA/incidents/` |
 | **Dashboard** | `00_QA/scores/quality_dashboard.yaml` |
 | **Correctifs** | `00_QA/fixes/pending/` et `00_QA/fixes/applied/` |
 | **Version** | 1.0.0 |
 
-*GPT Setup Card v1.0 — IT-OPS-QAMaster — MSP Intelligence AI — 2026-05-18*
+*GPT Setup Card v1.0 — IT-QAMaster — MSP Intelligence AI — 2026-05-18*

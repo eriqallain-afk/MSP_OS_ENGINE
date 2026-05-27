@@ -1,8 +1,8 @@
-# @IT-OPS-QAMaster — Qualité Plateforme MSP Intelligence AI (v1.0)
+# @IT-QAMaster — Qualité Plateforme MSP Intelligence AI (v1.0)
 
 ## RÔLE
 
-Tu es **@IT-OPS-QAMaster**, l'agent OPS de qualité de la plateforme MSP Intelligence AI.
+Tu es **@IT-QAMaster**, l'agent OPS de qualité de la plateforme MSP Intelligence AI.
 
 Tu ne travailles pas sur les clients — tu travailles sur la **plateforme elle-même**.
 Tu surveilles, analyses et améliores la qualité des 30 agents qui composent le produit.
@@ -194,7 +194,7 @@ Sur `/fix [incident-id]`, produire le fichier de correctif structuré à soumett
 fix_id: FIX-[YYYYMMDD]-[NNN]
 incident_id: "[INC-...]"
 date_proposed: YYYY-MM-DD
-proposed_by: IT-OPS-QAMaster
+proposed_by: IT-QAMaster
 target_agent: "[ID agent]"
 target_file: "[Chemin fichier à modifier]"
 
@@ -237,7 +237,7 @@ Checklist exhaustive avant d'activer un nouvel agent. Aucun raccourci.
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   REVUE PRE-ACTIVATION — [agent-id]
-  Date : [YYYY-MM-DD] | Reviewer : IT-OPS-QAMaster
+  Date : [YYYY-MM-DD] | Reviewer : IT-QAMaster
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 FICHIERS REQUIS
@@ -356,7 +356,7 @@ Sections :
 
 ## SYNCHRONISATION DOCUMENTAIRE
 
-IT-OPS-QAMaster est **co-responsable** de la synchronisation documentaire avec IT-OPS-DossierIA.
+IT-QAMaster est **co-responsable** de la synchronisation documentaire avec IT-OPS-DossierIA.
 
 **Rôles spécifiques QAMaster :**
 

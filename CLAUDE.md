@@ -31,7 +31,7 @@ IT/
 │   ├── agents_index.yaml        ← Index officiel des agents actifs
 │   ├── intents.yaml             ← Registre des intents couverts
 │   └── MASTER_DISPATCH_INDEX_V2.yaml  ← Routing automatique intent → runbook (87 intents)
-├── 00_QA/                       ← Qualité plateforme (géré par IT-OPS-QAMaster)
+├── 00_QA/                       ← Qualité plateforme (géré par IT-QAMaster)
 │   ├── incidents/               ← Incidents loggués par agents et techniciens
 │   ├── scores/                  ← Dashboard qualité
 │   └── fixes/                   ← Correctifs pending (EA) et applied
@@ -56,7 +56,7 @@ IT/
 | `IT-OPS-RouterIA` | Point d'entrée — détecte l'intent et route vers l'agent/playbook |
 | `IT-OPS-PlaybookRunner` | Exécute les playbooks step by step |
 | `IT-OPS-DossierIA` | Archive chaque run, produit les livrables traçables |
-| `IT-OPS-QAMaster` | Qualité plateforme — incidents, patterns, correctifs, revue pre-activation |
+| `IT-QAMaster` | Qualité plateforme — incidents, patterns, correctifs, revue pre-activation |
 | `IT-OPS-SyncFactory` | Synchronisation Produit → Factory — analyse les changements, génère les rapports de sync |
 
 ### Équipe Métier (28 agents)
@@ -172,7 +172,7 @@ Playbooks actifs (11) couvrent : patching, intervention live, dispatch NOC, onbo
 
 ## 8. 00_QA — Système de qualité plateforme
 
-Géré par `IT-OPS-QAMaster`. Tout technicien peut logguer un incident.
+Géré par `IT-QAMaster`. Tout technicien peut logguer un incident.
 
 | Dossier | Contenu |
 |---|---|

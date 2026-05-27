@@ -5,7 +5,7 @@
 > documents doivent être mis à jour et qui notifier.
 >
 > Responsable de l'application : **IT-OPS-DossierIA** (après chaque run)
-> Responsable de la maintenance : **IT-OPS-QAMaster** (si une règle est manquante ou obsolète)
+> Responsable de la maintenance : **IT-QAMaster** (si une règle est manquante ou obsolète)
 
 ---
 
@@ -33,7 +33,7 @@
 | `00_INDEX/agents_index.yaml` | Ajouter entrée complète | Auteur du changement |
 | `FACTORY_MANIFEST_IT.yaml` | Ajouter entrée + incrémenter `stats.total_agents` | Auteur du changement |
 | `CLAUDE.md` | Tableau agents section 3 + compteur total | Auteur du changement |
-| `00_QA/scores/quality_dashboard.yaml` | Incrémenter `platform.total_agents` | IT-OPS-QAMaster |
+| `00_QA/scores/quality_dashboard.yaml` | Incrémenter `platform.total_agents` | IT-QAMaster |
 | `IT-SHARED/00_INDEX/INTENT_RUNBOOK_MATRIX_V1.md` | Ajouter intents selon le rôle de l'agent | Auteur du changement |
 | `IT-SHARED/RUNBOOK_MENU_CONTEXTUEL_V4.md` | Ajouter section MENU de l'agent | Auteur du changement |
 | `IT-SHARED/00_INDEX/MASTER_DISPATCH_INDEX_V2.yaml` | Ajouter signals[] pour chaque intent | Auteur du changement |
@@ -111,7 +111,7 @@
 
 | Document à mettre à jour | Champ concerné | Responsable |
 |---|---|---|
-| `00_QA/scores/quality_dashboard.yaml` | Incrémenter compteur incidents par sévérité | IT-OPS-QAMaster |
+| `00_QA/scores/quality_dashboard.yaml` | Incrémenter compteur incidents par sévérité | IT-QAMaster |
 
 ---
 
@@ -119,9 +119,9 @@
 
 | Document à mettre à jour | Champ concerné | Responsable |
 |---|---|---|
-| `00_QA/scores/quality_dashboard.yaml` | Déplacer de `pending_ea` → `applied_30d` | IT-OPS-QAMaster |
-| Fichier cible du correctif | Selon le `fix_type` du correctif | EA (validation) + IT-OPS-QAMaster |
-| `20_Agents/[id]/agent.yaml` | Incrémenter version si prompt modifié | IT-OPS-QAMaster |
+| `00_QA/scores/quality_dashboard.yaml` | Déplacer de `pending_ea` → `applied_30d` | IT-QAMaster |
+| Fichier cible du correctif | Selon le `fix_type` du correctif | EA (validation) + IT-QAMaster |
+| `20_Agents/[id]/agent.yaml` | Incrémenter version si prompt modifié | IT-QAMaster |
 
 ---
 
@@ -155,8 +155,8 @@ Le préfixe `[DOC_SYNC]` permet de les filtrer et prioriser facilement.
 ## MAINTENANCE DE CETTE MATRICE
 
 Si une règle manque ou est obsolète :
-- **IT-OPS-QAMaster** propose l'ajout via `/fix` → soumis à EA
+- **IT-QAMaster** propose l'ajout via `/fix` → soumis à EA
 - Ajouter la règle dans la section appropriée
 - Incrémenter la date de mise à jour ci-dessous
 
-*Dernière mise à jour : 2026-05-23 | Maintenu par : IT-OPS-QAMaster*
+*Dernière mise à jour : 2026-05-23 | Maintenu par : IT-QAMaster*

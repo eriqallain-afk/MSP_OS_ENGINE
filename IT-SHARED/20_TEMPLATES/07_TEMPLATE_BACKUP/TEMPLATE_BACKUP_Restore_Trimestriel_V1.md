@@ -144,7 +144,7 @@ _______________________________________________________________________________
 | **Rapport archivé dans Hudu** | ☐ Oui — Chemin : Client → Rapports → Backup & DR |
 | **Note CW mise à jour** | ☐ Oui — Billet # _____________ |
 | **Captures d'écran jointes** | ☐ Oui  ☐ Non — Raison : ________ |
-| **Dashboard QA mis à jour** | ☐ Oui (via @IT-OPS-QAMaster)  ☐ Non |
+| **Dashboard QA mis à jour** | ☐ Oui (via @IT-QAMaster)  ☐ Non |
 
 ---
 

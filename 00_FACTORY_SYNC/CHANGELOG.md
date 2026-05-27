@@ -44,7 +44,7 @@
 ## [2026-05-19] — Standardisation 00_INSTRUCTIONS.md (32 agents)
 
 - [ADDED] `20_Agents/IT-ComplianceMaster/00_INSTRUCTIONS.md`
-- [ADDED] `20_Agents/IT-OPS-QAMaster/00_INSTRUCTIONS.md`
+- [ADDED] `20_Agents/IT-QAMaster/00_INSTRUCTIONS.md`
 - [ADDED] `20_Agents/IT-OnOffBoarder/00_INSTRUCTIONS.md`
 - [ADDED] `00_DOCS/META_TEMPLATE__Produit_IA_Vertical_v1.md` — scaffold réutilisable vertical AI
 - [ADDED] `IT-SHARED/80_EXEMPLES/README.md`

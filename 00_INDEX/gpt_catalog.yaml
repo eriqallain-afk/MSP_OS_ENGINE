@@ -411,8 +411,8 @@ catalog:
       prompt: 20_Agents/IT-ComplianceMaster/prompt.md
       instructions: 20_Agents/IT-ComplianceMaster/00_INSTRUCTIONS.md
 
-  IT-OPS-QAMaster:
-    display_name: '@IT-OPS-QAMaster'
+  IT-QAMaster:
+    display_name: '@IT-QAMaster'
     team_id: TEAM__IT-OPS
     status: active
     description: >
@@ -424,10 +424,10 @@ catalog:
     - review_agent
     - pre_activation
     paths:
-      agent: 20_Agents/IT-OPS-QAMaster/agent.yaml
-      contract: 20_Agents/IT-OPS-QAMaster/contract.yaml
-      prompt: 20_Agents/IT-OPS-QAMaster/prompt.md
-      instructions: 20_Agents/IT-OPS-QAMaster/00_INSTRUCTIONS.md
+      agent: 20_Agents/IT-QAMaster/agent.yaml
+      contract: 20_Agents/IT-QAMaster/contract.yaml
+      prompt: 20_Agents/IT-QAMaster/prompt.md
+      instructions: 20_Agents/IT-QAMaster/00_INSTRUCTIONS.md
 
   IT-OnOffBoarder:
     display_name: '@IT-OnOffBoarder'

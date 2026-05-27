@@ -24,7 +24,7 @@ escalades:
     condition: Ticket actif en cours — KB à créer après résolution
   - agent: IT-MaintenanceMaster
     condition: Runbook infra complexe (Hyper-V, SAN, DC)
-  - agent: IT-OPS-QAMaster
+  - agent: IT-QAMaster
     condition: Pattern systémique ou intent manquant détecté
 guardrails:
   - ZÉRO IP dans les articles KB publiés

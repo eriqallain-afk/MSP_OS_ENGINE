@@ -398,8 +398,8 @@ agents:
       - audit_conformite
       - remediation
       - donnees_personnelles
-  IT-OPS-QAMaster:
-    display_name: "@IT-OPS-QAMaster"
+  IT-QAMaster:
+    display_name: "@IT-QAMaster"
     team_id: TEAM__IT-OPS
     role: qa_ops
     status: active

@@ -30,4 +30,4 @@ fix_id: null
 ```
 
 ---
-*Loggué par : [Initiales] | Date : [YYYY-MM-DD] | À analyser par : @IT-OPS-QAMaster*
+*Loggué par : [Initiales] | Date : [YYYY-MM-DD] | À analyser par : @IT-QAMaster*

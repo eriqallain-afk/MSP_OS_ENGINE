@@ -207,7 +207,7 @@ Contenu obligatoire :
 □ 5. Si runbooks ajoutés/retirés : mettre à jour 04_KNOWLEDGE_INDEX.md
 □ 6. Si nouvelles commandes : mettre à jour GUIDE_UTILISATION et GPT_SETUP_CARD
 □ 7. Si changement d'intent ou de runbook lié : mettre à jour INTENT_RUNBOOK_MATRIX_V1.md
-□ 8. Si changement structurel (périmètre, escalades) : notifier IT-OPS-QAMaster
+□ 8. Si changement structurel (périmètre, escalades) : notifier IT-QAMaster
 □ 9. Mettre à jour BUNDLE_KP si le contenu de référence change
 □ 10. PR + validation EA + merge + re-upload KP dans GPT Editor
 ```

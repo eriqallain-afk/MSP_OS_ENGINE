@@ -384,7 +384,7 @@ agents:
     required_files: [agent.yaml, prompt.md, contract.yaml, 00_INSTRUCTIONS.md]
     completeness: 100%
 
-  - id: IT-OPS-QAMaster
+  - id: IT-QAMaster
     team: TEAM__IT-OPS
     status: active
     role: qa_ops
@@ -394,7 +394,7 @@ agents:
       détecte patterns systémiques, propose correctifs soumis à EA, valide nouveaux agents
       en pre-activation. 4e membre équipe OPS.
     intents: [qa, qualite, incident_agent, review_agent, pre_activation, pattern_detection]
-    path: 20_Agents/IT-OPS-QAMaster/
+    path: 20_Agents/IT-QAMaster/
     required_files: [agent.yaml, prompt.md, contract.yaml, 00_INSTRUCTIONS.md, 04_KNOWLEDGE_INDEX.md]
     completeness: 100%
 

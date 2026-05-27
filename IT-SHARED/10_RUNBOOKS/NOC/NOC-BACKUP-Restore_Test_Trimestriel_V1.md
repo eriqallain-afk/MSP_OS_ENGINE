@@ -541,7 +541,7 @@ Remplir toutes les sections avant de clore le billet ConnectWise.
 - Rapport complété → archiver dans Hudu (fiche client → section Rapports → Backup & DR)
 - Copier le rapport dans le billet ConnectWise (note interne)
 - Conserver les captures d'écran/logs de validation (joindre au billet CW ou à Hudu)
-- Mettre à jour le dashboard qualité : `00_QA/scores/quality_dashboard.yaml` (via @IT-OPS-QAMaster)
+- Mettre à jour le dashboard qualité : `00_QA/scores/quality_dashboard.yaml` (via @IT-QAMaster)
 
 ---
 

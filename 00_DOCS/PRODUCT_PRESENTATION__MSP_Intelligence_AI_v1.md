@@ -88,7 +88,7 @@ Prix élevé   GitHub Copilot              Concurrents à bâtir
 | `IT-ClientDocMaster` | Documentation client Hudu — fiches, VMs, liaisons d'infrastructure |
 | `IT-KnowledgeKeeper` | Capitalise chaque incident résolu en article KB réutilisable |
 | `IT-OPS-PlaybookRunner` | Exécute les playbooks step by step — interventions guidées |
-| `IT-OPS-QAMaster` | Qualité plateforme — incidents, correctifs, revue agents |
+| `IT-QAMaster` | Qualité plateforme — incidents, correctifs, revue agents |
 
 **Valeur supplémentaire :**
 - Rapports mensuels clients générés en 15 min (vs 2-4h)
@@ -147,7 +147,7 @@ Prix élevé   GitHub Copilot              Concurrents à bâtir
 | `IT-Commandare-Infra` | Commandement infrastructure — incidents serveurs/VMs |
 | `IT-Commandare-OPR` | Commandement OPS — clôture formelle, comms, rapports P1/P2 |
 | `IT-OPS-RouterIA` | *(déjà inclus Starter — version enrichie Enterprise)* |
-| `IT-OPS-QAMaster` | *(déjà inclus Pro — accès complet tableau de bord qualité)* |
+| `IT-QAMaster` | *(déjà inclus Pro — accès complet tableau de bord qualité)* |
 
 **Valeur supplémentaire :**
 - Coordination P1/P2 multi-équipes avec commandants dédiés par domaine

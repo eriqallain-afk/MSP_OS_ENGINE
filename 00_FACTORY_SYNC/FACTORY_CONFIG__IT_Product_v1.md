@@ -30,9 +30,9 @@ Fichiers clés :
 - Lire CURRENT_STATE.yaml pour l'état du produit
 - Lire outbox/ pour les changements à intégrer
 - Proposer l'activation d'un agent staging → EA valide
-- NE PAS modifier directement les fichiers d'agents (passer par IT-OPS-QAMaster)
+- NE PAS modifier directement les fichiers d'agents (passer par IT-QAMaster)
 
 ## Règles absolues
 - auto_activation: false — toujours
 - Toute activation = validation EA obligatoire
-- Correctifs agents = via IT-OPS-QAMaster uniquement
+- Correctifs agents = via IT-QAMaster uniquement

@@ -96,7 +96,7 @@ Même tests que GPT Editor (section 6 de la Setup Card).
 | `IT-OPS-RouterIA` | Routage intents | — |
 | `IT-OPS-PlaybookRunner` | Exécution playbooks | — |
 | `IT-OPS-DossierIA` | Archivage et traçabilité | — |
-| `IT-OPS-QAMaster` | Qualité plateforme | — |
+| `IT-QAMaster` | Qualité plateforme | — |
 | `IT-FrontLine` | Support N1, triage | `GPT_SETUP_CARD__IT-AssistanTI_FrontLine_v3.md` |
 | `IT-Assistant-N2` | Support N2 | `GPT_SETUP_CARD__IT-AssistanTI_N2_v3.md` |
 | `IT-Assistant-N3` | Support N3, architecture | `GPT_SETUP_CARD__IT-AssistanTI_N3_v3.md` |

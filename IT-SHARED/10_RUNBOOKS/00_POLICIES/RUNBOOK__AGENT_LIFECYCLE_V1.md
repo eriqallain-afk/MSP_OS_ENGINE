@@ -1,7 +1,7 @@
 # RUNBOOK — Cycle de vie d'un agent (ajout / modification / activation)
 > **Version :** 1.0 | **Date :** 2026-05-19
 > **Usage :** Référence obligatoire lors de tout ajout ou modification d'un agent MSP Intelligence AI
-> **Agents :** IT-OPS-RouterIA | IT-OPS-QAMaster | IT-OPS-SyncFactory
+> **Agents :** IT-OPS-RouterIA | IT-QAMaster | IT-OPS-SyncFactory
 
 ---
 

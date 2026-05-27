@@ -210,7 +210,7 @@ L'index central qui mappe chaque type de problème (intent) vers les ressources 
 Il demande plus de contexte et liste les informations manquantes. Il ne propose jamais un runbook inventé.
 
 **Q : Comment ajouter un nouvel intent à l'index ?**
-Via `/suggest-intent` dans IT-KnowledgeKeeper → IT-OPS-QAMaster → validation EA → MASTER_DISPATCH_INDEX_V2.yaml mis à jour.
+Via `/suggest-intent` dans IT-KnowledgeKeeper → IT-QAMaster → validation EA → MASTER_DISPATCH_INDEX_V2.yaml mis à jour.
 
 ---
 

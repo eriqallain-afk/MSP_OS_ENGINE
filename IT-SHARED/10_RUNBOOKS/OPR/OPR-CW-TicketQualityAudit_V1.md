@@ -1,6 +1,6 @@
 # OPR-CW-TicketQualityAudit_V1
 **Version :** V1 | **Statut :** active | **Domaine :** OPR | **Date :** 2026-05-23
-**Agents :** @IT-TicketOpr | @IT-TicketScribe | @IT-OPS-QAMaster | @IT-Commandare-OPR
+**Agents :** @IT-TicketOpr | @IT-TicketScribe | @IT-QAMaster | @IT-Commandare-OPR
 **Scope :** Audit qualité ticket ConnectWise avant fermeture — applicable à tous les agents et techniciens
 
 ---
@@ -226,8 +226,8 @@ PROCHAINES ACTIONS :
 |---|---|---|
 | Résolution technique manquante (cause inconnue persistante) | Propriétaire technique | Immédiat |
 | P1/P2 sans post-incident review > 48h | @IT-ReportMaster | 48h max |
-| Problème récurrent (3e occurrence) | @IT-KnowledgeKeeper + @IT-OPS-QAMaster | Prochain jour ouvrable |
-| Ticket fermé sans DoD satisfait (détecté en QA) | @IT-OPS-QAMaster → incident QA loggué | Correction avant fin de journée |
+| Problème récurrent (3e occurrence) | @IT-KnowledgeKeeper + @IT-QAMaster | Prochain jour ouvrable |
+| Ticket fermé sans DoD satisfait (détecté en QA) | @IT-QAMaster → incident QA loggué | Correction avant fin de journée |
 | Credentials détectés dans la Discussion CW | @IT-SecurityMaster | Immédiat — P1 sécurité |
 
 ---

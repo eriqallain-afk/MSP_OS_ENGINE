@@ -111,7 +111,7 @@ Les agents MSP Intelligence IT résolvent ce problème : ils connaissent déjà 
 | IT-OPS-RouterIA | Point d'entrée — détecte l'intent, charge le runbook, route vers l'agent |
 | IT-OPS-PlaybookRunner | Exécute les playbooks multi-agents step by step |
 | IT-OPS-DossierIA | Archive chaque run, produit les livrables traçables |
-| IT-OPS-QAMaster | Qualité plateforme — incidents, patterns, correctifs |
+| IT-QAMaster | Qualité plateforme — incidents, patterns, correctifs |
 | IT-OPS-SyncFactory | Synchronisation produit, rapports de mise à jour |
 
 **Équipe Métier — 28 agents** (détail par gamme à la section 4)
@@ -528,7 +528,7 @@ Un kit de démarrage est fourni : 1 fiche de référence rapide par agent (comma
 | IT-OPS-RouterIA | Routing automatique des intents — 87 scénarios | MSP+ |
 | IT-OPS-PlaybookRunner | Exécution des playbooks multi-agents | Interne |
 | IT-OPS-DossierIA | Archivage et traçabilité des runs | Interne |
-| IT-OPS-QAMaster | Qualité plateforme — incidents et correctifs | Interne |
+| IT-QAMaster | Qualité plateforme — incidents et correctifs | Interne |
 | IT-OPS-SyncFactory | Synchronisation et rapports de mise à jour | Interne |
 
 ### Équipe Métier — Agents opérationnels (28 agents)

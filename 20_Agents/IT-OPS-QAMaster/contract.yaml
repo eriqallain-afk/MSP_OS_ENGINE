@@ -1,5 +1,5 @@
 schema_version: "1.0"
-agent_id: IT-OPS-QAMaster
+agent_id: IT-QAMaster
 inputs:
   agent_id:
     type: string

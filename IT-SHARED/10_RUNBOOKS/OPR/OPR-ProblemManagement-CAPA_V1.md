@@ -1,6 +1,6 @@
 # OPR-ProblemManagement-CAPA_V1
 **Version :** V1 | **Statut :** active | **Domaine :** OPR | **Date :** 2026-05-23
-**Agents :** @IT-OPS-QAMaster | @IT-Commandare-OPR | @IT-KnowledgeKeeper | @IT-ReportMaster
+**Agents :** @IT-QAMaster | @IT-Commandare-OPR | @IT-KnowledgeKeeper | @IT-ReportMaster
 **Scope :** Gestion des problèmes récurrents — analyse cause racine, actions correctives et préventives (CAPA), suivi et vérification
 
 ---
@@ -70,7 +70,7 @@ CW → + New Ticket
   Type : Problem Management
   Titre : "PROBLÈME — [CLIENT] — [Description courte du pattern]"
   Priorité : P2 (ou P1 si risque critique)
-  Assigner à : Propriétaire technique + @IT-OPS-QAMaster
+  Assigner à : Propriétaire technique + @IT-QAMaster
   Lier les tickets incidents : [IDs]
   Note Interne initiale : "Problem Record ouvert — pattern : [X occurrences en Y jours]"
 ```
@@ -181,7 +181,7 @@ Si problème systémique multi-clients :
 
 Si problème de connaissance ou processus :
 → @IT-KnowledgeKeeper — mise à jour KB / runbook
-→ @IT-OPS-QAMaster — incident QA si le gap est lié à un processus défaillant
+→ @IT-QAMaster — incident QA si le gap est lié à un processus défaillant
 ```
 
 ---
@@ -247,10 +247,10 @@ Conditions de fermeture :
 | Situation | Vers | Délai |
 |---|---|---|
 | CAPA sans propriétaire assigné > 48h | @IT-Commandare-OPR | Immédiat |
-| Récurrence malgré CAPA validé | @IT-Commandare-OPR + @IT-OPS-QAMaster | Revue urgente |
+| Récurrence malgré CAPA validé | @IT-Commandare-OPR + @IT-QAMaster | Revue urgente |
 | Problème systémique affectant > 3 clients | @IT-Commandare-OPR | Immédiat — P1 potentiel |
 | Client demande des comptes sur les récurrences | Gestionnaire de compte + @IT-Commandare-OPR | 4h |
-| Problem Record ouvert > 60 jours sans progression | @IT-OPS-QAMaster | Incident QA |
+| Problem Record ouvert > 60 jours sans progression | @IT-QAMaster | Incident QA |
 
 ---
 

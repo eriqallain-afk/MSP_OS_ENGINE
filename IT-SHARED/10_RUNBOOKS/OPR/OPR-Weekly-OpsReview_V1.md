@@ -1,6 +1,6 @@
 # OPR-Weekly-OpsReview_V1
 **Version :** V1 | **Statut :** active | **Domaine :** OPR | **Date :** 2026-05-23
-**Agents :** @IT-Commandare-OPR | @IT-NOCDispatcher | @IT-OPS-QAMaster | @IT-ReportMaster
+**Agents :** @IT-Commandare-OPR | @IT-NOCDispatcher | @IT-QAMaster | @IT-ReportMaster
 **Scope :** Revue opérationnelle hebdomadaire — état de santé de la semaine, incidents ouverts, tickets en attente, actions prioritaires semaine suivante
 
 ---
@@ -178,7 +178,7 @@ Option B — Message Teams / Slack (équipe NOC/OPR) :
 DIFFUSION RECOMMANDÉE :
   □ @IT-Commandare-OPR — destinataire principal
   □ @IT-Commandare-NOC — pour les alertes et incidents NOC
-  □ @IT-OPS-QAMaster — pour les patterns et CAPA
+  □ @IT-QAMaster — pour les patterns et CAPA
   □ Gestionnaires de compte — résumé exécutif uniquement (version client-safe)
 ```
 
@@ -243,7 +243,7 @@ ACTION #1 PRIORITAIRE : [Description — Responsable — ETA]
 | Santé globale Rouge (P1 actif ou SLA < 85%) | @IT-Commandare-OPR | Immédiat — revue d'urgence |
 | CAPA en retard > 1 semaine | @IT-Commandare-OPR + propriétaire du CAPA | Lors de la revue |
 | Alerte NOC active depuis > 48h sans résolution | @IT-MonitoringMaster + @IT-Commandare-NOC | Immédiat |
-| Pattern récurrent détecté (3e semaine consécutive) | @IT-OPS-QAMaster — ouvrir Problem Record | Avant la fin de la revue |
+| Pattern récurrent détecté (3e semaine consécutive) | @IT-QAMaster — ouvrir Problem Record | Avant la fin de la revue |
 | Revue non effectuée depuis > 2 semaines | @IT-Commandare-OPR | Notification automatique requise |
 
 ---

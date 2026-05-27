@@ -161,7 +161,7 @@ Quand tu viens de créer une KB sur un nouveau type de problème et que tu pense
 
 **Ce que tu obtiens :**
 - Suggestion structurée d'un nouvel intent pour `MASTER_DISPATCH_INDEX_V2.yaml`
-- Soumis automatiquement à IT-OPS-QAMaster → validation EA → RouterIA amélioré
+- Soumis automatiquement à IT-QAMaster → validation EA → RouterIA amélioré
 
 > C'est comme ça que la plateforme apprend. Chaque KB bien rédigée peut améliorer le routage de tous les techniciens.
 
