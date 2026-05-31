@@ -1,0 +1,143 @@
+name: Normalize casepage headers
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/normalize-casepage-headers.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Normalize MSP casepage headers
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          files = [
+            'pages/eaia-msp-resolution-billet-agent.html',
+            'pages/eaia_case_ad_replication_multisites.html',
+            'pages/eaia_case_ad_replication_sysvol_rodc.html',
+            'pages/eaia_case_auvik_esxi_supervision.html',
+            'pages/eaia_case_dc_double_reboot.html',
+            'pages/eaia_case_msp_auvik_esxi_watchguard.html',
+            'pages/eaia_case_ntfs_veeam_bdr.html',
+            'pages/eaia_case_pending_reboot_postcheck_dc_anonymise.html',
+            'pages/eaia_casepage_msp_site_down_livrables_public.html',
+            'pages/eaia_casepage_pending_reboot_fileserver.html',
+            'pages/eaia_casepage_veeam_backup_warning_public.html',
+            'pages/eaia_casepage_windows_postcheck_public (1).html',
+            'pages/msp-capacite-resolution-11-serveurs.html',
+            'pages/msp-case-dhcp-scope.html',
+            'pages/msp-case-exchange-transport.html',
+            'pages/msp-case-incident-noc-hyperv.html',
+            'pages/msp-case-page-client-anonymise.html',
+            'pages/msp-case-qnap-backupradar.html',
+            'pages/msp-case-resolutionsql-performance.html',
+            'pages/msp-case-windows-postcheck.html',
+          ]
+
+          header = '''<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html#preuve">Preuve</a></li>
+    <li><a href="../index.html#pipeline">Pipeline</a></li>
+    <li><a href="../index.html#livrables">Livrables</a></li>
+    <li><a href="msp-demos.html">Cas terrain</a></li>
+    <li><a href="../index.html#demo">Démo</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:contact@eaia.ca?subject=Démo%20MSP%20Intelligence%20OS">Démo — 30 min</a>
+</nav>'''
+
+          css = r'''
+/* EAIA-CASEPAGE-HEADER-NORMALIZED-2026-05-31 */
+nav{
+  padding:22px 64px!important;
+  min-height:auto!important;
+}
+.nav-brand{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:2px!important;
+  min-width:0!important;
+  text-decoration:none!important;
+}
+.nav-logo-text{
+  font-family:'Cormorant Garamond',serif!important;
+  font-size:22px!important;
+  font-weight:600!important;
+  letter-spacing:4px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.nav-logo-text .ea{color:var(--gold)!important;}
+.nav-logo-text .sep{color:rgba(200,149,42,.5)!important;margin:0 2px!important;}
+.nav-logo-text .ia{color:var(--silver-light)!important;}
+.nav-brand>.nav-tagline{
+  display:block!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:7px!important;
+  color:rgba(200,149,42,.5)!important;
+  letter-spacing:3px!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  border-left:0!important;
+  padding-left:0!important;
+  margin:0!important;
+  line-height:1.2!important;
+}
+.nav-links{gap:32px!important;}
+.nav-links a{font-size:12px!important;font-weight:600!important;}
+.nav-cta{padding:10px 28px!important;font-size:11px!important;}
+@media(max-width:1050px){
+  nav{padding-left:24px!important;padding-right:24px!important;}
+}
+@media(max-width:720px){
+  .nav-brand{gap:2px!important;}
+  .nav-logo-text{font-size:22px!important;}
+  .nav-brand>.nav-tagline{font-size:7px!important;letter-spacing:2px!important;max-width:none!important;}
+}
+'''
+
+          changed = []
+          for name in files:
+            p = Path(name)
+            if not p.exists():
+              print(f'SKIP missing {name}')
+              continue
+            text = p.read_text(encoding='utf-8')
+            original = text
+            text = re.sub(r'<nav\b[^>]*>.*?</nav>', header, text, count=1, flags=re.S|re.I)
+            if 'EAIA-CASEPAGE-HEADER-NORMALIZED-2026-05-31' not in text:
+              text = text.replace('</style>', css + '\n</style>', 1)
+            if text != original:
+              p.write_text(text, encoding='utf-8')
+              changed.append(name)
+
+          Path('.github/workflows/normalize-casepage-headers.yml').unlink(missing_ok=True)
+          print('Changed files:')
+          print('\n'.join(changed))
+          PY
+
+          git config user.name "EAIA automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add pages/*.html .github/workflows/normalize-casepage-headers.yml
+          if ! git diff --cached --quiet; then
+            git commit -m "Uniformise les entêtes des casepages MSP"
+            git push
+          else
+            echo "No changes to commit"
+          fi
