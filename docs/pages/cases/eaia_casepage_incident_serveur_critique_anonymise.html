@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas réel anonymisé : incident serveur critique et corrélation EDR</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #000000; --dark: #080808; --dark2: #0E0E0E; --dark3: #141414;
+  --gold: #C8952A; --gold-light: #E4B84A; --gold-dim: rgba(200,149,42,0.15); --gold-line: rgba(200,149,42,0.3);
+  --silver: #B8BCC8; --silver-light: #D8DCE8; --white: #FFFFFF;
+  --muted: rgba(255,255,255,0.56); --muted2: rgba(255,255,255,0.2);
+  --border: rgba(200,149,42,0.18); --border2: rgba(255,255,255,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(200,149,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,149,42,0.04) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; z-index: 0; }
+section, nav, footer, header, div { position: relative; z-index: 1; }
+a { color: inherit; text-decoration: none; }
+nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 64px; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.92); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(24px); }
+.nav-brand { display: flex; flex-direction: column; gap: 2px; }
+.nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 4px; line-height: 1; }
+.nav-logo-text .ea { color: var(--gold); } .nav-logo-text .sep { color: rgba(200,149,42,0.5); margin: 0 2px; } .nav-logo-text .ia { color: var(--silver-light); }
+.nav-tagline { font-family: 'JetBrains Mono', monospace; font-size: 7px; color: rgba(200,149,42,0.5); letter-spacing: 3px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold-light); }
+.nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 28px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.25s; }
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+.hero { min-height: auto; display: flex; flex-direction: column; justify-content: flex-start; padding: 64px 64px 56px; position: relative; overflow: hidden; }
+.hero-orb { position: absolute; top: -20%; right: -8%; width: 700px; height: 700px; border-radius: 50%; border: 1px solid rgba(200,149,42,0.08); pointer-events: none; }
+.hero-orb::before { content: ''; position: absolute; inset: 40px; border-radius: 50%; border: 1px solid rgba(200,149,42,0.05); }
+.hero-orb-glow { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(200,149,42,0.07) 0%, transparent 65%); pointer-events: none; }
+.hero-label, .s-label { display: flex; align-items: center; gap: 16px; }
+.hero-label { margin-bottom: 36px; }
+.hero-label-line, .s-label-line { width: 48px; height: 1px; background: var(--gold); }
+.hero-label-text, .s-label-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; }
+.hero-eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: var(--silver); letter-spacing: 8px; text-transform: uppercase; margin-bottom: 20px; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 68px); font-weight: 300; line-height: 0.95; letter-spacing: -1px; margin-bottom: 12px; max-width: 980px; }
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero h1 .strong { font-weight: 600; color: var(--white); }
+.hero-product-tag { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--gold); letter-spacing: 3px; margin-bottom: 40px; margin-top: 16px; }
+.hero-sub { font-size: 17px; color: var(--muted); max-width: 760px; line-height: 1.8; margin-bottom: 52px; font-weight: 300; }
+.hero-sub strong { color: var(--white); font-weight: 600; }
+.hero-metrics { display: flex; gap: 0; margin-bottom: 56px; border: 1px solid var(--border); width: fit-content; flex-wrap: wrap; }
+.hero-metric { padding: 20px 32px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+.hero-metric:last-child { border-right: none; }
+.hero-metric-n { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--gold-light); line-height: 1; }
+.hero-metric-l { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+.hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.btn-gold { background: var(--gold); color: var(--black); padding: 16px 44px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; display: inline-block; transition: all 0.25s; }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-outline { border: 1px solid rgba(200,149,42,0.4); color: var(--gold); padding: 16px 44px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.25s; }
+.btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+.firm-band { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 64px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.firm-band-left { display: flex; flex-direction: column; gap: 6px; }
+.firm-band-name { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
+.firm-band-desc { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted2); letter-spacing: 2px; text-transform: uppercase; }
+.firm-products { display: flex; gap: 2px; flex-wrap: wrap; }
+.firm-product { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; padding: 6px 14px; border: 1px solid rgba(200,149,42,0.15); color: rgba(200,149,42,0.5); text-transform: uppercase; }
+.firm-product.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.ticker { overflow: hidden; border-bottom: 1px solid var(--border2); padding: 12px 0; background: var(--dark3); }
+.ticker-inner { display: inline-flex; gap: 48px; animation: ticker 35s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.2); white-space: nowrap; }
+.ticker-inner span { color: rgba(200,149,42,0.6); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.s-pad { padding: 96px 64px; }
+.s-label { margin-bottom: 20px; }
+.s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 80px); font-weight: 300; line-height: 0.95; letter-spacing: -0.5px; margin-bottom: 24px; }
+.s-title em { font-style: italic; color: var(--gold-light); }
+.s-title strong { font-weight: 600; }
+.s-sub { color: var(--muted); font-size: 16px; max-width: 780px; line-height: 1.8; font-weight: 300; }
+.problem { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.problem-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.problem-pains { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+.pain-item { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; gap: 16px; align-items: flex-start; transition: background 0.2s; }
+.pain-item:last-child { border-bottom: none; }
+.pain-item:hover { background: var(--gold-dim); }
+.pain-icon { font-size: 11px; color: var(--gold); margin-top: 3px; font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+.pain-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.pain-text strong { color: var(--white); font-weight: 600; }
+.terminal { background: #050505; border: 1px solid rgba(200,149,42,0.25); padding: 28px; position: relative; }
+.terminal::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.t-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
+.t-dot { width: 9px; height: 9px; border-radius: 50%; }
+.t-dot:nth-child(1) { background: #FF5F57; } .t-dot:nth-child(2) { background: #FEBC2E; } .t-dot:nth-child(3) { background: #28C840; }
+.t-bar-title { margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 2px; }
+.t-line { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.8; margin-bottom: 2px; }
+.t-gray { color: rgba(255,255,255,0.2); } .t-gold { color: var(--gold); } .t-silver { color: var(--silver); } .t-green { color: #4ADE80; } .t-red { color: #F87171; } .t-white { color: var(--white); }
+.cursor { display: inline-block; width: 7px; height: 12px; background: var(--gold); animation: blink 1.2s infinite; vertical-align: middle; }
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+.modules-header, .content-wrap, .table-wrap, .deliver-wrap, .results-wrap, .cta-wrap, .doc-wrap, .flow-wrap { max-width: 1160px; margin: 0 auto; }
+.modules-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.mod-card { background: var(--dark); padding: 30px 24px; transition: background 0.25s; position: relative; overflow: hidden; }
+.mod-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s; transform-origin: left; }
+.mod-card:hover { background: #0C0C0C; } .mod-card:hover::after { transform: scaleX(1); }
+.mod-n { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(200,149,42,0.35); letter-spacing: 2px; margin-bottom: 18px; }
+.mod-icon { font-size: 24px; margin-bottom: 14px; }
+.mod-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--white); }
+.mod-sub { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.mod-desc { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; font-weight: 300; }
+.mod-agents { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.18); letter-spacing: 0.5px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; line-height: 1.7; }
+.arsenal { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.arsenal-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.arsenal-block { background: var(--dark); padding: 40px 32px; }
+.arsenal-n { font-family: 'Cormorant Garamond', serif; font-size: 68px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+.arsenal-unit { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(200,149,42,0.6); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+.arsenal-desc { color: var(--muted); font-size: 14px; line-height: 1.75; font-weight: 300; margin-bottom: 16px; }
+.arsenal-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.arsenal-list li { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.35); padding-left: 14px; position: relative; line-height: 1.6; }
+.arsenal-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+.case-table { width: 100%; border-collapse: collapse; background: var(--dark); border: 1px solid var(--border); margin-top: 36px; }
+.case-table th, .case-table td { padding: 18px 16px; text-align: left; border-bottom: 1px solid var(--border2); vertical-align: top; }
+.case-table th { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+.case-table td { color: var(--muted); font-size: 14px; line-height: 1.7; font-weight: 300; }
+.case-table td strong { color: var(--white); font-weight: 600; }
+.doc-section { padding: 96px 64px; }
+.doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 40px; }
+.doc-card { background: var(--dark); border: 1px solid var(--border); padding: 28px; position: relative; }
+.doc-card.full { grid-column: 1 / -1; }
+.doc-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.doc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+.doc-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; }
+.doc-copy { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.24); letter-spacing: 2px; text-transform: uppercase; }
+.doc-pre { white-space: pre-wrap; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.9; color: #D2D7E1; }
+.doc-pre strong { color: var(--white); }
+.quote-section { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 64px; text-align: center; position: relative; }
+.quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 120px; color: rgba(200,149,42,0.08); line-height: 0.5; margin-bottom: 20px; font-style: italic; }
+.quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 30px); font-weight: 300; font-style: italic; max-width: 920px; margin: 0 auto 28px; line-height: 1.6; color: var(--silver-light); }
+.quote-text strong { color: var(--gold-light); font-style: normal; }
+.quote-attr { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); letter-spacing: 3px; text-transform: uppercase; }
+.cta-section { padding: 120px 64px; text-align: center; position: relative; overflow: hidden; }
+.cta-orb { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(200,149,42,0.06); pointer-events: none; }
+.cta-orb::before { content: ''; position: absolute; inset: 60px; border-radius: 50%; border: 1px solid rgba(200,149,42,0.04); }
+.cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 8vw, 96px); font-weight: 300; line-height: 0.95; margin-bottom: 28px; }
+.cta-section h2 em { font-style: italic; color: var(--gold-light); }
+.cta-section p { color: var(--muted); font-size: 17px; margin-bottom: 48px; max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.8; font-weight: 300; }
+.cta-note { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); letter-spacing: 2px; }
+footer { border-top: 1px solid var(--border); padding: 36px 64px; display: flex; justify-content: space-between; align-items: center; background: var(--dark); }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 4px; color: var(--gold); }
+.footer-brand span { color: rgba(200,149,42,0.5); margin: 0 4px; }
+.footer-brand em { color: var(--silver); font-style: normal; }
+.footer-right { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted2); letter-spacing: 2px; text-align: right; line-height: 1.8; }
+@media (max-width: 960px) {
+  nav, .hero, .s-pad, .firm-band, .quote-section, .cta-section, .doc-section { padding-left: 24px; padding-right: 24px; }
+  .problem-inner { grid-template-columns: 1fr; gap: 40px; }
+  .arsenal-grid { grid-template-columns: 1fr; }
+  .doc-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 640px) { .modules-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+  <div class="hero-label"><div class="hero-label-line"></div><div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div></div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Un serveur<br><em>presque vivant,</em><br>une analyse <span class="strong">sans raccourci.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · INCIDENT SERVEUR · EDR · CORRÉLATION ≠ CAUSALITÉ · LIVRABLES MSP</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite un incident majeur sur un serveur critique dont les interfaces d'administration sont figées alors que les partages réseau continuent de répondre. Au lieu de conclure trop vite, l'agent établit les faits, sépare la corrélation de la causalité, prépare l'escalade sécurité et génère des <strong>livrables MSP complets</strong>.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Serveur critique</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">2</div><div class="hero-metric-l">Pistes majeures</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Hard reboot requis</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4</div><div class="hero-metric-l">Livrables premium</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">IOC confirmés</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Groupe manufacturier québécois · serveur de stockage principal · corrélation EDR · analyse post-crash</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">RMM</div>
+    <div class="firm-product active">CW Close</div>
+    <div class="firm-product active">IT-SecurityMaster</div>
+    <div class="firm-product active">T2</div>
+    <div class="firm-product active">T3</div>
+    <div class="firm-product active">Case Page</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>SERVER FREEZE</span> · RDP KO · RMM KO · SMB EN LIGNE ·
+    <span>POST-REBOOT TRIAGE</span> · SENTINELONE UPGRADE · THREATLOCKER ·
+    <span>CORRÉLATION</span> · CAUSALITÉ NON PROUVÉE · SECURITY ESCALATION ·
+    <span>CLIENT-SAFE DELIVERY</span> · CW T2 · CW T3 · CASE PAGE ·
+    <span>SERVER FREEZE</span> · RDP KO · RMM KO · SMB EN LIGNE ·
+    <span>POST-REBOOT TRIAGE</span> · SENTINELONE UPGRADE · THREATLOCKER ·
+    <span>CORRÉLATION</span> · CAUSALITÉ NON PROUVÉE · SECURITY ESCALATION ·
+    <span>CLIENT-SAFE DELIVERY</span> · CW T2 · CW T3 · CASE PAGE ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Un serveur critique<br>restait accessible<br><em>au mauvais endroit.</em></div>
+      <p class="s-sub" style="margin-bottom: 24px;">Le client ne perdait pas complètement son service : les partages réseau répondaient encore. Mais les interfaces d'administration, la connexion distante et la console étaient gelées.</p>
+      <p class="s-sub">C'est précisément ce qui rend le cas fort pour un lancement produit : l'agent n'a ni minimisé l'incident, ni accusé trop vite l'outil de sécurité.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>Les accès admin étaient figés</strong> — RMM, RDP et console ne répondaient plus correctement.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le partage de fichiers restait disponible</strong> — le serveur n'était donc pas mort, seulement partiellement dégradé.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Le client soupçonnait SentinelOne</strong> — mais l'équipe devait distinguer perception client et preuve technique.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Un hard reboot avait déjà été effectué</strong> — la fenêtre d'analyse se déplaçait donc sur l'après-incident.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>Deux agents de sécurité coexistaient</strong> — interaction EDR / allowlisting / drivers plausible, sans causalité démontrée.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">MSP-INTELLIGENCE-IT · INCIDENT FREEZE / SECURITY CORRELATION</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// SIGNAUX INITIAUX</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">CLIENT :</span> <span class="t-white">GROUPE MANUFACTURIER [ANONYMISÉ]</span></div>
+          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">SERVEUR DE STOCKAGE PRINCIPAL</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔMES :</span> <span class="t-white">RMM / RDP / CONSOLE FIGÉS</span></div>
+          <div class="t-line"><span class="t-gold">CE QUI RESTE VIVANT :</span> <span class="t-white">PARTAGES SMB</span></div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION D'ANALYSE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Triage post-reboot exécuté</span></div>
+          <div class="t-line"><span class="t-green">✓ Corrélation SentinelOne renforcée</span></div>
+          <div class="t-line"><span class="t-green">✓ Interaction ThreatLocker conservée comme hypothèse</span></div>
+          <div class="t-line"><span class="t-red">✗ Cause unique non affirmée</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">ESCALADE SÉCURITÉ + LIVRABLES COMPLETS + MESSAGE CLIENT MAÎTRISÉ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Le vrai talent ici,</strong><br>c'est de <em>ne pas sur-conclure.</em></div>
+    <p class="s-sub">Ce cas ne vaut pas parce qu'il trouve vite un coupable. Il vaut parce qu'il garde une ligne de preuve propre et produit une conclusion solide même après un reboot déjà effectué.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Disponibilité partielle</strong></td><td>Les partages SMB restaient accessibles malgré le gel des accès admin</td><td>Le serveur n'était pas entièrement hors service</td><td>Traiter l'incident comme gel partiel, pas comme arrêt complet</td></tr>
+        <tr><td><strong>État post-reboot</strong></td><td>Le dernier boot observé se situe à 15:00:33, après hard reboot</td><td>La preuve utile doit être reconstruite à partir de la timeline</td><td>Faire un triage post-incident rigoureux</td></tr>
+        <tr><td><strong>Pending reboot</strong></td><td>Seul PendingFileRename reste actif, sans CBS ni Windows Update classiques</td><td>Ressemble davantage à une finalisation de fichiers / pilotes</td><td>Écarter la lecture simpliste "Windows Update a cassé le serveur"</td></tr>
+        <tr><td><strong>Processus dominants</strong></td><td>DFSR, SentinelAgentWorker, SentinelAgent et ThreatLockerService ressortent fortement</td><td>La piste sécurité / filtres / services devient crédible sans être suffisante</td><td>Maintenir SentinelOne et ThreatLocker comme hypothèses corrélées</td></tr>
+        <tr><td><strong>Rapport de tâches EDR</strong></td><td>Tâche "Agent version change" vers SentinelOne complète à 15:02:29, environ 2 minutes après le reboot</td><td>La corrélation temporelle avec l'upgrade EDR est renforcée</td><td>Dire "plausible", jamais "confirmé"</td></tr>
+        <tr><td><strong>Verdict</strong></td><td>SentinelOne plausible, non confirmé ; interaction avec ThreatLocker plausible, non confirmée ; aucun IOC confirmé</td><td>Le bon message protège la crédibilité technique et la relation client</td><td>Escalade sécurité avec langue précise</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Zéro storytelling vide.</em></div>
+    <p class="s-sub">Le cas démontre un vrai pipeline MSP : intake, triage, causal framing, escalade, puis documentation prête à l'emploi.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Intake</div><div class="mod-sub">Billet critique reçu</div><div class="mod-desc">Le signal initial provient du client et du contexte d'incident majeur.</div><div class="mod-agents">Contexte brut → cas MSP</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Lecture prudente</div><div class="mod-sub">Pas de conclusion hâtive</div><div class="mod-desc">La suspicion EDR du client est gardée comme hypothèse, pas comme vérité.</div><div class="mod-agents">Discernement d'entrée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⍁</div><div class="mod-name">Post-reboot triage</div><div class="mod-sub">Lecture seule</div><div class="mod-desc">OS, uptime, pending reboot, disques, services, processus et journaux capturés.</div><div class="mod-agents">État stabilisé → preuves</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Reconstruction timeline</div><div class="mod-sub">Heures utiles</div><div class="mod-desc">Le boot observé est recollé à la timeline de la tâche d'upgrade SentinelOne.</div><div class="mod-agents">Chronologie maîtrisée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Corrélation</div><div class="mod-sub">Lien temporel</div><div class="mod-desc">L'upgrade S1 devient une piste sérieuse parce qu'il complète juste après le reboot.</div><div class="mod-agents">Corrélation ≠ preuve</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Causal framing</div><div class="mod-sub">Langage exact</div><div class="mod-desc">Le verdict est volontairement prudent : plausible, non confirmé, aucune exclusion immédiate recommandée.</div><div class="mod-agents">Crédibilité préservée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Escalade sécurité</div><div class="mod-sub">IT-SecurityMaster</div><div class="mod-desc">Le cas est reformulé pour l'équipe sécurité avec les bons artefacts et les bonnes questions.</div><div class="mod-agents">Escalade prête</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Clôture MSP</div><div class="mod-sub">T2 + T3</div><div class="mod-desc">La discussion client-safe et la note interne complète sont générées.</div><div class="mod-agents">Prêt à coller</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Narration client</div><div class="mod-sub">Message maîtrisé</div><div class="mod-desc">Le message transmis protège la confiance client sans accuser un produit avant preuve.</div><div class="mod-agents">Message maîtrisé</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Case page</div><div class="mod-sub">Support lancement</div><div class="mod-desc">Le billet devient une preuve de capacité produit, pas seulement un historique.</div><div class="mod-agents">Marketing + opérations</div></div>
+  </div>
+</section>
+
+<section class="doc-section" id="livrables">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Le cas entier,</strong><br><em>dans les bons formats MSP.</em></div>
+    <p class="s-sub">Le contenu ci-dessous est entièrement anonymisé et présenté comme il serait valorisé sur un site de lancement.</p>
+    <div class="doc-grid">
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Discussion STAR — T2</div></div><div class="doc-copy">Client-safe · P1/P2</div></div>
+        <div class="doc-pre">BILLET : #[ANON]
+DATE : 2025-02-22
+TECHNICIEN : Agent NOC-19
+
+SITUATION : Perte des accès de gestion et impossibilité d'ouvrir une session sur un serveur critique, alors que l'accès aux partages demeurait disponible.
+
+ACTIONS :
+• [15:00] Redémarrage supervisé requis pour rétablir l'accès au service.
+• [15:18] Validation post-incident de l'état général du serveur.
+• [15:34] Confirmation du retour de l'outil de gestion à distance.
+• [15:55] Analyse complémentaire de l'historique de mise à jour de l'agent de sécurité et préparation d'une escalade interne.
+
+RÉSULTAT : Service rétabli et accès de gestion de nouveau fonctionnels.
+RECOMMANDATION : Poursuivre l'analyse avec l'équipe sécurité.</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Note Interne — T3</div></div><div class="doc-copy">Interne · complet</div></div>
+        <div class="doc-pre">Date : 2025-02-24 | Technicien : Agent NOC-19 | Billet : #[ANON]
+
+CONTEXTE : Serveur de stockage principal gelé. RMM/RDP/console injoignables. Partages SMB fonctionnels.
+Hard reboot effectué avant analyse. Client suspecte SentinelOne [A CONFIRMER].
+
+OBSERVATIONS POST-REBOOT :
+- OS : Windows Storage Server 2016 Standard
+- Dernier boot : 2025-02-22 15:00:33
+- PendingFileRename=True (CBS=False, WU=False)
+- Processus dominants : DFSR, SentinelAgentWorker, SentinelAgent, ThreatLockerService
+- Tâche S1 : Agent version change complétée le 2025-02-24 à 15:02:29 (2 min après reboot)
+- Corrélation temporelle aussi observée sur un autre serveur du même parc
+
+CAUSE PROBABLE : Corrélation SentinelOne renforcée sans causalité démontrée.
+Hypothèse la plus prudente : interaction S1 / ThreatLocker / pilotes à confirmer.
+
+SUIVI :
+▶ Extraire Agent Events SentinelOne et journaux ThreatLocker
+▶ Ne pas ajouter d'exclusion additionnelle avant analyse complète</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Brief IT-SecurityMaster</div></div><div class="doc-copy">Escalade · sécurité</div></div>
+        <div class="doc-pre">[ESCALADE → IT-SecurityMaster]
+
+Ticket : #[ANON] | Serveur : Nœud de stockage principal
+Objet : Validation SentinelOne / exclusions / analyse upgrade agent
+
+TÂCHE S1 CONFIRMÉE :
+- Agent version change pour SentinelOneInstaller_windows_64bit_vx_x_x_xx.exe
+- Initié : 2025-02-22 08:40:59 Montréal
+- Complété : 2025-02-22 15:02:29 Montréal
+- Statut : completed / Upgrade completed
+
+ACTION DEMANDÉE : Valider la fenêtre 2025-02-22 12:00 à 15:05 Montréal pour
+agent upgrade start, reboot required, driver load/unload, connectivity lost.</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Conclusion technique ticket</div></div><div class="doc-copy">Synthèse · prête à coller</div></div>
+        <div class="doc-pre">- SentinelOne hors de cause : Non
+- SentinelOne confirmé responsable : Non
+- Mise à jour S1 liée temporellement au reboot : Oui
+- Interaction S1 + ThreatLocker / driver : Plausible
+- Besoin d'exclusion additionnelle immédiate : Non recommandé</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">Le meilleur cas de démonstration n'est pas toujours celui qui répare le plus vite. C'est souvent celui qui prouve qu'un agent peut <strong>tenir une ligne de preuve crédible</strong>, protéger la relation client et produire des livrables impeccables <strong>sans vendre une certitude qu'il n'a pas.</strong></p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des pages<br><em>comme celle-ci</em><br>pour ton lancement MSP ?</h2>
+  <p>EAIA transforme des billets réels, anonymisés et opérationnellement crédibles en pages premium prêtes à intégrer au site, à la démo produit ou au support commercial.</p>
+  <a href="mailto:eaia.eaai@gmail.com" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · cas réel anonymisé · prête à intégrer au site existant</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas serveur critique / corrélation EDR<br>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>
