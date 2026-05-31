@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EAIA | MSP Intelligence IT — Cas Auvik / ESXi / perte de visibilité supervision</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=JetBrains+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --black:#000; --dark:#080808; --dark2:#0E0E0E; --dark3:#141414; --gold:#C8952A; --gold-light:#E4B84A;
+  --gold-dim:rgba(200,149,42,0.15); --silver:#B8BCC8; --silver-light:#D8DCE8; --white:#FFF;
+  --muted:rgba(255,255,255,0.56); --muted2:rgba(255,255,255,0.2); --border:rgba(200,149,42,0.18); --border2:rgba(255,255,255,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1} a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)} .nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .25s}.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 64px 80px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,0.05)}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,108px);font-weight:300;line-height:.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)} .hero h1 .strong{font-weight:600;color:var(--white)}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}.hero-sub strong{color:var(--white);font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s}.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .25s}.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap}.ticker-inner span{color:rgba(200,149,42,0.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:.95;letter-spacing:-.5px;margin-bottom:24px}.s-title em{font-style:italic;color:var(--gold-light)} .s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background .2s}.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:var(--white);font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}.t-dot{width:9px;height:9px;border-radius:50%}.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}.t-gray{color:rgba(255,255,255,0.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.doc-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background .25s;position:relative;overflow:hidden}.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px}.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:.5px;margin-bottom:6px;color:var(--white)}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6}.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}.case-table td strong{color:var(--white);font-weight:600}
+.doc-section{padding:96px 64px}.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative}.doc-card.full{grid-column:1 / -1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)} .quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none}
+.cta-orb::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(200,149,42,0.04)}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:.95;margin-bottom:28px}.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)} .footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}} .hero-label,.hero-eyebrow,.hero h1,.hero-product-tag,.hero-sub,.hero-metrics,.hero-actions{animation:fadeUp .7s ease both}
+@media (max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metric{border-bottom:1px solid var(--border);border-right:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+@media (max-width:640px){.modules-grid{grid-template-columns:1fr}}
+
+
+/* EAIA-UNIFORM-HEADER-LOGO-TOP-2026-05-14
+   Logo EA IA en haut + slogan seulement à droite.
+   Le footer ne porte plus le logo afin d'éviter le déséquilibre visuel. */
+nav, .nav {
+  min-height: 78px;
+}
+.nav-brand {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-width: 0 !important;
+  text-decoration: none !important;
+}
+.nav-logo,
+.nav-logo-img {
+  height: 54px !important;
+  width: auto !important;
+  max-width: 220px !important;
+  object-fit: contain !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+}
+.nav-brand > .nav-tagline {
+  display: block !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 2.7px !important;
+  text-transform: uppercase !important;
+  color: rgba(236,205,133,.88) !important;
+  white-space: nowrap !important;
+  border-left: 1px solid rgba(200,149,42,.34) !important;
+  padding-left: 17px !important;
+  margin: 0 !important;
+}
+.footer-logo,
+footer img.footer-logo {
+  display: none !important;
+}
+@media (max-width: 720px) {
+  nav, .nav { min-height: 70px; }
+  .nav-brand { gap: 12px !important; }
+  .nav-logo,
+  .nav-logo-img { height: 44px !important; max-width: 178px !important; }
+  .nav-brand > .nav-tagline {
+    font-size: 8px !important;
+    letter-spacing: 1.45px !important;
+    white-space: normal !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    max-width: 210px !important;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+<a aria-label="EA IA — Accueil" class="nav-brand" href="../index.html">
+    <img alt="EA IA" class="nav-logo" src="../assets/images/eaia-logo-header-mark.png"/>
+    <span class="nav-tagline">Intelligence artificielle opérationnelle</span>
+  </a>
+<ul class="nav-links">
+<li><a href="#cas">Cas</a></li>
+<li><a href="#diagnostic">Diagnostic</a></li>
+<li><a href="#pipeline">Pipeline</a></li>
+<li><a href="#livrables">Livrables</a></li>
+</ul>
+<a class="nav-cta" href="#contact">Démo — 30 min</a>
+</nav>
+<section class="hero" id="cas">
+<div class="hero-orb"></div>
+<div class="hero-orb-glow"></div>
+<div class="hero-label">
+<div class="hero-label-line"></div>
+<div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+</div>
+<div class="hero-eyebrow">EAIA — Site de lancement</div>
+<h1>Une alerte<br/><em>multi-serveurs down</em><br/>devenue <span class="strong">preuve de discernement.</span></h1>
+<div class="hero-product-tag">MSP INTELLIGENCE IT · AUVIK · VMWARE ESXI · WATCHGUARD · CW CLOSEOUT</div>
+<p class="hero-sub">
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite une alerte critique de supervision
+    signalant plusieurs serveurs injoignables, puis démontre par corrélation infrastructure que le bon diagnostic
+    n’était pas “tout a réellement chuté”, mais <strong>une perte temporaire de visibilité de la supervision</strong>.
+    Le cas illustre la force du produit : lecture seule, raisonnement structuré, et génération de livrables complets.
+  </p>
+<div class="hero-metrics">
+<div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Site impacté</div></div>
+<div class="hero-metric"><div class="hero-metric-n">148j</div><div class="hero-metric-l">Uptime ESXi</div></div>
+<div class="hero-metric"><div class="hero-metric-n">6j</div><div class="hero-metric-l">Uptime firewall</div></div>
+<div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Collecteur Auvik corrélé</div></div>
+<div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">Action destructive</div></div>
+</div>
+<div class="hero-actions">
+<a class="btn-gold" href="#diagnostic">Voir le cas complet</a>
+<a class="btn-outline" href="#contact">Demander une démo</a>
+</div>
+</section>
+<div class="firm-band">
+<div class="firm-band-left">
+<div class="firm-band-name">Résumé exécutif du cas</div>
+<div class="firm-band-desc">Cabinet professionnel anonymisé · supervision Auvik · ESXi standalone · corrélation multi-sources</div>
+</div>
+<div class="firm-products">
+<div class="firm-product active">Auvik</div>
+<div class="firm-product active">VMware</div>
+<div class="firm-product active">WatchGuard</div>
+<div class="firm-product active">CW Note</div>
+<div class="firm-product active">CW Discussion</div>
+<div class="firm-product active">Teams</div>
+</div>
+</div>
+<div class="ticker">
+<div class="ticker-inner">
+<span>AUVIK ALERT</span> · MULTIPLE SERVERS UNREACHABLE · VMWARE ESXI ·
+    <span>WATCHGUARD UPTIME</span> · INFRA CORRELATION · READ ONLY FIRST ·
+    <span>FALSE POSITIVE ANALYSIS</span> · CW NOTE · CW DISCUSSION · MONITORING VISIBILITY ·
+    <span>AUVIK ALERT</span> · MULTIPLE SERVERS UNREACHABLE · VMWARE ESXI ·
+    <span>WATCHGUARD UPTIME</span> · INFRA CORRELATION · READ ONLY FIRST ·
+    <span>FALSE POSITIVE ANALYSIS</span> · CW NOTE · CW DISCUSSION · MONITORING VISIBILITY ·
+  </div>
+</div>
+<section class="problem s-pad">
+<div class="problem-inner">
+<div>
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+<div class="s-title">Une alerte<br/>hautement anxiogène,<br/><em>mais pas forcément réelle.</em></div>
+<p class="s-sub" style="margin-bottom:24px;">
+        Le billet initial signalait plusieurs serveurs injoignables sur le site principal,
+        incluant le contrôleur de domaine. Dans beaucoup d’équipes, ce type d’alerte déclenche immédiatement
+        une lecture “panne générale”.
+      </p>
+<p class="s-sub">
+        Ici, l’agent a requalifié le cas par la preuve : état actuel des systèmes, uptime de l’hôte ESXi,
+        uptime du WatchGuard, source exacte de l’alerte, puis corrélation du fait que <strong>la sonde Auvik
+        était elle-même hébergée sur le même environnement VMware</strong>.
+      </p>
+</div>
+<div>
+<div class="problem-pains">
+<div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>L’alerte disait “plusieurs serveurs offline”</strong> — mais au moment de l’analyse, ils étaient déjà revenus en ligne.</div></div>
+<div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le DC était nommé dans le billet</strong> — ce qui augmente immédiatement la perception de criticité.</div></div>
+<div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>ESXi et WatchGuard n’avaient pas redémarré</strong> — ce qui affaiblissait la thèse d’une panne complète du site.</div></div>
+<div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>L’alerte provenait d’Auvik</strong> — et l’appliance Auvik résidait sur le même hôte ESXi, rendant crédible une perte de visibilité locale.</div></div>
+<div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>La vraie valeur ne venait pas d’une remédiation rapide</strong> — mais d’un diagnostic assez solide pour éviter une mauvaise action sur une infrastructure revenue saine.</div></div>
+</div>
+</div>
+</div>
+<div style="max-width:1160px;margin:56px auto 0">
+<div class="terminal">
+<div class="t-bar">
+<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+<div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AUVIK / ESXI / VISIBILITÉ</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div>
+<div class="t-line t-gray">// BILLET BRUT REÇU</div>
+<div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">AUVIK MONITORING ALERT</span></div>
+<div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">MULTIPLE SERVERS UNREACHABLE</span></div>
+<div class="t-line"><span class="t-gold">ENVIRONNEMENT :</span> <span class="t-white">SITE PRINCIPAL · ESXI · WATCHGUARD</span></div>
+<div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">LECTURE ERRONÉE D’UNE PANNE GÉNÉRALE</span></div>
+<div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+<div class="t-line t-silver">Tous les systèmes sont revenus online.</div>
+<div class="t-line t-silver">L’hôte ESXi est stable depuis 148 jours.</div>
+<div class="t-line t-silver">Le firewall n’a pas redémarré pendant l’incident.</div>
+</div>
+<div>
+<div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+<div class="t-line" style="margin-top:8px"><span class="t-green">✓ Corrélation hyperviseur effectuée</span></div>
+<div class="t-line"><span class="t-green">✓ Corrélation firewall effectuée</span></div>
+<div class="t-line"><span class="t-green">✓ Source Auvik recontextualisée</span></div>
+<div class="t-line"><span class="t-red">✗ Aucun reboot déclenché à l’aveugle</span></div>
+<div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">INCIDENT DE VISIBILITÉ SUPERVISION PROBABLE + LIVRABLES GÉNÉRÉS</span></div>
+<div class="t-line t-gold">▌<span class="cursor"></span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="s-pad" id="diagnostic">
+<div class="content-wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+<div class="s-title"><strong>Une alerte critique,</strong><br/>une conclusion <em>plus mature que le réflexe.</em></div>
+<p class="s-sub">
+      L’agent n’a pas seulement validé le retour en ligne. Il a séparé le symptôme brut de supervision,
+      les preuves d’état réel de l’infrastructure, puis la cause la plus plausible au regard de l’architecture.
+    </p>
+<table class="case-table">
+<thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+<tbody>
+<tr><td><strong>État des serveurs</strong></td><td>Les serveurs visés par l’alerte étaient de nouveau en ligne au moment de l’analyse</td><td>Le cas n’était plus une panne active, mais un incident transitoire à qualifier</td><td>Basculer d’un mode urgence vers une validation post-incident</td></tr>
+<tr><td><strong>Hyperviseur ESXi</strong></td><td>Hôte en état normal, hors vCenter, avec 148 jours de fonctionnement</td><td>La thèse d’un reboot ou crash de l’hôte au moment de l’alerte devenait peu probable</td><td>Écarter la panne hôte comme hypothèse dominante</td></tr>
+<tr><td><strong>WatchGuard</strong></td><td>Firewall opérationnel avec plus de 6 jours d’uptime</td><td>La thèse d’un redémarrage réseau/site corrélé à l’alerte perdait également en crédibilité</td><td>Écarter le reboot du firewall comme cause principale</td></tr>
+<tr><td><strong>Source de l’alerte</strong></td><td>L’alerte provenait de la plateforme Auvik</td><td>Le symptôme devenait une vue de monitoring, pas encore une preuve d’indisponibilité réelle</td><td>Requalifier la source avant toute remédiation</td></tr>
+<tr><td><strong>Placement du collecteur</strong></td><td>L’appliance Auvik était hébergée sur le même environnement ESXi</td><td>Une perte temporaire de visibilité locale pouvait faire remonter plusieurs serveurs “offline” simultanément</td><td>Faire de la perte de visibilité supervision l’hypothèse dominante</td></tr>
+<tr><td><strong>Extraits VMware analysés</strong></td><td>Événements de capture d’écran console et consolidation de snapshot Auvik sans erreur critique</td><td>Aucune preuve directe de crash ou reboot collectif n’a été observée</td><td>Conclure à un incident transitoire de visibilité/connectivité supervision</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="s-pad" id="pipeline">
+<div class="modules-header">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+<div class="s-title"><strong>10 étapes.</strong><br/><em>Aucune panique, aucune fiction.</em></div>
+<p class="s-sub">Le cas met en valeur une capacité rare : démonter une alerte à forte charge émotionnelle sans sur-réagir, tout en livrant une documentation MSP complète.</p>
+</div>
+<div class="modules-grid">
+<div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Lecture du billet NOC</div><div class="mod-desc">Le billet est absorbé avec son contexte : plusieurs serveurs signalés injoignables au site principal, incluant un contrôleur de domaine.</div><div class="mod-agents">Signal brut → cas structuré</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Triage</div><div class="mod-sub">P1/P2 au départ</div><div class="mod-desc">Le cas est traité comme potentiellement critique, mais sans transformer l’alerte en certitude de panne générale.</div><div class="mod-agents">Urgence cadrée</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Lecture seule</div><div class="mod-sub">Avant toute action</div><div class="mod-desc">Les vérifications visent d’abord l’état réel : serveurs revenus online, statut hôte, statut firewall, aucune action intrusive.</div><div class="mod-agents">Aucune supposition</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Corrélation infra</div><div class="mod-sub">ESXi + WatchGuard</div><div class="mod-desc">L’uptime du VMware ESXi et celui du WatchGuard sont confrontés à l’heure de l’incident pour écarter les reboots récents.</div><div class="mod-agents">Panne hôte affaiblie</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Qualification source</div><div class="mod-sub">Qui voit quoi ?</div><div class="mod-desc">Le fait que l’alerte vienne d’Auvik modifie la lecture : le symptôme est peut-être une perte de visibilité du collecteur.</div><div class="mod-agents">Signal recontextualisé</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Architecture</div><div class="mod-sub">Collecteur sur ESXi</div><div class="mod-desc">La présence de l’appliance Auvik sur le même hôte renforce l’hypothèse d’un incident local de supervision plutôt qu’une panne simultanée des serveurs.</div><div class="mod-agents">Hypothèse dominante</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Analyse logs</div><div class="mod-sub">VMware ciblé</div><div class="mod-desc">Les extraits VMware sont interprétés correctement : screenshot console, consolidation de snapshot, aucune preuve de crash collectif.</div><div class="mod-agents">Signal ≠ panne</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Décision</div><div class="mod-sub">Recovered / monitoring</div><div class="mod-desc">L’incident est classé comme rétabli, avec cause probable côté supervision/visibilité plutôt qu’indisponibilité persistante.</div><div class="mod-agents">Pas de remédiation forcée</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Clôture CW</div><div class="mod-sub">Interne + client</div><div class="mod-desc">La note interne et la discussion client-safe sont générées dans les formats exploitables par un MSP mature.</div><div class="mod-agents">Prêt à coller</div></div>
+<div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Capitalisation</div><div class="mod-sub">Cas marketing premium</div><div class="mod-desc">Le billet devient un cas de démonstration fort pour le lancement produit : supervision, discernement, documentation, valeur MSP.</div><div class="mod-agents">Support vente + démo</div></div>
+</div>
+</section>
+<section class="arsenal s-pad" id="livrables">
+<div style="max-width:1160px;margin:0 auto 56px">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+<div class="s-title">Ce que le cas<br/><em>démontre réellement.</em></div>
+<p class="s-sub">Au lieu d’une conclusion hâtive, l’agent fournit une lecture plus fiable de l’incident et des sorties directement exploitables par les opérations MSP.</p>
+</div>
+<div class="arsenal-grid">
+<div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Le cas montre une méthode : validation de l’état des systèmes, corrélation hyperviseur, corrélation firewall, requalification de l’alerte et clôture sans geste inutile.</div><ul class="arsenal-list"><li>Triage P1/P2 initial</li><li>Validation lecture seule</li><li>Corrélation ESXi</li><li>Corrélation WatchGuard</li><li>Requalification Auvik</li></ul></div>
+<div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le produit démontre sa valeur en empêchant les faux gestes sur une infrastructure déjà revenue stable.</div><ul class="arsenal-list"><li>Aucun reboot à l’aveugle</li><li>Aucune remédiation destructive</li><li>Lecture seule avant action</li><li>Signal distinct de la preuve</li><li>Hypothèse confirmée par corrélation</li></ul></div>
+<div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Sorties prêtes à l’emploi</div><div class="arsenal-desc">La même analyse se transforme en livrables adaptés aux équipes MSP, au client et au marketing produit.</div><ul class="arsenal-list"><li>CW Note Interne</li><li>CW Discussion client-safe</li><li>Notice Teams</li><li>Résumé exécutif du cas</li><li>Page web premium</li></ul></div>
+<div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">État final</div><div class="arsenal-desc">Le site n’est pas “récupéré par force” : il est déjà revenu stable, observé et correctement interprété.</div><ul class="arsenal-list"><li>Tous les systèmes online</li><li>Aucune panne persistante</li><li>Incident classé recovered</li><li>Cause probable identifiée</li><li>Clôture maîtrisée</li></ul></div>
+<div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Démonstration produit</div><div class="arsenal-desc">Ce cas valorise une promesse plus forte que l’automatisation brute : savoir penser comme un N3 MSP sous pression.</div><ul class="arsenal-list"><li>Lecture multi-couches</li><li>Rigueur d’exploitation</li><li>Langage MSP crédible</li><li>Sorties multi-publics</li><li>Qualité démontrable</li></ul></div>
+<div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Le produit ne promet pas juste d’aller vite. Il prouve qu’il peut protéger les opérations tout en documentant de façon premium.</div><ul class="arsenal-list"><li>Moins de faux gestes</li><li>Plus de confiance opérationnelle</li><li>Meilleure clôture CW</li><li>Démo crédible pour la vente</li><li>Cas fort pour le lancement</li></ul></div>
+</div>
+</section>
+<section class="doc-section">
+<div class="doc-wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+<div class="s-title"><strong>Les sorties réelles,</strong><br/><em>dans le bon format MSP.</em></div>
+<p class="s-sub">Cette section montre la profondeur du produit : la même analyse devient une note interne, une discussion facturable, et une notice opérationnelle. Le contenu ci-dessous reste anonymisé pour publication publique.</p>
+<div class="doc-grid">
+<div class="doc-card">
+<div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Note Interne</div></div><div class="doc-copy">Interne · complet</div></div>
+<div class="doc-pre">Prise de connaissance de la demande et consultation de la documentation du client.
+
+Billet #0000000 — Cabinet professionnel anonymisé
+
+Alerte reçue pour plusieurs serveurs signalés injoignables au site principal.
+Analyse effectuée en mode lecture seule afin d’éviter toute action corrective non nécessaire.
+
+Validation de l’état des systèmes concernés effectuée après retour en ligne observé.
+Confirmation que les serveurs visés par l’alerte étaient de nouveau accessibles au moment de l’investigation.
+
+Validation de l’hyperviseur VMware ESXi : état normal observé, sans indice de redémarrage récent.
+Validation du pare-feu du site : équipement opérationnel, sans redémarrage récent corrélé à l’incident.
+
+Information complémentaire confirmée durant l’analyse : la sonde / appliance Auvik est hébergée dans le même environnement VMware.
+Analyse des journaux VMware fournis : événements compatibles avec activité normale de console/supervision, sans preuve de crash ou de redémarrage de l’hôte.
+
+Corrélation des éléments recueillis :
+- les systèmes sont revenus en ligne sans action corrective destructive
+- aucun redémarrage récent de l’hyperviseur ou du pare-feu n’a été constaté
+- l’alerte provenait de la plateforme de supervision
+
+Conclusion technique :
+Incident transitoire probablement lié à une perte temporaire de visibilité ou de connectivité de la supervision, plutôt qu’à une panne réelle simultanée de l’ensemble des serveurs.
+
+Validation finale effectuée :
+- tous les systèmes signalés sont en ligne
+- aucune indisponibilité persistante constatée
+- aucun redémarrage forcé requis
+
+Statut final : Fermé
+Résolution : Services opérationnels au moment de la clôture
+Cause probable : incident transitoire de supervision / visibilité réseau de l’appliance de monitoring</div>
+</div>
+<div class="doc-card">
+<div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Discussion</div></div><div class="doc-copy">Client-safe · facturable</div></div>
+<div class="doc-pre">---------
+INTERVENTION: Investigation d'alerte de serveurs injoignables
+---------
+
+DATE: 2026-04-09
+TECHNICIEN: [À compléter]
+---------
+
+PRÉPARATION ET DÉCOUVERTE:
+---------
+Préparation et découverte.
+Prendre connaissance de la demande et connexion à la documentation de l'entreprise.
+
+TRAVAUX EFFECTUÉS:
+---------
+• Prise en charge de l’alerte et validation de l’état général de l’infrastructure concernée
+• Vérification des composants principaux de l’environnement afin de confirmer l’absence de redémarrage récent
+• Analyse des éléments de supervision et des journaux disponibles pour déterminer si l’alerte reflétait une panne réelle ou un incident de visibilité
+• Confirmation que les systèmes visés par l’alerte sont revenus en ligne sans action corrective destructive
+• Corrélation des informations recueillies pour isoler une cause probable liée à la supervision plutôt qu’à une panne généralisée
+
+RÉSULTAT:
+---------
+• Tous les systèmes concernés sont opérationnels au moment de la fermeture du billet
+• Aucune indisponibilité persistante observée après validation
+• Cause probable : incident transitoire de supervision ou de connectivité de la collecte de monitoring
+
+RECOMMANDATION:
+---------
+• Surveiller les alertes futures du même type et, si récurrence, planifier une vérification approfondie des journaux réseau et de la plateforme de supervision</div>
+</div>
+<div class="doc-card full">
+<div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Notice Teams</div></div><div class="doc-copy">Coordination · opération</div></div>
+<div class="doc-pre">🔧 Maintenance en cours — Billet : #0000000
+Client : Cabinet professionnel anonymisé
+Tâche principale : Validation post-incident après retour en ligne de plusieurs serveurs
+Impact : Service restauré — analyse de la cause en cours
+
+Version mise à jour en fin d’intervention :
+✅ Maintenance terminée — Billet : #0000000
+Client : Cabinet professionnel anonymisé
+Tâche : Investigation d’alerte de serveurs injoignables
+Statut : Systèmes opérationnels — cause probable liée à la supervision / visibilité monitoring</div>
+</div>
+<div class="doc-card full">
+<div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Résumé de valeur produit</div></div><div class="doc-copy">Marketing · site de lancement</div></div>
+<div class="doc-pre">Ce cas montre qu’un bon agent MSP ne vaut pas seulement par sa vitesse d’exécution.
+Il vaut par sa capacité à :
+- distinguer une alerte de supervision d’une panne réellement prouvée
+- corréler plusieurs couches d’infrastructure sans inventer la cause
+- refuser les actions inutiles quand les systèmes sont déjà revenus stables
+- produire immédiatement les livrables attendus par un MSP mature
+- transformer une intervention en démonstration concrète de valeur produit
+
+Autrement dit : moins de bruit, moins de faux gestes, plus de confiance opérationnelle.</div>
+</div>
+</div>
+</div>
+</section>
+<div class="quote-section">
+<div class="quote-mark">"</div>
+<p class="quote-text">
+    Le meilleur signal de maturité opérationnelle n’est pas seulement la capacité à <strong>réagir vite</strong>.
+    C’est la capacité à <strong>requalifier correctement l’alerte</strong>, à éviter une fausse remédiation, puis à livrer une clôture irréprochable.
+  </p>
+<div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+<section class="cta-section" id="contact">
+<div class="cta-orb"></div>
+<h2>Tu veux des cas<br/><em>comme celui-ci</em><br/>sur ton site de lancement ?</h2>
+<p>
+    EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site,
+    la vente ou la démo produit — avec un niveau de fond suffisant pour convaincre autant les opérations que le marketing.
+  </p>
+<a class="btn-gold" href="mailto:contact@eaia.ca">Demander une démo</a>
+<p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+<footer>
+<div class="footer-brand">EA<span>|</span><em>IA</em></div>
+<div class="footer-right">
+    MSP Intelligence IT — Cas Auvik / ESXi / perte de visibilité supervision<br/>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+</body>
+</html>

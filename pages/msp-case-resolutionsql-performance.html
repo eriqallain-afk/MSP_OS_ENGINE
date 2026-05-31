@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EA|IA — Cas SQL Performance | MSP Intelligence IT</title>
+<meta content="Cas MSP Intelligence IT : un redémarrage contrôlé révèle une lenteur ERP et un problème de performance SQL détecté au précheck, puis résolu proprement." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=JetBrains+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --black: #000000;
+      --dark: #080808;
+      --dark2: #0E0E0E;
+      --dark3: #141414;
+      --gold: #C8952A;
+      --gold-light: #E4B84A;
+      --gold-dim: rgba(200,149,42,0.15);
+      --border: rgba(200,149,42,0.18);
+      --border2: rgba(255,255,255,0.08);
+      --silver: #B8BCC8;
+      --silver-light: #D8DCE8;
+      --white: #FFFFFF;
+      --muted: rgba(255,255,255,0.45);
+      --muted2: rgba(255,255,255,0.22);
+      --success: #4ADE80;
+      --warn: #F2BE61;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,149,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,149,42,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    section, nav, footer, header, div { position: relative; z-index: 1; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 64px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.92);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(24px);
+      gap: 28px;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7px;
+      color: rgba(200,149,42,0.62);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 10px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+    .nav-logo{height:48px;width:auto;max-width:178px;object-fit:contain;display:block;flex:0 0 auto}
+    .nav-brand{display:flex;align-items:center;gap:14px;min-width:0;text-decoration:none}
+    .nav-title{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;letter-spacing:4px;line-height:1;color:var(--silver-light);white-space:nowrap}
+    .nav-name .ea{color:var(--gold-light)}
+    .badge-soft{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(200,149,42,.24);color:var(--gold-light);background:rgba(200,149,42,.08);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.6px;text-transform:uppercase;padding:7px 10px;margin:5px 5px 0 0}
+    .warning-panel{border:1px solid rgba(242,190,97,.26);background:rgba(242,190,97,.06);padding:22px;color:var(--silver-light);font-size:14px;line-height:1.75}
+
+    .hero {
+      min-height: 96vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 110px 64px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute;
+      top: -18%;
+      right: -8%;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,149,42,0.08);
+      pointer-events: none;
+    }
+    .hero-orb::before { content: ''; position: absolute; inset: 42px; border-radius: 50%; border: 1px solid rgba(200,149,42,0.05); }
+    .hero-orb-glow { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(200,149,42,0.07) 0%, transparent 65%); pointer-events: none; }
+    .hero-label { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+    .hero-label-line { width: 48px; height: 1px; background: var(--gold); }
+    .hero-label-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; }
+    .hero-eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: var(--silver); letter-spacing: 8px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(54px, 8vw, 108px); font-weight: 300; line-height: 0.95; letter-spacing: -1px; margin-bottom: 12px; max-width: 980px; }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero h1 .strong { font-weight: 600; color: var(--white); }
+    .hero-product-tag { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--gold); letter-spacing: 3px; margin-bottom: 36px; margin-top: 16px; text-transform: uppercase; }
+    .hero-sub { font-size: 17px; color: var(--muted); max-width: 720px; line-height: 1.8; margin-bottom: 48px; font-weight: 300; }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+
+    .hero-metrics { display: flex; gap: 0; margin-bottom: 52px; border: 1px solid var(--border); width: fit-content; flex-wrap: wrap; }
+    .hero-metric { padding: 20px 30px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; min-width: 138px; }
+    .hero-metric:last-child { border-right: none; }
+    .hero-metric-n { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: var(--gold-light); line-height: 1; }
+    .hero-metric-l { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .btn-gold { background: var(--gold); color: var(--black); padding: 16px 42px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; display: inline-block; transition: all 0.25s; }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline { border: 1px solid rgba(200,149,42,0.4); color: var(--gold); padding: 16px 42px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.25s; }
+    .btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+    .firm-band { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 64px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .firm-band-name { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
+    .firm-band-desc { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted2); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+    .firm-products { display: flex; gap: 2px; flex-wrap: wrap; }
+    .firm-product { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; padding: 6px 14px; border: 1px solid rgba(200,149,42,0.15); color: rgba(200,149,42,0.5); text-transform: uppercase; }
+    .firm-product.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+    .ticker { overflow: hidden; border-bottom: 1px solid var(--border2); padding: 12px 0; background: var(--dark3); }
+    .ticker-inner { display: inline-flex; gap: 48px; animation: ticker 35s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.2); white-space: nowrap; }
+    .ticker-inner span { color: rgba(200,149,42,0.6); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .s-pad { padding: 96px 64px; }
+    .s-label { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .s-label-line { width: 36px; height: 1px; background: var(--gold); }
+    .s-label-text { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; }
+    .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 80px); font-weight: 300; line-height: 0.95; letter-spacing: -0.5px; margin-bottom: 24px; }
+    .s-title em { font-style: italic; color: var(--gold-light); }
+    .s-title strong { font-weight: 600; }
+    .s-sub { color: var(--muted); font-size: 16px; max-width: 660px; line-height: 1.75; font-weight: 300; }
+    .case-shell { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 80px; align-items: start; }
+    .problem { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .pain-list { display: flex; flex-direction: column; border: 1px solid var(--border); }
+    .pain-item { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; gap: 16px; align-items: flex-start; transition: background 0.2s; }
+    .pain-item:last-child { border-bottom: none; }
+    .pain-item:hover { background: var(--gold-dim); }
+    .pain-icon { font-size: 11px; color: var(--gold); margin-top: 3px; font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+    .pain-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .pain-text strong { color: var(--white); }
+    .terminal { background: #050505; border: 1px solid rgba(200,149,42,0.25); padding: 28px; position: relative; min-height: 100%; }
+    .terminal::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .t-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
+    .t-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .t-dot:nth-child(1) { background: #FF5F57; } .t-dot:nth-child(2) { background: #FEBC2E; } .t-dot:nth-child(3) { background: #28C840; }
+    .t-bar-title { margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 2px; }
+    .t-line { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.75; margin-bottom: 2px; }
+    .t-gray { color: rgba(255,255,255,0.2); } .t-gold { color: var(--gold); } .t-silver { color: var(--silver); } .t-green { color: var(--success); } .t-white { color: var(--white); } .t-warn { color: var(--warn); }
+    .timeline-wrap { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .timeline-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .timeline-card { background: var(--dark); padding: 30px 24px; min-height: 292px; }
+    .timeline-step { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(200,149,42,0.45); margin-bottom: 16px; text-transform: uppercase; }
+    .timeline-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; margin-bottom: 10px; }
+    .timeline-sub { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; }
+    .timeline-card p { color: var(--muted); font-size: 13px; line-height: 1.7; font-weight: 300; }
+    .results-grid { max-width: 1160px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .result-card { background: var(--dark); padding: 38px 30px; min-height: 335px; }
+    .result-n { font-family: 'Cormorant Garamond', serif; font-size: 70px; color: var(--gold-light); line-height: 1; margin-bottom: 8px; }
+    .result-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(200,149,42,0.6); margin-bottom: 18px; }
+    .result-card p { color: var(--muted); font-size: 14px; line-height: 1.75; font-weight: 300; margin-bottom: 16px; }
+    .result-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .result-card li { color: rgba(255,255,255,0.38); font-family: 'JetBrains Mono', monospace; font-size: 10px; line-height: 1.6; padding-left: 14px; position: relative; }
+    .result-card li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+    .agents-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .agent-card { background: var(--dark); padding: 34px 28px; }
+    .agent-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(200,149,42,0.35); letter-spacing: 2px; margin-bottom: 14px; text-transform: uppercase; }
+    .agent-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; margin-bottom: 10px; }
+    .agent-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+    .agent-card p { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; margin-bottom: 14px; }
+    .agent-foot { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.18); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; line-height: 1.7; }
+    .quote-section { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 84px 64px; text-align: center; }
+    .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 120px; color: rgba(200,149,42,0.08); line-height: 0.5; margin-bottom: 20px; font-style: italic; }
+    .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 30px); font-weight: 300; font-style: italic; max-width: 820px; margin: 0 auto 28px; line-height: 1.6; color: var(--silver-light); }
+    .quote-text strong { color: var(--gold-light); font-style: normal; }
+    .quote-attr { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); letter-spacing: 3px; text-transform: uppercase; }
+    .cta-section { padding: 120px 64px; text-align: center; position: relative; overflow: hidden; }
+    .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 8vw, 96px); font-weight: 300; line-height: 0.95; margin-bottom: 28px; }
+    .cta-section h2 em { font-style: italic; color: var(--gold-light); }
+    .cta-section p { color: var(--muted); font-size: 17px; margin: 0 auto 48px; max-width: 680px; line-height: 1.75; font-weight: 300; }
+    .cta-note { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); letter-spacing: 2px; }
+    footer { border-top: 1px solid var(--border); padding: 36px 64px; display: flex; justify-content: space-between; align-items: center; background: var(--dark); gap: 16px; }
+    .footer-logo { height: 42px; width: auto; object-fit: contain; }
+    .footer-right { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted2); letter-spacing: 2px; text-align: right; line-height: 1.8; text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-label, .hero-eyebrow, .hero h1, .hero-product-tag, .hero-sub, .hero-metrics, .hero-actions { animation: fadeUp 0.7s ease both; }
+    @media (max-width: 1100px) { .case-shell { grid-template-columns: 1fr; gap: 40px; } .timeline-grid, .results-grid, .agents-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 960px) { nav, .hero, .s-pad, .firm-band, .quote-section, .cta-section, footer { padding-left: 24px; padding-right: 24px; } .nav-links { display: none; } footer { flex-direction: column; text-align: center; align-items:flex-start; } .footer-right { text-align:left; } }
+    @media (max-width: 720px) { .nav-title { display:none; } .nav-logo { height:44px; max-width:152px; } .hero h1 { font-size: 52px; } .hero-metric { flex: 1 1 50%; border-bottom:1px solid var(--border); } .hero-actions .btn-gold,.hero-actions .btn-outline { width:100%; text-align:center; } }
+  
+
+/* EAIA-UNIFORM-HEADER-LOGO-TOP-2026-05-14
+   Logo EA IA en haut + slogan seulement à droite.
+   Le footer ne porte plus le logo afin d'éviter le déséquilibre visuel. */
+nav, .nav {
+  min-height: 78px;
+}
+.nav-brand {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-width: 0 !important;
+  text-decoration: none !important;
+}
+.nav-logo,
+.nav-logo-img {
+  height: 54px !important;
+  width: auto !important;
+  max-width: 220px !important;
+  object-fit: contain !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+}
+.nav-brand > .nav-tagline {
+  display: block !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 2.7px !important;
+  text-transform: uppercase !important;
+  color: rgba(236,205,133,.88) !important;
+  white-space: nowrap !important;
+  border-left: 1px solid rgba(200,149,42,.34) !important;
+  padding-left: 17px !important;
+  margin: 0 !important;
+}
+.footer-logo,
+footer img.footer-logo {
+  display: none !important;
+}
+@media (max-width: 720px) {
+  nav, .nav { min-height: 70px; }
+  .nav-brand { gap: 12px !important; }
+  .nav-logo,
+  .nav-logo-img { height: 44px !important; max-width: 178px !important; }
+  .nav-brand > .nav-tagline {
+    font-size: 8px !important;
+    letter-spacing: 1.45px !important;
+    white-space: normal !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    max-width: 210px !important;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+<a aria-label="EA IA — Accueil" class="nav-brand" href="../index.html">
+    <img alt="EA IA" class="nav-logo" src="../assets/images/eaia-logo-header-mark.png"/>
+    <span class="nav-tagline">Intelligence artificielle opérationnelle</span>
+  </a>
+<ul class="nav-links">
+<li><a href="../pages/msp-demos.html">Démonstrateurs</a></li>
+<li><a href="#cas">Cas</a></li>
+<li><a href="#resolution">Résolution</a></li>
+<li><a href="#agents">Agents</a></li>
+<li><a href="#impact">Impact</a></li>
+</ul>
+<a class="nav-cta" href="mailto:contact@eaia.ca?subject=Démo%20MSP%20SQL%20Performance">Voir la démo</a>
+</nav>
+<section class="hero">
+<div class="hero-orb"></div>
+<div class="hero-orb-glow"></div>
+<div class="hero-label"><div class="hero-label-line"></div><div class="hero-label-text">EA|IA · Cas MSP · Redémarrage contrôlé devenu diagnostic performance</div></div>
+<div class="hero-eyebrow">Étude de résolution — SQL / ERP / Précheck</div>
+<h1>Un redémarrage demandé.<br/><em>Une lenteur ERP</em><br/>résolue <span class="strong">avant l’improvisation.</span></h1>
+<div class="hero-product-tag">CAS D'USAGE — REBOOT CONTRÔLÉ · SQL PERFORMANCE · SENTINELONE · ERP</div>
+<p class="hero-sub">Au départ, le billet demandait un <strong>simple redémarrage contrôlé</strong>. Mais le courriel d’approbation client mentionnait une lenteur ERP. Le précheck a donc été traité comme plus qu’une formalité : il a révélé un problème de performance serveur, puis a guidé une résolution propre au lieu d’un redémarrage aveugle.</p>
+<div class="hero-metrics">
+<div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Reboot demandé</div></div>
+<div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Mention ERP détectée</div></div>
+<div class="hero-metric"><div class="hero-metric-n">100%</div><div class="hero-metric-l">Pression disque observée</div></div>
+<div class="hero-metric"><div class="hero-metric-n">2</div><div class="hero-metric-l">Corrections structurantes</div></div>
+<div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">Perte de données</div></div>
+</div>
+<div class="hero-actions"><a class="btn-gold" href="#resolution">Voir la résolution</a><a class="btn-outline" href="msp-demos.html">Retour aux cas MSP</a></div>
+</section>
+<div class="firm-band">
+<div>
+<div class="firm-band-name">EA | IA — Cas démonstratif MSP</div>
+<div class="firm-band-desc">Valeur clé : lire le contexte client, enrichir le précheck, résoudre au-delà de la demande initiale</div>
+</div>
+<div class="firm-products"><div class="firm-product active">@IT Maintenance</div><div class="firm-product active">@IT SysAdmin</div><div class="firm-product">SQL</div><div class="firm-product">ERP</div><div class="firm-product">SentinelOne</div></div>
+</div>
+<div class="ticker"><div class="ticker-inner"><span>CONTROLLED REBOOT</span> · PRECHECK · ERP SLOWNESS · SQL SERVER · RESOURCE MONITOR · SENTINELONE · PERFORMANCE BASELINE · POSTCHECK · <span>CONTROLLED REBOOT</span> · PRECHECK · ERP SLOWNESS · SQL SERVER · RESOURCE MONITOR · SENTINELONE · PERFORMANCE BASELINE · POSTCHECK ·</div></div>
+<section class="s-pad" id="agents-summary">
+<div class="split">
+<div>
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Lecture agent</div></div>
+<div class="s-title">Ce n’est pas seulement<br/><em>une belle page.</em></div>
+<p class="s-sub">Le cas explique maintenant plus visiblement ce que les agents ont apporté : lecture du courriel client, enrichissement du précheck, distinction entre symptôme ERP et cause technique, puis production d’un dossier de fermeture exploitable.</p>
+</div>
+<div class="terminal">
+<div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">AGENT VALUE TRACE · SQL / ERP</div></div>
+<div class="t-line t-gray">// CE QUE L’AGENT AJOUTE</div>
+<div class="t-line"><span class="t-gold">SIGNAL FAIBLE :</span> <span class="t-white">mention de lenteur ERP dans l’approbation</span></div>
+<div class="t-line"><span class="t-gold">PRECHECK :</span> <span class="t-white">performance observée avant reboot</span></div>
+<div class="t-line"><span class="t-gold">GARDE-FOU :</span> <span class="t-white">ne pas réduire le billet à “serveur redémarré”</span></div>
+<div class="t-line"><span class="t-gold">SORTIE :</span> <span class="t-white">résolution + preuve + livrables</span></div>
+</div>
+</div>
+</section>
+<section class="problem s-pad" id="cas">
+<div class="case-shell">
+<div>
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le vrai cas</div></div>
+<div class="s-title">La demande était simple.<br/>Le contexte ne l’était<br/><em>pas.</em></div>
+<p class="s-sub" style="margin-bottom:32px;">Le risque dans ce type de billet est classique : exécuter le redémarrage, confirmer que le serveur revient en ligne, puis fermer. Ici, l’agent a exploité deux signaux faibles : la mention de lenteur ERP dans l’approbation client et les métriques anormales vues au précheck.</p>
+<div class="pain-list">
+<div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>Demande initiale :</strong> effectuer un redémarrage contrôlé, avec fenêtre approuvée par le client.</div></div>
+<div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Signal client :</strong> le courriel d’approbation mentionnait une certaine lenteur avec l’ERP.</div></div>
+<div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Précheck révélateur :</strong> les performances serveur montraient une pression disque et un comportement anormal, surtout côté volume système.</div></div>
+<div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Observation technique :</strong> SentinelAgent et des composants système dominaient l’activité disque; SQL était présent, mais pas retenu comme cause dominante.</div></div>
+<div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>Valeur ajoutée :</strong> l’intervention ne s’est pas limitée au reboot; elle a produit diagnostic, correction, alignement et trace opérationnelle.</div></div>
+</div>
+</div>
+<div class="terminal">
+<div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">CASE DEMO · MSP INTELLIGENCE IT · SQL/ERP PERFORMANCE</div></div>
+<div class="t-line t-gray">// DEMANDE INITIALE</div>
+<div class="t-line"><span class="t-gold">TASK :</span> <span class="t-white">REDÉMARRAGE CONTRÔLÉ · SERVEUR SQL / ERP</span></div>
+<div class="t-line"><span class="t-gold">CLIENT NOTE :</span> <span class="t-white">LENTEUR ERP OBSERVÉE</span></div>
+<div class="t-line" style="margin-top:12px"><span class="t-gray">// PRECHECK</span></div>
+<div class="t-line t-silver">Performance counters → anomalie détectée</div>
+<div class="t-line t-silver">Active time C: → pression disque élevée</div>
+<div class="t-line t-silver">Resource Monitor → SentinelAgent.exe dominant</div>
+<div class="t-line t-silver">sqlservr.exe présent mais non dominant</div>
+<div class="t-line" style="margin-top:12px"><span class="t-gray">// ACTIONS STRUCTURÉES</span></div>
+<div class="t-line"><span class="t-gold">1.</span> <span class="t-white">Ajout / validation des exclusions Sentinel appropriées</span></div>
+<div class="t-line"><span class="t-gold">2.</span> <span class="t-white">Alignement du serveur dans le groupe SQL approprié</span></div>
+<div class="t-line"><span class="t-gold">3.</span> <span class="t-white">Postcheck performance + stabilité ERP</span></div>
+<div class="t-line" style="margin-top:12px"><span class="t-gray">// RÉSULTAT</span></div>
+<div class="t-line t-green">✓ LE REBOOT N’A PAS ÉTÉ TRAITÉ COMME UNE SIMPLE FORMALITÉ</div>
+<div class="t-line t-green">✓ PROBLÈME PERFORMANCE IDENTIFIÉ ET RÉSOLU</div>
+<div class="t-line t-green">✓ TRACE MSP VALORISABLE PRODUITE</div>
+</div>
+</div>
+</section>
+<section class="timeline-wrap s-pad" id="resolution">
+<div style="max-width:1160px;margin:0 auto 56px;">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">La résolution</div></div>
+<div class="s-title">Ce que l’agent a fait<br/><strong>de plus que demandé.</strong></div>
+<p class="s-sub">La valeur n’est pas d’avoir “inventé” une intervention. Elle est d’avoir élevé le niveau de lecture : passer d’un redémarrage approuvé à un diagnostic performance défendable, puis à une correction qui explique la lenteur ERP.</p>
+</div>
+<div class="timeline-grid">
+<div class="timeline-card"><div class="timeline-step">Étape 01</div><div class="timeline-title">Lire l’approbation</div><div class="timeline-sub">Contexte client</div><p>Le courriel d’approbation n’a pas été traité comme une formalité administrative. La mention de lenteur ERP est devenue un signal d’analyse à préserver dans le dossier.</p></div>
+<div class="timeline-card"><div class="timeline-step">Étape 02</div><div class="timeline-title">Préchecker vraiment</div><div class="timeline-sub">Performance avant reboot</div><p>Le précheck a capturé l’état avant intervention : pression disque, activité processus, comportement du volume système et risque de masquer le problème par un simple redémarrage.</p></div>
+<div class="timeline-card"><div class="timeline-step">Étape 03</div><div class="timeline-title">Corriger au bon endroit</div><div class="timeline-sub">Sentinel + SQL group</div><p>L’analyse a mené à des ajustements ciblés : exclusions Sentinel adaptées et ajout du serveur au groupe SQL approprié pour aligner l’héritage et les politiques.</p></div>
+<div class="timeline-card"><div class="timeline-step">Étape 04</div><div class="timeline-title">Fermer avec preuve</div><div class="timeline-sub">Postcheck + livrables</div><p>L’intervention se termine avec postcheck, trace technique, résumé client et démonstration claire : le serveur n’a pas seulement été redémarré, il a été stabilisé.</p></div>
+</div>
+</section>
+<section class="s-pad" id="impact">
+<div style="max-width:1160px;margin:0 auto 0;">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Résultat</div></div>
+<div class="s-title">Un billet de reboot<br/>devient une preuve<br/><em>de maturité MSP.</em></div>
+<p class="s-sub">Ce cas est particulièrement bon pour EA|IA parce qu’il montre une valeur que les clients comprennent immédiatement : un technicien augmenté ne clique pas seulement sur “restart”. Il lit, valide, protège, corrige et documente.</p>
+</div>
+<div class="results-grid">
+<div class="result-card"><div class="result-n">01</div><div class="result-label">Technique</div><p>La lenteur ERP a été reliée à un comportement performance observable, plutôt qu’à une supposition SQL générique ou à un reboot réflexe.</p><ul><li>Pression disque qualifiée</li><li>Cause dominante isolée</li><li>Correction ciblée</li></ul></div>
+<div class="result-card"><div class="result-n">02</div><div class="result-label">Opérationnel</div><p>L’agent a augmenté la qualité du précheck : il a transformé une tâche simple en intervention mesurée, sans sortir du cadre d’un changement contrôlé.</p><ul><li>Moins d’angles morts</li><li>Meilleur dossier de fermeture</li><li>Postcheck plus utile</li></ul></div>
+<div class="result-card"><div class="result-n">03</div><div class="result-label">Commercial</div><p>Comme page vitrine, le cas raconte très bien la promesse MSP Intelligence IT : identifier la valeur cachée dans les billets ordinaires.</p><ul><li>Cas réel facilement racontable</li><li>Preuve de rigueur précheck</li><li>Démonstration premium</li></ul></div>
+</div>
+</section>
+<section class="problem s-pad" id="agents">
+<div style="max-width:1160px;margin:0 auto 56px;">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Les agents en action</div></div>
+<div class="s-title">Un reboot contrôlé.<br/><strong>Trois disciplines.</strong></div>
+<p class="s-sub">Ce cas combine maintenance, sysadmin et documentation. C’est précisément la zone où une équipe d’agents apporte de la valeur : pas en remplaçant le technicien, mais en l’empêchant de fermer trop vite.</p>
+</div>
+<div class="agents-grid">
+<div class="agent-card"><div class="agent-role">Agent principal</div><div class="agent-name">@IT-MaintenanceMaster</div><div class="agent-tag">Précheck · reboot · postcheck</div><p>Cadre la fenêtre de redémarrage, vérifie l’état avant action, capte les signaux faibles et transforme le postcheck en vraie preuve de stabilité.</p><div class="agent-foot">Controlled reboot · change window · pre/post checks</div></div>
+<div class="agent-card"><div class="agent-role">Diagnostic</div><div class="agent-name">@IT-SysAdmin</div><div class="agent-tag">Windows · SQL · performance</div><p>Interprète les compteurs, compare les processus actifs, distingue SQL du symptôme global et propose la correction la plus défendable.</p><div class="agent-foot">Resource Monitor · SQL Server · Windows Server</div></div>
+<div class="agent-card"><div class="agent-role">Capitalisation</div><div class="agent-name">MSP Intelligence IT</div><div class="agent-tag">Livrables · client · preuve</div><p>Produit la note interne, le résumé client et la page démonstratrice. Le billet devient une preuve de méthode, pas seulement un historique.</p><div class="agent-foot">ConnectWise close · rapport client · casepage</div></div>
+</div>
+</section>
+<div class="quote-section">
+<div class="quote-mark">"</div>
+<p class="quote-text">Le vrai gain n’est pas que l’agent fasse le travail à la place du technicien. C’est qu’il remarque ce qui aurait pu être ignoré : <strong>la phrase dans le courriel, le compteur anormal, le précheck qui change le sens du billet.</strong></p>
+<div class="quote-attr">EA|IA · MSP Intelligence IT · Démonstration de cas</div>
+</div>
+<section class="cta-section" id="contact">
+<h2>Vous voulez transformer<br/>vos billets ordinaires<br/><em>en preuves de valeur ?</em></h2>
+<p>Ce cas est un excellent modèle pour les interventions MSP où la demande initiale est simple, mais où le contexte révèle une occasion de mieux diagnostiquer, mieux corriger et mieux démontrer la valeur du service.</p>
+<a class="btn-gold" href="mailto:contact@eaia.ca?subject=Démo MSP Intelligence IT - SQL Performance">Créer une démonstration semblable</a>
+<p class="cta-note">Cas réel · Version anonymisée · Style premium EA|IA</p>
+</section>
+<footer>
+
+<div class="footer-right">MSP Intelligence IT — Page démonstrative de résolution SQL / ERP<br/>© 2026 EA|IA — Tous droits réservés</div>
+</footer>
+</body>
+</html>

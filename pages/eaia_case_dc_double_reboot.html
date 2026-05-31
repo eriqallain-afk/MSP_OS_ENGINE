@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EAIA | MSP Intelligence IT — Cas pending reboot sur serveur de fichiers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=JetBrains+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --black: #000000;
+  --dark: #080808;
+  --dark2: #0E0E0E;
+  --dark3: #141414;
+  --gold: #C8952A;
+  --gold-light: #E4B84A;
+  --gold-dim: rgba(200,149,42,0.15);
+  --gold-line: rgba(200,149,42,0.3);
+  --silver: #B8BCC8;
+  --silver-light: #D8DCE8;
+  --white: #FFFFFF;
+  --muted: rgba(255,255,255,0.56);
+  --muted2: rgba(255,255,255,0.2);
+  --border: rgba(200,149,42,0.18);
+  --border2: rgba(255,255,255,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,149,42,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,149,42,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+section, nav, footer, header, div { position: relative; z-index: 1; }
+a { color: inherit; text-decoration: none; }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 64px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(24px);
+}
+.nav-brand { display: flex; flex-direction: column; gap: 2px; }
+.nav-logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  line-height: 1;
+}
+.nav-logo-text .ea { color: var(--gold); }
+.nav-logo-text .sep { color: rgba(200,149,42,0.5); margin: 0 2px; }
+.nav-logo-text .ia { color: var(--silver-light); }
+.nav-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  color: rgba(200,149,42,0.5);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold-light); }
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 10px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 64px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  top: -20%;
+  right: -8%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.08);
+  pointer-events: none;
+}
+.hero-orb::before {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.05);
+}
+.hero-orb-glow {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(200,149,42,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-label, .s-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-label { margin-bottom: 36px; }
+.hero-label-line, .s-label-line { width: 48px; height: 1px; background: var(--gold); }
+.hero-label-text, .s-label-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--silver);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 8vw, 108px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  max-width: 980px;
+}
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero h1 .strong { font-weight: 600; color: var(--white); }
+.hero-product-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  margin-top: 16px;
+}
+.hero-sub {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 760px;
+  line-height: 1.8;
+  margin-bottom: 52px;
+  font-weight: 300;
+}
+.hero-sub strong { color: var(--white); font-weight: 600; }
+.hero-metrics {
+  display: flex;
+  gap: 0;
+  margin-bottom: 56px;
+  border: 1px solid var(--border);
+  width: fit-content;
+  flex-wrap: wrap;
+}
+.hero-metric {
+  padding: 20px 32px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero-metric:last-child { border-right: none; }
+.hero-metric-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.hero-metric-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  padding: 16px 44px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.25s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-outline {
+  border: 1px solid rgba(200,149,42,0.4);
+  color: var(--gold);
+  padding: 16px 44px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.25s;
+}
+.btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+.firm-band {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.firm-band-left { display: flex; flex-direction: column; gap: 6px; }
+.firm-band-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.firm-band-desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.firm-products {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.firm-product {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border: 1px solid rgba(200,149,42,0.15);
+  color: rgba(200,149,42,0.5);
+  text-transform: uppercase;
+}
+.firm-product.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-dim);
+}
+.ticker {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border2);
+  padding: 12px 0;
+  background: var(--dark3);
+}
+.ticker-inner {
+  display: inline-flex;
+  gap: 48px;
+  animation: ticker 35s linear infinite;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.2);
+  white-space: nowrap;
+}
+.ticker-inner span { color: rgba(200,149,42,0.6); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.s-pad { padding: 96px 64px; }
+.s-label { margin-bottom: 20px; }
+.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+.s-title em { font-style: italic; color: var(--gold-light); }
+.s-title strong { font-weight: 600; }
+.s-sub {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 780px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+.problem {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.problem-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.problem-pains {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.pain-item {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: background 0.2s;
+}
+.pain-item:last-child { border-bottom: none; }
+.pain-item:hover { background: var(--gold-dim); }
+.pain-icon {
+  font-size: 11px;
+  color: var(--gold);
+  margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+.pain-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.pain-text strong { color: var(--white); font-weight: 600; }
+
+.terminal {
+  background: #050505;
+  border: 1px solid rgba(200,149,42,0.25);
+  padding: 28px;
+  position: relative;
+}
+.terminal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.t-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
+.t-dot { width: 9px; height: 9px; border-radius: 50%; }
+.t-dot:nth-child(1) { background: #FF5F57; }
+.t-dot:nth-child(2) { background: #FEBC2E; }
+.t-dot:nth-child(3) { background: #28C840; }
+.t-bar-title {
+  margin-left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+}
+.t-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  line-height: 1.8;
+  margin-bottom: 2px;
+}
+.t-gray { color: rgba(255,255,255,0.2); }
+.t-gold { color: var(--gold); }
+.t-silver { color: var(--silver); }
+.t-green { color: #4ADE80; }
+.t-red { color: #F87171; }
+.t-white { color: var(--white); }
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 12px;
+  background: var(--gold);
+  animation: blink 1.2s infinite;
+  vertical-align: middle;
+}
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+.modules-header, .content-wrap, .table-wrap, .deliver-wrap, .results-wrap, .cta-wrap, .doc-wrap, .flow-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.modules-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.mod-card {
+  background: var(--dark);
+  padding: 30px 24px;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.mod-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+  transform-origin: left;
+}
+.mod-card:hover { background: #0C0C0C; }
+.mod-card:hover::after { transform: scaleX(1); }
+.mod-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(200,149,42,0.35);
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.mod-icon { font-size: 24px; margin-bottom: 14px; }
+.mod-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  color: var(--white);
+}
+.mod-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.mod-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+.mod-agents {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 12px;
+  line-height: 1.7;
+}
+.arsenal {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.arsenal-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.arsenal-block {
+  background: var(--dark);
+  padding: 40px 32px;
+}
+.arsenal-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 68px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.arsenal-unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(200,149,42,0.6);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.arsenal-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+.arsenal-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.arsenal-list li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.6;
+}
+.arsenal-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+.case-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  margin-top: 36px;
+}
+.case-table th, .case-table td {
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  vertical-align: top;
+}
+.case-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.case-table td {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.case-table td strong { color: var(--white); font-weight: 600; }
+
+.doc-section {
+  padding: 96px 64px;
+}
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+.doc-card {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  padding: 28px;
+  position: relative;
+}
+.doc-card.full { grid-column: 1 / -1; }
+.doc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.doc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.doc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+.doc-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.24);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.doc-pre {
+  white-space: pre-wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #D2D7E1;
+}
+.doc-pre strong { color: var(--white); }
+
+.quote-section {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 64px;
+  text-align: center;
+  position: relative;
+}
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  color: rgba(200,149,42,0.08);
+  line-height: 0.5;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 300;
+  font-style: italic;
+  max-width: 920px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+  color: var(--silver-light);
+}
+.quote-text strong { color: var(--gold-light); font-style: normal; }
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.cta-section {
+  padding: 120px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.06);
+  pointer-events: none;
+}
+.cta-orb::before {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.04);
+}
+.cta-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 300;
+  line-height: 0.95;
+  margin-bottom: 28px;
+}
+.cta-section h2 em { font-style: italic; color: var(--gold-light); }
+.cta-section p {
+  color: var(--muted);
+  font-size: 17px;
+  margin-bottom: 48px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+  font-weight: 300;
+}
+.cta-note {
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 2px;
+}
+footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--dark);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--gold);
+}
+.footer-brand span { color: rgba(200,149,42,0.5); margin: 0 4px; }
+.footer-brand em { color: var(--silver); font-style: normal; }
+.footer-right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 2px;
+  text-align: right;
+  line-height: 1.8;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-label{ animation: fadeUp 0.7s ease both; }
+.hero-eyebrow{ animation: fadeUp 0.7s 0.1s ease both; }
+.hero h1{ animation: fadeUp 0.7s 0.15s ease both; }
+.hero-product-tag{ animation: fadeUp 0.7s 0.2s ease both; }
+.hero-sub{ animation: fadeUp 0.7s 0.25s ease both; }
+.hero-metrics{ animation: fadeUp 0.7s 0.3s ease both; }
+.hero-actions{ animation: fadeUp 0.7s 0.35s ease both; }
+
+@media (max-width: 1080px) {
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 960px) {
+  nav, .hero, .s-pad, .firm-band, .quote-section, .cta-section, .doc-section { padding-left: 24px; padding-right: 24px; }
+  .problem-inner { grid-template-columns: 1fr; gap: 40px; }
+  .arsenal-grid { grid-template-columns: 1fr; }
+  .doc-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-metric { border-bottom: 1px solid var(--border); border-right: none; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-right { text-align: center; }
+}
+@media (max-width: 640px) {
+  .modules-grid { grid-template-columns: 1fr; }
+}
+
+
+/* EAIA-UNIFORM-HEADER-LOGO-TOP-2026-05-14
+   Logo EA IA en haut + slogan seulement à droite.
+   Le footer ne porte plus le logo afin d'éviter le déséquilibre visuel. */
+nav, .nav {
+  min-height: 78px;
+}
+.nav-brand {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-width: 0 !important;
+  text-decoration: none !important;
+}
+.nav-logo,
+.nav-logo-img {
+  height: 54px !important;
+  width: auto !important;
+  max-width: 220px !important;
+  object-fit: contain !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+}
+.nav-brand > .nav-tagline {
+  display: block !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 2.7px !important;
+  text-transform: uppercase !important;
+  color: rgba(236,205,133,.88) !important;
+  white-space: nowrap !important;
+  border-left: 1px solid rgba(200,149,42,.34) !important;
+  padding-left: 17px !important;
+  margin: 0 !important;
+}
+.footer-logo,
+footer img.footer-logo {
+  display: none !important;
+}
+@media (max-width: 720px) {
+  nav, .nav { min-height: 70px; }
+  .nav-brand { gap: 12px !important; }
+  .nav-logo,
+  .nav-logo-img { height: 44px !important; max-width: 178px !important; }
+  .nav-brand > .nav-tagline {
+    font-size: 8px !important;
+    letter-spacing: 1.45px !important;
+    white-space: normal !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    max-width: 210px !important;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+<a aria-label="EA IA — Accueil" class="nav-brand" href="../index.html">
+    <img alt="EA IA" class="nav-logo" src="../assets/images/eaia-logo-header-mark.png"/>
+    <span class="nav-tagline">Intelligence artificielle opérationnelle</span>
+  </a>
+<ul class="nav-links">
+<li><a href="#cas">Cas</a></li>
+<li><a href="#diagnostic">Diagnostic</a></li>
+<li><a href="#pipeline">Pipeline</a></li>
+<li><a href="#livrables">Livrables</a></li>
+</ul>
+<a class="nav-cta" href="#contact">Démo — 30 min</a>
+</nav>
+<section class="hero" id="cas">
+<div class="hero-orb"></div>
+<div class="hero-orb-glow"></div>
+<div class="hero-label">
+<div class="hero-label-line"></div>
+<div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+</div>
+<div class="hero-eyebrow">EAIA — Site de lancement</div>
+<h1>
+    Deux redémarrages.<br/>
+<em>Zéro improvisation.</em><br/>
+<span class="strong">Un DC validé jusqu’au bout.</span>
+</h1>
+<div class="hero-product-tag">MSP INTELLIGENCE IT · RMM · ACTIVE DIRECTORY · CW CLOSURE · N3 RUNBOOK</div>
+<p class="hero-sub">
+    Cette page montre comment <strong>MSP Intelligence IT</strong> transforme une alerte RMM de type
+    <strong>Windows Update Installation Failure</strong> sur un <strong>contrôleur de domaine</strong>
+    en intervention N3 rigoureuse : premier redémarrage pour un reboot pending Windows Update,
+    post-check AD/DNS, identification d’un <strong>PendingFileRenameOperations</strong> résiduel,
+    second redémarrage contrôlé, puis production des <strong>livrables ConnectWise complets</strong>.
+  </p>
+<div class="hero-metrics">
+<div class="hero-metric">
+<div class="hero-metric-n">1</div>
+<div class="hero-metric-l">Contrôleur de domaine</div>
+</div>
+<div class="hero-metric">
+<div class="hero-metric-n">2</div>
+<div class="hero-metric-l">Redémarrages contrôlés</div>
+</div>
+<div class="hero-metric">
+<div class="hero-metric-n">5</div>
+<div class="hero-metric-l">Services critiques validés</div>
+</div>
+<div class="hero-metric">
+<div class="hero-metric-n">0</div>
+<div class="hero-metric-l">Reboot pending final</div>
+</div>
+<div class="hero-metric">
+<div class="hero-metric-n">0</div>
+<div class="hero-metric-l">Erreur critique post-check</div>
+</div>
+</div>
+<div class="hero-actions">
+<a class="btn-gold" href="#diagnostic">Voir le cas complet</a>
+<a class="btn-outline" href="#contact">Demander une démo</a>
+</div>
+</section>
+<div class="firm-band">
+<div class="firm-band-left">
+<div class="firm-band-name">Résumé exécutif du cas</div>
+<div class="firm-band-desc">Municipalité anonymisée · domaine Windows · alerte RMM · double reboot · clôture CW</div>
+</div>
+<div class="firm-products">
+<div class="firm-product active">RMM</div>
+<div class="firm-product active">AD DS</div>
+<div class="firm-product active">DNS</div>
+<div class="firm-product active">CW Note</div>
+<div class="firm-product active">CW Discussion</div>
+<div class="firm-product active">Teams</div>
+</div>
+</div>
+<div class="ticker">
+<div class="ticker-inner">
+<span>WINDOWS UPDATE</span> · REBOOT PENDING · ACTIVE DIRECTORY · SYSVOL · NETLOGON ·
+    <span>LECTURE SEULE</span> · REPADMIN · PENDINGFILERENAMEOPERATIONS · DOUBLE REBOOT · CW NOTE ·
+    <span>DISCUSSION CLIENT</span> · TEAMS NOTICE · POST-CHECK DC · RMM ALERT ·
+    <span>WINDOWS UPDATE</span> · REBOOT PENDING · ACTIVE DIRECTORY · SYSVOL · NETLOGON ·
+    <span>LECTURE SEULE</span> · REPADMIN · PENDINGFILERENAMEOPERATIONS · DOUBLE REBOOT · CW NOTE ·
+    <span>DISCUSSION CLIENT</span> · TEAMS NOTICE · POST-CHECK DC · RMM ALERT ·
+  </div>
+</div>
+<section class="problem s-pad">
+<div class="problem-inner">
+<div>
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+<div class="s-title">Une alerte RMM<br/>sur un DC,<br/><em>pas un simple reboot.</em></div>
+<p class="s-sub" style="margin-bottom: 24px;">
+        Le ticket démarre comme une alerte de supervision classique :
+        échec d’installation Windows Update et redémarrage requis sur un contrôleur de domaine.
+      </p>
+<p class="s-sub">
+        La vraie difficulté ne réside pas dans la commande de reboot. Elle réside dans la capacité
+        à <strong>séquencer correctement l’intervention</strong>, distinguer la cause exacte du pending reboot,
+        appliquer le bon niveau de vérification AD/DNS, puis produire une <strong>clôture MSP propre et crédible</strong>.
+      </p>
+</div>
+<div>
+<div class="problem-pains">
+<div class="pain-item">
+<div class="pain-icon">01</div>
+<div class="pain-text"><strong>L’alerte initiale pointait Windows Update</strong> — un premier redémarrage était justifié par le RMM.</div>
+</div>
+<div class="pain-item">
+<div class="pain-icon">02</div>
+<div class="pain-text"><strong>Le serveur était un contrôleur de domaine</strong> — donc le post-check devait aller au-delà d’un simple “ça ping”.</div>
+</div>
+<div class="pain-item">
+<div class="pain-icon">03</div>
+<div class="pain-text"><strong>Après le premier reboot, le DC était sain</strong> — mais un pending reboot résiduel demeurait présent.</div>
+</div>
+<div class="pain-item">
+<div class="pain-icon">04</div>
+<div class="pain-text"><strong>La cause finale n’était pas CBS</strong> — il fallait corriger la narration technique et retenir <strong>PendingFileRenameOperations</strong>.</div>
+</div>
+<div class="pain-item">
+<div class="pain-icon">05</div>
+<div class="pain-text"><strong>La valeur se joue dans la clôture</strong> — relier proprement l’alerte RMM, les deux redémarrages et la validation finale dans les livrables CW.</div>
+</div>
+</div>
+</div>
+</div>
+<div style="max-width:1160px;margin:56px auto 0">
+<div class="terminal">
+<div class="t-bar">
+<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+<div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · DOMAIN CONTROLLER REBOOT PENDING</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div>
+<div class="t-line t-gray">// BILLET BRUT REÇU</div>
+<div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">SCRIPT MONITOR / RMM</span></div>
+<div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">WINDOWS UPDATE INSTALLATION FAILURE</span></div>
+<div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">CONTRÔLEUR DE DOMAINE PRINCIPAL</span></div>
+<div class="t-line"><span class="t-gold">ACTION 1 :</span> <span class="t-white">REBOOT CONTRÔLÉ POUR WU PENDING</span></div>
+<div class="t-line" style="margin-top:12px"><span class="t-gray">// APRÈS LE PREMIER REBOOT</span></div>
+<div class="t-line t-silver">AD/DNS opérationnels.</div>
+<div class="t-line t-silver">SYSVOL et NETLOGON présents.</div>
+<div class="t-line t-silver">PendingFileRenameOperations encore actif.</div>
+</div>
+<div>
+<div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+<div class="t-line" style="margin-top:8px"><span class="t-green">✓ Cause WU initiale documentée</span></div>
+<div class="t-line"><span class="t-green">✓ Cause résiduelle requalifiée correctement</span></div>
+<div class="t-line"><span class="t-green">✓ Second reboot contrôlé exécuté</span></div>
+<div class="t-line"><span class="t-green">✓ Post-check final validé</span></div>
+<div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">DC STABLE + CLÔTURE CW EXEMPLAIRE</span></div>
+<div class="t-line t-gold">▌<span class="cursor"></span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="s-pad" id="diagnostic">
+<div class="content-wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+<div class="s-title"><strong>Un cas simple en apparence,</strong><br/>une exécution <em>de niveau N3.</em></div>
+<p class="s-sub">
+      Le cas démontre une capacité rare dans les produits MSP : non seulement guider l’opération,
+      mais aussi produire la bonne explication technique et la bonne formulation de clôture sans contradiction.
+    </p>
+<table class="case-table">
+<thead>
+<tr>
+<th>Élément</th>
+<th>Constat</th>
+<th>Impact</th>
+<th>Décision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Alerte initiale</strong></td>
+<td>Le monitor RMM signalait un état de redémarrage requis lié à Windows Update</td>
+<td>Un premier redémarrage était cohérent avec la demande initiale</td>
+<td>Documenter explicitement le premier reboot comme lié à Windows Update</td>
+</tr>
+<tr>
+<td><strong>Post-check DC #1</strong></td>
+<td>DNS, KDC, Netlogon, NTDS et W32Time étaient démarrés; SYSVOL et NETLOGON étaient présents</td>
+<td>Le rôle Active Directory était revenu opérationnel après le premier redémarrage</td>
+<td>Poursuivre l’analyse sans conclure trop tôt</td>
+</tr>
+<tr>
+<td><strong>Réplication et journaux</strong></td>
+<td>Le résumé de réplication ne montrait pas d’échec apparent et aucune erreur critique récente n’était visible dans les journaux contrôlés</td>
+<td>Pas d’indice d’impact AD/DNS post-reboot</td>
+<td>Valider que le problème restant n’est pas un problème de rôle DC</td>
+</tr>
+<tr>
+<td><strong>Cause résiduelle</strong></td>
+<td>Après le premier reboot, CBS et WU étaient faux, mais PendingFileRenameOperations demeurait actif</td>
+<td>La narration technique devait être corrigée pour éviter une mauvaise clôture</td>
+<td>Retenir PendingFileRenameOperations comme cause du second reboot</td>
+</tr>
+<tr>
+<td><strong>Remédiation finale</strong></td>
+<td>Un second redémarrage contrôlé a été lancé pour finaliser les renommages/remplacements de fichiers en attente</td>
+<td>La transaction de maintenance pouvait se terminer proprement</td>
+<td>Rejouer le post-check minimal du DC et les flags de pending reboot</td>
+</tr>
+<tr>
+<td><strong>Validation finale</strong></td>
+<td>Tous les flags sont revenus à False avec les services DC critiques opérationnels</td>
+<td>Le serveur est stabilisé et clôturable sans réserve</td>
+<td>Produire la note interne et la discussion client-safe en mentionnant les deux redémarrages</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="s-pad" id="pipeline">
+<div class="modules-header">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+<div class="s-title"><strong>10 étapes.</strong><br/><em>Aucune ambiguïté.</em></div>
+<p class="s-sub">La force de l’agent se voit ici : gérer l’opération, corriger la cause retenue, puis transformer l’intervention en livrables premium.</p>
+</div>
+<div class="modules-grid">
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 01</div>
+<div class="mod-icon">◎</div>
+<div class="mod-name">Ingestion</div>
+<div class="mod-sub">Lecture du billet RMM</div>
+<div class="mod-desc">Le signal de supervision est converti en intervention exploitable : type d’alerte, serveur visé, nature Windows Update.</div>
+<div class="mod-agents">Signal brut → cas structuré</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 02</div>
+<div class="mod-icon">◇</div>
+<div class="mod-name">Qualification</div>
+<div class="mod-sub">Triage N3</div>
+<div class="mod-desc">Le cas est reconnu comme maintenance corrective sur un actif critique, avec règles spécifiques DC et lecture seule initiale.</div>
+<div class="mod-agents">Priorité juste</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 03</div>
+<div class="mod-icon">⌁</div>
+<div class="mod-name">Action #1</div>
+<div class="mod-sub">Premier reboot</div>
+<div class="mod-desc">Le premier redémarrage est exécuté pour traiter le reboot pending lié à Windows Update, tel que signalé par l’outil RMM.</div>
+<div class="mod-agents">Cause initiale assumée</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 04</div>
+<div class="mod-icon">□</div>
+<div class="mod-name">Post-check DC</div>
+<div class="mod-sub">Validation de rôle</div>
+<div class="mod-desc">Les services AD/DNS, les partages SYSVOL/NETLOGON, la réplication et les journaux critiques sont validés après redémarrage.</div>
+<div class="mod-agents">État DC confirmé</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 05</div>
+<div class="mod-icon">△</div>
+<div class="mod-name">Requalification</div>
+<div class="mod-sub">Cause exacte</div>
+<div class="mod-desc">L’agent distingue correctement la cause résiduelle : non pas CBS, mais PendingFileRenameOperations.</div>
+<div class="mod-agents">Précision narrative</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 06</div>
+<div class="mod-icon">✦</div>
+<div class="mod-name">Action #2</div>
+<div class="mod-sub">Second reboot</div>
+<div class="mod-desc">Un second redémarrage contrôlé finalise les renommages/remplacements de fichiers encore en attente.</div>
+<div class="mod-agents">Transaction complétée</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 07</div>
+<div class="mod-icon">↺</div>
+<div class="mod-name">Validation finale</div>
+<div class="mod-sub">Zéro pending</div>
+<div class="mod-desc">Tous les flags de reboot pending reviennent à False et le rôle DC reste stable.</div>
+<div class="mod-agents">Résolution prouvée</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 08</div>
+<div class="mod-icon">✉</div>
+<div class="mod-name">Clôture CW</div>
+<div class="mod-sub">Interne + facturable</div>
+<div class="mod-desc">La note interne et la discussion client-safe reprennent la chronologie exacte des deux redémarrages sans contradiction.</div>
+<div class="mod-agents">Prêt à coller</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 09</div>
+<div class="mod-icon">◆</div>
+<div class="mod-name">Coordination</div>
+<div class="mod-sub">Notice Teams</div>
+<div class="mod-desc">La communication opérationnelle est synchronisée avec le billet et peut être publiée immédiatement à l’interne.</div>
+<div class="mod-agents">Équipe alignée</div>
+</div>
+<div class="mod-card">
+<div class="mod-n">ÉTAPE 10</div>
+<div class="mod-icon">◈</div>
+<div class="mod-name">Capitalisation</div>
+<div class="mod-sub">Page marketing premium</div>
+<div class="mod-desc">L’intervention devient une preuve produit : diagnostic, gouvernance, clôture MSP et design de lancement réunis sur une seule page.</div>
+<div class="mod-agents">Vente + opérations</div>
+</div>
+</div>
+</section>
+<section class="arsenal s-pad" id="livrables">
+<div style="max-width:1160px;margin:0 auto 56px">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+<div class="s-title">Ce que le cas<br/><em>démontre vraiment.</em></div>
+<p class="s-sub">Au-delà du redémarrage, le cas prouve la capacité de l’agent à gouverner une intervention critique et à produire une clôture MSP de haut niveau.</p>
+</div>
+<div class="arsenal-grid">
+<div class="arsenal-block">
+<div class="arsenal-n">01</div>
+<div class="arsenal-unit">Actions effectuées</div>
+<div class="arsenal-desc">Prise en charge de l’alerte, premier reboot Windows Update, post-check DC, requalification du pending reboot résiduel, second reboot, validation finale.</div>
+<ul class="arsenal-list">
+<li>Lecture du billet RMM</li>
+<li>Premier redémarrage contrôlé</li>
+<li>Validation AD/DNS</li>
+<li>Cause résiduelle identifiée</li>
+<li>Second redémarrage contrôlé</li>
+</ul>
+</div>
+<div class="arsenal-block">
+<div class="arsenal-n">02</div>
+<div class="arsenal-unit">Garde-fous</div>
+<div class="arsenal-desc">Le produit suit les règles d’exploitation critique plutôt que d’appliquer un automatisme aveugle.</div>
+<ul class="arsenal-list">
+<li>Lecture seule avant ré-analyse</li>
+<li>Post-check DC obligatoire</li>
+<li>1 serveur critique à la fois</li>
+<li>Cause technique explicitée</li>
+<li>Pas d’invention dans la clôture</li>
+</ul>
+</div>
+<div class="arsenal-block">
+<div class="arsenal-n">03</div>
+<div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+<div class="arsenal-desc">Le cas se convertit immédiatement en livrables opérationnels et commerciaux.</div>
+<ul class="arsenal-list">
+<li>CW Note Interne</li>
+<li>CW Discussion</li>
+<li>Notice Teams</li>
+<li>Résumé post-check final</li>
+<li>Page de cas web premium</li>
+</ul>
+</div>
+<div class="arsenal-block">
+<div class="arsenal-n">04</div>
+<div class="arsenal-unit">État final</div>
+<div class="arsenal-desc">L’intervention se termine avec un état technique démontrable et non présumé.</div>
+<ul class="arsenal-list">
+<li>Services critiques démarrés</li>
+<li>SYSVOL et NETLOGON présents</li>
+<li>Réplication sans échec apparent</li>
+<li>Pending reboot à False</li>
+<li>Serveur stabilisé</li>
+</ul>
+</div>
+<div class="arsenal-block">
+<div class="arsenal-n">05</div>
+<div class="arsenal-unit">Démonstration produit</div>
+<div class="arsenal-desc">Ce cas expose une vraie différence : l’agent ne fait pas qu’aider techniquement, il produit une exécution présentable au marché MSP.</div>
+<ul class="arsenal-list">
+<li>Narration techniquement juste</li>
+<li>Discernement N3 visible</li>
+<li>Clôture facturable maîtrisée</li>
+<li>Signal de maturité MSP</li>
+<li>Preuve de lancement crédible</li>
+</ul>
+</div>
+<div class="arsenal-block">
+<div class="arsenal-n">06</div>
+<div class="arsenal-unit">Valeur business</div>
+<div class="arsenal-desc">La page parle autant aux opérations qu’aux ventes : elle transforme un ticket réel en argument premium pour le produit MSP.</div>
+<ul class="arsenal-list">
+<li>Cas réel anonymisé</li>
+<li>Facile à intégrer au site</li>
+<li>Réutilisable en démo</li>
+<li>Aligné avec le branding EAIA</li>
+<li>Compatible lancement produit</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="doc-section">
+<div class="doc-wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+<div class="s-title"><strong>Les sorties réelles,</strong><br/><em>dans le bon format.</em></div>
+<p class="s-sub">
+      Cette section reprend les livrables clés du cas dans un format directement exploitable pour un démonstrateur public.
+      Le contexte est anonymisé, mais la structure opérationnelle est fidèle à l’intervention.
+    </p>
+<div class="doc-grid">
+<div class="doc-card">
+<div class="doc-top">
+<div>
+<div class="doc-label">Livrable 01</div>
+<div class="doc-title">CW Note Interne</div>
+</div>
+<div class="doc-copy">Interne · complet</div>
+</div>
+<div class="doc-pre">Billet : #0000000
+Client : Municipalité [anonymisée]
+Site : Site principal
+Asset : Contrôleur de domaine Windows
+Type : Alerte RMM / Windows Update Installation Failure
+Statut : Résolu après validation finale
+
+Contexte
+---------
+Alerte RMM reçue indiquant un état de redémarrage requis sur le contrôleur de domaine,
+initialement associé à Windows Update.
+
+Chronologie
+---------
+- Premier redémarrage effectué pour traiter le reboot pending initial lié à Windows Update.
+- Validation post-reboot #1 :
+  - services critiques AD/DNS opérationnels
+  - partages SYSVOL et NETLOGON présents
+  - aucune erreur critique observée dans les journaux vérifiés
+- Un reboot pending résiduel demeure après le premier redémarrage.
+- Analyse complémentaire :
+  - CBS = False
+  - WU = False
+  - PendingFileRenameOperations = True
+- Cause retenue pour le pending reboot résiduel :
+  PendingFileRenameOperations, indiquant des renommages/remplacements de fichiers encore en attente.
+- Second redémarrage contrôlé exécuté pour compléter la transaction de maintenance.
+- Validation finale :
+  - DNS, KDC, Netlogon, NTDS et W32Time = Running
+  - SYSVOL et NETLOGON présents
+  - résumé de réplication AD sans échec apparent
+  - CBS = False
+  - WU = False
+  - PendingFileRenameOperations = False
+  - PendingReboot = False
+
+Conclusion technique
+---------
+Serveur revenu stable après redémarrages contrôlés successifs.
+Le reboot pending initial lié à Windows Update puis le pending reboot résiduel lié aux renommages de fichiers sont résolus.
+Les services critiques AD/DNS ont été validés opérationnels.</div>
+</div>
+<div class="doc-card">
+<div class="doc-top">
+<div>
+<div class="doc-label">Livrable 02</div>
+<div class="doc-title">CW Discussion</div>
+</div>
+<div class="doc-copy">Client-safe · facturable</div>
+</div>
+<div class="doc-pre">Préparation et découverte.
+Prendre connaissance de la demande et connexion à la documentation de l'entreprise.
+
+TRAVAUX EFFECTUÉS:
+---------
+• Analyse de l’alerte de supervision signalant un redémarrage requis à la suite du processus de mises à jour Windows
+• Exécution d’un premier redémarrage contrôlé afin de finaliser l’état de redémarrage en attente associé à Windows Update
+• Vérification post-redémarrage des services critiques du contrôleur de domaine ainsi que des fonctions essentielles du domaine
+• Investigation complémentaire d’un état résiduel de redémarrage requis causé par des changements système encore en attente de finalisation
+• Exécution d’un second redémarrage contrôlé pour compléter la finalisation des fichiers en attente
+• Validation finale de la stabilité du serveur et confirmation du retour normal des fonctions critiques
+
+RÉSULTAT:
+---------
+• Contrôleur de domaine revenu pleinement opérationnel après finalisation des redémarrages requis
+• Services critiques du domaine confirmés fonctionnels après intervention
+• Aucun état de redémarrage requis résiduel observé à la validation finale
+• Alerte considérée résolue et serveur stabilisé</div>
+</div>
+<div class="doc-card">
+<div class="doc-top">
+<div>
+<div class="doc-label">Livrable 03</div>
+<div class="doc-title">Notice Teams</div>
+</div>
+<div class="doc-copy">Coordination · opération</div>
+</div>
+<div class="doc-pre">🔧 Maintenance en cours — Billet : #0000000
+Client : Municipalité [anonymisée]
+Tâche principale : Validation post-redémarrage du contrôleur de domaine après alerte Windows Update Installation Failure
+Impact : Aucun impact confirmé pour le moment — vérifications post-reboot en cours
+
+✅ Résolution confirmée — Billet : #0000000
+Client : Municipalité [anonymisée]
+Tâche principale : Finalisation des redémarrages requis et validation complète du contrôleur de domaine
+Impact : Services critiques confirmés opérationnels; aucun reboot pending résiduel observé à la validation finale</div>
+</div>
+<div class="doc-card">
+<div class="doc-top">
+<div>
+<div class="doc-label">Livrable 04</div>
+<div class="doc-title">Résumé post-check final</div>
+</div>
+<div class="doc-copy">Technique · synthèse</div>
+</div>
+<div class="doc-pre">Services critiques validés
+---------
+DNS      Running Automatic
+KDC      Running Automatic
+Netlogon Running Automatic
+NTDS     Running Automatic
+W32Time  Running Automatic
+
+Partages système validés
+---------
+NETLOGON présent
+SYSVOL présent
+
+Réplication
+---------
+Résumé de réplication sans échec apparent
+
+Flags de redémarrage
+---------
+CBS                         : False
+WU                          : False
+PendingFileRenameOperations : False
+PendingReboot               : False</div>
+</div>
+</div>
+</div>
+</section>
+<div class="quote-section">
+<div class="quote-mark">"</div>
+<p class="quote-text">
+    La maturité MSP ne se résume pas à <strong>exécuter un redémarrage</strong>.
+    Elle se voit dans la capacité à <strong>qualifier la bonne cause, valider le bon rôle serveur, puis raconter l’intervention sans erreur</strong>.
+  </p>
+<div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+<section class="cta-section" id="contact">
+<div class="cta-orb"></div>
+<h2>Tu veux des cas<br/><em>comme celui-ci</em><br/>sur ton site de lancement ?</h2>
+<p>
+    EAIA transforme des billets MSP réels en pages premium prêtes pour le site, la vente ou la démonstration produit —
+    sans perdre la rigueur technique qui convainc les équipes d’opérations.
+  </p>
+<a class="btn-gold" href="mailto:contact@eaia.ca">Demander une démo</a>
+<p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+<footer>
+<div class="footer-brand">EA<span>|</span><em>IA</em></div>
+<div class="footer-right">
+    MSP Intelligence IT — Cas double reboot sur contrôleur de domaine<br/>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+</body>
+</html>

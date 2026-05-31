@@ -1,0 +1,50 @@
+MSP_OS_ENGINE — AUDIT EXTRACTION / ANONYMISATION
+
+Casepages extraites: 20
+Source locale: EAIA_logo_top_uniforme_2026-05-14.zip + landing MSP corrigée
+
+OK — aucun numéro de billet réel détecté par les motifs de scan.
+
+Fichiers inclus:
+- .nojekyll
+- FACEBOOK-Bandeau-1.png
+- FACEBOOK-Bandeau.png
+- LOGO.png
+- README.md
+- assets/images/README.md
+- assets/images/eaia-logo-header-mark.png
+- assets/images/eaia-logo-officiel.png
+- assets/images/logo-ea-ia-with-bar.png
+- assets/images/logo-ea-ia.png
+- img/FACEBOOK-Bandeau-0.png
+- img/FACEBOOK-Bandeau-1.png
+- img/FACEBOOK-Bandeau.png
+- img/LOGO.png
+- img/og-image.png
+- index.html
+- msp-preview.html
+- og-image-1280x480.png
+- og-image-linkedin.png
+- og-image.png
+- pages/eaia-msp-resolution-billet-agent.html
+- pages/eaia_case_ad_replication_multisites.html
+- pages/eaia_case_ad_replication_sysvol_rodc.html
+- pages/eaia_case_auvik_esxi_supervision.html
+- pages/eaia_case_dc_double_reboot.html
+- pages/eaia_case_msp_auvik_esxi_watchguard.html
+- pages/eaia_case_ntfs_veeam_bdr.html
+- pages/eaia_case_pending_reboot_postcheck_dc_anonymise.html
+- pages/eaia_casepage_msp_site_down_livrables_public.html
+- pages/eaia_casepage_pending_reboot_fileserver.html
+- pages/eaia_casepage_veeam_backup_warning_public.html
+- pages/eaia_casepage_windows_postcheck_public (1).html
+- pages/msp-capacite-resolution-11-serveurs.html
+- pages/msp-case-dhcp-scope.html
+- pages/msp-case-exchange-transport.html
+- pages/msp-case-incident-noc-hyperv.html
+- pages/msp-case-page-client-anonymise.html
+- pages/msp-case-qnap-backupradar.html
+- pages/msp-case-resolutionsql-performance.html
+- pages/msp-case-windows-postcheck.html
+- pages/msp-demos.html
+- scan-anonymisation.ps1

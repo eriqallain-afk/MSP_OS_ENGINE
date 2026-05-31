@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>EA|IA — Cas MSP · BackupRadar QNAP Wasabi</title>
+<meta content="Cas MSP détaillé : résolution structurée BackupRadar / QNAP HBS / Wasabi avec livrables ConnectWise." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=JetBrains+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;
+  --gold:#C8952A;--gold-light:#E4B84A;--gold-deep:#8F6818;--gold-dim:rgba(200,149,42,.145);--gold-line:rgba(200,149,42,.30);
+  --silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,.56);--muted2:rgba(255,255,255,.25);
+  --border:rgba(200,149,42,.18);--border2:rgba(255,255,255,.08);--ok:#79D28B;--warn:#F2BE61;--bad:#F08072;--max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--black);color:var(--white);font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;overflow-x:hidden;line-height:1.65}a{color:inherit;text-decoration:none}body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}section,nav,footer,header,main{position:relative;z-index:1}.wrap{width:min(calc(100% - 48px),var(--max));margin:0 auto}.nav{display:flex;justify-content:space-between;align-items:center;gap:28px;padding:18px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}.nav-brand{display:flex;align-items:center;gap:14px;min-width:0}.nav-logo{height:48px;width:auto;max-width:178px;object-fit:contain;display:block;flex:0 0 auto}.nav-title{display:flex;flex-direction:column;gap:2px;min-width:0}.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;letter-spacing:4px;line-height:1;color:var(--silver-light);white-space:nowrap}.nav-name .ea{color:var(--gold-light)}.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,.62);letter-spacing:3px;text-transform:uppercase;white-space:nowrap}.nav-links{display:flex;gap:28px;list-style:none;align-items:center}.nav-links a{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--gold-light)}.nav-cta{border:1px solid var(--gold);color:var(--gold-light);padding:10px 24px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:.25s;white-space:nowrap}.nav-cta:hover{background:var(--gold);color:var(--black)}.hero{min-height:calc(100vh - 85px);display:flex;flex-direction:column;justify-content:center;padding:98px 64px 78px;overflow:hidden}.hero.compact{min-height:auto;padding-top:90px;padding-bottom:56px}.orb{position:absolute;top:-22%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,.08);pointer-events:none}.orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,.05)}.orb-glow{position:absolute;top:50%;right:3%;transform:translateY(-50%);width:520px;height:520px;background:radial-gradient(ellipse,rgba(200,149,42,.075) 0%,transparent 65%);pointer-events:none}.label{display:flex;align-items:center;gap:16px;margin-bottom:34px}.label-line{width:48px;height:1px;background:var(--gold)}.label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold-light);letter-spacing:4px;text-transform:uppercase}.eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}.hero h1,.display-title{font-family:'Cormorant Garamond',serif;font-size:clamp(54px,8vw,112px);font-weight:300;line-height:.95;letter-spacing:-1px;margin-bottom:16px;max-width:1000px}.hero h1 em,.display-title em,.s-title em{font-style:italic;color:var(--gold-light)}.hero h1 strong,.display-title strong,.s-title strong{font-weight:600;color:var(--white)}.product-tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:3px;margin:16px 0 34px;text-transform:uppercase}.hero-sub{font-size:17px;color:var(--muted);max-width:790px;line-height:1.78;margin-bottom:46px;font-weight:300}.hero-sub strong{color:var(--white);font-weight:600}.actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.btn-gold,.btn-outline,.btn-muted{display:inline-flex;align-items:center;justify-content:center;padding:15px 38px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:.25s;border-radius:0;cursor:pointer}.btn-gold{background:var(--gold);color:var(--black);border:1px solid var(--gold)}.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}.btn-outline{border:1px solid rgba(200,149,42,.42);color:var(--gold-light);background:transparent}.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}.btn-muted{border:1px solid var(--border2);color:var(--silver);background:rgba(255,255,255,.02)}.btn-muted:hover{border-color:var(--gold-line);color:var(--gold-light)}.metrics{display:flex;gap:0;margin:0 0 52px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}.metric{padding:20px 30px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px;min-width:138px}.metric:last-child{border-right:none}.metric-n{font-family:'Cormorant Garamond',serif;font-size:43px;font-weight:300;color:var(--gold-light);line-height:1}.metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px}.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold-light);text-transform:uppercase}.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-top:6px}.firm-products{display:flex;gap:2px;flex-wrap:wrap}.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,.16);color:rgba(200,149,42,.58);text-transform:uppercase}.firm-product.active{border-color:var(--gold);color:var(--gold-light);background:var(--gold-dim)}.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.22);white-space:nowrap}.ticker-inner span{color:rgba(200,149,42,.68)}@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}.s-pad{padding:96px 64px}.s-label{display:flex;align-items:center;gap:16px;margin-bottom:20px}.s-label-line{width:36px;height:1px;background:var(--gold)}.s-label-text{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold-light);letter-spacing:4px;text-transform:uppercase}.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:.95;letter-spacing:-.5px;margin-bottom:24px}.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.78;font-weight:300}.dark-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.split{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}.card-grid{max-width:var(--max);margin:56px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}.card-grid.four{grid-template-columns:repeat(4,1fr)}.card-grid.two{grid-template-columns:repeat(2,1fr)}.pro-card{background:var(--dark);padding:34px 28px;min-height:230px;transition:.25s;position:relative;overflow:hidden}.pro-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:.25s}.pro-card:hover{background:#0C0C0C}.pro-card:hover::after{transform:scaleX(1)}.card-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,.38);letter-spacing:2px;margin-bottom:18px;text-transform:uppercase}.card-icon{font-size:24px;margin-bottom:14px}.card-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:.4px;margin-bottom:7px;color:var(--white)}.card-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold-light);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}.card-desc{font-size:13.5px;color:var(--muted);line-height:1.68;font-weight:300;margin-bottom:16px}.card-link{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold-light);letter-spacing:1.5px;text-transform:uppercase;border-top:1px solid var(--border2);padding-top:14px;display:inline-block}.terminal{background:#050505;border:1px solid rgba(200,149,42,.25);padding:28px;position:relative}.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}.t-dot{width:9px;height:9px;border-radius:50%}.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.22);letter-spacing:2px}.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.74;margin-bottom:2px}.t-gray{color:rgba(255,255,255,.22)}.t-gold{color:var(--gold-light)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}.table-wrap{overflow:auto;border:1px solid var(--border);background:var(--dark);max-width:var(--max);margin:48px auto 0}table{width:100%;border-collapse:collapse}th,td{padding:16px 14px;border-bottom:1px solid var(--border2);vertical-align:top;text-align:left;font-size:13px}th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);background:#0B0B0B}td{color:var(--muted)}td strong{color:var(--silver-light)}.pipeline{max-width:var(--max);margin:48px auto 0;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}.step{background:var(--dark);padding:24px 20px;min-height:190px}.step-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}.step strong{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);font-weight:600;display:block;margin-bottom:8px}.step p{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300}.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center}.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,.08);line-height:.5;margin-bottom:20px;font-style:italic}.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,34px);font-weight:300;font-style:italic;max-width:900px;margin:0 auto 28px;line-height:1.45;color:var(--silver-light)}.quote-text strong{color:var(--gold-light);font-style:normal}.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}.list-grid{max-width:var(--max);margin:50px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}.list-card{background:var(--dark);padding:30px}.list-card h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:14px}.list-card p{color:var(--muted);margin-bottom:16px}.list-card ul{list-style:none;display:grid;gap:10px}.list-card li{padding-left:18px;position:relative;color:var(--silver);font-size:14px}.list-card li::before{content:'•';position:absolute;left:0;color:var(--gold-light)}.output-grid{max-width:var(--max);margin:50px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}.output-card{background:var(--dark);padding:28px;min-height:320px}.output-card h3{font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:10px}.output-card .tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px}.output-card .mini{font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.7;color:var(--silver);white-space:pre-wrap;background:#030303;border:1px solid var(--border);padding:16px;max-height:340px;overflow:auto}.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.badge{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 10px;border:1px solid var(--border);color:var(--silver)}.badge.ok{color:var(--ok);border-color:rgba(121,210,139,.35)}.badge.warn{color:var(--warn);border-color:rgba(242,190,97,.35)}.badge.bad{color:var(--bad);border-color:rgba(240,128,114,.35)}.cta-section{padding:112px 64px;text-align:center;overflow:hidden}.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:.95;margin-bottom:28px}.cta-section h2 em{font-style:italic;color:var(--gold-light)}.cta-section p{color:var(--muted);font-size:17px;margin:0 auto 44px;max-width:700px;line-height:1.75;font-weight:300}.small-note{max-width:var(--max);margin:22px auto 0;color:var(--muted2);font-size:12px}.two-col-note{max-width:var(--max);margin:50px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;gap:18px;background:var(--dark)}.footer-logo{height:52px;width:auto;object-fit:contain}.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;text-transform:uppercase}@media(max-width:1100px){.card-grid,.card-grid.four,.output-grid{grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.split,.list-grid,.two-col-note{grid-template-columns:1fr}.nav-links{display:none}.metrics{width:100%}.metric{flex:1 1 50%;border-bottom:1px solid var(--border)}}@media(max-width:720px){.nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,footer{padding-left:24px;padding-right:24px}.nav-title{display:none}.nav-logo{height:44px;max-width:152px}.hero h1,.display-title{font-size:52px}.card-grid,.card-grid.four,.card-grid.two,.pipeline,.output-grid{grid-template-columns:1fr}.firm-band{flex-direction:column;align-items:flex-start}.metrics{display:grid;width:100%;grid-template-columns:1fr}.metric{border-right:none}.actions{align-items:stretch}.btn-gold,.btn-outline,.btn-muted{width:100%;padding-left:22px;padding-right:22px}.footer-right{text-align:left}footer{flex-direction:column;align-items:flex-start}}
+
+
+/* EAIA-UNIFORM-HEADER-LOGO-TOP-2026-05-14
+   Logo EA IA en haut + slogan seulement à droite.
+   Le footer ne porte plus le logo afin d'éviter le déséquilibre visuel. */
+nav, .nav {
+  min-height: 78px;
+}
+.nav-brand {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-width: 0 !important;
+  text-decoration: none !important;
+}
+.nav-logo,
+.nav-logo-img {
+  height: 54px !important;
+  width: auto !important;
+  max-width: 220px !important;
+  object-fit: contain !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+}
+.nav-brand > .nav-tagline {
+  display: block !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 2.7px !important;
+  text-transform: uppercase !important;
+  color: rgba(236,205,133,.88) !important;
+  white-space: nowrap !important;
+  border-left: 1px solid rgba(200,149,42,.34) !important;
+  padding-left: 17px !important;
+  margin: 0 !important;
+}
+.footer-logo,
+footer img.footer-logo {
+  display: none !important;
+}
+@media (max-width: 720px) {
+  nav, .nav { min-height: 70px; }
+  .nav-brand { gap: 12px !important; }
+  .nav-logo,
+  .nav-logo-img { height: 44px !important; max-width: 178px !important; }
+  .nav-brand > .nav-tagline {
+    font-size: 8px !important;
+    letter-spacing: 1.45px !important;
+    white-space: normal !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    max-width: 210px !important;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a aria-label="EA IA — Accueil" class="nav-brand" href="../index.html">
+    <img alt="EA IA" class="nav-logo" src="../assets/images/eaia-logo-header-mark.png"/>
+    <span class="nav-tagline">Intelligence artificielle opérationnelle</span>
+  </a>
+<ul class="nav-links">
+<li><a href="msp-demos.html">Cas MSP</a></li>
+<li><a href="#lecture">Lecture agent</a></li>
+<li><a href="#pipeline">Pipeline</a></li>
+<li><a href="#livrables">Livrables</a></li>
+</ul>
+<a class="nav-cta" href="mailto:contact@eaia.ca?subject=Demo%20MSP%20Intelligence%20IT">Démo — 30 min</a>
+</nav>
+<section class="hero compact" id="top">
+<div class="orb"></div><div class="orb-glow"></div>
+<div class="label"><div class="label-line"></div><div class="label-text">Démonstrateur public · MSP Intelligence IT · Backup &amp; DR</div></div>
+<div class="eyebrow">Cas de résolution — Backup / DR</div>
+<h1>Une alerte backup.<br/><em>Un triage guidé.</em><br/><strong>Des livrables prêts.</strong></h1>
+<div class="product-tag">BACKUPRADAR · QNAP HBS · WASABI · CONNECTWISE · TEAMS</div>
+<p class="hero-sub"><strong>Cette page montre comment un agent Backup &amp; DR accompagne le technicien étape par étape :</strong> cadrage de l’alerte, validation croisée QNAP / Wasabi / notification, détection d’un problème probable de corrélation et production de notes uniformes.</p>
+<div class="metrics"><div class="metric"><div class="metric-n">1</div><div class="metric-l">Incident cadré</div></div><div class="metric"><div class="metric-n">3</div><div class="metric-l">Sources vérifiées</div></div><div class="metric"><div class="metric-n">0</div><div class="metric-l">Action destructive</div></div><div class="metric"><div class="metric-n">3</div><div class="metric-l">Livrables</div></div><div class="metric"><div class="metric-n">1</div><div class="metric-l">Hypothèse forte</div></div><div class="metric"><div class="metric-n">✓</div><div class="metric-l">Backup semble OK</div></div></div>
+<div class="actions"><a class="btn-gold" href="#lecture">Voir la lecture agent</a><a class="btn-outline" href="#livrables">Voir les livrables</a><a class="btn-muted" href="msp-demos.html">Retour aux cas MSP</a></div>
+</section>
+<div class="firm-band">
+<div><div class="firm-band-name">Cas BackupRadar / QNAP / Wasabi — version publique anonymisée</div><div class="firm-band-desc">alerte no result · job HBS réussi · corrélation supervision · validation manuelle</div></div>
+<div class="firm-products"><span class="firm-product active">BackupRadar</span><span class="firm-product active">QNAP HBS</span><span class="firm-product active">Wasabi</span><span class="firm-product active">CW</span><span class="firm-product active">Teams</span><span class="firm-product active">Backup &amp; DR</span></div>
+</div>
+<div class="ticker"><div class="ticker-inner"><span>BACKUPRADAR</span> · QNAP HBS 3 · <span>WASABI</span> · CONNECTWISE · <span>TEAMS</span> · RUNBOOKS · <span>NOTE INTERNE</span> · DISCUSSION CLIENT · <span>BACKUPRADAR</span> · QNAP HBS 3 · <span>WASABI</span> · CONNECTWISE · <span>TEAMS</span> · RUNBOOKS · <span>NOTE INTERNE</span> · DISCUSSION CLIENT</div></div>
+<section class="s-pad dark-band" id="lecture">
+<div class="split">
+<div>
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Billet source anonymisé</div></div>
+<div class="s-title">Du signal brut<br/><em>au vrai besoin.</em></div>
+<p class="s-sub">L’alerte initiale semblait pointer vers un échec de sauvegarde. L’agent évite de conclure trop tôt : il vérifie le moteur réel, la destination, la notification et la corrélation attendue.</p>
+<div class="terminal" style="margin-top:28px"><div class="t-bar"><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span><span class="t-bar-title">SIGNAL-BRUT · PUBLIC ANONYMISÉ</span></div><div class="t-line t-silver" style="white-space:pre-wrap">Sujet : Alerte BackupRadar — Hybrid Backup Sync: No Result
+Client : client anonymisé
+Technologie : QNAP HBS vers Wasabi
+Job observé : JOB-CLOUD-DAILY
+Path cible : CLOUD-STORAGE-QUOTIDIEN
+Notification : envoyée vers BackupRadar
+Statut réel observé : fin de tâche avec succès
+Hypothèse : mismatch de corrélation côté supervision</div></div>
+</div>
+<div class="terminal">
+<div class="t-bar"><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span><span class="t-bar-title">MSP-CASE · LECTURE AGENT</span></div>
+<div class="t-line t-gray">// BILLET ACTIF</div><div class="t-line t-gold">ALERTE : Hybrid Backup Sync — No Result</div><div class="t-line t-silver">L’absence de résultat corrélé ne prouve pas un échec de backup.</div><div class="t-line t-green">✓ Job HBS visible et terminé avec succès</div><div class="t-line t-green">✓ Notification envoyée vers BackupRadar</div><div class="t-line t-red">✗ Identifiant surveillé et nom de job non parfaitement alignés</div><div class="t-line t-silver">Cause probable : matching / parsing côté supervision</div>
+<div class="badge-row"><span class="badge warn">No Result</span><span class="badge ok">Job HBS success</span><span class="badge warn">Matching supervision</span></div>
+</div>
+</div>
+</section>
+<section class="s-pad">
+<div class="split">
+<div class="list-card">
+<h3>Ce que l’agent comprend vraiment</h3>
+<p>Le billet est reformulé en décisions techniques, pas simplement résumé.</p>
+<ul><li>BackupRadar signale une absence de résultat corrélé, pas nécessairement un échec de sauvegarde.</li><li>Veeam n’est pas le moteur du backup visé; la piste doit être recentrée sur QNAP HBS.</li><li>Le nom du job, le path Wasabi et le sujet de notification doivent correspondre aux règles de corrélation.</li><li>La validation finale exige un test manuel ou l’observation du prochain cycle.</li></ul>
+</div>
+<div class="list-card">
+<h3>Risques et garde-fous</h3>
+<p>Le modèle commun force la discipline MSP : faits, limites, validation et sorties adaptées.</p>
+<ul><li>Ne pas déclarer une panne backup tant que HBS n’est pas vérifié.</li><li>Ne pas modifier plusieurs éléments à la fois.</li><li>Ne pas exposer client, destinataires, clés ou chemins sensibles dans la page publique.</li><li>Documenter clairement “fonctionnel probable” vs “validation finale en cours”.</li></ul>
+</div>
+</div>
+</section>
+<section class="s-pad dark-band" id="diagnostic">
+<div class="wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+<div class="s-title"><strong>Des constats</strong><br/>transformés en <em>décision.</em></div>
+<p class="s-sub">Le diagnostic compare plusieurs sources avant de conclure. C’est précisément la valeur de l’agent : empêcher une mauvaise piste et produire un récit vérifiable.</p>
+</div>
+<div class="table-wrap"><table><thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead><tbody><tr><td><strong>Alerte BackupRadar</strong></td><td>Hybrid Backup Sync remonte No Result.</td><td>Le monitor ne corrèle pas un résultat attendu.</td><td>Ne pas conclure à un échec sans lire HBS.</td></tr><tr><td><strong>Veeam</strong></td><td>Services et jobs non bloquants pour ce cas.</td><td>Piste secondaire non pertinente au moteur surveillé.</td><td>Recentrer sur QNAP HBS.</td></tr><tr><td><strong>QNAP HBS</strong></td><td>Job visible et destination Wasabi confirmée.</td><td>Le backup semble fonctionner.</td><td>Vérifier le statut et la notification exacte.</td></tr><tr><td><strong>Notification</strong></td><td>Message de succès envoyé vers BackupRadar.</td><td>La supervision reçoit quelque chose mais peut ne pas matcher.</td><td>Comparer sujet, nom de job et identifiant monitor.</td></tr><tr><td><strong>Correction</strong></td><td>Sujet de notification ajusté et test manuel lancé.</td><td>Réduit le mismatch de corrélation.</td><td>Attendre validation du résultat côté supervision.</td></tr></tbody></table></div>
+</section>
+<section class="s-pad" id="pipeline">
+<div class="wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline agent</div></div>
+<div class="s-title"><strong>Une méthode.</strong><br/><em>Pas de l’improvisation.</em></div>
+<p class="s-sub">Le workflow protège la qualité du diagnostic : cadrer, écarter la mauvaise piste, confirmer la vraie technologie, comparer et tester.</p>
+</div>
+<div class="pipeline"><div class="step"><div class="step-n">Étape 01</div><strong>Cadrer</strong><p>Identifier que le billet vise BackupRadar et QNAP HBS, pas un incident Veeam général.</p></div><div class="step"><div class="step-n">Étape 02</div><strong>Écarter</strong><p>Vérifier Veeam uniquement pour éviter la mauvaise piste.</p></div><div class="step"><div class="step-n">Étape 03</div><strong>Confirmer</strong><p>Lire HBS 3, identifier le job réel et la destination Wasabi.</p></div><div class="step"><div class="step-n">Étape 04</div><strong>Comparer</strong><p>Comparer nom du job, path cible et contenu exact de la notification.</p></div><div class="step"><div class="step-n">Étape 05</div><strong>Ajuster</strong><p>Modifier le sujet de courriel pour améliorer la corrélation.</p></div><div class="step"><div class="step-n">Étape 06</div><strong>Tester</strong><p>Lancer un test manuel et garder le statut en validation.</p></div></div>
+<div class="card-grid four"><div class="pro-card"><div class="card-n">Capacité 01</div><div class="card-icon">🧭</div><div class="card-title">Triage structuré</div><div class="card-sub">lecture seule</div><div class="card-desc">L’agent isole le périmètre réel et évite les détours inutiles.</div></div><div class="pro-card"><div class="card-n">Capacité 02</div><div class="card-icon">🧪</div><div class="card-title">Validation croisée</div><div class="card-sub">multi-source</div><div class="card-desc">QNAP, Wasabi, notifications et BackupRadar sont comparés avant conclusion.</div></div><div class="pro-card"><div class="card-n">Capacité 03</div><div class="card-icon">🛡️</div><div class="card-title">Garde-fous</div><div class="card-sub">un changement à la fois</div><div class="card-desc">Aucune action majeure sans confirmation humaine et aucun secret en livrable public.</div></div><div class="pro-card"><div class="card-n">Capacité 04</div><div class="card-icon">✍️</div><div class="card-title">Livrables standards</div><div class="card-sub">CW / Teams</div><div class="card-desc">Le diagnostic devient note interne, discussion client et notice d’équipe.</div></div></div>
+</section>
+<section class="quote-section"><div class="quote-mark">“</div><div class="quote-text">Une alerte backup ne dit pas toujours que le backup a échoué. Parfois, elle dit que la supervision ne comprend pas encore le bon signal.</div><div class="quote-attr">EA|IA · MSP Intelligence IT · Casepage standardisé</div></section>
+<section class="s-pad dark-band" id="livrables">
+<div class="wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Sorties produites</div></div>
+<div class="s-title"><strong>Résoudre, puis</strong><br/><em>documenter proprement.</em></div>
+<p class="s-sub">Les livrables rendent le cas immédiatement exploitable dans un PSA ou une communication d’équipe.</p>
+</div>
+<div class="output-grid"><div class="output-card"><h3>CW Note interne</h3><div class="tag">audit trail technique</div><div class="mini">Alerte BackupRadar No Result sur job QNAP HBS vers Wasabi.
+
+Constats :
+- Job HBS visible
+- Destination Wasabi confirmée
+- Notification envoyée
+- Résultat HBS observé en succès
+- Incohérence possible entre nom de job et identifiant surveillé
+
+Action : ajustement du sujet de notification et test manuel lancé.
+Statut : en validation.</div></div><div class="output-card"><h3>CW Discussion</h3><div class="tag">client-safe</div><div class="mini">Validation effectuée sur l’alerte de sauvegarde cloud. La tâche de sauvegarde semble fonctionnelle au moment de l’analyse. La cause probable est une incohérence de corrélation dans la supervision. Un ajustement de notification a été appliqué et un test manuel est en cours de validation.</div></div><div class="output-card"><h3>Notice Teams</h3><div class="tag">communication uniforme</div><div class="mini">BackupRadar / QNAP : alerte No Result en analyse. HBS indique un succès et notification envoyée. Hypothèse forte : problème de corrélation / sujet de notification. Sujet ajusté, test manuel lancé. À valider côté supervision.</div></div></div>
+</section>
+<section class="s-pad" id="impact">
+<div class="wrap">
+<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Valeur MSP</div></div>
+<div class="s-title">Pourquoi ce cas<br/><em>compte pour un MSP.</em></div>
+<p class="s-sub">Le cas démontre une capacité essentielle MSP : ne pas prendre une alerte de backup au pied de la lettre, mais prouver ce qui s’est réellement produit.</p>
+</div>
+<div class="card-grid four"><div class="pro-card"><div class="card-n">Valeur 01</div><div class="card-title">Moins de fausses pistes</div><div class="card-desc">Le diagnostic évite de traiter Veeam comme cause principale.</div></div><div class="pro-card"><div class="card-n">Valeur 02</div><div class="card-title">Plus de méthode</div><div class="card-desc">Les sources sont vérifiées dans un ordre logique.</div></div><div class="pro-card"><div class="card-n">Valeur 03</div><div class="card-title">Meilleure communication</div><div class="card-desc">Le client reçoit une explication claire et non alarmiste.</div></div><div class="pro-card"><div class="card-n">Valeur 04</div><div class="card-title">Standardisation</div><div class="card-desc">Les notes et avis gardent le même niveau de qualité.</div></div></div>
+</section>
+<section class="cta-section">
+<h2>Transformer vos billets<br/><em>en preuves commerciales</em>.</h2>
+<p>Chaque cas peut exister en version interne détaillée et en version publique anonymisée : même méthode, même logo, même niveau de rigueur.</p>
+<a class="btn-gold" href="mailto:contact@eaia.ca?subject=Demo%20MSP%20Intelligence%20IT">Planifier une démo</a>
+</section>
+<footer><div class="footer-right">EA|IA — Intelligence artificielle opérationnelle<br/>MSP Intelligence IT · casepage standardisé · GitHub Pages ready</div></footer>
+</body>
+</html>
