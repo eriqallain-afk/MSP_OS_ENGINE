@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MSP Intelligence AI — La plateforme qui sait ce que savent vos techniciens</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,.12);--gold-line:rgba(200,149,42,.28);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,.52);--muted2:rgba(255,255,255,.22);--border:rgba(200,149,42,.18);--border2:rgba(255,255,255,.08);--ok:#79D28B;--max:780px}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--black);color:var(--white);font-family:'Outfit',system-ui,sans-serif;overflow-x:hidden;line-height:1.65}a{color:inherit;text-decoration:none}body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}section,nav,footer{position:relative;z-index:1}nav{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}.nav-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;letter-spacing:4px}.nav-brand .ea{color:var(--gold-light)}.nav-cta{border:1px solid var(--gold);color:var(--gold-light);padding:9px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:.2s}.nav-cta:hover{background:var(--gold);color:var(--black)}.hero{padding:64px 28px 52px;max-width:var(--max);margin:0 auto}.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold-light);letter-spacing:4px;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}.eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,9vw,72px);font-weight:300;line-height:.95;letter-spacing:-.5px;margin-bottom:28px}.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 strong{font-weight:600}.hero-lead{font-size:17px;color:var(--muted);line-height:1.78;margin-bottom:36px;max-width:640px}.hero-lead strong{color:var(--white)}.metrics{display:flex;gap:0;border:1px solid var(--border);width:fit-content;margin-bottom:40px;flex-wrap:wrap}.metric{padding:16px 24px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px}.metric:last-child{border-right:none}.metric-n{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold-light);line-height:1}.metric-l{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}.actions{display:flex;gap:14px;flex-wrap:wrap}.btn-gold{display:inline-flex;align-items:center;padding:14px 32px;background:var(--gold);color:var(--black);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--gold)}.btn-outline{display:inline-flex;align-items:center;padding:14px 32px;border:1px solid var(--gold-line);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}.divider{border:none;border-top:1px solid var(--border);margin:0}.section{padding:56px 28px;max-width:var(--max);margin:0 auto}.section.dark{background:var(--dark2);max-width:100%;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.section.dark .inner{max-width:var(--max);margin:0 auto}.s-label{display:flex;align-items:center;gap:12px;margin-bottom:16px}.s-label-line{width:28px;height:1px;background:var(--gold)}.s-label-text{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold-light);letter-spacing:4px;text-transform:uppercase}.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,6vw,56px);font-weight:300;line-height:.97;letter-spacing:-.3px;margin-bottom:20px}.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}.s-body{color:var(--muted);font-size:15px;line-height:1.82;margin-bottom:20px}.s-body strong{color:var(--white)}.s-body em{color:var(--gold-light);font-style:normal}.quote-block{border-left:2px solid var(--gold);padding:20px 24px;background:rgba(200,149,42,.05);margin:32px 0}.quote-block p{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,24px);font-style:italic;color:var(--silver-light);line-height:1.52;margin-bottom:10px}.quote-block cite{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}.cta-section{padding:72px 28px;text-align:center;max-width:var(--max);margin:0 auto}.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,8vw,64px);font-weight:300;line-height:.95;margin-bottom:20px}.cta-section h2 em{font-style:italic;color:var(--gold-light)}.cta-section p{color:var(--muted);font-size:16px;margin:0 auto 36px;max-width:500px;line-height:1.72}.cta-email{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold-light);letter-spacing:1px;margin-bottom:28px;display:block}footer{border-top:1px solid var(--border);padding:28px;display:flex;justify-content:space-between;align-items:center;gap:14px;background:var(--dark);flex-wrap:wrap}.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold-light)}.footer-right{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;text-align:right}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand"><span class="ea">EA</span> | IA</div>
+  <a class="nav-cta" href="mailto:eaia.eaai@gmail.com?subject=Demo MSP Intelligence AI">Démo — 30 min</a>
+</nav>
+<section class="hero">
+  <div class="eyebrow">Lancement · MSP Intelligence AI · 2026</div>
+  <h1>Votre MSP.<br><em>Enfin</em> avec<br><strong>la mémoire.</strong></h1>
+  <p class="hero-lead"><strong>23 agents IA spécialisés</strong> — un pour chaque rôle dans un MSP. Clôture uniforme, documentation prête à coller, knowledge base générée automatiquement.</p>
+  <div class="metrics">
+    <div class="metric"><div class="metric-n">23</div><div class="metric-l">Agents IA</div></div>
+    <div class="metric"><div class="metric-n">77</div><div class="metric-l">Runbooks</div></div>
+    <div class="metric"><div class="metric-n">65</div><div class="metric-l">Templates</div></div>
+    <div class="metric"><div class="metric-n">28</div><div class="metric-l">Scripts PS</div></div>
+  </div>
+  <div class="actions">
+    <a class="btn-gold" href="mailto:eaia.eaai@gmail.com?subject=Demo MSP Intelligence AI">Réserver une démo de 30 min</a>
+    <a class="btn-outline" href="../msp-preview.html">Voir la plateforme complète</a>
+  </div>
+</section>
+<hr class="divider">
+<section class="section dark">
+  <div class="inner">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le problème réel</div></div>
+    <div class="s-title">La connaissance<br>est dans les <em>têtes.</em></div>
+    <p class="s-body">En 25 ans dans le milieu IT, j'ai rarement vu une documentation réellement à jour. Pas par manque de volonté — par manque de structure et de temps.</p>
+    <p class="s-body">Les procédures qui fonctionnent, les garde-fous qui évitent les catastrophes, les façons de gérer un Exchange sous pression à 2h du matin — <strong>tout ça vit dans la tête des techniciens d'expérience.</strong></p>
+    <div class="quote-block">
+      <p>« Je n'ai jamais vu une documentation tenue à jour dans un MSP. C'est une perte de temps constante. »</p>
+      <cite>— Constat après 25 ans dans le milieu IT, Québec</cite>
+    </div>
+  </div>
+</section>
+<hr class="divider">
+<section class="cta-section">
+  <h2>Apportez un billet <em>réel.</em></h2>
+  <p>On vous montre en 30 minutes ce que la plateforme fait avec un cas concret de votre MSP.</p>
+  <a class="cta-email" href="mailto:eaia.eaai@gmail.com?subject=Demo MSP Intelligence AI">eaia.eaai@gmail.com</a>
+  <div class="actions" style="justify-content:center">
+    <a class="btn-gold" href="mailto:eaia.eaai@gmail.com?subject=Demo MSP Intelligence AI">Réserver ma démo gratuite</a>
+    <a class="btn-outline" href="../msp-preview.html">Explorer la plateforme</a>
+  </div>
+</section>
+<footer>
+  <div class="footer-brand"><span style="color:var(--gold-light)">EA</span> | IA</div>
+  <div class="footer-right">MSP Intelligence AI · EA|IA<br>eaia.eaai@gmail.com · 2026</div>
+</footer>
+</body>
+</html>
