@@ -1,0 +1,66 @@
+name: Update contact email
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/update-contact-email.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Replace public contact email
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          exts = {'.html', '.htm', '.md', '.txt', '.yml', '.yaml', '.json', '.css', '.js'}
+          replacements = {
+              'contact@eaia.ca': 'info@ea-ia.ca',
+              'contact@ea-ia.ca': 'info@ea-ia.ca',
+              'eaia.eaai@gmail.com': 'info@ea-ia.ca',
+              'support@eaia.ca': 'info@ea-ia.ca',
+          }
+
+          changed = []
+          for p in Path('.').rglob('*'):
+              if not p.is_file():
+                  continue
+              if '.git' in p.parts:
+                  continue
+              if p.suffix.lower() not in exts:
+                  continue
+              try:
+                  text = p.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              original = text
+              for old, new in replacements.items():
+                  text = text.replace(old, new)
+              if text != original:
+                  p.write_text(text, encoding='utf-8')
+                  changed.append(str(p))
+
+          Path('.github/workflows/update-contact-email.yml').unlink(missing_ok=True)
+          print('Changed files:')
+          print('\n'.join(changed))
+          PY
+
+          git config user.name "EAIA automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "Remplace courriel public par info@ea-ia.ca"
+            git push
+          else
+            echo "No changes to commit"
+          fi
