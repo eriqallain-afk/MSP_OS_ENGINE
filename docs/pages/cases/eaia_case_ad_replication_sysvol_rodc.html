@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,.15);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFF;--muted:rgba(255,255,255,.56);--muted2:rgba(255,255,255,.2);--border:rgba(200,149,42,.18);--border2:rgba(255,255,255,.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:#000;color:#fff;font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1}a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)}.nav-logo-text .sep{color:rgba(200,149,42,.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .25s}
+.nav-cta:hover{background:var(--gold);color:#000}
+.hero{padding:64px 64px 56px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,.08);pointer-events:none}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,.05)}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 .strong{font-weight:600}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}
+.hero-sub strong{color:#fff;font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:#000;padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .25s}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,.15);color:rgba(200,149,42,.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.2);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:.95;letter-spacing:-.5px;margin-bottom:24px}
+.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background .2s}
+.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:#fff;font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}
+.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:#fff}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.doc-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background .25s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,.35);letter-spacing:2px;margin-bottom:18px}
+.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:.5px;margin-bottom:6px}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.18);letter-spacing:.5px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);padding-left:14px;position:relative;line-height:1.6}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.case-table td strong{color:#fff;font-weight:600}
+.doc-section{padding:96px 64px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px}
+.doc-card.full{grid-column:1/-1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,.08);line-height:.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,.06);pointer-events:none}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:.95;margin-bottom:28px}
+.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)}
+.footer-brand span{color:rgba(200,149,42,.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@media(max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}.nav-links{display:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li><li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li><li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div><div class="hero-orb-glow"></div>
+  <div class="hero-label"><div class="hero-label-line"></div><div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div></div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Une réplication AD<br>bloquée depuis <em>2023</em>,<br>récupérée <span class="strong">sans rebuild aveugle.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard : un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>, un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle, avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">5</div><div class="hero-metric-l">Partitions AD rellancées</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">RODC récupéré</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">8614</div><div class="hero-metric-l">Erreur levée</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4114 → 4614</div><div class="hero-metric-l">Phases DFSR observées</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">Rebuild immédiat</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">AD DS</div><div class="firm-product active">DFSR</div>
+    <div class="firm-product active">SYSVOL</div><div class="firm-product active">CW Note</div>
+    <div class="firm-product active">CW Discussion</div><div class="firm-product active">Email client</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
+    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
+    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
+    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
+    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <p class="s-sub" style="margin-bottom:24px">Le billet initial ressemblait à une alerte de supervision Active Directory. En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps et ne publiait plus ses partages SYSVOL / NETLOGON.</p>
+      <p class="s-sub">Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée : lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition, puis récupération DFSR non-authoritative sur le seul DC affecté.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps qu'un simple redémarrage aurait pu régler.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
+          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
+          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
+          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
+          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
+          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
+          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
+          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <p class="s-sub">Ici, l'agent ne sert pas à "donner une commande". Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence, éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Erreur AD</strong></td><td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td><td>Risque d'annuaire divergent et d'objets désynchronisés</td><td>Vérifier lingering objects avant toute reprise forcée</td></tr>
+        <tr><td><strong>Portée réelle</strong></td><td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td><td>Une erreur de séquence pouvait empirer l'état du domaine</td><td>Relancer la réplication partition par partition</td></tr>
+        <tr><td><strong>Topologie</strong></td><td>Le DC central Azure était le seul contrôleur de domaine writable</td><td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td><td>Faire partir toute la reprise depuis AZ vers le RODC</td></tr>
+        <tr><td><strong>SYSVOL</strong></td><td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td><td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td><td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td></tr>
+        <tr><td><strong>Validation DFSR</strong></td><td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td><td>La procédure avançait, mais la publication complète n'était pas encore terminée</td><td>Passer en mode surveillance plutôt que multiplier les manipulations</td></tr>
+        <tr><td><strong>Sortie de crise</strong></td><td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td><td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td><td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
+    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Lecture du billet NOC</div><div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div><div class="mod-agents">Signal brut → cas N3</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Lecture seule</div><div class="mod-sub">Avant tout geste</div><div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div><div class="mod-agents">Aucune supposition</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Qualification</div><div class="mod-sub">RODC vs writable</div><div class="mod-desc">Le DC central sain est identifié comme source de vérité ; le DC distant est traité comme membre à récupérer.</div><div class="mod-agents">Architecture respectée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Validation des risques</div><div class="mod-sub">Tombstone / lingering</div><div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div><div class="mod-agents">Pas d'écriture aveugle</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Levier contrôlé</div><div class="mod-sub">AllowDivergent temporaire</div><div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div><div class="mod-agents">Remédiation ciblée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Reprise AD</div><div class="mod-sub">Partition par partition</div><div class="mod-desc">Les 5 partitions sont rellancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div><div class="mod-agents">Rigueur d'exécution</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Sauvegarde &amp; DFSR</div><div class="mod-sub">SYSVOL non-authoritative</div><div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div><div class="mod-agents">Méthode Microsoft</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Validation des phases</div><div class="mod-sub">4114 puis 4614</div><div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div><div class="mod-agents">Diagnostic prouvé</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Communication MSP</div><div class="mod-sub">Interne + client</div><div class="mod-desc">4 livrables générés : Note Interne, CW Discussion, Email client, Notice Teams.</div><div class="mod-agents">Multi-publics</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Capitalisation</div><div class="mod-sub">Cas de lancement</div><div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div><div class="mod-agents">Support vente + démo</div></div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
+    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div><ul class="arsenal-list"><li>Precheck AD/DC complet</li><li>Tests advisory mode</li><li>5 partitions répliquées</li><li>4114 puis 4614 obtenus</li><li>SYSVOL republié partiellement</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div><ul class="arsenal-list"><li>Lecture seule d'abord</li><li>1 DC à la fois</li><li>Pas de rebuild aveugle</li><li>Pas de reprise DFSR globale</li><li>Flag temporaire retiré après succès</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Sorties prêtes à l'emploi</div><div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div><ul class="arsenal-list"><li>CW Note Interne</li><li>CW Discussion</li><li>Email client</li><li>Notice Teams</li><li>Page de cas web premium</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">État final</div><div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div><ul class="arsenal-list"><li>Réplication AD reprise</li><li>SYSVOL revenu côté partage</li><li>NETLOGON encore à confirmer</li><li>SysvolReady encore à 0</li><li>Suivi technique maintenu</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Démonstration produit</div><div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div><ul class="arsenal-list"><li>Crédible pour les ops</li><li>Lisible pour le marketing</li><li>Prêt pour le lancement</li><li>Montre le jugement</li><li>Montre les livrables</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div><ul class="arsenal-list"><li>Réduit le risque d'erreur</li><li>Accélère la décision N3</li><li>Améliore la traçabilité</li><li>Augmente la qualité perçue</li><li>Transforme un ticket en démonstration</li></ul></div>
+  </div>
+</section>
+
+<section class="doc-section">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <p class="s-sub">Cette section montre la profondeur du produit : la même intervention produit une note interne technique, une discussion client-safe, un email d'état et une notice de coordination.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Note Interne</div></div><div class="doc-copy">Interne · complet</div></div>
+        <div class="doc-pre">Billet : #[1731222] · Client : client inc. · Site : Succursale client inc.
+Asset : RODC en succursale · Type : Réplication AD / SYSVOL / DFSR
+Statut : Suivi requis — récupération avancée, validation finale en attente
+
+CONTEXTE : Alerte réplication AD sur RODC. DC central Azure = seul writable.
+
+VÉRIFICATIONS :
+- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
+- Repadmin /replsummary et /showrepl exécutés
+- Erreur 8614 · dernière réplication réussie : 2023-12-04
+- SYSVOL / NETLOGON non publiés initialement · SysvolReady = 0 · DFSR State = 2
+- Advisory lingering objects sur 5 partitions : aucun remonté
+
+ACTIONS :
+1. Activation temporaire allowDivergent sur DC writable sain
+2. Reprise contrôlée réplication AD partition par partition
+3. Retrait du flag allowDivergent après succès
+4. Sauvegarde C:\Windows\SYSVOL sur RODC avant remédiation DFSR
+5. Procédure non-authoritative SYSVOL sur RODC :
+   msDFSR-Enabled=FALSE → réplication AD → dfsrdiag pollad → 4114
+   msDFSR-Enabled=TRUE → réplication AD → dfsrdiag pollad → 4614
+6. Contrôles réseau (SMB/RPC/WinRM/RDP accessibles)
+
+RÉSULTAT :
+- Réplication AD reprise sur les partitions d'annuaire
+- 4114 puis 4614 obtenus sur le SYSVOL du RODC
+- SYSVOL publié au dernier contrôle
+- NETLOGON encore absent au dernier contrôle
+- SysvolReady encore à 0 · DFSR état 2
+
+SUIVI : Surveillance jusqu'à 4604 · revalider NETLOGON/SysvolReady/DFSR State 4
+Si blocage persistant : rebuild / re-promo contrôlé du RODC</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Discussion</div></div><div class="doc-copy">Client-safe · facturable</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────
+  Validation Active Directory — suivi en cours
+────────────────────────────────────────────────
+BILLET : #[1731222] · DATE : 2025-03-07 · TECHNICIEN : Agent NOC-07
+
+TRAVAUX EFFECTUÉS :
+• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
+• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
+• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
+• Contrôles complémentaires de connectivité et de santé des services.
+• Suivi post-remédiation maintenu.
+
+RÉSULTAT / ÉTAT ACTUEL :
+• La réplication de l'annuaire a été rétablie.
+• Le contrôleur de domaine est en progression normale sur la portion SYSVOL.
+• Une validation complémentaire demeure requise avant de confirmer la fin de l'intervention.
+
+SUIVI : Billet en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Email client — état / suivi</div></div><div class="doc-copy">Externe · prêt à envoyer</div></div>
+        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+
+Bonjour,
+
+Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+
+Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+
+Nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+
+Cordialement,
+[Signature MSP]</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Notice Teams</div></div><div class="doc-copy">Coordination · opération</div></div>
+        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+Client : client inc.
+Tâche : récupération contrôlée réplication AD / SYSVOL sur RODC en succursale
+État : réplication AD reprise ; SYSVOL en progression avancée ; validation finale encore requise avant clôture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD. C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR, puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.</p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.</p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+</body>
+</html>
