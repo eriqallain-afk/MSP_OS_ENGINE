@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas multi-serveurs hors ligne /Auvik/RMM/Datto/Zabbix / ESXi / WatchGuard</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -628,6 +628,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -765,6 +767,7 @@ footer {
 </head>
 <body>
 
+
 <nav>
   <div class="nav-brand">
     <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
@@ -791,40 +794,40 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une vague<br>
+    <em>de serveurs offline</em><br>
+    devenue <span class="strong">preuve de discernement.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · NOC ·Auvik/RMM/Datto/Zabbix · VMWARE · WATCHGUARD · LIVRABLES CW</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> transforme une alerte critique “multiple servers unreachable”
+    en enquête structurée : validation en <strong>lecture seule</strong>, corrélation entre la sondeAuvik/RMM/Datto/Zabbix, l’hyperviseur ESXi-01,
+    le pare-feu FW-01 et la plateforme VEEAM-01, puis production des <strong>livrables complets</strong> de clôture.
+    Ici, la valeur n’est pas d’exécuter vite — c’est de démontrer qu’il ne s’agissait probablement <strong>pas</strong> d’une panne massive réelle.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
+      <div class="hero-metric-n">1</div>
+      <div class="hero-metric-l">Alerte NOC critique</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">3</div>
+      <div class="hero-metric-l">Pivots corrélés</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">2</div>
+      <div class="hero-metric-l">Équipements cœur stables</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
+      <div class="hero-metric-l">CollectorAuvik/RMM/Datto/Zabbix analysé</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-l">Reboot forcé</div>
     </div>
   </div>
 
@@ -837,27 +840,28 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · alerte multi-serveurs ·Auvik/RMM/Datto/Zabbix-COLLECTOR-01 hébergé sur ESXi-01</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
+    <div class="firm-product active">Auvik</div>
+    <div class="firm-product active">VMware</div>
+    <div class="firm-product active">WatchGuard</div>
+    <div class="firm-product active">VEEAM</div>
     <div class="firm-product active">CW Note</div>
     <div class="firm-product active">CW Discussion</div>
-    <div class="firm-product active">Email client</div>
-    <div class="firm-product active">client inc.</div>
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>MULTIPLE SERVERS UNREACHABLE</span> ·Auvik/RMM/Datto/Zabbix ALERT · COLLECTOR VISIBILITY ·
+    <span>VMWARE ESXI</span> · WATCHGUARD T80 · VEEAM ACCESS ·
+    <span>READ ONLY FIRST</span> · INCIDENT TRIAGE · FALSE MASS OUTAGE AVOIDED ·
+    <span>CW NOTE INTERNE</span> · CW DISCUSSION · EMAIL CLIENT · TEAMS NOTICE ·
+    <span>MULTIPLE SERVERS UNREACHABLE</span> ·Auvik/RMM/Datto/Zabbix ALERT · COLLECTOR VISIBILITY ·
+    <span>VMWARE ESXI</span> · WATCHGUARD T80 · VEEAM ACCESS ·
+    <span>READ ONLY FIRST</span> · INCIDENT TRIAGE · FALSE MASS OUTAGE AVOIDED ·
+    <span>CW NOTE INTERNE</span> · CW DISCUSSION · EMAIL CLIENT · TEAMS NOTICE ·
   </div>
 </div>
 
@@ -865,16 +869,17 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une alerte<br>qui ressemblait à une<br><em>panne générale.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le billet initial signalait plusieurs serveurs hors ligne, incluant le serveur DC-01.
+        Pour beaucoup d’équipes, ce type d’alerte déclenche immédiatement l’hypothèse d’une panne majeure,
+        d’un redémarrage d’hyperviseur ou d’un problème de site.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        Ici, l’agent a refusé la conclusion rapide. Il a vérifié ce qui comptait vraiment :
+        l’accès réel aux systèmes, l’état de l’ESXi, le WatchGuard, VEEAM et la provenance exacte de l’alerte.
+        La vraie découverte n’était pas “un serveur est revenu”. C’était que le signal d’alarme venait
+        probablement d’une <strong>perte de visibilité temporaire duAuvik/RMM/Datto/Zabbix-COLLECTOR-01</strong>.
       </p>
     </div>
 
@@ -882,23 +887,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’alerte NOC indiquait plusieurs serveurs injoignables</strong> — avec un DC mentionné dans le lot, ce qui élève immédiatement la gravité perçue.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Le VEEAM-01 était accessible</strong> — premier indice que l’environnement n’était peut-être pas réellement “à terre”.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>L’hôte ESXi affichait un uptime de 148 jours</strong> — incompatible avec l’hypothèse d’un redémarrage récent de l’hyperviseur.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>Le WatchGuard affichait plus de 6 jours d’uptime</strong> — ce qui écartait aussi un reboot récent du cœur réseau.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>La sondeAuvik/RMM/Datto/Zabbix tournait sur le même ESXi</strong> — donc une perte de visibilité du collector pouvait faire croire à une panne simultanée de multiples serveurs.</div>
         </div>
       </div>
     </div>
@@ -908,27 +913,28 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW ·Auvik/RMM/Datto/Zabbix / ESXI / WATCHGUARD</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">AUVIK / NOC</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">MULTIPLE SERVERS UNREACHABLE</span></div>
+          <div class="t-line"><span class="t-gold">CONTEXTE :</span> <span class="t-white">SITE PRINCIPAL · DC SIGNALÉ</span></div>
+          <div class="t-line"><span class="t-gold">RÉFLEXE ÉVITÉ :</span> <span class="t-white">ESCALADE HÂTIVE OU REBOOT À TORT</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Le signal est critique.</div>
+          <div class="t-line t-silver">La panne réelle n’est pas encore prouvée.</div>
+          <div class="t-line t-silver">La source de vérité doit être recoupée.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ VEEAM accessible</span></div>
+          <div class="t-line"><span class="t-green">✓ ESXi stable / uptime élevé</span></div>
+          <div class="t-line"><span class="t-green">✓ WatchGuard stable / uptime élevé</span></div>
+          <div class="t-line"><span class="t-green">✓ Tous les serveurs observés online</span></div>
+          <div class="t-line"><span class="t-red">✗ Panne massive confirmée</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">INCIDENT TRANSITOIRE PROBABLE + LIVRABLES COMPLETS GÉNÉRÉS</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +945,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Une alerte P1,</strong><br>une lecture <em>plus intelligente.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      L’agent n’a pas seulement confirmé un retour à la normale. Il a séparé la panne réelle,
+      la perception du monitoring et la cause la plus probable, tout en gardant une discipline de lecture seule
+      et une documentation MSP immédiatement exploitable.
     </p>
 
     <table class="case-table">
@@ -957,40 +963,40 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>Source initiale</strong></td>
+          <td>L’alerte venait de la sondeAuvik/RMM/Datto/Zabbix et non d’une confirmation terrain directe</td>
+          <td>Le symptôme pouvait être un problème de visibilité du monitoring plutôt qu’une panne généralisée</td>
+          <td>Requalifier l’incident avant toute remédiation</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Serveur VEEAM</strong></td>
+          <td>Connexion au VEEAM-01 confirmée dès le début de l’investigation</td>
+          <td>Premier indice concret qu’une partie de l’infrastructure restait joignable</td>
+          <td>Écarter l’hypothèse d’un site totalement indisponible</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>État ESXi</strong></td>
+          <td>Hôte VMware en état normal avec un uptime de 148 jours</td>
+          <td>Absence de signe d’un redémarrage récent de l’hyperviseur</td>
+          <td>Ne pas conclure à un incident hôte sans preuve</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>État WatchGuard</strong></td>
+          <td>Pare-feu stable avec un uptime supérieur à 6 jours</td>
+          <td>Absence de signe d’un reboot récent du cœur réseau</td>
+          <td>Réduire la probabilité d’une panne firewall franche</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>VMAuvik/RMM/Datto/Zabbix</strong></td>
+          <td>LeAuvik/RMM/Datto/Zabbix-COLLECTOR-01 était hébergé sur le même environnement ESXi</td>
+          <td>Une perte temporaire de visibilité du collector pouvait générer une vague d’alertes offline</td>
+          <td>Retenir l’hypothèse monitoring/connectivité transitoire comme la plus solide</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>État final</strong></td>
+          <td>Tous les serveurs observés étaient revenus online sans action intrusive lourde</td>
+          <td>Aucune preuve d’une panne persistante ni d’un redémarrage massif</td>
+          <td>Clôturer comme incident transitoire probable et documenté</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1006,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune panique. Aucun raccourci.</em></div>
+    <p class="s-sub">Le cas démontre une compétence rare en MSP : gérer un incident d’apparence critique sans sur-réagir, tout en produisant des preuves et des livrables premium.</p>
   </div>
 
   <div class="modules-grid">
@@ -1010,79 +1016,79 @@ footer {
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
       <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-desc">L’agent ingère le billet d’alerte multi-serveurs, le site concerné et le rôle critique du serveur mentionné.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Gravité réelle</div>
+      <div class="mod-desc">Le cas est traité comme P1 potentiel, mais la panne réelle n’est pas supposée avant validations croisées.</div>
+      <div class="mod-agents">Critique sans dramatisation</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Lecture seule</div>
+      <div class="mod-sub">Avant toute action</div>
+      <div class="mod-desc">Aucune action intrusive : validation du retour online, du DC, de VEEAM et des équipements cœur.</div>
+      <div class="mod-agents">Aucune supposition</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Pivot VEEAM</div>
+      <div class="mod-sub">Premier ancrage</div>
+      <div class="mod-desc">L’accès au VEEAM-01 montre que l’environnement n’est probablement pas totalement indisponible.</div>
+      <div class="mod-agents">Hypothèse globale affaiblie</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Pivot ESXi</div>
+      <div class="mod-sub">Hyperviseur</div>
+      <div class="mod-desc">L’uptime élevé de l’ESXi élimine la thèse d’un reboot récent du socle de virtualisation.</div>
+      <div class="mod-agents">Fausse piste écartée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Pivot WatchGuard</div>
+      <div class="mod-sub">Cœur réseau</div>
+      <div class="mod-desc">Le firewall stable renforce l’idée d’un incident transitoire plutôt qu’une chute totale de site.</div>
+      <div class="mod-agents">Corrélation inter-couches</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">SourceAuvik/RMM/Datto/Zabbix</div>
+      <div class="mod-sub">Origine du signal</div>
+      <div class="mod-desc">L’agent identifie que leAuvik/RMM/Datto/Zabbix-COLLECTOR-01 est lui-même hébergé sur ESXi et peut expliquer la vague d’alertes.</div>
+      <div class="mod-agents">Symptôme ≠ cause</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Conclusion</div>
+      <div class="mod-sub">Cause probable</div>
+      <div class="mod-desc">Le cas est requalifié comme incident de visibilité du monitoring ou de connectivité transitoire du collector.</div>
+      <div class="mod-agents">Diagnostic crédible</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">Clôture CW</div>
+      <div class="mod-sub">Livrables complets</div>
+      <div class="mod-desc">La note interne, la discussion client, l’email et la notice Teams sont produits dans le bon niveau de détail.</div>
+      <div class="mod-agents">Prêt à coller</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
       <div class="mod-name">Capitalisation</div>
       <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
+      <div class="mod-desc">L’intervention devient une page de démonstration forte pour le site, la vente et la preuve de valeur produit.</div>
       <div class="mod-agents">Support vente + démo</div>
     </div>
   </div>
@@ -1091,42 +1097,42 @@ footer {
 <section class="arsenal s-pad" id="livrables">
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <div class="s-title">Ce que le cas<br><em>produit vraiment.</em></div>
+    <p class="s-sub">Le démonstrateur ne s’arrête pas à l’analyse. Il montre comment l’agent livre une clôture exploitable, propre et différenciante pour un MSP moderne.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Qualification de l’alerte, validation de l’état réel des systèmes, corrélation VEEAM / ESXi / WatchGuard /Auvik/RMM/Datto/Zabbix et conclusion sans remédiation intrusive.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Triage P1 structuré</li>
+        <li>Vérification VEEAM</li>
+        <li>Contrôle ESXi</li>
+        <li>Contrôle WatchGuard</li>
+        <li>Analyse origineAuvik/RMM/Datto/Zabbix</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">La valeur du produit se voit dans ce qu’il empêche : escalade hâtive, reboot inutile, conclusion non prouvée.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule avant action</li>
+        <li>Aucun reboot d’hôte</li>
+        <li>Aucun reboot firewall</li>
+        <li>Aucune remédiation non justifiée</li>
+        <li>Cause probable clairement séparée du symptôme</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">Le cas livre autant de valeur documentaire que de valeur opérationnelle.</div>
       <ul class="arsenal-list">
         <li>CW Note Interne</li>
-        <li>CW Discussion</li>
+        <li>CW Discussion client-safe</li>
         <li>Email client</li>
         <li>client inc.</li>
         <li>Page de cas web premium</li>
@@ -1135,37 +1141,37 @@ footer {
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
       <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-desc">L’environnement revient à un état stable observé sans action lourde et sans interruption ajoutée par l’équipe MSP.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Tous les serveurs online</li>
+        <li>Aucune panne persistante prouvée</li>
+        <li>Infrastructure cœur stable</li>
+        <li>Impact actuel nul</li>
+        <li>Surveillance recommandée</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
       <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-desc">Ce cas montre que le produit ne “récite” pas un runbook : il arbitre, recoupe et écrit comme une équipe MSP senior.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>Discernement NOC</li>
+        <li>Corrélation multi-outils</li>
+        <li>Clôture premium</li>
+        <li>Ton vente + opérations</li>
+        <li>Preuve de maturité</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">La page permet d’expliquer une promesse forte : moins d’erreurs, de meilleurs arbitrages et une qualité documentaire visible.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Convainc le COO MSP</li>
+        <li>Parle au NOC</li>
+        <li>Parle aux ventes</li>
+        <li>Réutilisable en lancement</li>
+        <li>Crédibilité immédiate</li>
       </ul>
     </div>
   </div>
@@ -1174,11 +1180,10 @@ footer {
 <section class="doc-section">
   <div class="doc-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
-    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Comme dans ton modèle, la page expose les livrables finaux directement dans le site.
+      Le contenu ci-dessous est anonymisé mais reste fidèle à la forme MSP attendue.
     </p>
 
     <div class="doc-grid">
@@ -1190,69 +1195,75 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">BILLET:
+-------
+#000006
 
-Contexte
----------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+CLIENT:
+-------
+Entreprise inc.
 
-Préparation et découverte
----------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+CONTACT:
+-------
+nom du contact
 
-Vérifications effectuées
----------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
+DATE:
+-------
+11-08-2025
 
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+────────────────────────────────────────────────────────
+   INTERVENTION:     NOC / MULTIPLE SERVERS UNREACHABLE /Auvik/RMM/Datto/Zabbix
+────────────────────────────────────────────────────────
 
-Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+PRÉPARATION ET DÉCOUVERTE
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+Prise en charge de la demande et revue des informations d'inventaire.
+
+SOMMAIRE
+
+Alerte NOC reçue pour plusieurs serveurs signalés hors ligne sur le site client.
+Le serveur DC-01 figurait dans la liste, ce qui donnait initialement au cas
+une apparence de panne majeure et d'impact AD possible.
+
+VALIDATIONS EFFECTUÉES
+
+- Connexion au VEEAM-01 confirmée
+- Vérification que les serveurs observés étaient revenus online
+- Validation de l’hôte VMware ESXi-01
+  - État : normal
+  - Version : ESXi 7.0 Update 3
+  - Uptime : 148 jours
+- Validation du pare-feu FW-01
+  - État : opérationnel
+  - Uptime : plus de 6 jours
+- Confirmation que l’alerte provenait de la supervisionAuvik/RMM/Datto/Zabbix
+- Confirmation qu’une appliance /Auvik/RMM/Datto/Zabbix-COLLECTOR-01 est hébergée sur l’environnement ESXi
+
+ANALYSE TECHNIQUE
+
+Aucun élément ne suggère un redémarrage récent de l’hyperviseur ou du pare-feu.
+Comme leAuvik/RMM/Datto/Zabbix-COLLECTOR-01 est hébergé sur le même environnement, l’hypothèse principale retenue
+est une perte de visibilité temporaire du collector ou un incident transitoire de connectivité,
+et non une panne massive réelle de tous les serveurs.
+
+DÉCISION
+
+- Aucune action intrusive effectuée
+- Aucun reboot d’hôte ou de pare-feu exécuté
+- Incident clôturé une fois tous les serveurs observés online
+
+RÉSULTAT FINAL
+
+Tous les serveurs sont online au moment de la clôture.
+Aucune panne persistante confirmée.
+Cause racine non prouvée à 100 %, mais forte présomption d’un incident de visibilité monitoring
+ou de connectivité transitoire autour duAuvik/RMM/Datto/Zabbix-COLLECTOR-01.
+
+SUIVI RECOMMANDÉ
+
+- Surveiller la récurrence d’alertes similaires
+- Vérifier prioritairement l’état duAuvik/RMM/Datto/Zabbix-COLLECTOR-01 si le symptôme revient
+- Corréler les prochains événements avec les logs ESXi et réseau</div>
       </div>
 
       <div class="doc-card">
@@ -1263,61 +1274,67 @@ Prochaines étapes
           </div>
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
-        <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
-────────────────────────────────────────────────────────
-
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
+        <div class="doc-pre">---------
+INTERVENTION: Incident de connectivité / alerte de serveurs hors ligne
 ---------
 
-PRÉPARATION ET DÉCOUVERTE :
+DATE: 11-08-2025
+TECHNICIEN: Agent NOC-04
 ---------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
 
-TRAVAUX EFFECTUÉS :
+QUALIFICATION INITIALE:
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+Prise en charge de la demande et revue des informations d'inventaire.
 
-RÉSULTAT / ÉTAT ACTUEL :
+TRAVAUX EFFECTUÉS:
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+• Analyse de l’alerte signalant plusieurs serveurs hors ligne sur le site client
+• Validation de l’état général de l’infrastructure de virtualisation et du pare-feu du site client
+• Vérification de la plateforme de sauvegarde et confirmation du retour en ligne de l’ensemble des serveurs
+• Investigation de la source de monitoring afin de distinguer une panne réelle d’un problème de visibilité
+• Corrélation des éléments recueillis pour confirmer qu’aucun redémarrage récent de l’infrastructure principale n’avait eu lieu pendant l’incident
+• Confirmation finale que tous les systèmes observés étaient de nouveau accessibles et opérationnels
 
-SUIVI :
+RÉSULTAT:
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+• Tous les serveurs sont revenus en ligne et opérationnels
+• Aucun arrêt prolongé de l’infrastructure principale n’a été constaté
+• L’incident semble lié à une perte de visibilité temporaire de la supervision ou à un événement transitoire de connectivité
+• Aucun correctif intrusif ni redémarrage non planifié n’a été requis
+
+RECOMMANDATION:
+---------
+• Surveiller les prochaines alertes de supervision afin de confirmer s’il s’agit d’un événement ponctuel ou récurrent
+• Vérifier prioritairement la sonde de monitoring si l’alerte se reproduit</div>
       </div>
 
       <div class="doc-card full">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
+            <div class="doc-title">Email client — résumé de l’incident</div>
           </div>
           <div class="doc-copy">Externe · prêt à envoyer</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Objet : Billet ##000006 — Incident de serveurs signalés hors ligne maintenant résolu
 
-Bonjour,
+Bonjour nom du contact,
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+Nous avons complété l’analyse de l’alerte qui signalait plusieurs serveurs hors ligne sur le site client.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Au moment de notre validation, l’ensemble des serveurs observés était de nouveau accessible.
+Nos vérifications de l’infrastructure principale n’ont pas mis en évidence de redémarrage récent
+du socle de virtualisation ESXi-01 ni du pare-feu FW-01.
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+À ce stade, l’incident semble davantage correspondre à une perte temporaire de visibilité de la supervision
+ou à un événement transitoire de connectivité, plutôt qu’à une panne persistante des serveurs eux-mêmes.
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
+Aucune action intrusive ni redémarrage non planifié n’a été nécessaire pour revenir à un état normal.
+Nous recommandons simplement une surveillance des prochaines alertes afin de confirmer s’il s’agissait
+d’un événement isolé.
 
 Cordialement,
-[Signature MSP]</div>
+Tech</div>
       </div>
 
       <div class="doc-card full">
@@ -1328,10 +1345,10 @@ Cordialement,
           </div>
           <div class="doc-copy">Coordination · opération</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+        <div class="doc-pre">✅ Maintenance terminée — Billet : #000006
 Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+Tâche : Validation post-incident après alerte multi-serveurs hors ligne sur site client
+Statut : Tous les systèmes observés sont opérationnels — incident transitoire probable lié à la visibilité de la supervision</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1357,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    La vraie maturité MSP n’est pas seulement de <strong>réagir vite</strong>.
+    C’est de savoir quand une alerte critique décrit une panne réelle… et quand elle révèle surtout
+    une <strong>perte temporaire de visibilité</strong> qu’il faut démontrer proprement.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1351,8 +1368,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
   <div class="cta-orb"></div>
   <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
   <p>
-    EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site,
-    la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.
+    EAIA transforme de vrais billets MSP en pages premium prêtes pour le site,
+    la démo produit ou la vente — avec le niveau de fond nécessaire pour convaincre
+    les opérations, le NOC et les décideurs.
   </p>
   <a href="mailto:eaia.eaai@gmail.com" class="btn-gold">Demander une démo</a>
   <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
@@ -1361,8 +1379,12 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas alerte multi-serveurs hors ligne /Auvik/RMM/Datto/Zabbix / ESXi<br>
+<<<<<<< HEAD
     © 2025 EAIA — Tous droits réservés
+=======
+    © 2026 EAIA — Tous droits réservés
+>>>>>>> 4c3608d4de6a7c2f97e6378028ce0d99613b1d1d
   </div>
 </footer>
 

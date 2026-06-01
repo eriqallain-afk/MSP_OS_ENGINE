@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EA|IA — Démonstrateur MSP | Cas DHCP saturé</title>
+<meta name="description" content="Démonstrateur de cas MSP — alerte DHCP saturé, méthode d'analyse structurée et livrables complets prêts à coller.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;
+  --gold:#C8952A;--gold-light:#E4B84A;--gold-deep:#8F6818;--gold-dim:rgba(200,149,42,.145);--gold-line:rgba(200,149,42,.30);
+  --silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,.48);--muted2:rgba(255,255,255,.23);
+  --border:rgba(200,149,42,.18);--border2:rgba(255,255,255,.08);--ok:#79D28B;--warn:#F2BE61;--bad:#F08072;--max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;overflow-x:hidden;line-height:1.65}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,main{position:relative;z-index:1}
+.wrap{width:min(calc(100% - 48px),var(--max));margin:0 auto}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:28px;padding:18px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;align-items:center;gap:14px;min-width:0}
+.nav-title{display:flex;flex-direction:column;gap:2px;min-width:0}
+.nav-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;letter-spacing:4px;line-height:1;color:var(--silver-light);white-space:nowrap}
+.nav-name .ea{color:var(--gold-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,.62);letter-spacing:3px;text-transform:uppercase;white-space:nowrap}
+.nav-links{display:flex;gap:30px;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{border:1px solid var(--gold);color:var(--gold-light);padding:10px 24px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:.25s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;overflow:hidden}
+.hero.compact{min-height:auto;padding-top:90px;padding-bottom:56px}
+.orb{position:absolute;top:-22%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,.08);pointer-events:none}
+.orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,.05)}
+.orb-glow{position:absolute;top:50%;right:3%;transform:translateY(-50%);width:520px;height:520px;background:radial-gradient(ellipse,rgba(200,149,42,.075) 0%,transparent 65%);pointer-events:none}
+.label{display:flex;align-items:center;gap:16px;margin-bottom:34px}
+.label-line{width:48px;height:1px;background:var(--gold)}
+.label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold-light);letter-spacing:4px;text-transform:uppercase}
+.eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1,.display-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:.95;letter-spacing:-1px;margin-bottom:16px;max-width:980px}
+.hero h1 em,.display-title em,.s-title em{font-style:italic;color:var(--gold-light)}
+.hero h1 strong,.display-title strong,.s-title strong{font-weight:600;color:var(--white)}
+.product-tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:3px;margin:16px 0 34px;text-transform:uppercase}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.78;margin-bottom:46px;font-weight:300}
+.hero-sub strong{color:var(--white);font-weight:600}
+.actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.btn-gold,.btn-outline,.btn-muted{display:inline-flex;align-items:center;justify-content:center;padding:15px 38px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:.25s;border-radius:0;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--black);border:1px solid var(--gold)}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,.42);color:var(--gold-light);background:transparent}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.btn-muted{border:1px solid var(--border2);color:var(--silver);background:rgba(255,255,255,.02)}
+.btn-muted:hover{border-color:var(--gold-line);color:var(--gold-light)}
+.metrics{display:flex;gap:0;margin:0 0 52px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.metric{padding:20px 34px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px;min-width:160px}
+.metric:last-child{border-right:none}
+.metric-n{font-family:'Cormorant Garamond',serif;font-size:43px;font-weight:300;color:var(--gold-light);line-height:1}
+.metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold-light);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-top:6px}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,.16);color:rgba(200,149,42,.58);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold-light);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.22);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,.68)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}
+.s-label{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.s-label-line{width:36px;height:1px;background:var(--gold)}
+.s-label-text{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold-light);letter-spacing:4px;text-transform:uppercase}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:.95;letter-spacing:-.5px;margin-bottom:24px}
+.s-sub{color:var(--muted);font-size:16px;max-width:720px;line-height:1.78;font-weight:300}
+.dark-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.split{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.card-grid{max-width:var(--max);margin:56px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.card-grid.four{grid-template-columns:repeat(4,1fr)}
+.card-grid.two{grid-template-columns:repeat(2,1fr)}
+.pro-card{background:var(--dark);padding:34px 28px;min-height:220px;transition:.25s;position:relative;overflow:hidden}
+.pro-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:.25s}
+.pro-card:hover{background:#0C0C0C}
+.pro-card:hover::after{transform:scaleX(1)}
+.card-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,.38);letter-spacing:2px;margin-bottom:18px;text-transform:uppercase}
+.card-icon{font-size:24px;margin-bottom:14px}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:.4px;margin-bottom:7px;color:var(--white)}
+.card-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold-light);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.card-desc{font-size:13.5px;color:var(--muted);line-height:1.68;font-weight:300;margin-bottom:16px}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.22);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.74;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,.22)}.t-gold{color:var(--gold-light)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.pipeline{max-width:var(--max);margin:48px auto 0;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.step{background:var(--dark);padding:24px 20px;min-height:190px}
+.step-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.step strong{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);font-weight:600;display:block;margin-bottom:8px}
+.step p{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300}
+.table-wrap{overflow:auto;border:1px solid var(--border);background:var(--dark);max-width:var(--max);margin:48px auto 0}
+table{width:100%;border-collapse:collapse}
+th,td{padding:16px 14px;border-bottom:1px solid var(--border2);vertical-align:top;text-align:left;font-size:13px}
+th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);background:#0B0B0B}
+td{color:var(--muted)}
+td strong{color:var(--silver-light)}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,.08);line-height:.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,34px);font-weight:300;font-style:italic;max-width:820px;margin:0 auto 28px;line-height:1.45;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.code-block{white-space:pre-wrap;word-break:break-word;font-family:'JetBrains Mono',monospace;font-size:10.2px;line-height:1.65;background:#030303;border:1px solid var(--border);padding:16px;color:var(--silver);max-height:520px;overflow:auto}
+.badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.badge{border:1px solid var(--border);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.badge.ok{color:var(--ok);border-color:rgba(121,210,139,.25)}
+.badge.warn{color:var(--warn);border-color:rgba(242,190,97,.25)}
+.badge.bad{color:var(--bad);border-color:rgba(240,128,114,.25)}
+.list-clean{display:grid;gap:12px;margin-top:20px}
+.list-clean div{padding:14px 16px;border:1px solid var(--border2);background:#070707}
+.list-clean strong{display:block;color:var(--silver-light);margin-bottom:4px;font-size:14px}
+.list-clean span{font-size:13px;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;gap:18px;background:var(--dark)}
+.footer-mark{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:4px}
+.footer-mark .ea{color:var(--gold-light)}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;text-transform:uppercase}
+@media(max-width:1100px){
+  .card-grid,.card-grid.four{grid-template-columns:repeat(2,1fr)}
+  .pipeline{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .metrics{width:100%}
+  .metric{flex:1 1 50%;border-bottom:1px solid var(--border)}
+}
+@media(max-width:720px){
+  .nav,.hero,.s-pad,.firm-band,.quote-section,footer{padding-left:24px;padding-right:24px}
+  .hero h1,.display-title{font-size:52px}
+  .card-grid,.card-grid.four,.card-grid.two,.pipeline{grid-template-columns:1fr}
+  .firm-band{flex-direction:column;align-items:flex-start}
+  .metrics{display:grid;width:100%;grid-template-columns:1fr}
+  .metric{border-right:none}
+  .actions{align-items:stretch}
+  .btn-gold,.btn-outline,.btn-muted{width:100%;padding-left:22px;padding-right:22px}
+  .footer-right{text-align:left}
+  footer{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="#top" aria-label="EA IA — Démonstrateur MSP">
+    <span class="nav-title">
+      <span class="nav-name"><span class="ea">EA</span> | IA</span>
+      <span class="nav-tagline">Intelligence artificielle opérationnelle</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#cas">Le cas</a></li>
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#runbooks">Runbooks</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a class="nav-cta" href="#livrables">Voir les livrables</a>
+</nav>
+
+<section class="hero compact" id="top">
+  <div class="orb"></div><div class="orb-glow"></div>
+  <div class="label"><div class="label-line"></div><div class="label-text">Produit MSP · Démonstrateur de cas · Lancement</div></div>
+  <div class="eyebrow">EA | IA — Agents MSP en action</div>
+  <h1>Un cas réel.<br><em>Une méthode claire.</em><br><strong>Des livrables complets.</strong></h1>
+  <div class="product-tag">CAS DÉMONSTRATION — SATURATION D’ÉTENDUE DHCP</div>
+  <p class="hero-sub"><strong>Cette page montre comment une équipe d’agents MSP traite un billet de monitoring réel :</strong> triage, validation en lecture seule, isolement de la cause racine, génération des notes internes, de l’inscription facturable et des communications. Le but est simple : <strong>faciliter le travail du technicien</strong> et rendre les sorties <strong>uniformes, professionnelles et directement utilisables dans ConnectWise ou tout autre PSA.</strong></p>
+  <div class="metrics">
+    <div class="metric"><div class="metric-n">01</div><div class="metric-l">Cas démontré</div></div>
+    <div class="metric"><div class="metric-n">05</div><div class="metric-l">Phases d’analyse</div></div>
+    <div class="metric"><div class="metric-n">04</div><div class="metric-l">Livrables complets</div></div>
+    <div class="metric"><div class="metric-n">0</div><div class="metric-l">Action risquée avant diagnostic</div></div>
+  </div>
+  <div class="actions">
+    <a class="btn-gold" href="#cas">Voir le cas</a>
+    <a class="btn-outline" href="#livrables">Voir les sorties</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div>
+    <div class="firm-band-name">Fiche du cas — version anonymisée</div>
+    <div class="firm-band-desc">Billet ##000019 · Entreprise inc. · site client · 03-02-2024</div>
+  </div>
+  <div class="firm-products">
+    <span class="firm-product active">NOC</span>
+    <span class="firm-product active">DHCP</span>
+    <span class="firm-product active">CW</span>
+    <span class="firm-product">AD</span>
+    <span class="firm-product">DNS</span>
+    <span class="firm-product">RMM</span>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner"><span>CONNECTWISE</span> · DHCP · ACTIVE DIRECTORY · <span>DNS</span> · RMM · POWERSHELL · <span>READ-ONLY FIRST</span> · NOTE INTERNE · DISCUSSION FACTURABLE · <span>RUNBOOKS</span> · CONNECTWISE · DHCP · ACTIVE DIRECTORY · <span>DNS</span> · RMM · POWERSHELL · <span>READ-ONLY FIRST</span> · NOTE INTERNE · DISCUSSION FACTURABLE ·</div>
+</div>
+
+<section class="s-pad dark-band" id="cas">
+  <div class="split">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le cas</div></div>
+      <div class="s-title">Alerte DHCP.<br><em>Scope à 100 %.</em></div>
+      <p class="s-sub">Le billet démarre avec une alerte NOC signalant une saturation complète de l’étendue DHCP sur <strong>DC-01</strong> au <strong>site client</strong>. Le risque immédiat : de nouveaux appareils pourraient ne plus obtenir d’adresse réseau. L’objectif de l’agent est de distinguer une simple anomalie ponctuelle d’une vraie saturation structurelle.</p>
+      <div class="list-clean">
+        <div><strong>Billet</strong><span>#000019</span></div>
+        <div><strong>Client</strong><span>client inc.</span></div>
+        <div><strong>Contact</strong><span>nom du contact</span></div>
+        <div><strong>Technicien</strong><span>Tech</span></div>
+        <div><strong>Date</strong><span>03-02-2024</span></div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="t-bar"><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span><span class="t-bar-title">CASE-TRIAGE · INPUT</span></div>
+      <div class="t-line t-gray">// ALERTE INITIALE</div>
+      <div class="t-line"><span class="t-gold">SERVEUR :</span> <span class="t-white">DC-01</span></div>
+      <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">site client</span></div>client inc.<div class="t-line"><span class="t-gold">MONITOR :</span> <span class="t-white">DHCP Scope 100%</span></div>
+      <div class="t-line"><span class="t-gold">BILLET :</span> <span class="t-white">#000019</span></div>
+      <div class="t-line t-gray" style="margin-top:12px">// HYPOTHÈSES OUVERTES</div>
+      <div class="t-line t-silver">• faux pic ou alerte transitoire</div>
+      <div class="t-line t-silver">• conflit IP ponctuel</div>
+      <div class="t-line t-silver">• réservations / exclusions mal interprétées</div>
+      <div class="t-line t-silver">• saturation structurelle du scope</div>
+      <div class="t-line t-gray" style="margin-top:12px">// RÈGLE</div>
+      <div class="t-line t-green">LECTURE SEULE D’ABORD</div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="methode">
+  <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Méthode utilisée par les agents</div></div>
+  <div class="s-title"><strong>Une séquence disciplinée.</strong><br><em>Pas de guesswork.</em></div>
+  <p class="s-sub">L’agent ne saute pas à une remédiation. Il fait progresser le diagnostic en une suite de validations simples et défendables, chacune guidant la suivante.</p>
+
+  <div class="pipeline">
+    <div class="step"><div class="step-n">Phase 01</div><strong>Valider le scope</strong><p>Lecture des statistiques, du nombre d’adresses libres, des réservations, exclusions et états de baux. Le but est de confirmer si l’alerte est encore réelle.</p></div>
+    <div class="step"><div class="step-n">Phase 02</div><strong>Qualifier la plage</strong><p>Lecture de la plage réelle du scope et de la durée des baux. Cela permet d’écarter une fausse piste comme une durée de bail trop longue.</p></div>
+    <div class="step"><div class="step-n">Phase 03</div><strong>Tracer les conflits</strong><p>Validation des entrées <span style="color:#E4B84A">Declined / BAD_ADDRESS</span> sans rien exclure en bloc. L’agent documente avant d’envisager un changement.</p></div>
+    <div class="step"><div class="step-n">Phase 04</div><strong>Corréler les sources</strong><p>Croisement entre journaux DHCP, AD, DNS et RMM pour déterminer si l’anomalie est causale ou secondaire.</p></div>
+    <div class="step"><div class="step-n">Phase 05</div><strong>Transformer en livrables</strong><p>Une fois le diagnostic confirmé, l’agent produit les notes et communications au format MSP attendu, prêtes à être collées et facturées.</p></div>
+  </div>
+</section>
+
+<section class="s-pad dark-band">
+  <div class="split">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic final</div></div>
+      <div class="s-title">Cause racine :<br><em>saturation structurelle</em></div>
+      <p class="s-sub">Le diagnostic final ne retient pas une panne du service DHCP. Le service répond et les baux sont actifs. La conclusion est que le <strong>scope principal du site est trop sollicité</strong> parce qu’il sert de point commun à plusieurs catégories d’équipements : postes, téléphones SIP, IoT, multimédia et serveurs. Une anomalie de type <strong>BAD_ADDRESS</strong> est observée, mais elle est classée comme <strong>symptôme secondaire</strong>.</p>
+      <div class="badge-row">
+        <span class="badge ok">Service DHCP actif</span>
+        <span class="badge bad">Capacité critique</span>
+        <span class="badge warn">Conflit ponctuel secondaire</span>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="t-bar"><span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span><span class="t-bar-title">CASE-CONCLUSION · OUTPUT</span></div>
+      <div class="t-line t-gray">// CONSTAT</div>
+      <div class="t-line"><span class="t-gold">SERVICE :</span> <span class="t-green">fonctionnel</span></div>
+      <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-red">BAD_ADDRESS / conflit d’adressage</span></div>
+      <div class="t-line"><span class="t-gold">CAUSE RACINE :</span> <span class="t-white">scope utilisateur unique trop chargé</span></div>
+      <div class="t-line"><span class="t-gold">DÉCISION :</span> <span class="t-silver">aucune remédiation risquée immédiate</span></div>
+      <div class="t-line"><span class="t-gold">PLAN :</span> <span class="t-white">surveillance + correction durable du plan d’adressage</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="runbooks">
+  <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Runbooks et références</div></div>
+  <div class="s-title"><strong>Ce que les agents mobilisent</strong><br><em>pour travailler proprement</em></div>
+  <p class="s-sub">La démonstration ne repose pas sur une réponse improvisée. Elle s’appuie sur des garde-fous, des modèles de clôture et des logiques de triage déjà structurés dans la bibliothèque MSP.</p>
+
+  <div class="card-grid two">
+    <div class="pro-card">
+      <div class="card-n">Référence 01</div>
+      <div class="card-title">GUARDRAILS — IT Agents Master</div>
+      <div class="card-sub">Lecture seule d’abord · portée du billet · livrables propres</div>
+      <div class="card-desc">Utilisé pour garder l’intervention dans le périmètre du billet, éviter la remédiation hâtive et maintenir la discipline de diagnostic.</div>
+    </div>
+    <div class="pro-card">
+      <div class="card-n">Référence 02</div>
+      <div class="card-title">RUNBOOK — Triage Support N1/N2/N3</div>
+      <div class="card-sub">Qualification incident · réseau / infra</div>
+      <div class="card-desc">Utilisé pour qualifier le niveau du billet, confirmer qu’il ne s’agit pas d’une panne critique immédiate et cadrer l’intervention comme un incident réseau / capacité.</div>
+    </div>
+    <div class="pro-card">
+      <div class="card-n">Référence 03</div>
+      <div class="card-title">TEMPLATE BUNDLE — CW CLOSE</div>
+      <div class="card-sub">Template 1 · Discussion CW · Template 3 · Note interne</div>
+      <div class="card-desc">Utilisé pour transformer le diagnostic en notes uniformes, lisibles, prêtes à coller et cohérentes avec les standards MSP.</div>
+    </div>
+    <div class="pro-card">
+      <div class="card-n">Référence 04</div>
+      <div class="card-title">Pack SysAdmin / intervention live</div>
+      <div class="card-sub">Une action à la fois · validation avant suite</div>
+      <div class="card-desc">Référence opérationnelle générale pour la posture de copilote technique et le déroulé progressif de l’analyse.</div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad dark-band">
+  <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Preuve de méthode</div></div>
+  <div class="s-title"><strong>Extraits opérationnels</strong><br><em>utilisés dans le cas</em></div>
+  <p class="s-sub">Les agents produisent aussi les commandes adaptées au contexte. Le technicien n’a pas à improviser les scripts ni l’ordre des validations.</p>
+
+  <div class="card-grid two">
+    <div class="pro-card" style="min-height:auto">
+      <div class="card-n">Validation 01</div>
+      <div class="card-title">Lecture du scope</div>
+      <div class="card-sub">Statistiques · exclusions · réservations · états de baux</div>
+      <div class="code-block">$ScopeId = 'x.x.x.x'
+
+Write-Host "=== STATISTICS ==="
+Get-DhcpServerv4ScopeStatistics -ScopeId $ScopeId | Format-List *
+
+Write-Host " "
+Write-Host "=== EXCLUSIONS ==="
+Get-DhcpServerv4ExclusionRange -ScopeId $ScopeId | Format-Table -AutoSize
+
+Write-Host " "
+Write-Host "=== RESERVATIONS COUNT ==="
+(Get-DhcpServerv4Reservation -ScopeId $ScopeId | Measure-Object).Count
+
+Write-Host " "
+Write-Host "=== LEASE STATES ==="
+Get-DhcpServerv4Lease -ScopeId $ScopeId |
+    Group-Object AddressState |
+    Select-Object Name, Count |
+    Format-Table -AutoSize</div>
+    </div>
+    <div class="pro-card" style="min-height:auto">
+      <div class="card-n">Validation 02</div>
+      <div class="card-title">Corrélation du conflit</div>
+      <div class="card-sub">DHCP · AD · DNS · poste client</div>
+      <div class="code-block">client inc.</div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="livrables">
+  <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+  <div class="s-title"><strong>Ce que l’agent remet</strong><br><em>à la fin</em></div>
+  <p class="s-sub">Le diagnostic devient immédiatement exploitable : note interne, inscription facturable, mémo de coordination et communication d’équipe. Tous les livrables ci-dessous sont anonymisés et composés au format démonstrateur.</p>
+
+  <div class="card-grid two">
+    <div class="pro-card" style="min-height:auto">
+      <div class="card-n">Livrable 01</div>
+      <div class="card-title">Note interne CW</div>
+      <div class="card-sub">Technique · complète · prête à coller</div>
+      <div class="code-block">────────────────────────────────────────────────────────
+        DHCP / SATURATION D’ÉTENDUE / ANALYSE
+────────────────────────────────────────────────────────
+
+BILLET: #000019
+CLIENT: Entreprise inc.
+DATE: 03-02-2024
+
+PRÉPARATION ET DÉCOUVERTE
+---------
+Analyse du billet entrant et accès à la documentation technique.
+
+Réception et analyse d’une alerte NOC liée à une saturation d’étendue DHCP sur DC-01 au site client.
+Investigation effectuée en lecture seule uniquement.
+Validation progressive des statistiques du scope, des exclusions, des réservations, des états de baux, des entrées en conflit, des journaux DHCP, ainsi que des éléments AD, DNS et RMM requis pour corrélation.
+
+RÉSUMÉ
+---------
+Le service DHCP analysé était fonctionnel au moment de l’intervention.
+L’étendue concernée n’était pas en panne, mais demeurait en forte tension de capacité avec très peu d’adresses libres.
+L’analyse a permis d’identifier une anomalie ponctuelle de type BAD_ADDRESS, retenue comme symptôme secondaire.
+La cause principale retenue est une saturation structurelle du scope liée au design du segment d’adressage.
+
+TRAVAUX EFFECTUÉS
+---------
+- Validation des statistiques du scope DHCP et confirmation de la faible capacité restante.
+- Vérification de la plage du scope, de la durée des baux, des exclusions et des réservations.
+- Revue des états de baux incluant Active / Reservation / Declined / BAD_ADDRESS.
+- Analyse ciblée des IP en conflit et des adresses réellement libres.
+- Lecture de l’export des leases pour qualifier le type d’équipements présents sur le scope.
+- Corrélation d’une entrée BAD_ADDRESS avec les journaux DHCP.
+- Vérification de l’objet AD, du DNS et des informations RMM du poste POSTE-PORTABLE-01.
+- Validation que le poste utilise actuellement une autre adresse dynamique via son adaptateur actif.
+- Aucun changement appliqué en production.
+
+AVERTISSEMENTS OBSERVÉS
+---------
+- Très faible marge restante dans l’étendue DHCP.
+- Présence d’au moins une entrée BAD_ADDRESS durant l’analyse.
+- Tous les types d’équipements du site semblent présents dans le même scope, incluant postes, téléphones SIP, équipements réseau, IoT, multimédia et serveurs.
+- Risque de récurrence de l’alerte si la consommation augmente ou si de nouveaux appareils demandent une adresse.
+
+ÉVÉNEMENT OBSERVÉ APRÈS L’INTERVENTION
+---------
+Aucune panne générale du service DHCP n’a été confirmée pendant l’investigation.
+Aucune interruption de service n’a été observée durant les validations effectuées.
+Le risque principal demeure préventif et structurel, et non un arrêt du service DHCP.
+
+CONSTAT TECHNIQUE
+---------
+Le scope principal a été observé dans un état de tension critique, avec seulement quelques adresses libres disponibles.
+La durée de bail configurée était déjà courte, ce qui écarte cette variable comme cause principale.
+Les journaux DHCP ont montré qu’une même machine cliente a été vue à différents moments avec plusieurs adresses MAC / interfaces, ce qui explique probablement l’entrée BAD_ADDRESS observée sur une adresse spécifique.
+Le poste POSTE-PORTABLE-01 est actif dans l’environnement, mais son interface active actuelle utilise une autre adresse et une autre MAC que celle liée historiquement au conflit.
+Conclusion : le BAD_ADDRESS est un symptôme secondaire; la cause principale est la saturation structurelle du scope unique utilisé par plusieurs catégories d’équipements.
+
+STATUT
+---------
+Diagnostic complété en lecture seule.
+Aucun changement appliqué.
+Billet prêt pour coordination et décision de remédiation planifiée.
+
+SUIVI RECOMMANDÉ
+---------
+- Maintenir la surveillance de l’étendue DHCP.
+- Réévaluer rapidement la priorité si des postes, téléphones ou nouveaux appareils cessent d’obtenir une adresse réseau.
+- Planifier une correction durable du plan d’adressage.
+- Évaluer une segmentation réseau ou un agrandissement du sous-réseau selon les contraintes de l’infrastructure.
+- Revoir à moyen terme la séparation des équipements utilisateurs, VoIP, IoT et infrastructure.</div>
+    </div>
+
+    <div class="pro-card" style="min-height:auto">
+      <div class="card-n">Livrable 02</div>
+      <div class="card-title">Discussion CW (facturable)</div>
+      <div class="card-sub">Client-friendly · professionnelle · uniforme</div>
+      <div class="code-block">  ────────────────────────────────────────────────────────
+          Analyse d’alerte DHCP — Capacité d’adressage
+  ────────────────────────────────────────────────────────
+
+DATE: 03-02-2024
+TECHNICIEN: Agent NOC-20
+---------
+
+INITIALISATION DE L'INTERVENTION:
+---------
+• Réception et lecture du billet, revue de la documentation existante.
+
+TRAVAUX EFFECTUÉS:
+---------
+• Validation effectuée à la suite d’une alerte de capacité DHCP signalée sur le site client.
+• Vérification de l’état général du service d’attribution d’adresses réseau.
+• Analyse de l’utilisation de l’étendue et revue des éléments d’adressage actifs.
+• Investigation d’une anomalie ponctuelle d’adressage observée durant les vérifications.
+• Aucune modification appliquée en production pendant l’analyse.
+
+RÉSULTAT:
+---------
+• Le service analysé répondait au moment de la vérification.
+• Aucune panne générale n’a été confirmée.
+• Le constat principal est une capacité d’adressage très serrée sur le segment réseau actuel.
+
+RECOMMANDATION:
+---------
+• Maintenir la surveillance de l’étendue.
+• Planifier une correction durable du plan d’adressage afin de limiter la récurrence de l’alerte.
+• Réévaluer rapidement la priorité si des appareils cessent d’obtenir une adresse réseau.</div>
+    </div>
+
+    <div class="pro-card" style="min-height:auto">
+      <div class="card-n">Livrable 03</div>
+      <div class="card-title">Mémo coordonnateur</div>
+      <div class="card-sub">Coordination · priorisation · suite</div>
+      <div class="code-block">Mémo coordo
+Billet: #000019
+Client: client inc.
+Contact: nom du contact
+Date: 03-02-2024
+
+Résumé coordo:
+- Diagnostic complété sans changement en production.
+- Pas de panne DHCP confirmée au moment des vérifications.
+- Le scope est toutefois en saturation structurelle avec très peu d’adresses libres.
+- L’environnement regroupe plusieurs types d’équipements dans le même segment, ce qui explique la pression d’adressage.
+- Une entrée BAD_ADDRESS a été investiguée; elle semble secondaire et liée à l’historique d’un poste avec interface/adaptateur différent, non à une panne serveur.
+- Le risque principal est la récurrence de l’alerte et un possible défaut d’attribution IP si la consommation augmente.
+
+Recommandation coordo:
+- Garder le billet en suivi infra / réseau.
+- Priorité conservatrice si aucun impact utilisateur actif.
+- Monter rapidement la priorité si postes ou téléphones cessent d’obtenir une IP.
+- Prévoir une discussion client / planification pour correction durable du plan d’adressage.
+- Piste durable: segmentation des équipements ou agrandissement du sous-réseau, selon design réseau disponible.</div>
+    </div>
+
+    <div class="pro-card" style="min-height:auto">
+      <div class="card-n">Livrable 04</div>
+      <div class="card-title">Avis Teams / communication interne</div>
+      <div class="card-sub">Synthèse rapide · propre · opérationnelle</div>
+      <div class="code-block">🔎 Entreprise inc. — Diagnostic complété sur DC-01 pour une alerte de saturation DHCP au site client.
+
+Constat:
+- service DHCP fonctionnel
+- capacité du scope fortement serrée
+- anomalie ponctuelle d’adressage observée, mais non retenue comme cause principale
+
+Conclusion:
+Le problème est structurel au niveau de l’étendue / plan d’adressage, pas une panne du service.
+
+Suite recommandée:
+- surveillance
+- montée de priorité si attribution IP en échec
+- planification d’une correction durable du design réseau</div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="quote-mark">“</div>
+  <div class="quote-text">Le produit MSP ne démontre pas seulement qu’un agent peut répondre. Il démontre qu’il peut <strong>qualifier</strong>, <strong>structurer</strong>, <strong>diagnostiquer</strong> et surtout <strong>livrer des sorties utiles au technicien et au client.</strong></div>
+  <div class="quote-attr">EA | IA · Démonstrateur MSP · Cas anonymisé</div>
+</section>
+
+<section class="s-pad dark-band">
+  <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Ce que cela prouve</div></div>
+  <div class="s-title"><strong>La valeur pour le lancement</strong><br><em>du produit MSP</em></div>
+  <p class="s-sub">Ce cas est un bon démonstrateur commercial, car il montre à la fois la méthode d’analyse et la qualité de production documentaire. Il fait voir ce que les agents apportent au quotidien : plus de discipline, moins d’improvisation, et des sorties directement exploitables dans l’opération MSP.</p>
+
+  <div class="card-grid four">
+    <div class="pro-card">
+      <div class="card-n">Bénéfice 01</div>
+      <div class="card-icon">⌁</div>
+      <div class="card-title">Le tech est guidé</div>
+      <div class="card-sub">Moins d’hésitation</div>
+      <div class="card-desc">Les étapes et scripts sont proposés dans le bon ordre, une action à la fois.</div>
+    </div>
+    <div class="pro-card">
+      <div class="card-n">Bénéfice 02</div>
+      <div class="card-icon">◫</div>
+      <div class="card-title">Le risque baisse</div>
+      <div class="card-sub">Read-only first</div>
+      <div class="card-desc">Le diagnostic est construit avant toute remédiation, ce qui réduit les faux correctifs.</div>
+    </div>
+    <div class="pro-card">
+      <div class="card-n">Bénéfice 03</div>
+      <div class="card-icon">✎</div>
+      <div class="card-title">Les notes s’uniformisent</div>
+      <div class="card-sub">ConnectWise / PSA</div>
+      <div class="card-desc">Les sorties sont cohérentes, facturables, propres et plus faciles à relire.</div>
+    </div>
+    <div class="pro-card">
+      <div class="card-n">Bénéfice 04</div>
+      <div class="card-icon">⟐</div>
+      <div class="card-title">Le client comprend mieux</div>
+      <div class="card-sub">Communication claire</div>
+      <div class="card-desc">La discussion facturable et les avis sont plus professionnels et plus rassurants.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-mark"><span class="ea">EA</span> | IA</div>
+  <div class="footer-right">EA|IA — Intelligence artificielle opérationnelle<br>Page de cas MSP · Version anonymisée · prête à intégrer au site de lancement</div>
+</footer>
+
+</body>
+</html>

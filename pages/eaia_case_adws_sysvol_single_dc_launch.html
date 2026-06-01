@@ -761,6 +761,97 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
+
+/* BEGIN EAIA_UNIFORM_MODEL_HEADER_2025_05_14
+   Entête uniformisé selon le modèle eaia_case_dc_double_reboot.html */
+nav {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 28px !important;
+  padding: 22px 64px !important;
+  border-bottom: 1px solid var(--border) !important;
+  background: rgba(0,0,0,0.92) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  backdrop-filter: blur(24px) !important;
+}
+nav .nav-brand {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+  text-decoration: none !important;
+}
+nav .nav-logo-text {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  letter-spacing: 4px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+nav .nav-logo-text .ea { color: var(--gold) !important; }
+nav .nav-logo-text .sep { color: rgba(200,149,42,0.5) !important; margin: 0 2px !important; }
+nav .nav-logo-text .ia { color: var(--silver-light) !important; }
+nav .nav-tagline {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 7px !important;
+  color: rgba(200,149,42,0.5) !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+nav .nav-links {
+  display: flex !important;
+  gap: 36px !important;
+  list-style: none !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+nav .nav-links a {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  transition: color 0.2s !important;
+}
+nav .nav-links a:hover { color: var(--gold-light) !important; }
+nav .nav-cta {
+  background: transparent !important;
+  border: 1px solid var(--gold) !important;
+  color: var(--gold) !important;
+  padding: 10px 28px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s !important;
+  white-space: nowrap !important;
+}
+nav .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+nav .nav-logo,
+nav .nav-brand img,
+nav .nav-title,
+nav .nav-copy,
+footer .footer-logo { display: none !important; }
+@media (max-width: 960px) {
+  nav { padding-left: 24px !important; padding-right: 24px !important; }
+  nav .nav-links { display: none !important; }
+}
+/* END EAIA_UNIFORM_MODEL_HEADER_2025_05_14 */
+
+
+/* EAIA_PRODUCT_ARMIES_2025_05_15 */
+.army-status{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;margin-top:8px}.mini-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}.mini-list li{font-size:13px;color:var(--muted);line-height:1.65;padding-left:18px;position:relative}.mini-list li::before{content:'—';position:absolute;left:0;color:var(--gold-light)}.note-box{max-width:var(--max);margin:40px auto 0;border:1px solid var(--border);background:linear-gradient(180deg,rgba(200,149,42,.08),rgba(255,255,255,.02));padding:28px}.note-box strong{color:var(--white)}.timeline{max-width:var(--max);margin:52px auto 0;border:1px solid var(--border);background:var(--dark)}.timeline-row{display:grid;grid-template-columns:180px 1fr;gap:1px;border-bottom:1px solid var(--border2)}.timeline-row:last-child{border-bottom:0}.timeline-k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);padding:18px;background:rgba(200,149,42,.055)}.timeline-v{padding:18px;color:var(--muted);font-size:14px;line-height:1.75}.timeline-v strong{color:var(--white)}.product-tagline{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;margin-top:14px}.status-prod{color:var(--ok)}.status-coming{color:var(--warn)}@media(max-width:760px){.timeline-row{grid-template-columns:1fr}.timeline-k{border-bottom:1px solid var(--border2)}}
+/* END EAIA_PRODUCT_ARMIES_2025_05_15 */
+
 </style>
 </head>
 <body>
@@ -771,12 +862,14 @@ footer {
     <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
   </div>
   <ul class="nav-links">
-    <li><a href="#cas">Cas</a></li>
-    <li><a href="#diagnostic">Diagnostic</a></li>
-    <li><a href="#pipeline">Pipeline</a></li>
-    <li><a href="#livrables">Livrables</a></li>
+    <li><a href="../pages/factory.html">Factory</a></li>
+    <li><a href="../pages/armees-eaia.html">Armées</a></li>
+    <li><a href="../msp-preview.html">MSP</a></li>
+    <li><a href="../pages/agence-marketing-ia.html">Marketing IA</a></li>
+    <li><a href="../pages/msp-demos.html">En Action</a></li>
+    <li><a href="../pages/eaia-apercu-besoin-client.html">Cadrage</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+  <a class="nav-cta" href="mailto:eaia.eaai@gmail.com?subject=Demo%20EAIA">Démo — 30 min</a>
 </nav>
 
 <section class="hero" id="cas">
@@ -791,40 +884,42 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte <em>ADWS / GC</em><br>
+    qui cachait un <span class="strong">SYSVOL cassé</span><br>
+    sur un <em>domaine à DC unique.</em>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · SINGLE DC · SYSVOL · DFSR · CW LIVRABLES</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre un cas premium pour le lancement du produit MSP :
+    une <strong>alerte répétitive Active Directory Web Services / Global Catalog</strong> qui cachait en réalité un
+    <strong>blocage DFSR/SYSVOL</strong> sur <strong>l’unique contrôleur de domaine</strong> d’un environnement.
+    L’agent a requalifié le symptôme, protégé l’environnement, exécuté une
+    <strong>récupération autoritative SYSVOL</strong> contrôlée, puis produit les
+    <strong>livrables MSP complets</strong>.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
+      <div class="hero-metric-n">16</div>
+      <div class="hero-metric-l">Alertes historiques similaires</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">196</div>
+      <div class="hero-metric-l">Jours hors ligne DFSR</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">Seul DC / seul GC</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
+      <div class="hero-metric-n">4012 → 4602</div>
+      <div class="hero-metric-l">Séquence DFSR observée</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-l">Reboot pendant la remédiation</div>
     </div>
   </div>
 
@@ -837,10 +932,11 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Organisation anonymisée · domaine à DC unique · alerte ADWS répétitive · récupération SYSVOL autoritative</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
+    <div class="firm-product active">ADWS</div>
+    <div class="firm-product active">GC</div>
     <div class="firm-product active">DFSR</div>
     <div class="firm-product active">SYSVOL</div>
     <div class="firm-product active">CW Note</div>
@@ -852,12 +948,12 @@ footer {
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>ADWS</span> · GLOBAL CATALOG · DFSR 4012 · ERROR 9061 · SYSVOL STATE 5 ·
+    <span>DOMAIN SINGLE DC</span> · 4114 · 4602 · NETLOGON · POLLDSNOW ·
+    <span>AUTHORITATIVE SYSVOL</span> · CW NOTE · CW DISCUSSION · TEAMS ·
+    <span>ADWS</span> · GLOBAL CATALOG · DFSR 4012 · ERROR 9061 · SYSVOL STATE 5 ·
+    <span>DOMAIN SINGLE DC</span> · 4114 · 4602 · NETLOGON · POLLDSNOW ·
+    <span>AUTHORITATIVE SYSVOL</span> · CW NOTE · CW DISCUSSION · TEAMS ·
   </div>
 </div>
 
@@ -865,16 +961,15 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une alerte ADWS<br>apparemment simple,<br><em>un vrai cas N3.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le billet initial signalait qu’<strong>Active Directory Web Services</strong> n’arrivait plus à déterminer le
+        <strong>Global Catalog</strong>. En apparence : un problème ADWS, Netlogon ou DNS.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        En réalité, l’agent a démontré que le symptôme visible masquait un problème beaucoup plus sérieux :
+        un <strong>SYSVOL en erreur</strong>, une réplication <strong>DFSR bloquée depuis 196 jours</strong>,
+        et un environnement où <strong>le seul DC du domaine</strong> portait aussi tous les rôles FSMO.
       </p>
     </div>
 
@@ -882,23 +977,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>Symptôme trompeur</strong> — l’alerte parlait d’ADWS / Global Catalog, alors que le défaut critique était du côté <strong>SYSVOL / DFSR</strong>.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Historique récurrent</strong> — plusieurs tickets d’urgence similaires existaient déjà, signe d’un problème structurel et non transitoire.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Topologie sensible</strong> — le domaine ne comportait qu’<strong>un seul contrôleur de domaine</strong>, seul GC, seul détenteur des rôles FSMO.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>DFSR stale</strong> — le journal montrait un arrêt de réplication SYSVOL avec <strong>Error 9061</strong> après <strong>196 jours</strong> hors ligne.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>Décision à risque</strong> — corriger sur l’unique DC exigeait une procédure rigoureuse, sauvegarde préalable incluse, sans reboot arbitraire.</div>
         </div>
       </div>
     </div>
@@ -908,27 +1003,28 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · ADWS / GC → SYSVOL / DFSR</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY WEB SERVICES / GLOBAL CATALOG</span></div>
+          <div class="t-line"><span class="t-gold">PRIORITÉ :</span> <span class="t-white">EMERGENCY</span></div>
+          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">CONTRÔLEUR DE DOMAINE UNIQUE</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">AUTHENTIFICATION / GPO / SYSVOL</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">ADWS est un symptôme secondaire.</div>
+          <div class="t-line t-silver">La vraie panne est DFSR / SYSVOL.</div>
+          <div class="t-line t-silver">Le seul DC doit être traité avec méthode.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Sauvegarde SYSVOL réalisée</span></div>
+          <div class="t-line"><span class="t-green">✓ 4114 observé</span></div>
+          <div class="t-line"><span class="t-green">✓ 4602 observé</span></div>
+          <div class="t-line"><span class="t-green">✓ SYSVOL / NETLOGON revenus</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucun reboot pendant la remédiation</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">RÉTABLISSEMENT CONTRÔLÉ + LIVRABLES MSP COMPLETS</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +1035,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Un cas d’infrastructure</strong><br>où la valeur est dans <em>le discernement.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      Le démonstrateur montre exactement ce que le produit MSP doit prouver :
+      distinguer le <strong>symptôme</strong> de la <strong>cause racine</strong>, protéger le domaine,
+      puis transformer l’intervention en livrables exploitables par les opérations et le client.
     </p>
 
     <table class="case-table">
@@ -957,51 +1053,59 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
-        </tr>
-        <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Alerte initiale</strong></td>
+          <td>ADWS n’arrive plus à déterminer le Global Catalog</td>
+          <td>Risque apparent sur l’authentification et l’annuaire</td>
+          <td>Vérifier d’abord l’état réel du DC, des rôles GC et de la réplication</td>
         </tr>
         <tr>
           <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td>Domaine à <strong>DC unique</strong>, seul GC, tous les rôles FSMO sur le même serveur</td>
+          <td>Aucune marge d’erreur sur la remédiation</td>
+          <td>Rester sur une séquence contrôlée, sans reboot ni manipulation large</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>DFSR</strong></td>
+          <td>Event <strong>4012</strong> répété, <strong>Error 9061</strong>, SYSVOL considéré stale après <strong>196 jours</strong> hors ligne</td>
+          <td>Le dossier SYSVOL ne participe plus correctement au fonctionnement du domaine</td>
+          <td>Qualifier le cas comme incident SYSVOL / DFSR, pas uniquement ADWS</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>État local</strong></td>
+          <td>SYSVOL Share en <strong>State = 5</strong> et ADWS opérationnel mais secondaire dans la chaîne causale</td>
+          <td>Le moniteur RMM voit un symptôme, pas la panne principale</td>
+          <td>Procéder à une récupération autoritative SYSVOL sur le DC unique</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Sécurisation</strong></td>
+          <td>Copie complète de SYSVOL réalisée avant changement</td>
+          <td>Réduction du risque de perte ou de corruption des éléments de stratégie/scripts</td>
+          <td>Préparer la procédure Microsoft avec filet de sécurité local</td>
+        </tr>
+        <tr>
+          <td><strong>Validation finale</strong></td>
+          <td>Événement <strong>4602</strong> obtenu, SYSVOL / NETLOGON revenus, tests dcdiag finaux sans erreur</td>
+          <td>Retour du comportement attendu côté domaine</td>
+          <td>Remettre DFSR en Automatic et clôturer avec surveillance 24–48h</td>
         </tr>
       </tbody>
     </table>
+
+    <div class="note-box">
+      <strong>Runbooks et références mobilisés</strong><br><br>
+      • <strong>INFRA-AD-DC_PrePost_Validation_V2</strong> — validation services critiques, SYSVOL / NETLOGON, réplication et post-check DC<br>
+      • <strong>GUARDRAILS__IT_AGENTS_MASTER</strong> — lecture seule d’abord, 1 serveur/DC à la fois, confirmation avant geste à impact<br>
+      • <strong>TEMPLATE_BUNDLE_CW_CLOSE</strong> — note interne, discussion client, email et notice Teams au format MSP<br>
+      • <strong>Référence Microsoft</strong> — procédure de récupération SYSVOL/DFSR autoritative et validation des partages SYSVOL / NETLOGON
+    </div>
   </div>
 </section>
 
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une seule trajectoire propre.</em></div>
+    <p class="s-sub">Le cas démontre la capacité de l’agent à piloter tout le cycle : triage, analyse, sécurisation, remédiation et closeout.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1113,104 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
+      <div class="mod-sub">Billet Emergency</div>
+      <div class="mod-desc">Absorption du billet RMM, du symptôme ADWS/GC et de l’historique d’alertes récurrentes.</div>
       <div class="mod-agents">Signal brut → cas N3</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
       <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
+      <div class="mod-sub">État du DC</div>
+      <div class="mod-desc">Services AD, partages SYSVOL/NETLOGON, GC, réplication, journaux KDC/ADWS et topologie sont validés sans toucher au système.</div>
       <div class="mod-agents">Aucune supposition</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Requalification</div>
+      <div class="mod-sub">Cause racine</div>
+      <div class="mod-desc">L’agent démontre que la cause réelle est DFSR/SYSVOL stale et non un simple incident ADWS.</div>
+      <div class="mod-agents">Symptôme ≠ cause</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Topologie</div>
+      <div class="mod-sub">Single-DC domain</div>
+      <div class="mod-desc">Vérification qu’il n’existe qu’un seul objet server, NTDS Settings, Domain Controller et membre DFSR.</div>
+      <div class="mod-agents">Risque élevé identifié</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Sauvegarde</div>
+      <div class="mod-sub">Pré-changement</div>
+      <div class="mod-desc">Copie de sécurité de SYSVOL avant toute modification du service DFSR ou de l’objet SYSVOL Subscription.</div>
+      <div class="mod-agents">Retour arrière préparé</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">DFSR stoppé</div>
+      <div class="mod-sub">Phase de préparation</div>
+      <div class="mod-desc">DFSR passe temporairement en Manual puis Stopped pour préparer la récupération autoritative.</div>
+      <div class="mod-agents">Geste à impact contrôlé</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
+      <div class="mod-name">Subscription modifiée</div>
+      <div class="mod-sub">FALSE / 1</div>
+      <div class="mod-desc">msDFSR-Enabled est passé à False et msDFSR-Options à 1 sur l’objet SYSVOL Subscription du DC autoritatif.</div>
       <div class="mod-agents">Méthode Microsoft</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Validation 4114</div>
+      <div class="mod-sub">Folder disabled</div>
+      <div class="mod-desc">DFSR redémarre, le dossier SYSVOL est vu comme désactivé, puis la subscription est réactivée côté AD.</div>
+      <div class="mod-agents">Étape charnière</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">PollDsNow</div>
+      <div class="mod-sub">True / 1 → 4602</div>
+      <div class="mod-desc">DFSR relit sa configuration AD et l’événement 4602 confirme l’initialisation autoritative du SYSVOL local.</div>
+      <div class="mod-agents">Preuve de réussite</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Closeout MSP</div>
+      <div class="mod-sub">Ops + client</div>
+      <div class="mod-desc">client inc.</div>
+      <div class="mod-agents">Prêt pour le site</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-row">
+      <div class="timeline-k">Triage</div>
+      <div class="timeline-v">L’alerte ADWS/GC est reprise comme un <strong>cas de santé AD</strong>, pas comme un simple ticket de service Windows.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-k">Découverte</div>
+      <div class="timeline-v">Le domaine est confirmé comme <strong>single-DC</strong> avec tous les rôles critiques concentrés sur le même serveur.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-k">Diagnostic</div>
+      <div class="timeline-v">DFSR 4012 / Error 9061 révèle la panne réelle : <strong>SYSVOL stale</strong>, avec symptomatologie secondaire côté ADWS.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-k">Remédiation</div>
+      <div class="timeline-v">Sauvegarde pré-changement puis <strong>récupération autoritative SYSVOL</strong> menée par étapes, sans reboot.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-k">Validation</div>
+      <div class="timeline-v">Les événements <strong>4114</strong> puis <strong>4602</strong> prouvent la remise en route maîtrisée du dossier SYSVOL.</div>
     </div>
   </div>
 </section>
@@ -1092,80 +1219,80 @@ footer {
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
     <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <p class="s-sub">Ce cas ne vend pas une “IA qui répond”. Il vend un agent MSP qui sait diagnostiquer, sécuriser, corriger et documenter.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Analyse AD/GC, diagnostic DFSR, sauvegarde SYSVOL, récupération autoritative et post-check final sans reboot.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Post-check DC complet</li>
+        <li>DFSR 4012 / 9061 qualifié</li>
+        <li>Backup SYSVOL pré-changement</li>
+        <li>4114 puis 4602 observés</li>
+        <li>dcdiag final sans erreur</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">Le cas prouve qu’un bon agent protège le domaine avant de le corriger.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule d’abord</li>
+        <li>1 serveur/DC à la fois</li>
+        <li>Confirmation avant action à impact</li>
+        <li>Aucune remise en état “large” aveugle</li>
+        <li>Service remis à son état normal en fin d’intervention</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Runbooks mobilisés</div>
+      <div class="arsenal-desc">La page montre aussi la valeur du produit comme système d’exécution assistée par runbooks.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>INFRA-AD-DC_PrePost_Validation_V2</li>
+        <li>GUARDRAILS__IT_AGENTS_MASTER</li>
+        <li>TEMPLATE_BUNDLE_CW_CLOSE</li>
+        <li>Récupération SYSVOL / DFSR Microsoft</li>
+        <li>Validation événementielle DFSR</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">La même intervention nourrit les opérations, le client et la démonstration produit.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>CW Note Interne complète</li>
+        <li>CW Discussion client-safe</li>
+        <li>Email client prêt à envoyer</li>
+        <li>Notice Teams opérationnelle</li>
+        <li>Page web premium pour lancement</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">État final</div>
+      <div class="arsenal-desc">L’environnement revient en état conforme avec validation technique explicite et non supposée.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>DFSR Running / Automatic</li>
+        <li>SYSVOL revenu</li>
+        <li>NETLOGON revenu</li>
+        <li>4602 confirmé</li>
+        <li>dcdiag final vide</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">Un seul cas suffit à montrer la profondeur technique, la prudence et la qualité de livrables du produit MSP.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Convainc les opérations</li>
+        <li>Convainc le marketing</li>
+        <li>Renforce la crédibilité du lancement</li>
+        <li>Montre la capacité N3</li>
+        <li>Montre la discipline MSP</li>
       </ul>
     </div>
   </div>
@@ -1176,9 +1303,8 @@ footer {
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
     <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Le cas public reste entièrement anonymisé, mais les livrables ci-dessous gardent la structure et le niveau de profondeur
+      attendus dans un vrai closeout MSP : interne, client, communication et suivi.
     </p>
 
     <div class="doc-grid">
@@ -1190,69 +1316,70 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">═══════════════════════════════════════════════════════════════
+RÉSOLUTION — récupération SYSVOL sur contrôleur de domaine
+═══════════════════════════════════════════════════════════════
 
-Contexte
+INFORMATIONS GÉNÉRALES
+----------------------
+Date        : 2025-04-[XX]
+Technicien  : Agent NOC-03
+Client      : client inc.
+Billet CW   : #[17XXXX]
+Équipement  : Contrôleur de domaine unique
+Type        : Incident P1 / urgence
+
+QUALIFICATION INITIALE :
 ---------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+• Lecture du billet entrant et revue de la documentation client.
+• Accès à la console RMM et revue des alertes actives.
 
-Préparation et découverte
----------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+CONTEXTE INITIAL
+----------------
+Alerte critique récurrente liée à Active Directory Web Services incapable de déterminer le Global Catalog.
+Validation effectuée sur un domaine à DC unique.
 
-Vérifications effectuées
----------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
+DIAGNOSTIC / ANALYSE
+--------------------
+- Domaine confirmé avec un seul contrôleur de domaine.
+- Le serveur porte les rôles FSMO et constitue le seul Global Catalog.
+- Les services AD critiques étaient fonctionnels.
+- La cause principale observée était DFSR / SYSVOL, avec événements 4012 répétés et Error 9061.
+- Le dossier SYSVOL était considéré stale après 196 jours hors ligne vis-à-vis d’anciens partenaires.
+- ADWS était un symptôme secondaire.
+- Vérification AD : un seul objet serveur, un seul objet NTDS Settings, un seul objet Domain Controllers et un seul membre DFSR.
+- Vérification WMI/CIM DFSR : SYSVOL Share en état d’erreur avant remédiation.
 
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+ACTIONS TECHNIQUES
+------------------
+1. Validation de l’état AD / GC / rôles / services
+2. Qualification DFSR / SYSVOL comme cause racine
+3. Sauvegarde pré-changement de SYSVOL
+4. Passage temporaire de DFSR en démarrage manuel et arrêt du service
+5. Modification de l’objet SYSVOL Subscription :
+   - msDFSR-Enabled = False
+   - msDFSR-Options = 1
+6. Redémarrage DFSR et validation de l’événement 4114
+7. Réactivation de l’abonnement SYSVOL :
+   - msDFSR-Enabled = True
+8. PollDsNow exécuté avec succès
+9. Validation de l’événement 4602
+10. Remise de DFSR en Automatic
+11. Post-check final DC et dcdiag sans erreur
 
-Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+RÉSULTAT FINAL
+--------------
+État : RÉSOLU
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+CAUSE RACINE
+------------
+Blocage DFS Replication sur SYSVOL avec état stale hérité d’une ancienne topologie/ancien partenariat, ayant entraîné des alertes récurrentes ADWS/GC sur l’unique contrôleur de domaine.
+
+SUIVI REQUIS
+------------
+□ Surveiller les alertes ADWS / Global Catalog / DFSR sur 24 à 48 heures
+□ Vérifier séparément le service de monitoring si les événements d’instabilité persistent
+═══════════════════════════════════════════════════════════════</div>
       </div>
 
       <div class="doc-card">
@@ -1264,36 +1391,47 @@ Prochaines étapes
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
         <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
+       Intervention urgente — rétablissement Active Directory
 ────────────────────────────────────────────────────────
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
+BILLET : #[17XXXX]
+DATE : 2025-04-[XX]
+TECHNICIEN : Agent NOC-03
 ---------
 
-PRÉPARATION ET DÉCOUVERTE :
+QUALIFICATION INITIALE :
 ---------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+• Lecture du billet entrant et revue de la documentation client.
+• Accès à la console RMM et revue des alertes actives.
 
-TRAVAUX EFFECTUÉS :
+SITUATION :
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+• Alerte critique récurrente observée sur le service d’annuaire, avec risque potentiel sur l’authentification et la disponibilité des fonctions de domaine.
 
-RÉSULTAT / ÉTAT ACTUEL :
+TÂCHE :
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+• Analyser le contrôleur de domaine concerné, identifier la cause réelle de l’alerte et remettre en état le service si requis.
 
-SUIVI :
+ACTIONS :
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+• Prise en charge du billet et validation du bon environnement client.
+• Vérification complète de l’état du contrôleur de domaine, des services d’annuaire et du fonctionnement général.
+• Identification d’un blocage sur le mécanisme interne de réplication du dossier de stratégies du domaine.
+• Réalisation d’une copie de sécurité avant intervention.
+• Lancement de la procédure de remise en état du composant de réplication du contrôleur de domaine.
+• Confirmation de l’initialisation réussie du dossier système concerné.
+• Validation finale du service, retour des partages requis et confirmation de fonctionnement.
+
+RÉSULTAT :
+---------
+• Le service d’annuaire a été rétabli correctement.
+• Le composant de réplication concerné a été remis en état avec succès.
+• Les partages nécessaires au bon fonctionnement du domaine sont revenus et les validations finales sont conformes.
+• Aucune erreur n’était retournée au contrôle final.
+
+RECOMMANDATION :
+---------
+• Maintenir une surveillance rapprochée sur les prochaines 24 à 48 heures afin de confirmer l’absence de récurrence.</div>
       </div>
 
       <div class="doc-card full">
@@ -1304,17 +1442,17 @@ SUIVI :
           </div>
           <div class="doc-copy">Externe · prêt à envoyer</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Objet : Billet #[17XXXX] — Mise à jour sur le service Active Directory
 
 Bonjour,
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+Nous avons poursuivi l’analyse et la remise en état du contrôleur de domaine concerné par l’alerte.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Les validations effectuées confirment que la cause réelle provenait d’un mécanisme interne de réplication associé au service d’annuaire. La remise en état a été effectuée avec succès et les contrôles finaux sont conformes.
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+Les partages nécessaires au bon fonctionnement du domaine sont revenus et aucune erreur n’a été observée lors de la validation finale.
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
+Nous maintenons une surveillance préventive sur les prochaines 24 à 48 heures afin de confirmer l’absence de récurrence avant clôture définitive.
 
 Cordialement,
 [Signature MSP]</div>
@@ -1328,10 +1466,10 @@ Cordialement,
           </div>
           <div class="doc-copy">Coordination · opération</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+        <div class="doc-pre">🟢 Incident AD résolu — Billet #[17XXXX]
 Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+Tâche principale : récupération contrôlée SYSVOL / DFSR sur contrôleur de domaine unique
+État : 4602 confirmé, SYSVOL et NETLOGON revenus, post-check final conforme, surveillance 24–48h maintenue</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1478,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    La meilleure démonstration d’un agent MSP n’est pas de produire une commande PowerShell.
+    C’est de <strong>déjouer un faux symptôme</strong>, protéger un domaine à risque,
+    exécuter la bonne procédure au bon moment, puis livrer des <strong>sorties propres, utilisables et vendables</strong>.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1352,7 +1490,7 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
   <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
   <p>
     EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site,
-    la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.
+    la vente ou la démo produit — avec le bon niveau de profondeur technique, de prudence opérationnelle et de qualité documentaire.
   </p>
   <a href="mailto:eaia.eaai@gmail.com" class="btn-gold">Demander une démo</a>
   <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
@@ -1361,7 +1499,7 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas ADWS / SYSVOL / DFSR sur domaine à DC unique<br>
     © 2025 EAIA — Tous droits réservés
   </div>
 </footer>

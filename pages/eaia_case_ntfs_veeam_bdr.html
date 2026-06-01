@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EAIA | MSP Intelligence IT — Cas NTFS sur serveur de sauvegarde Veeam</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=JetBrains+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --black: #000000;
@@ -101,11 +100,11 @@ nav {
 .nav-cta:hover { background: var(--gold); color: var(--black); }
 
 .hero {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 100px 64px 80px;
+  justify-content: flex-start;
+  padding: 64px 64px 56px;
   position: relative;
   overflow: hidden;
 }
@@ -161,7 +160,7 @@ nav {
 }
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(52px, 8vw, 108px);
+  font-size: clamp(36px, 5vw, 68px);
   font-weight: 300;
   line-height: 0.95;
   letter-spacing: -1px;
@@ -762,145 +761,100 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
-
-
-/* EAIA-UNIFORM-HEADER-LOGO-TOP-2026-05-14
-   Logo EA IA en haut + slogan seulement à droite.
-   Le footer ne porte plus le logo afin d'éviter le déséquilibre visuel. */
-nav, .nav {
-  min-height: 78px;
-}
-.nav-brand {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 18px !important;
-  min-width: 0 !important;
-  text-decoration: none !important;
-}
-.nav-logo,
-.nav-logo-img {
-  height: 54px !important;
-  width: auto !important;
-  max-width: 220px !important;
-  object-fit: contain !important;
-  display: block !important;
-  flex: 0 0 auto !important;
-}
-.nav-brand > .nav-tagline {
-  display: block !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 10px !important;
-  line-height: 1.25 !important;
-  letter-spacing: 2.7px !important;
-  text-transform: uppercase !important;
-  color: rgba(236,205,133,.88) !important;
-  white-space: nowrap !important;
-  border-left: 1px solid rgba(200,149,42,.34) !important;
-  padding-left: 17px !important;
-  margin: 0 !important;
-}
-.footer-logo,
-footer img.footer-logo {
-  display: none !important;
-}
-@media (max-width: 720px) {
-  nav, .nav { min-height: 70px; }
-  .nav-brand { gap: 12px !important; }
-  .nav-logo,
-  .nav-logo-img { height: 44px !important; max-width: 178px !important; }
-  .nav-brand > .nav-tagline {
-    font-size: 8px !important;
-    letter-spacing: 1.45px !important;
-    white-space: normal !important;
-    border-left: 0 !important;
-    padding-left: 0 !important;
-    max-width: 210px !important;
-  }
-}
 </style>
 </head>
 <body>
+
 <nav>
-<a aria-label="EA IA — Accueil" class="nav-brand" href="../index.html">
-    <img alt="EA IA" class="nav-logo" src="../assets/images/eaia-logo-header-mark.png"/>
-    <span class="nav-tagline">Intelligence artificielle opérationnelle</span>
-  </a>
-<ul class="nav-links">
-<li><a href="#cas">Cas</a></li>
-<li><a href="#diagnostic">Diagnostic</a></li>
-<li><a href="#pipeline">Pipeline</a></li>
-<li><a href="#livrables">Livrables</a></li>
-</ul>
-<a class="nav-cta" href="#contact">Démo — 30 min</a>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
 </nav>
+
 <section class="hero" id="cas">
-<div class="hero-orb"></div>
-<div class="hero-orb-glow"></div>
-<div class="hero-label">
-<div class="hero-label-line"></div>
-<div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
-</div>
-<div class="hero-eyebrow">EAIA — Site de lancement</div>
-<h1>
-    Une alerte<br/>
-<em>NTFS critique</em><br/>
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+
+  <div class="hero-label">
+    <div class="hero-label-line"></div>
+    <div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+  </div>
+
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+
+  <h1>
+    Une alerte<br>
+    <em>NTFS critique</em><br>
     devenue <span class="strong">preuve de méthode.</span>
-</h1>
-<div class="hero-product-tag">MSP INTELLIGENCE IT · STORAGE · VEEAM · RMM · DIAGNOSTIC LECTURE SEULE · LIVRABLES CW</div>
-<p class="hero-sub">
+  </h1>
+
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · STORAGE · VEEAM · RMM · DIAGNOSTIC LECTURE SEULE · LIVRABLES CW</div>
+
+  <p class="hero-sub">
     Cette page montre comment <strong>MSP Intelligence IT</strong> transforme une alerte sévère sur un serveur de sauvegarde
     — “the file system structure on disk is corrupt and unusable” — en intervention rigoureuse :
     validation <strong>lecture seule</strong>, corrélation <strong>NTFS + Veeam + contrôleur HPE</strong>,
     décision de <strong>ne pas lancer de réparation destructive</strong>, puis génération des livrables complets
     pour l’interne, le client et la coordination opérationnelle.
   </p>
-<div class="hero-metrics">
-<div class="hero-metric">
-<div class="hero-metric-n">1</div>
-<div class="hero-metric-l">Serveur analysé</div>
-</div>
-<div class="hero-metric">
-<div class="hero-metric-n">2</div>
-<div class="hero-metric-l">Volumes NTFS sains</div>
-</div>
-<div class="hero-metric">
-<div class="hero-metric-n">3</div>
-<div class="hero-metric-l">Disques physiques vus par l’ADU</div>
-</div>
-<div class="hero-metric">
-<div class="hero-metric-n">2</div>
-<div class="hero-metric-l">Logical drives présents</div>
-</div>
-<div class="hero-metric">
-<div class="hero-metric-n">0</div>
-<div class="hero-metric-l">Action destructive lancée</div>
-</div>
-</div>
-<div class="hero-actions">
-<a class="btn-gold" href="#diagnostic">Voir le cas complet</a>
-<a class="btn-outline" href="#contact">Demander une démo</a>
-</div>
+
+  <div class="hero-metrics">
+    <div class="hero-metric">
+      <div class="hero-metric-n">1</div>
+      <div class="hero-metric-l">Serveur analysé</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">2</div>
+      <div class="hero-metric-l">Volumes NTFS sains</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">3</div>
+      <div class="hero-metric-l">Disques physiques vus par l’ADU</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">2</div>
+      <div class="hero-metric-l">Logical drives présents</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">0</div>
+      <div class="hero-metric-l">Action destructive lancée</div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
 </section>
+
 <div class="firm-band">
-<div class="firm-band-left">
-<div class="firm-band-name">Résumé exécutif du cas</div>
-<div class="firm-band-desc">Serveur de sauvegarde · alerte NTFS · Veeam · Smart Array HPE · incident non reproductible</div>
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Serveur de sauvegarde · alerte NTFS · Veeam · Smart Array HPE · incident non reproductible</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">RMM</div>
+    <div class="firm-product active">NTFS</div>
+    <div class="firm-product active">Veeam</div>
+    <div class="firm-product active">ADU</div>
+    <div class="firm-product active">CW Note</div>
+    <div class="firm-product active">CW Discussion</div>
+    <div class="firm-product active">Email client</div>
+    <div class="firm-product active">client inc.</div>
+  </div>
 </div>
-<div class="firm-products">
-<div class="firm-product active">RMM</div>
-<div class="firm-product active">NTFS</div>
-<div class="firm-product active">Veeam</div>
-<div class="firm-product active">ADU</div>
-<div class="firm-product active">CW Note</div>
-<div class="firm-product active">CW Discussion</div>
-<div class="firm-product active">Email client</div>
-<div class="firm-product active">Teams</div>
-</div>
-</div>
+
 <div class="ticker">
-<div class="ticker-inner">
-<span>NTFS ALERT</span> · FILE SYSTEM CORRUPT · READ-ONLY TRIAGE · DIRTY BIT CHECK ·
+  <div class="ticker-inner">
+    <span>NTFS ALERT</span> · FILE SYSTEM CORRUPT · READ-ONLY TRIAGE · DIRTY BIT CHECK ·
     <span>VEEAM SERVICES</span> · HPE SMART ARRAY · ADU REPORT · INCIDENT NON REPRODUCTIBLE ·
     <span>NO CHKDSK /F</span> · NO REBOOT FORCÉ · CW NOTE · CW DISCUSSION · EMAIL CLIENT ·
     <span>NTFS ALERT</span> · FILE SYSTEM CORRUPT · READ-ONLY TRIAGE · DIRTY BIT CHECK ·
@@ -908,332 +862,343 @@ footer img.footer-logo {
     <span>NO CHKDSK /F</span> · NO REBOOT FORCÉ · CW NOTE · CW DISCUSSION · EMAIL CLIENT ·
   </div>
 </div>
+
 <section class="problem s-pad">
-<div class="problem-inner">
-<div>
-<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-<div class="s-title">Une alerte<br/>qui disait corruption,<br/><em>sans preuve persistante.</em></div>
-<p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial semblait inquiétant : l’outil de surveillance indiquait que la structure du système de fichiers
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Une alerte<br>qui disait corruption,<br><em>sans preuve persistante.</em></div>
+      <p class="s-sub" style="margin-bottom: 24px;">
+        Le billet initial semblait inquiétant : Auvik/RMM/Datto/Zabbix indiquait que la structure du système de fichiers
         sur disque était corrompue et inutilisable sur un serveur BDR / Veeam.
       </p>
-<p class="s-sub">
+      <p class="s-sub">
         Beaucoup d’équipes auraient lancé un <strong>chkdsk /f</strong>, un redémarrage ou une réparation immédiate.
         Ici, l’agent a traité le cas comme un vrai incident stockage : lecture seule d’abord, validation des volumes,
         revue des événements, état des services Veeam, puis contrôle du RAID HPE avant toute décision.
       </p>
-</div>
-<div>
-<div class="problem-pains">
-<div class="pain-item">
-<div class="pain-icon">01</div>
-<div class="pain-text"><strong>L’alerte monitor disait “corrupt and unusable”</strong> — mais une alerte n’est pas un diagnostic confirmé.</div>
-</div>
-<div class="pain-item">
-<div class="pain-icon">02</div>
-<div class="pain-text"><strong>Le serveur portait les services Veeam</strong> — donc un faux mouvement pouvait toucher la chaîne de sauvegarde.</div>
-</div>
-<div class="pain-item">
-<div class="pain-icon">03</div>
-<div class="pain-text"><strong>Les volumes C: et V: étaient visibles et sains</strong> — aucun dirty bit, aucun volume offline, aucune corruption active reproduite.</div>
-</div>
-<div class="pain-item">
-<div class="pain-icon">04</div>
-<div class="pain-text"><strong>Le contrôleur HPE remontait OK</strong> — arrays, logical drives et physical drives présents sans erreur consolidée visible.</div>
-</div>
-<div class="pain-item">
-<div class="pain-icon">05</div>
-<div class="pain-text"><strong>La bonne décision n’était pas “réparer vite”</strong> — mais prouver qu’aucune action destructive n’était justifiée à cet instant.</div>
-</div>
-</div>
-</div>
-</div>
-<div style="max-width:1160px;margin:56px auto 0">
-<div class="terminal">
-<div class="t-bar">
-<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-<div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · NTFS / VEEAM / HPE ARRAY</div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
-<div>
-<div class="t-line t-gray">// BILLET BRUT REÇU</div>
-<div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">RMM / NOC / HARDWARE ALERT</span></div>
-<div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">NTFS — FILE SYSTEM STRUCTURE IS CORRUPT</span></div>
-<div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">SERVEUR BDR / VEEAM</span></div>
-<div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">STOCKAGE + SAUVEGARDE</span></div>
-<div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-<div class="t-line t-silver">Une alerte sévère ne suffit pas à autoriser une réparation.</div>
-<div class="t-line t-silver">La chaîne NTFS, backup et contrôleur doit converger.</div>
-<div class="t-line t-silver">Le danger est autant dans le faux diagnostic que dans la vraie panne.</div>
-</div>
-<div>
-<div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-<div class="t-line" style="margin-top:8px"><span class="t-green">✓ Volumes healthy</span></div>
-<div class="t-line"><span class="t-green">✓ Dirty bit absent</span></div>
-<div class="t-line"><span class="t-green">✓ Services Veeam en marche</span></div>
-<div class="t-line"><span class="t-green">✓ Contrôleur HPE statut OK</span></div>
-<div class="t-line"><span class="t-red">✗ Aucun chkdsk /f lancé</span></div>
-<div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">INCIDENT TRANSITOIRE / NON REPRODUCTIBLE + SURVEILLANCE</span></div>
-<div class="t-line t-gold">▌<span class="cursor"></span></div>
-</div>
-</div>
-</div>
-</div>
+    </div>
+
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item">
+          <div class="pain-icon">01</div>
+          <div class="pain-text"><strong>L’alerte monitor disait “corrupt and unusable”</strong> — mais une alerte n’est pas un diagnostic confirmé.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">02</div>
+          <div class="pain-text"><strong>Le serveur portait les services Veeam</strong> — donc un faux mouvement pouvait toucher la chaîne de sauvegarde.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">03</div>
+          <div class="pain-text"><strong>Les volumes C: et V: étaient visibles et sains</strong> — aucun dirty bit, aucun volume offline, aucune corruption active reproduite.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">04</div>
+          <div class="pain-text"><strong>Le contrôleur HPE remontait OK</strong> — arrays, logical drives et physical drives présents sans erreur consolidée visible.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">05</div>
+          <div class="pain-text"><strong>La bonne décision n’était pas “réparer vite”</strong> — mais prouver qu’aucune action destructive n’était justifiée à cet instant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · NTFS / VEEAM / HPE ARRAY</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">RMM / NOC / HARDWARE ALERT</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">NTFS — FILE SYSTEM STRUCTURE IS CORRUPT</span></div>
+          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">SERVEUR BDR / VEEAM</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">STOCKAGE + SAUVEGARDE</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Une alerte sévère ne suffit pas à autoriser une réparation.</div>
+          <div class="t-line t-silver">La chaîne NTFS, backup et contrôleur doit converger.</div>
+          <div class="t-line t-silver">Le danger est autant dans le faux diagnostic que dans la vraie panne.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Volumes healthy</span></div>
+          <div class="t-line"><span class="t-green">✓ Dirty bit absent</span></div>
+          <div class="t-line"><span class="t-green">✓ Services Veeam en marche</span></div>
+          <div class="t-line"><span class="t-green">✓ Contrôleur HPE statut OK</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucun chkdsk /f lancé</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">INCIDENT TRANSITOIRE / NON REPRODUCTIBLE + SURVEILLANCE</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 <section class="s-pad" id="diagnostic">
-<div class="content-wrap">
-<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-<div class="s-title"><strong>Une alerte critique,</strong><br/>une conclusion <em>précise.</em></div>
-<p class="s-sub">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Une alerte critique,</strong><br>une conclusion <em>précise.</em></div>
+    <p class="s-sub">
       L’agent n’a pas simplement vérifié si l’erreur “était encore là”.
       Il a séparé l’alerte brute, l’état réel des volumes, la santé Veeam et la santé RAID
       pour déterminer si une réparation intrusive était réellement justifiée.
     </p>
-<table class="case-table">
-<thead>
-<tr>
-<th>Élément</th>
-<th>Constat</th>
-<th>Impact</th>
-<th>Décision</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Alerte initiale</strong></td>
-<td>Le monitoring signalait une corruption NTFS “file system structure on disk is corrupt and unusable”</td>
-<td>Risque perçu élevé sur un serveur de sauvegarde</td>
-<td>Traiter comme incident stockage, pas comme simple bruit RMM</td>
-</tr>
-<tr>
-<td><strong>Volumes Windows</strong></td>
-<td>Les volumes C: et V: ont été observés en état Healthy</td>
-<td>Aucune preuve de corruption active au moment du triage</td>
-<td>Interdire toute réparation sans validation complémentaire</td>
-</tr>
-<tr>
-<td><strong>Dirty bit</strong></td>
-<td>Aucun volume n’était marqué Dirty</td>
-<td>Pas d’indice que Windows exige une correction NTFS immédiate</td>
-<td>Pas de chkdsk correctif lancé</td>
-</tr>
-<tr>
-<td><strong>Journaux NTFS</strong></td>
-<td>Les événements corrélés autour de l’alerte et sur la fenêtre récente remontaient des états “healthy” sur les shadow copies</td>
-<td>L’incident n’était pas reproductible dans les journaux analysés</td>
-<td>Classer le cas en événement transitoire / non persistant</td>
-</tr>
-<tr>
-<td><strong>Services Veeam</strong></td>
-<td>Les services principaux de sauvegarde étaient en marche au moment de la vérification</td>
-<td>La plateforme de backup restait opérationnelle</td>
-<td>Éviter tout geste destructif pouvant aggraver un système encore fonctionnel</td>
-</tr>
-<tr>
-<td><strong>Contrôleur HPE</strong></td>
-<td>Le Smart Array B140i remontait OK avec 2 logical drives et 3 physical drives présents</td>
-<td>Aucun signal clair de panne RAID active dans l’ADU fourni</td>
-<td>Conclure à l’absence de défaut matériel confirmé à cet instant</td>
-</tr>
-<tr>
-<td><strong>Clôture opérationnelle</strong></td>
-<td>Le cas nécessitait une note rigoureuse, pas une “réparation pour se rassurer”</td>
-<td>La vraie valeur provenait du discernement et de la traçabilité</td>
-<td>Produire les livrables complets et passer en surveillance</td>
-</tr>
-</tbody>
-</table>
-</div>
+
+    <table class="case-table">
+      <thead>
+        <tr>
+          <th>Élément</th>
+          <th>Constat</th>
+          <th>Impact</th>
+          <th>Décision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alerte initiale</strong></td>
+          <td>Le monitoring signalait une corruption NTFS “file system structure on disk is corrupt and unusable”</td>
+          <td>Risque perçu élevé sur un serveur de sauvegarde</td>
+          <td>Traiter comme incident stockage, pas comme simple bruit RMM</td>
+        </tr>
+        <tr>
+          <td><strong>Volumes Windows</strong></td>
+          <td>Les volumes C: et V: ont été observés en état Healthy</td>
+          <td>Aucune preuve de corruption active au moment du triage</td>
+          <td>Interdire toute réparation sans validation complémentaire</td>
+        </tr>
+        <tr>
+          <td><strong>Dirty bit</strong></td>
+          <td>Aucun volume n’était marqué Dirty</td>
+          <td>Pas d’indice que Windows exige une correction NTFS immédiate</td>
+          <td>Pas de chkdsk correctif lancé</td>
+        </tr>
+        <tr>
+          <td><strong>Journaux NTFS</strong></td>
+          <td>Les événements corrélés autour de l’alerte et sur la fenêtre récente remontaient des états “healthy” sur les shadow copies</td>
+          <td>L’incident n’était pas reproductible dans les journaux analysés</td>
+          <td>Classer le cas en événement transitoire / non persistant</td>
+        </tr>
+        <tr>
+          <td><strong>Services Veeam</strong></td>
+          <td>Les services principaux de sauvegarde étaient en marche au moment de la vérification</td>
+          <td>La plateforme de backup restait opérationnelle</td>
+          <td>Éviter tout geste destructif pouvant aggraver un système encore fonctionnel</td>
+        </tr>
+        <tr>
+          <td><strong>Contrôleur HPE</strong></td>
+          <td>Le Smart Array B140i remontait OK avec 2 logical drives et 3 physical drives présents</td>
+          <td>Aucun signal clair de panne RAID active dans l’ADU fourni</td>
+          <td>Conclure à l’absence de défaut matériel confirmé à cet instant</td>
+        </tr>
+        <tr>
+          <td><strong>Clôture opérationnelle</strong></td>
+          <td>Le cas nécessitait une note rigoureuse, pas une “réparation pour se rassurer”</td>
+          <td>La vraie valeur provenait du discernement et de la traçabilité</td>
+          <td>Produire les livrables complets et passer en surveillance</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
+
 <section class="s-pad" id="pipeline">
-<div class="modules-header">
-<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-<div class="s-title"><strong>10 étapes.</strong><br/><em>Zéro improvisation.</em></div>
-<p class="s-sub">Le cas met en valeur une compétence rare : savoir gérer une alerte grave sans sur-réagir, tout en documentant un diagnostic crédible de bout en bout.</p>
-</div>
-<div class="modules-grid">
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 01</div>
-<div class="mod-icon">◎</div>
-<div class="mod-name">Ingestion</div>
-<div class="mod-sub">Lecture du billet NOC</div>
-<div class="mod-desc">Le billet brut est absorbé avec son contexte RMM : alerte NTFS, serveur BDR, risque de corruption du système de fichiers.</div>
-<div class="mod-agents">Signal brut → cas structuré</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 02</div>
-<div class="mod-icon">◇</div>
-<div class="mod-name">Qualification</div>
-<div class="mod-sub">Triage réel</div>
-<div class="mod-desc">L’agent recadre le cas comme incident stockage / sauvegarde, sans conclure trop tôt à une panne physique ou logique.</div>
-<div class="mod-agents">Priorité juste</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 03</div>
-<div class="mod-icon">⌁</div>
-<div class="mod-name">Lecture seule</div>
-<div class="mod-sub">Avant toute action</div>
-<div class="mod-desc">Volumes, dirty bit, disques, événements et services sont interrogés sans aucune modification de l’environnement.</div>
-<div class="mod-agents">Aucune supposition</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 04</div>
-<div class="mod-icon">□</div>
-<div class="mod-name">Validation NTFS</div>
-<div class="mod-sub">Réalité du symptôme</div>
-<div class="mod-desc">L’agent distingue l’alerte initiale de l’état réel du système : volumes sains, dirty bit absent, pas de corruption persistante prouvée.</div>
-<div class="mod-agents">Faux diagnostic écarté</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 05</div>
-<div class="mod-icon">△</div>
-<div class="mod-name">Audit Veeam</div>
-<div class="mod-sub">Risque backup</div>
-<div class="mod-desc">La présence des services Veeam et le rôle de l’asset sont vérifiés pour évaluer le risque de toucher un dépôt ou une chaîne de sauvegarde.</div>
-<div class="mod-agents">Impact maîtrisé</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 06</div>
-<div class="mod-icon">✦</div>
-<div class="mod-name">Audit HPE</div>
-<div class="mod-sub">Contrôleur / RAID</div>
-<div class="mod-desc">Le rapport ADU est lu pour vérifier l’état du Smart Array, des physical drives et des logical drives.</div>
-<div class="mod-agents">Défaut matériel non confirmé</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 07</div>
-<div class="mod-icon">↺</div>
-<div class="mod-name">Décision</div>
-<div class="mod-sub">GO / NO-GO</div>
-<div class="mod-desc">Malgré une alerte alarmante, la décision finale est un NO-GO pour toute réparation intrusive immédiate.</div>
-<div class="mod-agents">Maturité opérationnelle</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 08</div>
-<div class="mod-icon">✉</div>
-<div class="mod-name">Clôture CW</div>
-<div class="mod-sub">Livrables internes</div>
-<div class="mod-desc">La note interne et la discussion client-safe sont produites dans le format MSP attendu.</div>
-<div class="mod-agents">Prêt à coller</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 09</div>
-<div class="mod-icon">◆</div>
-<div class="mod-name">Communication</div>
-<div class="mod-sub">Client + équipe</div>
-<div class="mod-desc">Le cas est reformulé en langage lisible pour le client et exploitable pour la coordination opérationnelle.</div>
-<div class="mod-agents">Externe prêt à envoyer</div>
-</div>
-<div class="mod-card">
-<div class="mod-n">ÉTAPE 10</div>
-<div class="mod-icon">◈</div>
-<div class="mod-name">Capitalisation</div>
-<div class="mod-sub">Cas marketing premium</div>
-<div class="mod-desc">Le billet devient une page de démonstration crédible pour le lancement du produit MSP.</div>
-<div class="mod-agents">Support vente + démo</div>
-</div>
-</div>
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Zéro improvisation.</em></div>
+    <p class="s-sub">Le cas met en valeur une compétence rare : savoir gérer une alerte grave sans sur-réagir, tout en documentant un diagnostic crédible de bout en bout.</p>
+  </div>
+
+  <div class="modules-grid">
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 01</div>
+      <div class="mod-icon">◎</div>
+      <div class="mod-name">Ingestion</div>
+      <div class="mod-sub">Lecture du billet NOC</div>
+      <div class="mod-desc">Le billet brut est absorbé avec son contexte RMM : alerte NTFS, serveur BDR, risque de corruption du système de fichiers.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 02</div>
+      <div class="mod-icon">◇</div>
+      <div class="mod-name">Qualification</div>
+      <div class="mod-sub">Triage réel</div>
+      <div class="mod-desc">L’agent recadre le cas comme incident stockage / sauvegarde, sans conclure trop tôt à une panne physique ou logique.</div>
+      <div class="mod-agents">Priorité juste</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 03</div>
+      <div class="mod-icon">⌁</div>
+      <div class="mod-name">Lecture seule</div>
+      <div class="mod-sub">Avant toute action</div>
+      <div class="mod-desc">Volumes, dirty bit, disques, événements et services sont interrogés sans aucune modification de l’environnement.</div>
+      <div class="mod-agents">Aucune supposition</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 04</div>
+      <div class="mod-icon">□</div>
+      <div class="mod-name">Validation NTFS</div>
+      <div class="mod-sub">Réalité du symptôme</div>
+      <div class="mod-desc">L’agent distingue l’alerte initiale de l’état réel du système : volumes sains, dirty bit absent, pas de corruption persistante prouvée.</div>
+      <div class="mod-agents">Faux diagnostic écarté</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 05</div>
+      <div class="mod-icon">△</div>
+      <div class="mod-name">Audit Veeam</div>
+      <div class="mod-sub">Risque backup</div>
+      <div class="mod-desc">La présence des services Veeam et le rôle de l’asset sont vérifiés pour évaluer le risque de toucher un dépôt ou une chaîne de sauvegarde.</div>
+      <div class="mod-agents">Impact maîtrisé</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 06</div>
+      <div class="mod-icon">✦</div>
+      <div class="mod-name">Audit HPE</div>
+      <div class="mod-sub">Contrôleur / RAID</div>
+      <div class="mod-desc">Le rapport ADU est lu pour vérifier l’état du Smart Array, des physical drives et des logical drives.</div>
+      <div class="mod-agents">Défaut matériel non confirmé</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 07</div>
+      <div class="mod-icon">↺</div>
+      <div class="mod-name">Décision</div>
+      <div class="mod-sub">GO / NO-GO</div>
+      <div class="mod-desc">Malgré une alerte alarmante, la décision finale est un NO-GO pour toute réparation intrusive immédiate.</div>
+      <div class="mod-agents">Maturité opérationnelle</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 08</div>
+      <div class="mod-icon">✉</div>
+      <div class="mod-name">Clôture CW</div>
+      <div class="mod-sub">Livrables internes</div>
+      <div class="mod-desc">La note interne et la discussion client-safe sont produites dans le format MSP attendu.</div>
+      <div class="mod-agents">Prêt à coller</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 09</div>
+      <div class="mod-icon">◆</div>
+      <div class="mod-name">Communication</div>
+      <div class="mod-sub">Client + équipe</div>
+      <div class="mod-desc">Le cas est reformulé en langage lisible pour le client et exploitable pour la coordination opérationnelle.</div>
+      <div class="mod-agents">Externe prêt à envoyer</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 10</div>
+      <div class="mod-icon">◈</div>
+      <div class="mod-name">Capitalisation</div>
+      <div class="mod-sub">Cas marketing premium</div>
+      <div class="mod-desc">Le billet devient une page de démonstration crédible pour le lancement du produit MSP.</div>
+      <div class="mod-agents">Support vente + démo</div>
+    </div>
+  </div>
 </section>
+
 <section class="arsenal s-pad" id="livrables">
-<div style="max-width:1160px;margin:0 auto 56px">
-<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-<div class="s-title">Ce que le cas<br/><em>produit vraiment.</em></div>
-<p class="s-sub">Au lieu d’un simple verdict, l’agent génère des sorties immédiatement exploitables par les équipes MSP et directement montrables sur un site de lancement.</p>
-</div>
-<div class="arsenal-grid">
-<div class="arsenal-block">
-<div class="arsenal-n">01</div>
-<div class="arsenal-unit">Actions effectuées</div>
-<div class="arsenal-desc">Qualification de l’alerte, validation NTFS, contrôle des volumes, revue des événements, audit Veeam, lecture du rapport HPE ADU et conclusion sous surveillance.</div>
-<ul class="arsenal-list">
-<li>Précheck lecture seule</li>
-<li>Dirty bit check</li>
-<li>Audit des événements NTFS</li>
-<li>Validation des services Veeam</li>
-<li>Contrôle ADU / Smart Array</li>
-</ul>
-</div>
-<div class="arsenal-block">
-<div class="arsenal-n">02</div>
-<div class="arsenal-unit">Garde-fous</div>
-<div class="arsenal-desc">Le système démontre sa valeur en empêchant une mauvaise remédiation sur un environnement encore exploitable.</div>
-<ul class="arsenal-list">
-<li>Lecture seule avant action</li>
-<li>Aucun chkdsk /f ou /r</li>
-<li>Aucun reboot préventif</li>
-<li>Aucune remise hors ligne du volume</li>
-<li>Validation croisée OS + RAID + backup</li>
-</ul>
-</div>
-<div class="arsenal-block">
-<div class="arsenal-n">03</div>
-<div class="arsenal-unit">Sorties prêtes à l’emploi</div>
-<div class="arsenal-desc">Le cas livre autant de valeur documentaire que de valeur analytique.</div>
-<ul class="arsenal-list">
-<li>CW Note Interne</li>
-<li>CW Discussion client-safe</li>
-<li>Email client de suivi</li>
-<li>Notice Teams</li>
-<li>Page de cas web premium</li>
-</ul>
-</div>
-<div class="arsenal-block">
-<div class="arsenal-n">04</div>
-<div class="arsenal-unit">État final</div>
-<div class="arsenal-desc">L’environnement n’est pas “réparé pour rassurer” artificiellement : il reste stable, surveillé et documenté.</div>
-<ul class="arsenal-list">
-<li>Volumes sains observés</li>
-<li>Services Veeam opérationnels</li>
-<li>Contrôleur HPE OK</li>
-<li>Incident non reproductible</li>
-<li>Surveillance renforcée recommandée</li>
-</ul>
-</div>
-<div class="arsenal-block">
-<div class="arsenal-n">05</div>
-<div class="arsenal-unit">Démonstration produit</div>
-<div class="arsenal-desc">Ce cas prouve une capacité différenciante : savoir ne pas casser ce qui fonctionne encore tout en produisant une documentation exemplaire.</div>
-<ul class="arsenal-list">
-<li>Discernement opérationnel</li>
-<li>Sorties multi-publics</li>
-<li>Approche MSP crédible</li>
-<li>Qualité de clôture visible</li>
-<li>Narration premium</li>
-</ul>
-</div>
-<div class="arsenal-block">
-<div class="arsenal-n">06</div>
-<div class="arsenal-unit">Valeur business</div>
-<div class="arsenal-desc">Le produit ne vend pas seulement de la vitesse. Il vend de la justesse, de la retenue, de la traçabilité et une image de maturité opérationnelle.</div>
-<ul class="arsenal-list">
-<li>Plus fort qu’un slogan</li>
-<li>Plus concret qu’une promesse</li>
-<li>Parle aux MSP matures</li>
-<li>Convainc vente + opérations</li>
-<li>Réutilisable au lancement</li>
-</ul>
-</div>
-</div>
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>produit vraiment.</em></div>
+    <p class="s-sub">Au lieu d’un simple verdict, l’agent génère des sorties immédiatement exploitables par les équipes MSP et directement montrables sur un site de lancement.</p>
+  </div>
+
+  <div class="arsenal-grid">
+    <div class="arsenal-block">
+      <div class="arsenal-n">01</div>
+      <div class="arsenal-unit">Actions effectuées</div>
+      <div class="arsenal-desc">Qualification de l’alerte, validation NTFS, contrôle des volumes, revue des événements, audit Veeam, lecture du rapport HPE ADU et conclusion sous surveillance.</div>
+      <ul class="arsenal-list">
+        <li>Précheck lecture seule</li>
+        <li>Dirty bit check</li>
+        <li>Audit des événements NTFS</li>
+        <li>Validation des services Veeam</li>
+        <li>Contrôle ADU / Smart Array</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">02</div>
+      <div class="arsenal-unit">Garde-fous</div>
+      <div class="arsenal-desc">Le système démontre sa valeur en empêchant une mauvaise remédiation sur un environnement encore exploitable.</div>
+      <ul class="arsenal-list">
+        <li>Lecture seule avant action</li>
+        <li>Aucun chkdsk /f ou /r</li>
+        <li>Aucun reboot préventif</li>
+        <li>Aucune remise hors ligne du volume</li>
+        <li>Validation croisée OS + RAID + backup</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">03</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">Le cas livre autant de valeur documentaire que de valeur analytique.</div>
+      <ul class="arsenal-list">
+        <li>CW Note Interne</li>
+        <li>CW Discussion client-safe</li>
+        <li>Email client de suivi</li>
+        <li>Notice Teams</li>
+        <li>Page de cas web premium</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">04</div>
+      <div class="arsenal-unit">État final</div>
+      <div class="arsenal-desc">L’environnement n’est pas “réparé pour rassurer” artificiellement : il reste stable, surveillé et documenté.</div>
+      <ul class="arsenal-list">
+        <li>Volumes sains observés</li>
+        <li>Services Veeam opérationnels</li>
+        <li>Contrôleur HPE OK</li>
+        <li>Incident non reproductible</li>
+        <li>Surveillance renforcée recommandée</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">05</div>
+      <div class="arsenal-unit">Démonstration produit</div>
+      <div class="arsenal-desc">Ce cas prouve une capacité différenciante : savoir ne pas casser ce qui fonctionne encore tout en produisant une documentation exemplaire.</div>
+      <ul class="arsenal-list">
+        <li>Discernement opérationnel</li>
+        <li>Sorties multi-publics</li>
+        <li>Approche MSP crédible</li>
+        <li>Qualité de clôture visible</li>
+        <li>Narration premium</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">06</div>
+      <div class="arsenal-unit">Valeur business</div>
+      <div class="arsenal-desc">Le produit ne vend pas seulement de la vitesse. Il vend de la justesse, de la retenue, de la traçabilité et une image de maturité opérationnelle.</div>
+      <ul class="arsenal-list">
+        <li>Plus fort qu’un slogan</li>
+        <li>Plus concret qu’une promesse</li>
+        <li>Parle aux MSP matures</li>
+        <li>Convainc vente + opérations</li>
+        <li>Réutilisable au lancement</li>
+      </ul>
+    </div>
+  </div>
 </section>
+
 <section class="doc-section">
-<div class="doc-wrap">
-<div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
-<div class="s-title"><strong>Les sorties réelles,</strong><br/><em>dans le bon format.</em></div>
-<p class="s-sub">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format.</em></div>
+    <p class="s-sub">
       Cette section montre la profondeur du produit : la même analyse se transforme en livrables distincts,
       chacun rédigé pour un usage précis. Le contenu ci-dessous est anonymisé pour un usage public.
     </p>
-<div class="doc-grid">
-<div class="doc-card">
-<div class="doc-top">
-<div>
-<div class="doc-label">Livrable 01</div>
-<div class="doc-title">CW Note Interne</div>
-</div>
-<div class="doc-copy">Interne · complet</div>
-</div>
-<div class="doc-pre">Billet : #0000000
-Client : Concession automobile [anonymisé]
+
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 01</div>
+            <div class="doc-title">CW Note Interne</div>
+          </div>
+          <div class="doc-copy">Interne · complet</div>
+        </div>
+        <div class="doc-pre">Billet : #[1716014]
+Client : client inc.
 Type : Incident stockage / alerte NTFS
 Actif concerné : serveur BDR / dépôt Veeam
 
@@ -1265,29 +1230,30 @@ Recommandation :
 
 Statut recommandé :
 Résolu sous surveillance</div>
-</div>
-<div class="doc-card">
-<div class="doc-top">
-<div>
-<div class="doc-label">Livrable 02</div>
-<div class="doc-title">CW Discussion</div>
-</div>
-<div class="doc-copy">Client-safe · facturable</div>
-</div>
-<div class="doc-pre">Préparation et découverte.
-Prendre connaissance de la demande et connexion à la documentation de l'entreprise.
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 02</div>
+            <div class="doc-title">CW Discussion</div>
+          </div>
+          <div class="doc-copy">Client-safe · facturable</div>
+        </div>
+        <div class="doc-pre">Préparation et découverte.
+Examen de la demande et consultation de la base documentaire.
 
 ---------
 INTERVENTION: Analyse d’une alerte de corruption du système de fichiers
 ---------
 
-DATE: 2026-04-09
-TECHNICIEN: [À compléter]
+DATE: 2024-03-11
+TECHNICIEN: Agent NOC-12
 ---------
 
 TRAVAUX EFFECTUÉS:
 ---------
-• Analyse de l’alerte remontée par l’outil de surveillance sur le serveur de sauvegarde
+• Analyse de l’alerte remontée par Auvik/RMM/Datto/Zabbix sur le serveur de sauvegarde
 • Vérification de l’état général des volumes et du stockage en mode lecture seule
 • Validation des journaux système afin de confirmer si une corruption active était toujours présente
 • Vérification de l’état des services de sauvegarde pour confirmer le bon fonctionnement de la plateforme
@@ -1304,16 +1270,17 @@ RÉSULTAT:
 RECOMMANDATION:
 ---------
 • Maintenir une surveillance renforcée et valider les prochains cycles de sauvegarde</div>
-</div>
-<div class="doc-card full">
-<div class="doc-top">
-<div>
-<div class="doc-label">Livrable 03</div>
-<div class="doc-title">Email client — suivi et surveillance</div>
-</div>
-<div class="doc-copy">Externe · prêt à envoyer</div>
-</div>
-<div class="doc-pre">Objet : Billet #0000000 — Mise à jour sur l’alerte détectée sur le serveur de sauvegarde
+      </div>
+
+      <div class="doc-card full">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 03</div>
+            <div class="doc-title">Email client — suivi et surveillance</div>
+          </div>
+          <div class="doc-copy">Externe · prêt à envoyer</div>
+        </div>
+        <div class="doc-pre">Objet : Billet #[1716014] — Mise à jour sur l’alerte détectée sur le serveur de sauvegarde
 
 Bonjour,
 
@@ -1329,47 +1296,52 @@ Nous poursuivrons la surveillance et reviendrons vers vous si un nouvel indicate
 
 Cordialement,
 [Signature MSP]</div>
-</div>
-<div class="doc-card full">
-<div class="doc-top">
-<div>
-<div class="doc-label">Livrable 04</div>
-<div class="doc-title">Notice Teams</div>
-</div>
-<div class="doc-copy">Coordination · opération</div>
-</div>
-<div class="doc-pre">🔧 Maintenance en cours — Billet : #0000000
-Client : Concession automobile [anonymisé]
+      </div>
+
+      <div class="doc-card full">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 04</div>
+            <div class="doc-title">Notice Teams</div>
+          </div>
+          <div class="doc-copy">Coordination · opération</div>
+        </div>
+        <div class="doc-pre">🔧 Maintenance en cours — Billet : #000008
+Client : client inc.
 Tâche principale : Diagnostic d’une alerte NTFS / santé disque sur le serveur de sauvegarde
 Impact : Aucune action destructive lancée — incident non reproductible pour l’instant; surveillance renforcée et validation des prochains cycles de sauvegarde</div>
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 </section>
+
 <div class="quote-section">
-<div class="quote-mark">"</div>
-<p class="quote-text">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">
     Le meilleur signal de maturité opérationnelle n’est pas seulement la capacité à <strong>réparer vite</strong>.
     C’est la capacité à <strong>refuser une réparation injustifiée</strong>, à corréler les couches techniques, puis à livrer une conclusion exploitable dans le bon format.
   </p>
-<div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
+
 <section class="cta-section" id="contact">
-<div class="cta-orb"></div>
-<h2>Tu veux des cas<br/><em>comme celui-ci</em><br/>sur ton site de lancement ?</h2>
-<p>
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>
     EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site,
     la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.
   </p>
-<a class="btn-gold" href="mailto:contact@eaia.ca">Demander une démo</a>
-<p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+  <a href="mailto:eaia.eaai@gmail.com" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
 </section>
+
 <footer>
-<div class="footer-brand">EA<span>|</span><em>IA</em></div>
-<div class="footer-right">
-    MSP Intelligence IT — Cas NTFS sur serveur de sauvegarde Veeam<br/>
-    © 2026 EAIA — Tous droits réservés
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas NTFS sur serveur de sauvegarde Veeam<br>
+    © 2025 EAIA — Tous droits réservés
   </div>
 </footer>
+
 </body>
 </html>

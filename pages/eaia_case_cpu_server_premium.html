@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas de surcharge CPU prolongée sur serveur</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
+
 :root {
   --black: #000000;
   --dark: #080808;
@@ -628,6 +630,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -761,6 +765,8 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
+
 </style>
 </head>
 <body>
@@ -791,40 +797,39 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte<br>
+    de <em>CPU à 100 %</em><br>
+    devenue <span class="strong">preuve de méthode MSP.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · PERFORMANCE SERVEUR · WINDOWS · EDR · BACKUP · CW · CLOSEOUT</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite une surcharge CPU prolongée sur un serveur de fichiers :
+    validation de l’alerte, analyse en <strong>lecture seule</strong>, corrélation entre sécurité, sauvegarde et maintenance Windows,
+    décision mesurée, redémarrage contrôlé, puis génération des <strong>livrables complets</strong> pour les opérations et la relation client.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
+      <div class="hero-metric-n">60</div>
+      <div class="hero-metric-l">minutes à 100 %</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">6</div>
+      <div class="hero-metric-l">processus dominants</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">3</div>
+      <div class="hero-metric-l">indices reboot pending</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">reboot contrôlé</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-n">OK</div>
+      <div class="hero-metric-l">serveur fonctionnel</div>
     </div>
   </div>
 
@@ -837,27 +842,28 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · FILE-01 · incident performance serveur</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
+    <div class="firm-product active">CPU</div>
+    <div class="firm-product active">Windows</div>
+    <div class="firm-product active">EDR</div>
+    <div class="firm-product active">Backup</div>
     <div class="firm-product active">CW Note</div>
     <div class="firm-product active">CW Discussion</div>
-    <div class="firm-product active">Email client</div>
-    <div class="firm-product active">client inc.</div>
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>CPU 100%</span> · FILE SERVER · WINDOWS SERVICING · DEFENDER ·
+    <span>SENTINEL</span> · DATTO BACKUP · TRIAGE STRUCTURÉ ·
+    <span>LECTURE SEULE</span> · PENDING REBOOT · REBOOT CONTRÔLÉ ·
+    <span>CW NOTE</span> · CW DISCUSSION · TEAMS NOTICE · SITE DE LANCEMENT ·
+    <span>CPU 100%</span> · FILE SERVER · WINDOWS SERVICING · DEFENDER ·
+    <span>SENTINEL</span> · DATTO BACKUP · TRIAGE STRUCTURÉ ·
+    <span>LECTURE SEULE</span> · PENDING REBOOT · REBOOT CONTRÔLÉ ·
+    <span>CW NOTE</span> · CW DISCUSSION · TEAMS NOTICE · SITE DE LANCEMENT ·
   </div>
 </div>
 
@@ -865,16 +871,16 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une seule alerte,<br>plusieurs couches<br><em>empilées.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le signal de départ semblait simple : <strong>CPU à 100 % pendant 60 minutes</strong> sur FILE-01.
+        Dans un contexte MSP, ce type d’alerte peut cacher plusieurs réalités : faux positif de collecte, scan sécurité,
+        job de sauvegarde, maintenance Windows, ou problème plus grave.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        L’agent n’a pas traité le cas “au feeling”. Il a confirmé que la surcharge était réelle, isolé les processus dominants,
+        éliminé la piste d’un simple échec de collecte RMM, identifié un contexte compatible avec un <strong>chevauchement de charges légitimes</strong>,
+        puis recommandé une remédiation contrôlée avec validation complète après intervention.
       </p>
     </div>
 
@@ -882,23 +888,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’alerte annonçait 100 % pendant 60 minutes</strong> — il fallait distinguer un vrai incident d’un simple bruit de monitoring.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Les agents de sécurité et de sauvegarde consommaient en parallèle</strong> — un mélange classique, mais difficile à raconter proprement sans méthode.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Le canal de collecte devait être validé</strong> — pour éviter d’attribuer l’absence ou la lenteur de sortie à un problème RMM au lieu d’une vraie saturation.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>Le pending reboot variait dans le temps</strong> — il fallait l’interpréter correctement sans conclure trop tôt à une seule cause unique.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>La clôture devait rester premium et défendable</strong> — claire pour le client, exploitable pour les opérations, et digne d’un site de lancement produit.</div>
         </div>
       </div>
     </div>
@@ -908,27 +914,27 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · CPU INCIDENT</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">BILLET :</span> <span class="t-white">#000001</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC.</span></div>
+          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE CLIENT</span></div>client inc.<div class="t-line"><span class="t-gold">ACTIF :</span> <span class="t-white">FILE-01</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">CPU 100 % PENDANT 60 MINUTES</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Charge réelle confirmée par plusieurs lectures.</div>
+          <div class="t-line t-silver">Processus sécurité / backup / servicing identifiés.</div>
+          <div class="t-line t-silver">Aucune preuve solide d’un processus malveillant.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Surcharge CPU validée</span></div>
+          <div class="t-line"><span class="t-green">✓ Piste RMM/ThreatLocker écartée comme cause principale</span></div>
+          <div class="t-line"><span class="t-green">✓ Redémarrage contrôlé justifié et documenté</span></div>
+          <div class="t-line"><span class="t-green">✓ Serveur revenu fonctionnel après intervention</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">INCIDENT STABILISÉ + LIVRABLES COMPLETS GÉNÉRÉS</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +945,10 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Une résolution qui distingue</strong><br>le <em>symptôme</em> de la <em>cause probable.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      Le système ne s’est pas contenté de lire une alerte CPU. Il a confirmé la saturation, mis en évidence les principaux consommateurs,
+      vérifié l’état système, interprété correctement les signaux de maintenance Windows, puis validé le retour au fonctionnement normal après remédiation.
     </p>
 
     <table class="case-table">
@@ -957,40 +962,40 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>Surcharge CPU</strong></td>
+          <td>Plusieurs lectures consécutives ont confirmé un CPU total à 100 % sur FILE-01 pendant la période critique</td>
+          <td>L’alerte ne relevait pas d’un faux positif ou d’un simple bruit de monitoring</td>
+          <td>Traiter comme incident de performance réel</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Processus dominants</strong></td>
+          <td>SentinelAgent, MsMpEng, System, WmiPrvSE, DattoBackupAgent et TiWorker dominaient le portrait pendant l’incident</td>
+          <td>Le problème ressemblait à un empilement de charges techniques plutôt qu’à un seul processus inconnu</td>
+          <td>Conserver une approche analytique plutôt qu’une remédiation brutale</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>Canal RMM</strong></td>
+          <td>Les commandes simples en ligne de commande retournaient bien leurs résultats</td>
+          <td>La piste d’un blocage total du canal d’exécution n’expliquait pas l’incident à elle seule</td>
+          <td>Écarter la collecte comme cause primaire</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>Maintenance Windows</strong></td>
+          <td>Des indicateurs de reboot pending ont été observés durant l’investigation, avec un contexte compatible avec du servicing Windows</td>
+          <td>Le chevauchement entre maintenance système, sécurité et sauvegarde devenait la cause probable la plus crédible</td>
+          <td>Préparer un reboot contrôlé</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>Signal sécurité</strong></td>
+          <td>Aucun élément n’a confirmé un processus malveillant ou un incident de sécurité actif dans le périmètre du billet</td>
+          <td>La réponse n’avait pas à basculer en containment sécurité</td>
+          <td>Rester sur un traitement performance / exploitation</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Validation finale</strong></td>
+          <td>Après redémarrage, le serveur a été confirmé comme redémarré et fonctionnel</td>
+          <td>Le service a été rétabli de façon stable et documentable</td>
+          <td>Clôture avec surveillance recommandée</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1005,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une alerte brute, une intervention premium.</em></div>
+    <p class="s-sub">Le cas démontre ce que le produit vend réellement : non seulement un diagnostic, mais une séquence MSP complète, lisible, réutilisable et commercialisable.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1014,81 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-sub">Billet NOC / RMM</div>
+      <div class="mod-desc">Le cas démarre avec une alerte CPU 100 % pendant 60 minutes sur FILE-01.</div>
+      <div class="mod-agents">Signal brut → cas qualifié</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Lecture seule d’abord</div>
+      <div class="mod-desc">L’agent confirme l’impact, évite toute action destructive et privilégie la collecte structurée.</div>
+      <div class="mod-agents">Méthode avant remédiation</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Validation</div>
+      <div class="mod-sub">CPU réel</div>
+      <div class="mod-desc">Les lectures CPU répétées prouvent que la saturation est réelle et prolongée.</div>
+      <div class="mod-agents">Confirmation terrain</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Corrélation</div>
+      <div class="mod-sub">Processus dominants</div>
+      <div class="mod-desc">Sécurité, monitoring, sauvegarde et servicing sont corrélés pour établir une cause probable crédible.</div>
+      <div class="mod-agents">Lecture inter-couches</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Discrimination</div>
+      <div class="mod-sub">Pas de faux coupable</div>
+      <div class="mod-desc">L’agent écarte la piste d’un simple échec RMM et évite de classer l’incident à tort comme menace active.</div>
+      <div class="mod-agents">Précision MSP</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Contexte Windows</div>
+      <div class="mod-sub">Pending reboot</div>
+      <div class="mod-desc">Les signaux de reboot pending sont interprétés comme partie du tableau et non comme conclusion isolée.</div>
+      <div class="mod-agents">Windows servicing</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">Décision</div>
+      <div class="mod-sub">Reboot contrôlé</div>
+      <div class="mod-desc">La remédiation retenue est justifiée, annoncée avec impact, puis exécutée dans un cadre maîtrisé.</div>
+      <div class="mod-agents">Action mesurée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Communication</div>
+      <div class="mod-sub">Teams / CW</div>
+      <div class="mod-desc">Le cas génère des messages clairs pour la coordination et la relation client, sans divulgation sensible.</div>
+      <div class="mod-agents">Communication opérationnelle</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">Validation</div>
+      <div class="mod-sub">Post-reboot</div>
+      <div class="mod-desc">Le serveur est confirmé redémarré et fonctionnel, ce qui permet une clôture techniquement défendable.</div>
+      <div class="mod-agents">Validation finale</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Closeout premium</div>
+      <div class="mod-sub">Site de lancement</div>
+      <div class="mod-desc">L’intervention devient une page de cas premium montrant la méthode, la discipline et les livrables du produit MSP.</div>
+      <div class="mod-agents">Ops + marketing</div>
     </div>
   </div>
 </section>
@@ -1092,80 +1097,80 @@ footer {
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
     <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <p class="s-sub">Au-delà d’un reboot réussi, cette intervention expose la maturité du produit : garde-fous, raisonnement, documentation et capacité à raconter l’incident correctement.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Qualification du billet, lectures CPU, analyse des processus, vérification du contexte Windows, recommandation de reboot et validation finale.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Confirmation CPU 100 %</li>
+        <li>Lecture des processus dominants</li>
+        <li>Analyse reboot pending</li>
+        <li>Reboot contrôlé documenté</li>
+        <li>Validation post-intervention</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">La discipline MSP reste visible du début à la fin : lecture seule d’abord, pas de kill de processus au hasard, impact annoncé avant action intrusive.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule avant remédiation</li>
+        <li>Aucune action destructive prématurée</li>
+        <li>Impact explicité avant reboot</li>
+        <li>Documentation continue</li>
+        <li>Clôture propre et différenciée</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Constats techniques</div>
+      <div class="arsenal-desc">Le portrait CPU montre un empilement d’activités de sécurité, backup et maintenance, plutôt qu’un unique coupable caricatural.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>SentinelAgent</li>
+        <li>MsMpEng</li>
+        <li>DattoBackupAgent</li>
+        <li>TiWorker</li>
+        <li>WmiPrvSE / System</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Résultats observables</div>
+      <div class="arsenal-desc">Le reboot ne sert pas seulement à “faire redescendre un CPU” : il restaure l’état opérationnel et permet une validation claire de la stabilité retrouvée.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Serveur redémarré</li>
+        <li>Fonctionnement confirmé</li>
+        <li>Incident stabilisé</li>
+        <li>Relation client facilitée</li>
+        <li>Suivi recommandé</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">Le cas produit directement les livrables attendus par une pratique MSP mature.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>CW Note Interne</li>
+        <li>CW Discussion</li>
+        <li>Notice Teams</li>
+        <li>Résumé exécutif</li>
+        <li>Page de cas premium</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">Le produit ne vend pas seulement un diagnostic. Il vend de la méthode, du discernement et une présentation haut de gamme de l’exécution MSP.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Ops + closeout</li>
+        <li>Support + marketing</li>
+        <li>Standard réutilisable</li>
+        <li>Confiance client renforcée</li>
+        <li>Démonstration produit crédible</li>
       </ul>
     </div>
   </div>
@@ -1174,11 +1179,10 @@ footer {
 <section class="doc-section">
   <div class="doc-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
-    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon langage MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Cette section expose les livrables complets générés pour le cas : résumé exécutif, note interne, discussion client-safe et notices Teams.
+      Tout le contenu est anonymisé selon votre convention de lancement produit.
     </p>
 
     <div class="doc-grid">
@@ -1186,152 +1190,168 @@ footer {
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 01</div>
-            <div class="doc-title">CW Note Interne</div>
+            <div class="doc-title">Résumé exécutif</div>
           </div>
-          <div class="doc-copy">Interne · complet</div>
+          <div class="doc-copy">Direction · premium</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
+        <div class="doc-pre">Date : 08-06-2024
+Billet : #000001
 Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+Contact : nom du contact
+Site : site client
+Actif : FILE-01
+Technicien : Agent NOC-11
 
-Contexte
+Résumé
 ---------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+Une alerte critique de performance a signalé une utilisation CPU prolongée à 100 % sur FILE-01.
+L’intervention a été prise en charge selon une méthode MSP complète : qualification du signal, validation en lecture seule, analyse des processus dominants, interprétation du contexte système, décision de remédiation, puis validation finale.
 
-Préparation et découverte
+Constat principal
 ---------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+La surcharge processeur était réelle.
+Les éléments collectés pointaient vers un chevauchement probable entre activités de sécurité, maintenance Windows, monitoring et sauvegarde, plutôt que vers un processus inconnu isolé.
 
-Vérifications effectuées
+Action retenue
 ---------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
-
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+Un redémarrage contrôlé a été recommandé puis exécuté afin de finaliser l’état du système et de restaurer un fonctionnement normal.
 
 Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
-
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+---------
+Le serveur a été redémarré avec succès et son fonctionnement a été confirmé après intervention.
+L’incident a été stabilisé avec une recommandation de surveillance pour confirmer l’absence de récurrence.</div>
       </div>
 
       <div class="doc-card">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 02</div>
-            <div class="doc-title">CW Discussion</div>
+            <div class="doc-title">CW Note Interne</div>
           </div>
-          <div class="doc-copy">Client-safe · facturable</div>
+          <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
-────────────────────────────────────────────────────────
+        <div class="doc-pre">Prendre connaissance de la demande et connexion à la documentation de l'entreprise.
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
----------
+Billet : #000001
+Client : client inc.
+Contact : nom du contact
+Site : site client
+Actif : FILE-01
+Type : Incident performance serveur / CPU élevé prolongé
+Date : 08-06-2024
+Technicien : Agent NOC-11
 
-PRÉPARATION ET DÉCOUVERTE :
+Contexte
 ---------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+Alerte reçue pour utilisation processeur prolongée à 100 % sur FILE-01.
+Investigation démarrée en lecture seule afin de confirmer la réalité de la surcharge et d’identifier la cause probable avant toute action intrusive.
 
-TRAVAUX EFFECTUÉS :
+Chronologie
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+- Analyse initiale du billet et qualification de l’incident
+- Validation de plusieurs lectures CPU à 100 %
+- Analyse des processus dominants observés pendant l’événement
+- Vérification du contexte de maintenance Windows et des indicateurs de reboot pending observés durant l’investigation
+- Élimination de la piste d’un simple problème de collecte comme cause principale
+- Recommandation de redémarrage contrôlé
+- Redémarrage effectué
+- Validation finale : serveur redémarré et fonctionnel
 
-RÉSULTAT / ÉTAT ACTUEL :
+Constats techniques
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+- CPU réellement saturé pendant la période d’alerte
+- Principaux processus observés :
+  * SentinelAgent
+  * MsMpEng
+  * System
+  * WmiPrvSE
+  * DattoBackupAgent
+  * TiWorker
+- Portrait compatible avec un chevauchement d’activités sécurité / sauvegarde / servicing Windows
+- Aucun indicateur clair retenu d’incident de sécurité actif dans le périmètre du billet
 
-SUIVI :
+Actions effectuées
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+- Revue de l’alerte et qualification de l’impact
+- Collecte lecture seule des indicateurs système
+- Analyse des processus et du contexte de maintenance
+- Communication de l’impact avant action intrusive
+- Redémarrage contrôlé du serveur
+- Validation post-intervention
+
+Résultat
+---------
+Serveur redémarré avec succès et fonctionnement normal confirmé.
+Incident stabilisé.
+Surveillance recommandée afin de confirmer l’absence de récurrence.</div>
       </div>
 
       <div class="doc-card full">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
+            <div class="doc-title">CW Discussion</div>
           </div>
-          <div class="doc-copy">Externe · prêt à envoyer</div>
+          <div class="doc-copy">Client-safe · facturable</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">---------
+INTERVENTION: Diagnostic et rétablissement d’une surcharge CPU sur serveur
+---------
 
-Bonjour,
+DATE: 08-06-2024
+TECHNICIEN: Agent NOC-11
+---------
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+PRÉPARATION ET DÉCOUVERTE:
+---------
+Préparation et découverte.
+Prendre connaissance de la demande et connexion à la documentation de l'entreprise.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+TRAVAUX EFFECTUÉS:
+---------
+• Analyse de l’alerte de performance signalant une utilisation processeur prolongée sur le serveur concerné
+• Vérification de l’état général du système afin de confirmer qu’il s’agissait d’un incident réel
+• Revue des principales activités techniques en cours susceptibles de générer une charge élevée
+• Validation du contexte système avant choix de la remédiation appropriée
+• Exécution d’une action corrective contrôlée afin de rétablir la stabilité du serveur
+• Vérification complète après intervention afin de confirmer le retour du service à un état normal
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+RÉSULTAT:
+---------
+• Serveur rétabli avec succès et fonctionnement normal confirmé
+• Incident stabilisé et aucun impact résiduel confirmé à la fin de l’intervention
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
-
-Cordialement,
-[Signature MSP]</div>
+RECOMMANDATION:
+---------
+• Maintenir une surveillance du serveur afin de confirmer l’absence de récurrence</div>
       </div>
 
-      <div class="doc-card full">
+      <div class="doc-card">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 04</div>
-            <div class="doc-title">Notice Teams</div>
+            <div class="doc-title">Notice Teams — début</div>
           </div>
-          <div class="doc-copy">Coordination · opération</div>
+          <div class="doc-copy">Coordination · live</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+        <div class="doc-pre">🔧 Maintenance en cours — Billet : #000001
 Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+Tâche principale : Investigation d’une surcharge CPU prolongée sur FILE-01
+Impact : Redémarrage potentiellement requis pour finaliser l’état du système et rétablir la stabilité</div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 05</div>
+            <div class="doc-title">Notice Teams — fin</div>
+          </div>
+          <div class="doc-copy">Coordination · clôture</div>
+        </div>
+        <div class="doc-pre">✅ Intervention terminée — Billet : #000001
+Client : client inc.
+Tâche principale : Validation post-redémarrage de FILE-01 après surcharge CPU prolongée
+Impact : Serveur redémarré et fonctionnel, fonctionnement normal confirmé à la fin de l’intervention</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1360,10 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    Le bon agent MSP n’est pas celui qui <strong>redémarre vite</strong>.
+    C’est celui qui confirme d’abord la réalité du symptôme,
+    comprend les couches qui se superposent, puis exécute une action simple
+    avec un niveau de <strong>preuve, de calme et de closeout</strong> que le client peut réellement sentir.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1361,7 +1382,7 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas de surcharge CPU prolongée sur serveur<br>
     © 2025 EAIA — Tous droits réservés
   </div>
 </footer>

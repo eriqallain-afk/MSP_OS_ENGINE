@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas de réplication Active Directory multisites</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --black: #000000;
   --dark: #080808;
@@ -628,6 +629,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -761,10 +764,10 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-brand">
     <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
@@ -791,40 +794,40 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte<br>
+    de <em>Windows Update</em><br>
+    devenue <span class="strong">preuve de méthode MSP.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · WINDOWS PATCHING · READ-ONLY TRIAGE · PRE-REBOOT CHECK · CW · RMM</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un billet de maintenance sur un
+    <strong>serveur legacy SBS 2011</strong> : qualification de l’alerte, collecte <strong>lecture seule</strong>,
+    validation des sessions et accès ouverts avant redémarrage, confirmation du reboot réel, puis clôture
+    avec <strong>livrables complets</strong> et recommandation de <strong>migration</strong>.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
-    </div>
-    <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">Serveur traité</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
+      <div class="hero-metric-n">2</div>
+      <div class="hero-metric-l">Validations reboot</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
+      <div class="hero-metric-n">4</div>
+      <div class="hero-metric-l">Contrôles clés</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-n">100%</div>
+      <div class="hero-metric-l">OS compliance</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">15+</div>
+      <div class="hero-metric-l">Ans de plateforme</div>
     </div>
   </div>
 
@@ -837,27 +840,28 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · serveur legacy SBS 2011 anonymisé en DC-01</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
+    <div class="firm-product active">Windows Update</div>
+    <div class="firm-product active">Read-Only</div>
+    <div class="firm-product active">Pre-Reboot</div>
     <div class="firm-product active">CW Note</div>
     <div class="firm-product active">CW Discussion</div>
-    <div class="firm-product active">Email client</div>
-    <div class="firm-product active">client inc.</div>
+    <div class="firm-product active">Mémo</div>
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>WINDOWS UPDATE</span> · PENDING REBOOT · PRE-REBOOT CHECK ·
+    <span>SESSIONS SMB</span> · OPEN HANDLES · RMM SAFE SCRIPT ·
+    <span>CONTROLLED REBOOT</span> · SCREENCONNECT VALIDATION · CW NOTE ·
+    <span>CLIENT DISCUSSION</span> · COORDINATOR MEMO · MIGRATION RECOMMENDED ·
+    <span>WINDOWS UPDATE</span> · PENDING REBOOT · PRE-REBOOT CHECK ·
+    <span>SESSIONS SMB</span> · OPEN HANDLES · RMM SAFE SCRIPT ·
+    <span>CONTROLLED REBOOT</span> · SCREENCONNECT VALIDATION · CW NOTE ·
+    <span>CLIENT DISCUSSION</span> · COORDINATOR MEMO · MIGRATION RECOMMENDED ·
   </div>
 </div>
 
@@ -865,16 +869,17 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une alerte simple,<br>un contexte legacy,<br><em>et plusieurs pièges.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le signal initial semblait banal : <strong>Windows Update Installation Failure</strong> sur un seul serveur. Mais le cas
+        mélangeait en réalité un état de <strong>pending reboot</strong>, des handles SMB encore ouverts, une
+        télémétrie RMM partiellement en retard et une plateforme <strong>SBS 2011</strong> vieille d’environ quinze ans.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        La valeur de l’agent ne se limite pas au redémarrage. Elle réside dans la méthode :
+        <strong>lecture seule d’abord</strong>, qualification du vrai blocage, contrôle du risque utilisateur avant reboot,
+        confirmation visuelle du redémarrage réel, puis clôture propre avec une recommandation stratégique
+        de <strong>migration</strong> plutôt qu’un simple “incident réglé”.
       </p>
     </div>
 
@@ -882,23 +887,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’alerte semblait pointer Windows Update</strong> — alors que les services n’étaient pas forcément la vraie cause.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Le premier script a échoué au parsing RMM</strong> — ce qui imposait une version de collecte plus robuste et compatible runner.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Des sessions et partages restaient ouverts</strong> — le reboot ne pouvait pas être lancé proprement sans contrôle préalable.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>Le RMM ne reflétait pas immédiatement le reboot</strong> — une validation live en session était nécessaire pour éviter une fausse conclusion.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>Le serveur est un SBS 2011 legacy</strong> — résoudre le billet ne supprime pas le risque structurel de plateforme obsolète.</div>
         </div>
       </div>
     </div>
@@ -908,27 +913,27 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · WINDOWS UPDATE LEGACY SERVER</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">RMM / MONITORING WINDOWS UPDATE</span></div>
+          <div class="t-line"><span class="t-gold">BILLET :</span> <span class="t-white">#000018</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC. · SITE CLIENT</span></div>client inc.<div class="t-line"><span class="t-gold">SERVEUR :</span> <span class="t-white">DC-01 · SBS 2011</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Pending reboot confirmé.</div>
+          <div class="t-line t-silver">Sessions et handles réseau vérifiés avant action.</div>
+          <div class="t-line t-silver">Validation live du reboot réel nécessaire.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Collecte RMM-safe relancée</span></div>
+          <div class="t-line"><span class="t-green">✓ Contrôle pré-reboot exécuté</span></div>
+          <div class="t-line"><span class="t-green">✓ Reboot réel confirmé en session</span></div>
+          <div class="t-line"><span class="t-green">✓ Compliance patching validée à 100%</span></div>
+          <div class="t-line"><span class="t-red">✗ Plateforme toujours legacy</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">BILLET RÉSOLU + RECOMMANDATION DE MIGRATION</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +944,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Un incident de patching</strong><br>traité avec une méthode <em>défendable.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      Ce cas montre comment l’agent transforme une alerte générique en intervention traçable : collecte sûre,
+      décision sous garde-fous, validation du risque avant reboot, confirmation du résultat technique,
+      puis lecture stratégique de l’actif vieillissant.
     </p>
 
     <table class="case-table">
@@ -957,40 +962,40 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>Monitor initial</strong></td>
+          <td>Alerte “Windows Update Installation Failure” sur DC-01</td>
+          <td>Le symptôme pouvait orienter à tort vers une panne Windows Update franche</td>
+          <td>Confirmer en lecture seule avant toute remédiation</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Collecte RMM</strong></td>
+          <td>Le premier bloc a échoué au parsing; une version ASCII / RMM-safe a été utilisée</td>
+          <td>Sans adaptation, le runner pouvait donner un faux négatif technique</td>
+          <td>Stabiliser la collecte avant d’interpréter l’état réel du serveur</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>État Windows</strong></td>
+          <td>Services contrôlés, espace disque suffisant, PendingFileRenameOperations détecté</td>
+          <td>Le cœur du problème ressemblait davantage à un reboot en attente qu’à un service cassé</td>
+          <td>Orienter la suite vers un redémarrage contrôlé</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>Contrôle pré-reboot</strong></td>
+          <td>Sessions actives et handles SMB observés sur des partages ouverts</td>
+          <td>Un reboot immédiat risquait d’interrompre des accès encore en cours</td>
+          <td>Vérifier / avertir avant lancement du redémarrage</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>Validation du reboot</strong></td>
+          <td>Le RMM a d’abord semblé incohérent; le redémarrage a ensuite été confirmé visuellement en session</td>
+          <td>Sans preuve live, le post-check pouvait être interprété trop tôt</td>
+          <td>Ne retenir comme preuve que le reboot réellement observé</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Résultat final</strong></td>
+          <td>Le volet OS Patching montre le serveur à 100% compliant avec la policy</td>
+          <td>Le billet peut être clôturé proprement</td>
+          <td>Résolution + recommandation de migration du SBS 2011</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1005,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une seule machine. Zéro improvisation.</em></div>
+    <p class="s-sub">Le cas démontre la capacité produit à opérer avec garde-fous, à corriger sans deviner et à générer les livrables complets attendus par un MSP.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1014,81 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-sub">Billet NOC / RMM</div>
+      <div class="mod-desc">Le cas démarre avec une alerte Windows Update sur un serveur legacy identifié comme DC-01.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Lecture seule d’abord</div>
+      <div class="mod-desc">L’agent vérifie espace disque, services Windows Update, pending reboot et événements sans toucher à la configuration.</div>
+      <div class="mod-agents">Aucun geste prématuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Durcissement</div>
+      <div class="mod-sub">Runner RMM</div>
+      <div class="mod-desc">Le script de collecte est simplifié pour contourner l’échec de parsing et obtenir enfin un état fiable.</div>
+      <div class="mod-agents">Compatibilité terrain</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Qualification</div>
+      <div class="mod-sub">Vrai problème</div>
+      <div class="mod-desc">Le cas est requalifié comme pending reboot persistant plutôt qu’échec simple du service Windows Update.</div>
+      <div class="mod-agents">Diagnostic nuancé</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Pré-reboot</div>
+      <div class="mod-sub">Sessions / fichiers</div>
+      <div class="mod-desc">Les sessions interactives, connexions SMB et handles ouverts sont vérifiés avant toute action risquée.</div>
+      <div class="mod-agents">Protection utilisateur</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Décision</div>
+      <div class="mod-sub">GO / NO-GO</div>
+      <div class="mod-desc">Le reboot est retenu seulement après validation des accès encore présents et préparation d’un redémarrage contrôlé.</div>
+      <div class="mod-agents">Un risque à la fois</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">Exécution</div>
+      <div class="mod-sub">Reboot contrôlé</div>
+      <div class="mod-desc">Le redémarrage est lancé avec traçabilité, puis confirmé en direct lorsque le RMM reste ambigu.</div>
+      <div class="mod-agents">Preuve > supposition</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Post-check</div>
+      <div class="mod-sub">Validation finale</div>
+      <div class="mod-desc">Les contrôles post-reboot et le volet patching servent à confirmer l’état final plutôt qu’un simple ressenti.</div>
+      <div class="mod-agents">Validation croisée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">Clôture</div>
+      <div class="mod-sub">CW propre</div>
+      <div class="mod-desc">Le billet est clôturé avec note interne, discussion client-safe et mémo coordonnateur déjà prêts à l’emploi.</div>
+      <div class="mod-agents">Qualité MSP visible</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Conseil</div>
+      <div class="mod-sub">Vision long terme</div>
+      <div class="mod-desc">L’intervention se termine sur une recommandation de migration, car un SBS 2011 compliant reste un actif à risque.</div>
+      <div class="mod-agents">Ops + stratégie</div>
     </div>
   </div>
 </section>
@@ -1091,81 +1096,81 @@ footer {
 <section class="arsenal s-pad" id="livrables">
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <div class="s-title">Ce que le cas<br><em>prouve vraiment.</em></div>
+    <p class="s-sub">La démonstration ne repose pas seulement sur une conformité finale. Elle montre la méthode, la gestion du risque, la preuve du redémarrage réel et la qualité des sorties MSP générées.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Qualification du pending reboot, collecte RMM-safe, contrôle des sessions et des partages, redémarrage contrôlé, validation du volet patching.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Collecte lecture seule</li>
+        <li>Analyse Windows Update</li>
+        <li>Contrôle pré-reboot</li>
+        <li>Reboot confirmé en session</li>
+        <li>Validation compliance finale</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">Le cas illustre la discipline MSP : un seul serveur, aucune remédiation destructive avant confirmation, et validation explicite avant étape risquée.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule d’abord</li>
+        <li>1 serveur à la fois</li>
+        <li>Pre-check avant reboot</li>
+        <li>Validation live du redémarrage</li>
+        <li>Aucune improvisation</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Constats techniques</div>
+      <div class="arsenal-desc">Le cas révèle un pending reboot persistant, des accès SMB encore présents avant redémarrage et une télémétrie RMM en décalage avec la réalité terrain.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>Pending reboot identifié</li>
+        <li>Handles réseau vérifiés</li>
+        <li>RMM vs session comparés</li>
+        <li>Compliance patching validée</li>
+        <li>Plateforme legacy reconnue</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Résultat visible</div>
+      <div class="arsenal-desc">Le billet est résolu, le serveur est conforme à la policy et l’intervention produit des livrables exploitables sans retraitement supplémentaire.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Billet résolu</li>
+        <li>OS compliance 100%</li>
+        <li>Clôture client-safe</li>
+        <li>Mémo coordonnateur prêt</li>
+        <li>Cas marketing réutilisable</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">Livrables générés</div>
+      <div class="arsenal-desc">Le système produit les sorties complètes attendues dans un flux MSP : note interne, discussion client, mémo de coordination et avis Teams.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>Note interne CW</li>
+        <li>Discussion CW</li>
+        <li>Mémo coordonnateur</li>
+        <li>Notice Teams</li>
+        <li>Page de cas premium</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">Le cas montre qu’un agent MSP crédible traite l’incident, protège l’utilisateur, documente correctement et révèle le risque structurel restant.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Discernement opérationnel</li>
+        <li>Traçabilité complète</li>
+        <li>Convainc opérations + vente</li>
+        <li>Met en lumière l’obsolescence</li>
+        <li>Ouvre la conversation migration</li>
       </ul>
     </div>
   </div>
@@ -1176,9 +1181,8 @@ footer {
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
     <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Cette section expose les livrables générés à partir du cas : une note interne détaillée, une discussion client-safe,
+      un mémo coordonnateur et une notice Teams. Le contenu est anonymisé selon les règles fournies pour un usage public.
     </p>
 
     <div class="doc-grid">
@@ -1190,69 +1194,84 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">═══════════════════════════════════════════════════════════════
+INTERVENTION TECHNIQUE — WINDOWS UPDATE INSTALLATION FAILURE
+═══════════════════════════════════════════════════════════════
 
-Contexte
+INFORMATIONS GÉNÉRALES
+----------------------
+Date/Heure  : 13-11-2024
+Technicien  : Agent NOC-18
+Client      : client inc.
+Contact     : nom du contact
+Billet CW   : #000018
+Site        : site client
+Équipement  : DC-01
+Type        : Troubleshooting / maintenance corrective
+
+CHARGEMENT DU CONTEXTE :
 ---------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+• Analyse initiale du billet et consultation du dossier d'infrastructure.
+• Accès à la plateforme RMM et analyse de l'état des équipements clients.
 
-Préparation et découverte
----------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+CONTEXTE INITIAL
+----------------
+Alerte de type Windows Update Installation Failure sur DC-01.
+Plateforme legacy : Windows Small Business Server 2011.
+Contrainte observée : lenteur générale durant l'intervention et télémétrie RMM partiellement décalée après redémarrage.
 
-Vérifications effectuées
----------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
+DIAGNOSTIC / ANALYSE
+--------------------
+Validation lecture seule effectuée :
+- espace disque suffisant;
+- services Windows Update contrôlés;
+- pending reboot détecté via PendingFileRenameOperations;
+- vérification des sessions utilisateurs et des accès SMB avant redémarrage;
+- validation côté sauvegarde : aucune tâche active expliquant la lenteur;
+- confirmation visuelle du redémarrage réel en session.
 
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+Analyse finale :
+- le billet était cohérent avec un état de redémarrage en attente dans le cycle de patching;
+- l'agent RMM a présenté un décalage temporaire sur les informations de dernier redémarrage;
+- la vue OS Patching montre finalement le serveur à 100% compliant avec la policy;
+- aucun correctif supplémentaire immédiat requis dans le cadre du billet.
 
-Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+ACTIONS TECHNIQUES
+------------------
+01) Revue de l'alerte NOC et collecte read-only Windows Update
+    Résultat : état pending reboot confirmé.
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+02) Vérification pré-redémarrage des sessions et accès ouverts
+    Résultat : connexions SMB présentes; reboot différé jusqu'à validation du risque.
+
+03) Redémarrage contrôlé puis validation visuelle en session
+    Résultat : reboot réel confirmé malgré une remontée RMM ambiguë.
+
+04) Validation post-redémarrage et revue du volet OS Patching
+    Résultat : conformité policy validée à 100%.
+
+CONFIGURATIONS MODIFIÉES
+------------------------
+Aucune modification de configuration durable.
+Validation, analyse et redémarrage contrôlé uniquement.
+
+TESTS DE VALIDATION
+-------------------
+✓ Vérification lecture seule Windows Update : effectuée
+✓ Vérification sessions / accès ouverts avant reboot : effectuée
+✓ Redémarrage réel confirmé visuellement : OK
+✓ Conformité OS Patching : 100% policy compliant
+✓ Billet initial : condition observée comme résolue / normalisée
+
+RÉSULTAT FINAL
+--------------
+État : RÉSOLU
+
+SUIVI REQUIS
+------------
+□ Recommander une migration de la plateforme SBS 2011
+□ Positionner l'actif comme candidat de remplacement à moyen terme
+□ Surveiller les prochains cycles de patching sur cette plateforme legacy</div>
       </div>
 
       <div class="doc-card">
@@ -1264,60 +1283,68 @@ Prochaines étapes
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
         <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
+       Vérification et remise en conformité des mises à jour
 ────────────────────────────────────────────────────────
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
+BILLET : #000018
+DATE : 13-11-2024
+TECHNICIEN : Agent NOC-18
 ---------
 
-PRÉPARATION ET DÉCOUVERTE :
+CHARGEMENT DU CONTEXTE :
 ---------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+• Analyse initiale du billet et consultation du dossier d'infrastructure.
+• Accès à la plateforme RMM et analyse de l'état des équipements clients.
 
 TRAVAUX EFFECTUÉS :
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+• Validation de l'état général du serveur et revue de la situation signalée par la supervision
+• Vérifications effectuées avant redémarrage afin de limiter l'impact sur les accès en cours
+• Redémarrage contrôlé réalisé pour compléter le cycle de maintenance
+• Validation finale effectuée dans l'outil de gestion des correctifs après retour en ligne
 
 RÉSULTAT / ÉTAT ACTUEL :
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+• Le problème signalé au billet est résolu
+• Le serveur est maintenant conforme à 100% à la politique de mises à jour en place
+• Aucun autre correctif immédiat n'est requis dans le cadre de cette intervention
 
-SUIVI :
+PROCHAINES ÉTAPES / RECOMMANDATIONS :
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+• La plateforme SBS 2011 concernée est ancienne
+• Une planification de migration est recommandée afin de réduire le risque opérationnel futur et faciliter le maintien à jour</div>
       </div>
 
       <div class="doc-card full">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
+            <div class="doc-title">Mémo au coordonnateur</div>
           </div>
-          <div class="doc-copy">Externe · prêt à envoyer</div>
+          <div class="doc-copy">Interne · coordination</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Mémo coordonnateur — Billet ##000018
 
-Bonjour,
+Client : client inc.
+Site : site client
+Contact : nom du contact
+Technicien : Agent NOC-18
+Date : 13-11-2024
+Serveur : DC-01
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+Billet résolu.
+Validation finale : le serveur est conforme à 100% dans le volet OS Patching / policy compliance.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Points à retenir :
+- Le comportement du serveur est demeuré lent pendant l'intervention
+- Le RMM a semblé en retard sur certaines données de dernier redémarrage / uptime durant la séquence
+- Le redémarrage réel a été confirmé en session avant conclusion
+- La plateforme est un SBS 2011, donc un actif legacy d'environ quinze ans
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
-
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
-
-Cordialement,
-[Signature MSP]</div>
+Recommandation :
+- Ouvrir ou proposer une discussion de modernisation / migration
+- Positionner DC-01 comme candidat à remplacement prioritaire à moyen terme
+- Éviter de considérer cette plateforme comme base durable pour les prochains cycles de maintenance</div>
       </div>
 
       <div class="doc-card full">
@@ -1328,10 +1355,17 @@ Cordialement,
           </div>
           <div class="doc-copy">Coordination · opération</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+        <div class="doc-pre">🔧 Billet ##000018 — Mise à jour d’intervention
+
 Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+Site : site client
+Contact : nom du contact
+
+Le traitement de l’alerte Windows Update sur le serveur concerné est complété.
+Les validations post-intervention confirment que le serveur est maintenant conforme à 100% à la policy de patching.
+
+Le billet est considéré comme résolu.
+À noter : l’équipement est une plateforme SBS 2011 legacy. Une migration demeure recommandée afin de réduire le risque opérationnel futur et faciliter la maintenance continue.</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1374,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    Le bon agent MSP n’est pas celui qui lance un reboot au premier signal.
+    C’est celui qui <strong>qualifie le vrai blocage</strong>, protège les accès encore actifs,
+    puis <strong>prouve le résultat</strong> avant de recommander la prochaine décision structurante : la migration.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1361,10 +1395,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas Windows Update sur serveur legacy SBS 2011<br>
     © 2025 EAIA — Tous droits réservés
   </div>
 </footer>
-
 </body>
 </html>

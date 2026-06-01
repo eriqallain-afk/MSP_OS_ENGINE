@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas de restauration Veeam Management Agent</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --black: #000000;
   --dark: #080808;
@@ -628,6 +629,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -761,8 +764,11 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
+
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -791,40 +797,40 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte<br>
+    <em>Veeam</em><br>
+    devenue <span class="strong">preuve de méthode MSP.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · VEEAM · WINDOWS INSTALLER · CAPACITÉ DISQUE · CW · LIVRABLES</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite une alerte de service qui paraît simple,
+    mais cache en réalité une chaîne complète de défaillance : <strong>volume système saturé</strong>, binaire manquant,
+    verrou Windows Installer, analyse des journaux MSI, puis réinstallation contrôlée du composant
+    <strong>Veeam Management Agent</strong> avec production des <strong>livrables MSP complets</strong>.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
-    </div>
-    <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">serveur ciblé</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
+      <div class="hero-metric-n">5</div>
+      <div class="hero-metric-l">blocages isolés</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-l">reboot requis</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">1</div>
+      <div class="hero-metric-l">service restauré</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">7,98%</div>
+      <div class="hero-metric-l">espace restant</div>
     </div>
   </div>
 
@@ -837,27 +843,29 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · BACKUP-01 · 10-05-2025</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
-    <div class="firm-product active">CW Note</div>
-    <div class="firm-product active">CW Discussion</div>
-    <div class="firm-product active">Email client</div>
-    <div class="firm-product active">client inc.</div>
+    <div class="firm-product active">VEEAM</div>
+    <div class="firm-product active">MSI</div>
+    <div class="firm-product active">WINDOWS</div>
+    <div class="firm-product active">CW NOTE</div>
+    <div class="firm-product active">CW DISCUSSION</div>
+    <div class="firm-product active">EMAIL</div>
+    <div class="firm-product active">TEAMS</div>
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>VEEAM MANAGEMENT AGENT</span> · SERVICE STOPPED · C: SATURATION ·
+    <span>LECTURE SEULE</span> · ANALYSE MSI · BINAIRE MANQUANT ·
+    <span>EXITCODE 1605</span> · EXITCODE 1618 · EXITCODE 1603 ·
+    <span>ACCEPT_EULA</span> · ACCEPT_THIRDPARTY_LICENSES · CW NOTE · CW DISCUSSION ·
+    <span>VEEAM MANAGEMENT AGENT</span> · SERVICE STOPPED · C: SATURATION ·
+    <span>LECTURE SEULE</span> · ANALYSE MSI · BINAIRE MANQUANT ·
+    <span>EXITCODE 1605</span> · EXITCODE 1618 · EXITCODE 1603 ·
+    <span>ACCEPT_EULA</span> · ACCEPT_THIRDPARTY_LICENSES · CW NOTE · CW DISCUSSION ·
   </div>
 </div>
 
@@ -865,16 +873,15 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une simple alerte<br>de service,<br><em>mais une panne en chaîne.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le signal de départ parlait d’un service Veeam arrêté sur un serveur de sauvegarde.
+        Le risque classique était de relancer le service trop vite et de masquer la vraie cause.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        L’agent a procédé en <strong>lecture seule d’abord</strong>, puis a reconstitué la chaîne réelle :
+        saturation du volume système, mise à jour interrompue, exécutable absent, état MSI incohérent,
+        blocage de licences lors de la réinstallation, puis remise en état complète avec validation finale.
       </p>
     </div>
 
@@ -882,23 +889,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’alerte semblait mineure</strong> — un service stoppé, alors que le binaire lui-même n’était plus présent.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Le volume C: était critique</strong> — la panne venait d’une mise à jour incomplète causée par un manque d’espace disque.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Les codes MSI changeaient à chaque étape</strong> — réparation impossible, installateur verrouillé, puis erreurs génériques 1603.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>Les causes finales étaient dans les logs</strong> — acceptation EULA puis licences tierces exigées par le package.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>La clôture devait rester MSP-grade</strong> — service restauré, aucun reboot, mais recommandation explicite sur la capacité disque restante.</div>
         </div>
       </div>
     </div>
@@ -908,27 +915,28 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · VEEAM MANAGEMENT AGENT</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">NOC / SERVICE MONITOR</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC.</span></div>
+          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE CLIENT</span></div>client inc.<div class="t-line"><span class="t-gold">ACTIF :</span> <span class="t-white">BACKUP-01</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">VEEAM MANAGEMENT AGENT SERVICE STOPPED</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Cause primaire : mise à jour cassée par manque d'espace.</div>
+          <div class="t-line t-silver">Cause secondaire : état MSI incohérent et verrouillé.</div>
+          <div class="t-line t-silver">Cause finale : propriétés de licences non fournies.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lecture seule avant remédiation</span></div>
+          <div class="t-line"><span class="t-green">✓ Espace disque récupéré</span></div>
+          <div class="t-line"><span class="t-green">✓ Journaux MSI analysés jusqu'à la cause exacte</span></div>
+          <div class="t-line"><span class="t-green">✓ Réinstallation contrôlée réussie</span></div>
+          <div class="t-line"><span class="t-red">△ Capacité disque encore sous seuil</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">SERVICE RESTAURÉ · LIVRABLES COMPLETS</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +947,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Une méthode qui relie</strong><br>service, <em>stockage</em> et <em>installateur.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      Le cas démontre une capacité clé du produit : ne pas confondre symptôme et cause.
+      Ici, le service arrêté n’était qu’un effet visible d’une chaîne plus profonde impliquant la capacité disque,
+      l’état de Windows Installer et les prérequis silencieux du package MSI.
     </p>
 
     <table class="case-table">
@@ -957,40 +965,40 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>Service cible</strong></td>
+          <td>Service observé Stopped, démarrage automatique, chemin binaire configuré mais exécutable absent</td>
+          <td>Un simple restart ne pouvait pas résoudre le problème</td>
+          <td>Analyser l’état du package et du système avant toute relance</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Volume système</strong></td>
+          <td>C: tombé à environ 0,36 GB libre, avec historiques MSI d’échec par manque d’espace</td>
+          <td>La mise à jour du composant avait laissé l’installation dans un état incomplet</td>
+          <td>Récupérer de l’espace de manière contrôlée avant remédiation</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>Périmètre Veeam</strong></td>
+          <td>Les autres services Veeam majeurs restaient actifs</td>
+          <td>L’impact était ciblé au composant de gestion et non à toute la plateforme de sauvegarde</td>
+          <td>Maintenir une priorité maîtrisée et éviter un scénario de crise injustifié</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>État MSI initial</strong></td>
+          <td>Réparation en échec puis réinstallation bloquée par un Windows Installer déjà engagé</td>
+          <td>Le problème ne relevait pas uniquement du package Veeam</td>
+          <td>Attendre / libérer le verrou proprement avant nouvelle tentative</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>Lecture des logs MSI</strong></td>
+          <td>Les erreurs 1603 masquaient en réalité deux prérequis : ACCEPT_EULA et ACCEPT_THIRDPARTY_LICENSES</td>
+          <td>Sans lecture ciblée du log, les nouvelles tentatives restaient vouées à l’échec</td>
+          <td>Corriger par paramètres explicites plutôt que multiplier les essais</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Validation finale</strong></td>
+          <td>Réinstallation réussie, binaire recréé, service Running, processus actif</td>
+          <td>Le composant a retrouvé un fonctionnement normal sans reboot</td>
+          <td>Clôturer avec recommandation de capacité disque</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1008,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une panne en chaîne, une résolution propre.</em></div>
+    <p class="s-sub">Ce cas montre la logique des agents MSP : lecture seule, corrélation, remédiation limitée, validation, puis livrables prêts à coller.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1017,81 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-sub">Billet NOC / RMM</div>
+      <div class="mod-desc">Le cas démarre par une alerte de service Veeam Management Agent sur BACKUP-01.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Lecture seule d’abord</div>
+      <div class="mod-desc">Validation de l’état du service, du chemin binaire, des journaux système et des autres services Veeam.</div>
+      <div class="mod-agents">Aucune relance prématurée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Corrélation</div>
+      <div class="mod-sub">Cause primaire</div>
+      <div class="mod-desc">Les événements d’installation montrent que la mise à jour a échoué faute d’espace disque sur C:.</div>
+      <div class="mod-agents">Symptôme ≠ cause</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Capacité</div>
+      <div class="mod-sub">Remédiation sûre</div>
+      <div class="mod-desc">De l’espace est récupéré sans toucher aux composants sensibles du système, jusqu’à repasser autour de 10 GB libres.</div>
+      <div class="mod-agents">Storage first</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Réparation</div>
+      <div class="mod-sub">Tentative contrôlée</div>
+      <div class="mod-desc">La réparation MSI échoue, ce qui confirme un état produit plus cassé qu’une simple réparation de fichiers.</div>
+      <div class="mod-agents">ExitCode 1605</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Déverrouillage</div>
+      <div class="mod-sub">Windows Installer</div>
+      <div class="mod-desc">Le flux attend la libération du verrou MSI avant de relancer une installation propre.</div>
+      <div class="mod-agents">ExitCode 1618</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">Lecture du log</div>
+      <div class="mod-sub">Cause exacte</div>
+      <div class="mod-desc">Les journaux MSI révèlent les paramètres de licence manquants plutôt qu’un problème générique d’installation.</div>
+      <div class="mod-agents">1603 expliqué</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Paramétrage</div>
+      <div class="mod-sub">EULA + tiers</div>
+      <div class="mod-desc">L’installation est relancée avec ACCEPT_EULA=1 puis ACCEPT_THIRDPARTY_LICENSES=1.</div>
+      <div class="mod-agents">Installation conforme</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">Validation</div>
+      <div class="mod-sub">Service restauré</div>
+      <div class="mod-desc">Le binaire est recréé, le service redémarre et le processus Veeam.AC.Agent est observé en exécution.</div>
+      <div class="mod-agents">Aucun reboot</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Livrables</div>
+      <div class="mod-sub">Clôture MSP</div>
+      <div class="mod-desc">Le cas débouche sur une note interne, une discussion client, un email et une notice Teams prêts à l’emploi.</div>
+      <div class="mod-agents">Ops + vente + site</div>
     </div>
   </div>
 </section>
@@ -1091,81 +1099,81 @@ footer {
 <section class="arsenal s-pad" id="livrables">
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <div class="s-title">Ce que le cas<br><em>prouve vraiment.</em></div>
+    <p class="s-sub">Ici, la valeur tient autant dans la résolution que dans la qualité de la narration opérationnelle : ce qui a été trouvé, ce qui a été corrigé, ce qui reste à surveiller.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Le flux a reconstruit la panne de bout en bout, du service arrêté jusqu’au succès de la réinstallation finale.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Préchecks lecture seule</li>
+        <li>Corrélation service / binaire / MSI</li>
+        <li>Libération d’espace contrôlée</li>
+        <li>Analyse de logs MSI</li>
+        <li>Réinstallation validée</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">Le cas illustre une discipline MSP forte : pas de reboot, pas de suppression hasardeuse, pas de “retry” aveugle.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule avant remédiation</li>
+        <li>Une seule machine ciblée</li>
+        <li>Pas de reboot serveur</li>
+        <li>Pas de nettoyage MSI destructif</li>
+        <li>Analyse des causes avant correction</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Résultats techniques</div>
+      <div class="arsenal-desc">Le service revient en production, le binaire est recréé et la chaîne logicielle redevient cohérente.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>ExitCode final = 0</li>
+        <li>Exécutable recréé</li>
+        <li>Service Running</li>
+        <li>Processus actif validé</li>
+        <li>Base locale réinitialisée proprement</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Traçabilité</div>
+      <div class="arsenal-desc">Chaque blocage a été explicitement isolé et documenté, ce qui rend le cas convaincant pour une démo produit.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Espace disque critique</li>
+        <li>Repair impossible</li>
+        <li>Verrou Windows Installer</li>
+        <li>EULA manquante</li>
+        <li>Licences tierces manquantes</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">Le produit génère directement les documents attendus dans un contexte MSP réel.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>Note interne CW</li>
+        <li>Discussion CW client-safe</li>
+        <li>Email client</li>
+        <li>client inc.</li>
+        <li>Page de cas premium</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">Le cas démontre une méthode crédible, rassurante et directement commercialisable pour le site de lancement.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Crédibilité technique</li>
+        <li>Méthode démontrable</li>
+        <li>Livrables facturables</li>
+        <li>Anonymisation prête web</li>
+        <li>Compatible opérations + marketing</li>
       </ul>
     </div>
   </div>
@@ -1176,9 +1184,8 @@ footer {
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
     <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Cette section expose les livrables générés à partir du cas : document interne détaillé, discussion client-safe,
+      email client et notice de coordination. Le contenu est entièrement anonymisé pour usage public.
     </p>
 
     <div class="doc-grid">
@@ -1190,69 +1197,65 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">────────────────────────────────────────────────────────
+Résolution — service agent Veeam
+────────────────────────────────────────────────────────
 
-Contexte
+DATE : 10-05-2025
+BILLET : #000014
+CLIENT : Entreprise inc.
+SITE : site client
+CONTACT : nom du contact
+TECHNICIEN : Agent NOC-15
+ACTIF : BACKUP-01
+
+• Lecture initiale du billet et revue du dossier technique de l&#x27;entreprise.
+• Connexion au RMM et analyse de l&#x27;état global et de la présence d&#x27;alerte.
+
+CONTEXTE
 ---------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+Alerte NOC reçue pour arrêt du service de gestion Veeam sur le serveur BACKUP-01.
+Le cas a été traité en lecture seule d&#x27;abord afin de distinguer un simple arrêt de service d&#x27;une panne d&#x27;installation plus profonde.
 
-Préparation et découverte
+DÉCOUVERTE
 ---------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+- Service Veeam Management Agent Service observé à l&#x27;état Stopped
+- Binaire référencé par le service absent du chemin d&#x27;installation
+- Journaux Windows Installer montrant plusieurs échecs précédents liés à un manque d&#x27;espace sur C:
+- Volume système initialement critique, avec environ 0,36 GB libre
+- Autres services Veeam principaux observés en fonctionnement, ce qui a permis de qualifier un impact ciblé au composant de gestion
 
-Vérifications effectuées
----------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
-
-Actions réalisées
+TRAVAUX EFFECTUÉS
 -----------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+- Validation lecture seule du service, du chemin binaire, des journaux système et applicatifs, des services Veeam associés et de l&#x27;espace disque
+- Identification de la cause primaire : saturation du volume C: ayant interrompu la mise à jour / réinstallation du composant
+- Libération contrôlée d&#x27;espace sur C: par déplacement d&#x27;installateurs présents dans un profil local
+- Nouvelle validation du volume système avant remédiation
+- Tentative de réparation MSI : échec
+- Tentative de réinstallation MSI : échec sur verrou Windows Installer
+- Lecture ciblée des journaux MSI pour identifier les causes bloquantes restantes
+- Validation successive de deux propriétés d&#x27;acceptation de licences requises par le package
+- Réinstallation finale réussie du composant Veeam Service Provider Console Management Agent
+- Démarrage du service et post-check du processus associé
 
-Résultat
+VALIDATION FINALE
+-----------------
+- Exécutable recréé au chemin attendu
+- Service Veeam Management Agent Service à l&#x27;état Running
+- Processus Veeam.AC.Agent observé actif
+- Initialisation correcte de la base locale de configuration de l&#x27;agent observée dans les événements applicatifs
+- Aucun redémarrage serveur requis pendant l&#x27;intervention
+
+RÉSULTAT
 --------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+Le composant de gestion Veeam a été restauré avec succès sur BACKUP-01.
+L&#x27;alerte d&#x27;arrêt de service a été corrigée et le service a repris un fonctionnement normal.
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+POINT DE VIGILANCE / RECOMMANDATION
+-----------------------------------
+Le volume C: demeure sous le seuil recommandé, avec environ 9,46 GB libre / 7,98 %.
+Prévoir une action de ménage / capacity review à court terme afin d&#x27;éviter un incident similaire lors d&#x27;une prochaine mise à jour Veeam ou Windows.
+</div>
       </div>
 
       <div class="doc-card">
@@ -1264,60 +1267,69 @@ Prochaines étapes
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
         <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
+Résolution — composant de gestion sauvegarde
 ────────────────────────────────────────────────────────
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
----------
+DATE : 10-05-2025
+BILLET : #000014
+TECHNICIEN : Agent NOC-15
 
-PRÉPARATION ET DÉCOUVERTE :
----------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+• Lecture initiale du billet et revue du dossier technique de l&#x27;entreprise.
+• Connexion au RMM et analyse de l&#x27;état global et de la présence d&#x27;alerte.
 
 TRAVAUX EFFECTUÉS :
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+• Validation de l&#x27;alerte liée au composant de gestion de la plateforme de sauvegarde
+• Analyse de l&#x27;environnement et constat qu&#x27;une mise à jour précédente avait échoué en raison d&#x27;un manque d&#x27;espace sur le volume système
+• Libération de l&#x27;espace requis puis réinstallation contrôlée du composant affecté
+• Validation du démarrage normal du service après réinstallation
+• Vérifications finales pour confirmer le retour au fonctionnement normal du composant
 
-RÉSULTAT / ÉTAT ACTUEL :
+RÉSULTAT :
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+• Le service de gestion de sauvegarde est maintenant rétabli et opérationnel
+• Le composant a été réinstallé avec succès et validé en fonctionnement
+• Aucun redémarrage de serveur n&#x27;a été nécessaire durant l&#x27;intervention
 
-SUIVI :
+RECOMMANDATION :
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+Le volume système demeure relativement chargé.
+Une vérification proactive de l&#x27;espace disque est recommandée afin de réduire le risque d&#x27;incident similaire lors d&#x27;une prochaine mise à jour.
+</div>
       </div>
 
       <div class="doc-card full">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
-          </div>
-          <div class="doc-copy">Externe · prêt à envoyer</div>
+            <div class="doc-title">Email client</div>
+          </div>client inc.<div class="doc-copy">Communication · externe</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Objet : Mise à jour — billet ##000014
 
-Bonjour,
+Bonjour nom du contact,
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+Nous vous confirmons que l&#x27;intervention liée au composant de gestion de la plateforme de sauvegarde a été complétée.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Résumé de l&#x27;intervention
+------------------------
+- validation de l&#x27;alerte et analyse du composant concerné
+- identification d&#x27;un échec de mise à jour causé par un manque d&#x27;espace sur le volume système
+- libération de l&#x27;espace requis
+- réinstallation contrôlée du composant
+- validation finale du service en fonctionnement normal
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+Résultat
+--------
+Le service est maintenant rétabli et opérationnel.
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
+Point de vigilance
+------------------
+Le volume système demeure assez chargé. Nous recommandons une révision proactive de l&#x27;espace disque afin de limiter le risque d&#x27;incident similaire lors d&#x27;une future mise à jour.
 
-Cordialement,
-[Signature MSP]</div>
+Merci,
+Tech
+</div>
       </div>
 
       <div class="doc-card full">
@@ -1328,10 +1340,20 @@ Cordialement,
           </div>
           <div class="doc-copy">Coordination · opération</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
-Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+        <div class="doc-pre">🔧 Billet ##000014 — Entreprise inc. — site client
+
+Le composant de gestion Veeam a été restauré avec succès sur le serveur de sauvegarde.
+Cause retenue : échec de mise à jour antérieure provoqué par un manque d&#x27;espace sur le volume système, suivi d&#x27;une réinstallation contrôlée du composant.
+
+Validation finale :
+- service Running
+- exécutable recréé
+- aucun reboot requis
+
+Point de vigilance :
+- C: reste sous le seuil de confort
+- prévoir un ménage / capacity review à court terme
+</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1362,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    Le bon agent MSP n’est pas celui qui se contente de <strong>redémarrer un service</strong>.
+    C’est celui qui remonte jusqu’à la chaîne de causes, rétablit le composant proprement,
+    puis laisse derrière lui des <strong>livrables défendables</strong> et un risque résiduel clairement formulé.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1361,10 +1383,11 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas de restauration Veeam Management Agent<br>
     © 2025 EAIA — Tous droits réservés
   </div>
 </footer>
 
 </body>
+
 </html>

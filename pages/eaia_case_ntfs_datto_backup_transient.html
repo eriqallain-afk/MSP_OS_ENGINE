@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas d’alerte NTFS corrélée à la sauvegarde</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --black: #000000;
   --dark: #080808;
@@ -628,6 +629,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -761,6 +764,7 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
 </style>
 </head>
 <body>
@@ -791,40 +795,40 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte<br>
+    de <em>corruption NTFS</em><br>
+    devenue <span class="strong">preuve de maîtrise MSP.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · WINDOWS SERVER · VMWARE · DATTO BCDR · CW · TRIAGE CROISÉ</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite une alerte critique sur un serveur de fichiers :
+    validation du système en <strong>lecture seule</strong>, corrélation des journaux Windows avec l’<strong>hyperviseur VMware</strong> et
+    la plateforme <strong>Datto BCDR</strong>, refus des remédiations risquées, puis génération des <strong>livrables complets</strong>
+    pour clôturer proprement un incident sans impact persistant.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
-    </div>
-    <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">Serveur analysé</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
+      <div class="hero-metric-n">3</div>
+      <div class="hero-metric-l">Couches corrélées</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
+      <div class="hero-metric-n">2</div>
+      <div class="hero-metric-l">Fenêtres confirmées</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-l">Action risquée</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">4</div>
+      <div class="hero-metric-l">Livrables complets</div>
     </div>
   </div>
 
@@ -837,27 +841,27 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · FILE-01 · ESX-01 · BCDR-01 · 27-01-2025</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
-    <div class="firm-product active">CW Note</div>
-    <div class="firm-product active">CW Discussion</div>
-    <div class="firm-product active">Email client</div>
-    <div class="firm-product active">client inc.</div>
-  </div>
-</div>
+    <div class="firm-product active">WINDOWS SERVER</div>
+    <div class="firm-product active">NTFS</div>
+    <div class="firm-product active">VMWARE</div>
+    <div class="firm-product active">DATTO BCDR</div>
+    <div class="firm-product active">CW NOTE</div>
+    <div class="firm-product active">EMAIL CLIENT</div>
+  </div>client inc.</div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>WINDOWS SERVER</span> · NTFS FILE SYSTEM ALERT · DISK SURPRISE REMOVED ·
+    <span>LECTURE SEULE</span> · CORRÉLATION CROISÉE · VMWARE · DATTO BCDR ·
+    <span>NO CHKDSK</span> · NO REBOOT · RECOVERY POINT SUCCESS · CW NOTE ·
+    <span>DISCUSSION CLIENT</span> · EMAIL CLIENT · NOTICE TEAMS · PAGE DE CAS ·
+    <span>WINDOWS SERVER</span> · NTFS FILE SYSTEM ALERT · DISK SURPRISE REMOVED ·
+    <span>LECTURE SEULE</span> · CORRÉLATION CROISÉE · VMWARE · DATTO BCDR ·
+    <span>NO CHKDSK</span> · NO REBOOT · RECOVERY POINT SUCCESS · CW NOTE ·
+    <span>DISCUSSION CLIENT</span> · EMAIL CLIENT · NOTICE TEAMS · PAGE DE CAS ·
   </div>
 </div>
 
@@ -865,16 +869,16 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une seule alerte,<br>trois couches<br><em>à départager.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le signal initial annonçait une <strong>corruption du système de fichiers NTFS</strong> sur FILE-01.
+        Le risque classique était de conclure trop vite à une panne disque persistante et de lancer un
+        <strong>chkdsk</strong> ou un <strong>redémarrage</strong> avant d’avoir prouvé l’état réel des volumes.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        L’agent a requalifié le cas à travers trois couches : <strong>Windows</strong>, <strong>VMware</strong> et <strong>Datto BCDR</strong>.
+        Il a démontré que les volumes visibles étaient sains au moment de la validation, que l’hyperviseur ne présentait pas
+        de panne de pathing active, et que les erreurs apparaissaient exactement pendant les fenêtres de sauvegarde.
       </p>
     </div>
 
@@ -882,23 +886,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’alerte parlait de corruption NTFS</strong> — mais les volumes visibles revenaient en état Healthy et not dirty lors du contrôle.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Les journaux Windows étaient bruyants</strong> — “Disk surprise removed” et erreurs NTFS transactionnelles pointaient un retrait soudain de disques temporaires.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Le côté VMware pouvait être suspecté</strong> — pourtant le pathing était actif au moment de la validation et aucun dead path n’était observé.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>La fenêtre Datto collait parfaitement</strong> — les événements se produisaient pendant les horaires de sauvegarde, avec recovery points tout de même réussis.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>La clôture devait être défendable</strong> — documenter un événement transitoire, éviter la remédiation intrusive et fournir des livrables complets.</div>
         </div>
       </div>
     </div>
@@ -908,27 +912,27 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · NTFS / VMWARE / DATTO</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">BILLET :</span> <span class="t-white">#000007</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC.</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">NTFS FILE SYSTEM CORRUPTION</span></div>
+          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">FILE-01 · site client</span></div>client inc.<div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">CHKDSK / REBOOT LANCÉ TROP TÔT</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Volumes visibles Healthy et not dirty.</div>
+          <div class="t-line t-silver">Événements critiques pendant 12:38 et 18:00.</div>
+          <div class="t-line t-silver">Aucune panne de pathing active côté ESX-01.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Corrélation Windows / VMware / Datto établie</span></div>
+          <div class="t-line"><span class="t-green">✓ Recovery points Datto réussis</span></div>
+          <div class="t-line"><span class="t-green">✓ Aucune nouvelle erreur critique après la fenêtre</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucune preuve de corruption persistante du volume principal</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">SURVEILLANCE + LIVRABLES COMPLETS</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +943,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Une résolution qui distingue</strong><br>la panne <em>persistante</em> de l’événement <em>transitoire.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      L’agent n’a pas seulement reconnu des erreurs NTFS. Il a prouvé que la couche Windows visible était revenue en état normal,
+      que le stockage VMware n’était pas en panne active au moment du check, puis que les logs et recovery points Datto
+      alignaient l’incident sur le workflow de sauvegarde plutôt que sur une corruption durable.
     </p>
 
     <table class="case-table">
@@ -957,40 +961,40 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>FILE-01 — volumes visibles</strong></td>
+          <td>C: et T: montés en NTFS, état Healthy, dirty bit négatif au moment de la collecte</td>
+          <td>Le serveur n’exhibait pas une corruption persistante évidente lors de la validation</td>
+          <td>Écarter toute remédiation destructive immédiate</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Journaux Windows</strong></td>
+          <td>Événements “Disk surprise removed” suivis d’erreurs NTFS delayed write / transaction log dans les fenêtres de 12:38 et 18:00</td>
+          <td>Le système avait subi un retrait soudain de disques temporaires ou présentés dynamiquement</td>
+          <td>Corréler avec la couche hyperviseur et la couche sauvegarde</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>ESX-01 — pathing</strong></td>
+          <td>Chemins actifs au moment de la vérification, aucun dead path observé</td>
+          <td>La panne n’était pas expliquée par une rupture de pathing persistante côté hôte</td>
+          <td>Faire descendre la piste stockage actif au second plan</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>BCDR-01 — corrélation horaire</strong></td>
+          <td>Fenêtres de sauvegarde alignées avec les événements Windows; initiateur iSCSI Datto observé déconnecté</td>
+          <td>Le workflow Datto devenait l’explication la plus solide du retrait de disques temporaires</td>
+          <td>Traiter le cas comme incident transitoire lié à la sauvegarde</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>Recovery points du 27-01-2025</strong></td>
+          <td>Points de 06:00, 12:38 et 18:00 réussis localement et dans le cloud, screenshot verification réussie</td>
+          <td>Le backup avait abouti malgré les warnings observés dans le guest</td>
+          <td>Documenter un succès de sauvegarde avec bruit de journalisation côté OS</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Post-fenêtre de sauvegarde</strong></td>
+          <td>Après 18:03, seulement des événements informationnels Volsnap/NTFS liés aux shadow copies</td>
+          <td>Aucun signe de persistance ou d’aggravation après la dernière fenêtre</td>
+          <td>Clôture en mode surveillance, sans reboot ni chkdsk</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1004,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Trois couches. Une conclusion propre.</em></div>
+    <p class="s-sub">Ce cas montre la capacité du produit à résister au réflexe “réparer vite”, à prouver l’état réel d’un serveur et à livrer les bonnes sorties MSP à la fin.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1013,81 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-sub">Billet NOC / RMM</div>
+      <div class="mod-desc">Le cas démarre par une alerte Windows Server NTFS File System Corruption sur FILE-01.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Lecture seule d’abord</div>
+      <div class="mod-desc">L’agent collecte l’état des volumes, disques, services et journaux Windows sans lancer de réparation.</div>
+      <div class="mod-agents">Aucun geste destructif</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Validation OS</div>
+      <div class="mod-sub">Healthy / not dirty</div>
+      <div class="mod-desc">Les volumes visibles reviennent Healthy et les bits dirty sont négatifs, ce qui casse l’hypothèse de corruption active persistante.</div>
+      <div class="mod-agents">Windows clarifié</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Corrélation logs</div>
+      <div class="mod-sub">12:38 / 18:00</div>
+      <div class="mod-desc">Les événements Disk surprise removed et NTFS transactionnels sont concentrés dans deux fenêtres précises.</div>
+      <div class="mod-agents">Fenêtres d’incident isolées</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Validation hyperviseur</div>
+      <div class="mod-sub">ESX-01</div>
+      <div class="mod-desc">Le pathing actif exclut une panne de transport persistante au moment du contrôle.</div>
+      <div class="mod-agents">VMware clarifié</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Validation Datto</div>
+      <div class="mod-sub">BCDR-01</div>
+      <div class="mod-desc">Les horaires de backup et les recovery points réussis alignent l’incident sur le workflow de sauvegarde.</div>
+      <div class="mod-agents">Datto clarifié</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">Vérification post-incident</div>
+      <div class="mod-sub">Après 18:03</div>
+      <div class="mod-desc">Aucune nouvelle erreur critique Disk/NTFS n’est observée après la dernière fenêtre de sauvegarde.</div>
+      <div class="mod-agents">Persistance exclue</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Décision de risque</div>
+      <div class="mod-sub">No chkdsk / no reboot</div>
+      <div class="mod-desc">Le système choisit la sécurité : aucune action intrusive n’est justifiée au vu des preuves collectées.</div>
+      <div class="mod-agents">Maîtrise opérationnelle</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
+      <div class="mod-name">Clôture CW</div>
       <div class="mod-sub">Interne + client</div>
       <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-agents">Qualité MSP visible</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Démonstration</div>
+      <div class="mod-sub">Lancement produit</div>
+      <div class="mod-desc">Le traitement devient une page premium montrant la méthode, le discernement et les livrables des agents.</div>
+      <div class="mod-agents">Marketing + opérations</div>
     </div>
   </div>
 </section>
@@ -1091,81 +1095,81 @@ footer {
 <section class="arsenal s-pad" id="livrables">
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <div class="s-title">Ce que le cas<br><em>produit vraiment.</em></div>
+    <p class="s-sub">La valeur ne réside pas seulement dans le diagnostic. Elle réside dans la discipline de validation, l’absence d’action destructive inutile et la capacité à fournir des livrables exploitables immédiatement.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Collecte lecture seule sur FILE-01, validation journaux Windows, vérification ESX-01, corrélation Datto BCDR-01, contrôle post-fenêtre.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Volumes / disques / dirty bit</li>
+        <li>Journaux Disk / NTFS / Volsnap</li>
+        <li>Path state sur ESX-01</li>
+        <li>Historique Datto et recovery points</li>
+        <li>Validation post-incident</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">Le cas montre une posture MSP mature : lecture seule d’abord, aucune hypothèse vendue comme un fait, aucune remédiation risquée sans preuve.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule avant correction</li>
+        <li>Pas de chkdsk /f à chaud</li>
+        <li>Pas de reboot forcé</li>
+        <li>Hypothèse ≠ confirmation</li>
+        <li>Validation croisée avant clôture</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Preuves techniques</div>
+      <div class="arsenal-desc">Les preuves sont cohérentes entre elles : volumes sains, pathing actif, récupération Datto réussie, absence d’erreurs critiques persistantes après la fenêtre.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>Healthy / not dirty</li>
+        <li>Disk surprise removed corrélé</li>
+        <li>Aucun dead path observé</li>
+        <li>Recovery points réussis</li>
+        <li>Screenshot verification réussie</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Résultat technique</div>
+      <div class="arsenal-desc">La conclusion retenue est un événement transitoire lié au workflow de sauvegarde, et non une corruption active du volume principal.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Incident borné dans le temps</li>
+        <li>Aucun impact persistant visible</li>
+        <li>Backups du jour réussis</li>
+        <li>Serveur stable au contrôle</li>
+        <li>Surveillance seulement</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">Le produit livre la matière nécessaire aux opérations et à la relation client sans réécriture manuelle.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>Note interne CW</li>
+        <li>Discussion CW client-safe</li>
+        <li>Email client</li>
+        <li>client inc.</li>
+        <li>Page de cas premium</li>
       </ul>
     </div>
     <div class="arsenal-block">
-      <div class="arsenal-n">06</div>
+      <div class="arsenal.n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">Le cas démontre que l’agent ne produit pas seulement une analyse technique : il produit une décision propre, défendable et présentable pour un lancement produit MSP.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Discernement plutôt que réflexe</li>
+        <li>Réassurance pour le client</li>
+        <li>client inc.</li>
+        <li>Démonstration premium</li>
+        <li>Compatible vente et opérations</li>
       </ul>
     </div>
   </div>
@@ -1176,9 +1180,9 @@ footer {
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
     <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Cette section expose les livrables générés à partir du cas : une note interne technique,
+      une discussion CW client-safe, un email client et une notice Teams. Le contenu est entièrement
+      anonymisé pour usage public selon les remplacements demandés.
     </p>
 
     <div class="doc-grid">
@@ -1190,69 +1194,46 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">────────────────────────────────────────────────────────
+Validation — alerte NTFS et sauvegarde
+────────────────────────────────────────────────────────
 
-Contexte
----------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+BILLET : #000007
+CLIENT : Entreprise inc.
+SITE : site client
+ASSET : FILE-01
+DATE : 27-01-2025
+TECHNICIEN : Agent NOC-08
 
-Préparation et découverte
----------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+PRÉPARATION ET DÉCOUVERTE
+• Examen du billet et accès à la documentation technique du client.
+• Connexion à la plateforme de gestion et validation des alertes en cours.
 
-Vérifications effectuées
----------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
+TRAVAUX EFFECTUÉS
+• Validation lecture seule sur FILE-01 à la suite de l’alerte Windows Server NTFS File System Corruption.
+• Vérification de l’état des volumes et disques visibles sur le serveur.
+• Validation des journaux système Windows pour les événements Disk / NTFS / Volsnap dans les fenêtres de 12:38 et 18:00.
+• Vérification côté hyperviseur ESX-01 afin d’exclure un problème de pathing actif au moment du contrôle.
+• Corrélation réalisée avec l’historique Datto sur BCDR-01 et validation des recovery points du 27-01-2025.
+• Contrôle complémentaire après la dernière fenêtre de sauvegarde afin de confirmer l’absence de nouvelles erreurs critiques.
 
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+CONSTATS
+• Les volumes visibles au moment de la validation étaient montés en NTFS, en état Healthy, et le dirty bit était négatif sur C: et T:.
+• Des événements “Disk surprise removed” suivis d’erreurs NTFS transactionnelles ont été observés durant les fenêtres de sauvegarde du 27-01-2025.
+• Aucun dead path actif n’a été observé lors de la vérification ESX-01.
+• Les recovery points Datto du 27-01-2025 ont été créés avec succès localement et dans le cloud, avec screenshot verification réussie.
+• Après la dernière fenêtre de sauvegarde, seules des entrées informationnelles Volsnap / NTFS sur shadow copies ont été relevées; aucune nouvelle erreur critique Disk/NTFS n’a été observée.
 
-Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+CONCLUSION
+• Cause probable retenue : événement transitoire lié au workflow de sauvegarde Datto / présentation-retrait temporaire de disque pendant la fenêtre de backup.
+• Aucun signe persistant de corruption active du volume principal au moment de la validation.
+• Aucune action intrusive n’a été lancée : pas de chkdsk /f, pas de redémarrage, pas de remédiation destructive.
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+VALIDATIONS FINALES
+• Monitoring : stable au moment de la fermeture.
+• Backups : OK — recovery points Datto confirmés réussis pour la journée validée.
+• Validation applicative : [À CONFIRMER]
+• Recommandation : surveillance seulement et réouverture si récurrence sur une prochaine fenêtre de sauvegarde.</div>
       </div>
 
       <div class="doc-card">
@@ -1264,60 +1245,56 @@ Prochaines étapes
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
         <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
+Validation — alerte système et sauvegarde
 ────────────────────────────────────────────────────────
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
----------
+BILLET : #000007
+DATE : 27-01-2025
+TECHNICIEN : Agent NOC-08
 
-PRÉPARATION ET DÉCOUVERTE :
----------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+• Examen du billet et accès à la documentation technique du client.
+• Connexion à la plateforme de gestion et validation des alertes en cours.
 
-TRAVAUX EFFECTUÉS :
----------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+TRAVAUX EFFECTUÉS
+• Vérification effectuée en lecture seule sur le serveur concerné afin de valider l’état général du système.
+• Analyse des événements observés durant les fenêtres de sauvegarde planifiées.
+• Validation croisée réalisée avec la plateforme de sauvegarde afin de confirmer l’état des points de reprise.
+• Vérification complémentaire après la dernière fenêtre de sauvegarde afin de confirmer l’absence de nouvelles erreurs critiques.
 
-RÉSULTAT / ÉTAT ACTUEL :
----------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+RÉSULTAT
+• Le système était stable au moment des validations.
+• Les points de sauvegarde de la journée concernée ont été confirmés réussis.
+• L’analyse oriente la cause vers un événement transitoire lié au mécanisme de sauvegarde, sans impact persistant observé lors de la validation finale.
+• Aucune action corrective intrusive n’a été nécessaire à ce stade.
 
-SUIVI :
----------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+STATUT
+• Surveillance recommandée seulement.
+• Merci de nous aviser si le comportement se reproduit.</div>
       </div>
 
       <div class="doc-card full">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
-          </div>
-          <div class="doc-copy">Externe · prêt à envoyer</div>
+            <div class="doc-title">Email client</div>
+          </div>client inc.<div class="doc-copy">Communication · complet</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Objet : Validation terminée — alerte système — Billet ##000007
 
-Bonjour,
+Bonjour nom du contact,
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+À la suite de l’alerte signalée sur votre serveur, nous avons effectué une vérification complète en lecture seule afin de valider l’état du système et des sauvegardes associées.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Nos validations confirment que le système était stable au moment du contrôle et que les points de sauvegarde de la journée concernée ont bien été complétés avec succès.
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+L’analyse indique qu’il s’agit vraisemblablement d’un événement ponctuel lié au mécanisme de sauvegarde, sans impact persistant observé lors de la validation finale. Aucune intervention intrusive n’a donc été requise.
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
+Nous recommandons simplement une surveillance. Si vous constatez un comportement inhabituel ou une nouvelle alerte semblable, merci de nous en aviser.
 
 Cordialement,
-[Signature MSP]</div>
+
+Tech
+Entreprise inc.</div>
       </div>
 
       <div class="doc-card full">
@@ -1328,10 +1305,15 @@ Cordialement,
           </div>
           <div class="doc-copy">Coordination · opération</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+        <div class="doc-pre">✅ Intervention terminée — Ticket ##000007
 Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+Site : site client
+
+Validation terminée sur le serveur concerné. Le système était stable au moment des vérifications et les sauvegardes de la journée ont été confirmées réussies.
+
+L’analyse oriente la cause vers un événement transitoire lié au mécanisme de sauvegarde, sans impact persistant observé lors de la validation finale.
+
+Aucune action intrusive n’a été nécessaire. Surveillance seulement; réouvrir si une alerte semblable réapparaît sur une prochaine fenêtre de sauvegarde.</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1322,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    Le bon agent MSP n’est pas celui qui lance un <strong>chkdsk</strong> dès qu’il voit “NTFS”.
+    C’est celui qui <strong>prouve l’état réel du système</strong>, corrèle les couches
+    <strong>Windows, hyperviseur et sauvegarde</strong>, puis ferme le billet avec des livrables propres et défendables.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1361,8 +1343,8 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
-    © 2025 EAIA — Tous droits réservés
+    MSP Intelligence IT — Cas d’alerte NTFS corrélée à la sauvegarde<br>
+    EAIA — Tous droits réservés
   </div>
 </footer>
 

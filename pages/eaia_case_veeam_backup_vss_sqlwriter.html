@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas Veeam : échec VSS / SQLWriter sur contrôleur de domaine</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
+
 :root {
   --black: #000000;
   --dark: #080808;
@@ -628,6 +630,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -761,6 +765,8 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
+
 </style>
 </head>
 <body>
@@ -791,40 +797,40 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte<br>
+    de <em>sauvegarde Veeam</em><br>
+    devenue <span class="strong">preuve de méthode MSP.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · VEEAM · VSS · SQLWRITER · CW · TRIAGE SAFE</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un échec de sauvegarde critique sur <strong>DC-01</strong> :
+    notification client immédiate, capture de l’erreur exacte, diagnostic en lecture seule, corrélation des journaux
+    <strong>VSS / SQLWRITER</strong>, validation des garde-fous propres aux contrôleurs de domaine, puis remédiation par
+    <strong>redémarrage contrôlé</strong> avec relance du job et documentation complète.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
+      <div class="hero-metric-n">1</div>
+      <div class="hero-metric-l">Job critique</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">3</div>
+      <div class="hero-metric-l">Échecs corrélés</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">Writer fautif</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
+      <div class="hero-metric-n">1</div>
+      <div class="hero-metric-l">Reboot contrôlé</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
-    </div>
-    <div class="hero-metric">
-      <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-n">4</div>
+      <div class="hero-metric-l">Livrables complets</div>
     </div>
   </div>
 
@@ -837,27 +843,31 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · Veeam · contrôleur de domaine · VSS/SQLWriter</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
+    <div class="firm-product active">VEEAM</div>
+    <div class="firm-product active">VSS</div>
+    <div class="firm-product active">SQLWRITER</div>
     <div class="firm-product active">CW Note</div>
     <div class="firm-product active">CW Discussion</div>
-    <div class="firm-product active">Email client</div>
+    <div class="firm-product active">Email Client</div>
     <div class="firm-product active">client inc.</div>
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>VEEAM</span> · BACKUP FAILURE · VSS · SQLWRITER ·
+    <span>LECTURE SEULE</span> · TRIAGE GUIDÉ · CORRÉLATION LOGS ·
+    <span>0x800423f4</span> · 0x800703fa · DC · NO SNAPSHOT ·
+    <span>REBOOT CONTRÔLÉ</span> · JOB RELANCÉ · CW NOTE · EMAIL CLIENT ·
+    <span>TEAMS NOTICE</span> · MÉTHODE MSP · LIVRABLES COMPLETS ·
+    <span>VEEAM</span> · BACKUP FAILURE · VSS · SQLWRITER ·
+    <span>LECTURE SEULE</span> · TRIAGE GUIDÉ · CORRÉLATION LOGS ·
+    <span>0x800423f4</span> · 0x800703fa · DC · NO SNAPSHOT ·
+    <span>REBOOT CONTRÔLÉ</span> · JOB RELANCÉ · CW NOTE · EMAIL CLIENT ·
+    <span>TEAMS NOTICE</span> · MÉTHODE MSP · LIVRABLES COMPLETS ·
   </div>
 </div>
 
@@ -865,16 +875,17 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Une seule alerte,<br>un risque réel,<br><em>plusieurs mauvaises pistes.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le signal initial parlait simplement d’un job Veeam en échec. Sans méthode, l’intervention aurait pu dériver
+        vers le repository, la connectivité ou un retry aveugle du job. Le système a forcé un triage factuel
+        à partir du message exact et des vérifications guest.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        Le diagnostic a rapidement montré que la panne n’était ni un problème de stockage ni un simple service Veeam arrêté,
+        mais un <strong>échec VSS dans le guest</strong> sur <strong>SqlServerWriter</strong>, avec répétition des erreurs
+        <strong>0x800423f4</strong> et <strong>0x800703fa</strong>. La décision utile n’était donc pas “relancer partout”,
+        mais de stabiliser proprement <strong>DC-01</strong> dans une fenêtre approuvée.
       </p>
     </div>
 
@@ -882,23 +893,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’erreur Veeam était spécifique</strong> — snapshot VSS impossible avec SqlServerWriter en défaut.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>Le serveur touché était un DC</strong> — impossible d’utiliser un snapshot comme raccourci de sécurité.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Les services étaient démarrés</strong> — ce n’était pas un simple incident de service arrêté.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>Les journaux montraient une répétition</strong> — même chaîne d’erreurs sur plusieurs cycles de sauvegarde.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>Le bon geste devait être unique et défendable</strong> — redémarrage contrôlé, puis relance et monitoring du job.</div>
         </div>
       </div>
     </div>
@@ -908,27 +919,27 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · VEEAM VSS SQLWRITER</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">BACKUP MONITOR VEEAM</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">FAILURE SUR JOB DC-01</span></div>
+          <div class="t-line"><span class="t-gold">MESSAGE :</span> <span class="t-white">VSS SNAPSHOT FAILED / SQLWRITER</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">RETRY INUTILE / DIAGNOSTIC SUR MAUVAISE COUCHE</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Volet primaire : VSS guest / SqlServerWriter.</div>
+          <div class="t-line t-silver">Services VSS présents, mais writer en Failed.</div>
+          <div class="t-line t-silver">Journaux corrélés avant toute remédiation.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Notification client immédiate</span></div>
+          <div class="t-line"><span class="t-green">✓ Validation lecture seule complète</span></div>
+          <div class="t-line"><span class="t-green">✓ Reboot planifié avec raison de maintenance</span></div>
+          <div class="t-line"><span class="t-green">✓ Job relancé après retour en ligne</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">CAUSE ISOLÉE + ACTION SAFE + LIVRABLES PRÊTS</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +950,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Un échec Veeam qui devient</strong><br>un cas de <em>discernement MSP.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      Le système a traversé le cas selon une logique défendable : capture de l’erreur exacte, validation des writers,
+      confirmation de l’état des services, corrélation des événements Application, analyse du contexte de redémarrage,
+      puis exécution d’une seule action corrective appropriée au serveur concerné.
     </p>
 
     <table class="case-table">
@@ -957,40 +968,52 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>Job Veeam</strong></td>
+          <td>Échec de création de snapshot VSS avec SqlServerWriter en défaut sur DC-01</td>
+          <td>Le job ne pouvait pas terminer par simple retry sans correction de contexte</td>
+          <td>Isoler la panne côté guest plutôt que côté repository</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Writers VSS</strong></td>
+          <td>SqlServerWriter en Failed / Non-retryable error alors que les autres writers étaient stables</td>
+          <td>Le défaut était ciblé et non généralisé à toute la pile VSS</td>
+          <td>Concentrer l’analyse sur SQLWriter et les journaux applicatifs associés</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>Services système</strong></td>
+          <td>SQL Server VSS Writer et Volume Shadow Copy présents et démarrés</td>
+          <td>La cause n’était pas un simple service arrêté</td>
+          <td>Écarter les faux positifs et poursuivre l’analyse événementielle</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>Journaux Application</strong></td>
+          <td>Corrélation répétée de SQLWRITER 24583 puis VSS 8229 sur plusieurs exécutions</td>
+          <td>Le problème se reproduisait à l’identique et devenait objectivable</td>
+          <td>Fonder la remédiation sur les logs plutôt que sur l’intuition</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>Codes d’erreur</strong></td>
+          <td>0x800423f4 côté VSS et 0x800703fa côté SQLWriter</td>
+          <td>Le défaut provenait du contexte VSS/SQL local pendant la préparation du snapshot</td>
+          <td>Préparer une réinitialisation contrôlée du serveur</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Contexte serveur</strong></td>
+          <td>Très longue durée de fonctionnement, aucun indicateur RebootPending ou RebootRequired</td>
+          <td>Pas de reboot Windows en attente, mais un composant potentiellement bloqué depuis longtemps</td>
+          <td>Valider puis exécuter un reboot de maintenance dans la fenêtre approuvée</td>
+        </tr>
+        <tr>
+          <td><strong>Garde-fou DC</strong></td>
+          <td>Le serveur concerné est un contrôleur de domaine</td>
+          <td>Un snapshot préventif aurait été contraire aux règles d’exploitation</td>
+          <td>Interdire tout snapshot et privilégier le redémarrage contrôlé</td>
+        </tr>
+        <tr>
+          <td><strong>Résultat post-action</strong></td>
+          <td>DC-01 revient en ligne et la sauvegarde peut être relancée</td>
+          <td>La remédiation débloque le traitement sans action destructive</td>
+          <td>Maintenir la surveillance du job et documenter le résultat final</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1023,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une méthode sûre, visible et réutilisable.</em></div>
+    <p class="s-sub">Le cas démontre comment l’agent structure l’intervention de bout en bout, sans invention, sans action prématurée et avec des sorties immédiatement exploitables.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1032,81 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-sub">Billet / monitoring</div>
+      <div class="mod-desc">Le cas démarre par une alerte de sauvegarde Veeam en échec sur DC-01.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Notification</div>
+      <div class="mod-sub">Client d’abord</div>
+      <div class="mod-desc">Le client est avisé immédiatement qu’une analyse est en cours sur ses sauvegardes.</div>
+      <div class="mod-agents">Confiance et visibilité</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
-      <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-name">Erreur exacte</div>
+      <div class="mod-sub">Base factuelle</div>
+      <div class="mod-desc">Le message Veeam complet est capturé pour éviter toute hypothèse sur la cause du failure.</div>
+      <div class="mod-agents">Zéro invention</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Validation VSS</div>
+      <div class="mod-sub">Guest checks</div>
+      <div class="mod-desc">L’état des writers VSS est vérifié sur le serveur, et SqlServerWriter ressort comme unique writer en défaut.</div>
+      <div class="mod-agents">Lecture seule d’abord</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Services</div>
+      <div class="mod-sub">Écarter les faux positifs</div>
+      <div class="mod-desc">Les services SQL Server VSS Writer et VSS sont validés afin d’éviter un diagnostic trop rapide.</div>
+      <div class="mod-agents">Cause ciblée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Corrélation logs</div>
+      <div class="mod-sub">Application log</div>
+      <div class="mod-desc">Les événements SQLWRITER 24583 et VSS 8229 sont corrélés sur plusieurs cycles du job.</div>
+      <div class="mod-agents">Preuve technique</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">Contexte reboot</div>
+      <div class="mod-sub">Décision encadrée</div>
+      <div class="mod-desc">L’uptime prolongée du serveur et l’absence de reboot pending orientent vers un redémarrage de maintenance planifié.</div>
+      <div class="mod-agents">Une action à la fois</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Garde-fous</div>
+      <div class="mod-sub">DC sans snapshot</div>
+      <div class="mod-desc">Le rôle de contrôleur de domaine interdit l’usage de snapshot et impose une remédiation propre.</div>
+      <div class="mod-agents">Discipline d’exploitation</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">Reboot + relance</div>
+      <div class="mod-sub">Fenêtre approuvée</div>
+      <div class="mod-desc">Le redémarrage est exécuté avec raison planifiée, le serveur revient en ligne et la sauvegarde est relancée.</div>
+      <div class="mod-agents">Remédiation safe</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Livrables</div>
+      <div class="mod-sub">Ops + relation client</div>
+      <div class="mod-desc">client inc.</div>
+      <div class="mod-agents">Marketing + opérations</div>
     </div>
   </div>
 </section>
@@ -1091,81 +1114,81 @@ footer {
 <section class="arsenal s-pad" id="livrables">
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <div class="s-title">Ce que le cas<br><em>démontre réellement.</em></div>
+    <p class="s-sub">Le produit ne montre pas seulement un triage Veeam. Il montre une méthode d’intervention complète : diagnostic, garde-fous, communication, remédiation contrôlée et narration exploitable pour les équipes MSP.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Capture de l’erreur exacte, validation VSS, analyse services, corrélation des logs, contrôle du contexte de redémarrage, reboot approuvé et relance du job.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Erreur exacte Veeam validée</li>
+        <li>Writer fautif isolé</li>
+        <li>Services confirmés</li>
+        <li>Logs Application corrélés</li>
+        <li>Job relancé après reboot</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">Le cas met en avant une discipline MSP visible : lecture seule d’abord, une action à la fois, client informé et aucune action incompatible avec un DC.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule avant correction</li>
+        <li>Une seule action corrective</li>
+        <li>Notification client immédiate</li>
+        <li>Aucun snapshot sur DC</li>
+        <li>Monitoring post-action</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Résultats techniques</div>
+      <div class="arsenal-desc">La panne est ramenée à sa vraie couche technique : VSS guest / SQLWriter, avec redémarrage contrôlé comme remédiation la plus propre et la plus défendable.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>SqlServerWriter isolé</li>
+        <li>0x800423f4 confirmé</li>
+        <li>0x800703fa corrélé</li>
+        <li>Repository exclu de la cause primaire</li>
+        <li>Serveur revenu en ligne</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Coordination client</div>
+      <div class="arsenal-desc">client inc.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Email de prise en charge</li>
+        <li>Message de maintenance interne</li>
+        <li>Discussion client-safe</li>
+        <li>Réassurance sans jargon inutile</li>
+        <li>Suivi du résultat final annoncé</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">Sorties prêtes à l’emploi</div>
+      <div class="arsenal-desc">Les livrables sont rédigés au format MSP et peuvent être repris tels quels sur le site de lancement comme démonstration produit.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>Note interne CW</li>
+        <li>Discussion CW</li>
+        <li>Email client</li>
+        <li>client inc.</li>
+        <li>Page premium HTML</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">La démonstration prouve qu’un agent MSP crédible n’automatise pas seulement des commandes : il automatise le discernement, les garde-fous et la qualité des livrables.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Crédibilité opérationnelle</li>
+        <li>Traçabilité des décisions</li>
+        <li>Qualité de communication</li>
+        <li>Cas réutilisable en vente</li>
+        <li>Compatible lancement produit</li>
       </ul>
     </div>
   </div>
@@ -1176,13 +1199,12 @@ footer {
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
     <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Cette section expose les livrables générés à partir du cas : documentation interne, discussion client-safe,
+      email au contact et coordination Teams. Le contenu est anonymisé pour usage public et aligné sur le contexte réel de l’intervention.
     </p>
 
     <div class="doc-grid">
-      <div class="doc-card">
+      <div class="doc-card full">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 01</div>
@@ -1190,69 +1212,74 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">────────────────────────────────────────────────────────
+        BACKUP VEEAM / VSS / SQLWRITER / TRIAGE
+────────────────────────────────────────────────────────
 
-Contexte
+BILLET:
+#000013
+CLIENT:
+Entreprise inc.
+DATE:
+22-08-2024
+
+PRÉPARATION ET DÉCOUVERTE
 ---------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+Prise de connaissance de la demande et consultation de la documentation du client.
 
-Préparation et découverte
+RÉSUMÉ
 ---------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+Alerte de sauvegarde Veeam en échec sur le job du serveur DC-01.
+Le diagnostic a permis d’isoler un échec applicatif VSS dans le guest, plus précisément sur SqlServerWriter, sans indication d’un problème de repository.
+La séquence d’intervention a été menée en lecture seule d’abord, puis avec une seule action corrective planifiée et exécutée : redémarrage contrôlé du serveur.
+Après retour en ligne, la sauvegarde a été relancée et le suivi du résultat final est resté en cours.
 
-Vérifications effectuées
+TRAVAUX EFFECTUÉS
 ---------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
+• Validation du message d’erreur exact dans Veeam : échec de snapshot VSS avec SqlServerWriter en défaut
+• Vérification de l’état des writers VSS sur DC-01
+• Confirmation que SqlServerWriter était en Failed / Non-retryable error
+• Vérification des services SQL Server VSS Writer et Volume Shadow Copy
+• Analyse ciblée des journaux Application pour VSS et SQLWRITER
+• Corrélation répétée des événements SQLWRITER 24583 et VSS 8229
+• Validation de l’uptime du serveur et de l’absence de RebootPending / RebootRequired
+• Décision d’un redémarrage contrôlé en fenêtre approuvée
+• Exécution du redémarrage avec raison planifiée et référence du billet
+• Relance de la sauvegarde après retour en ligne
 
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+AVERTISSEMENTS OBSERVÉS
+---------
+• L’erreur technique observée côté serveur indiquait un contexte VSS/SQLWriter persistant et non un simple service arrêté
+• L’avertissement lié aux composants de média de récupération ne constituait pas la cause primaire de l’échec
+• Aucun snapshot n’a été créé, car le serveur touché est un contrôleur de domaine
 
-Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+ÉVÉNEMENT OBSERVÉ APRÈS L’INTERVENTION
+---------
+• DC-01 est revenu en ligne après le redémarrage contrôlé
+• Le job Veeam a pu être relancé
+• Le traitement de sauvegarde est reparti en exécution
+• La confirmation du résultat final du job restait à surveiller au moment du présent livrable
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+CONSTAT TECHNIQUE
+---------
+Cause probable confirmée :
+• Échec VSS dans le guest sur SqlServerWriter
+• Erreurs corrélées : VSS 8229, SQLWRITER 24583, 0x800423f4 et 0x800703fa
+• Longue durée de fonctionnement du serveur ayant probablement maintenu le composant dans un état incohérent
+• Aucun indice primaire d’un problème de repository ou de connectivité Veeam
+
+STATUT
+---------
+Stabilisation en cours.
+Sauvegarde relancée après remédiation contrôlée.
+Résultat final du job à confirmer.
+
+SUIVI RECOMMANDÉ
+---------
+• Valider le résultat final du job Veeam relancé
+• Contrôler à nouveau l’état de SqlServerWriter après le cycle de sauvegarde
+• Documenter le résultat final dans le billet
+• Revoir l’avertissement de version des composants de média de récupération dans un billet distinct si nécessaire</div>
       </div>
 
       <div class="doc-card">
@@ -1264,60 +1291,63 @@ Prochaines étapes
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
         <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
+        SAUVEGARDE VEEAM / INTERVENTION CORRECTIVE
 ────────────────────────────────────────────────────────
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
+BILLET: #000013
+CLIENT: Entreprise inc.
+DATE: 22-08-2024
+TECHNICIEN: Agent NOC-14
 ---------
 
-PRÉPARATION ET DÉCOUVERTE :
+PRISE EN CHARGE ET ANALYSE:
 ---------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+• Prise en charge du billet et examen de la documentation client.
+• Connexion au RMM et analyse de l&#x27;état global et de la présence d&#x27;alerte.
 
-TRAVAUX EFFECTUÉS :
+TRAVAUX EFFECTUÉS:
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+• Prise en charge d’une alerte de sauvegarde Veeam en échec touchant le serveur DC-01
+• Validation de la cause de l’échec au niveau du composant de traitement applicatif utilisé pour la sauvegarde
+• Vérification ciblée des composants système concernés et des journaux applicatifs du serveur
+• Planification puis exécution d’un redémarrage contrôlé en fenêtre approuvée afin de réinitialiser proprement le composant en défaut
+• Retour en ligne du serveur confirmé après l’intervention
+• Relance du traitement de sauvegarde et maintien du suivi sur le résultat final
 
-RÉSULTAT / ÉTAT ACTUEL :
+RÉSULTAT:
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+• La cause primaire de l’échec a été identifiée
+• Le serveur concerné a été redémarré de manière contrôlée
+• La sauvegarde a pu être relancée après retour en ligne
+• Le traitement final du cycle de sauvegarde demeurait en surveillance au moment de la mise à jour
 
-SUIVI :
+RECOMMANDATION:
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+• Confirmer l’issue finale du cycle de sauvegarde relancé
+• Prévoir un contrôle de suivi sur les composants de sauvegarde associés si l’avertissement secondaire réapparaît</div>
       </div>
 
-      <div class="doc-card full">
+      <div class="doc-card">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
-          </div>
-          <div class="doc-copy">Externe · prêt à envoyer</div>
+            <div class="doc-title">Email client</div>
+          </div>client inc.<div class="doc-copy">Relation client · complet</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Objet : Mise à jour — intervention en cours sur vos sauvegardes
 
-Bonjour,
+Bonjour nom du contact,
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+Nous vous confirmons que nous avons poursuivi l’analyse du problème de sauvegarde touchant votre environnement.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Nos vérifications ont permis d’identifier le composant du serveur concerné qui empêchait l’exécution normale de la sauvegarde. Une fenêtre approuvée a été utilisée pour effectuer un redémarrage contrôlé du serveur DC-01.
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+Le serveur est maintenant revenu en ligne et la sauvegarde a été relancée avec succès du point de vue opérationnel. Nous poursuivons la surveillance du cycle en cours afin de confirmer le résultat final du traitement.
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
+Nous vous transmettrons une mise à jour complémentaire dès que la validation finale sera complétée.
 
-Cordialement,
-[Signature MSP]</div>
+Merci,
+Tech</div>
       </div>
 
       <div class="doc-card full">
@@ -1328,10 +1358,20 @@ Cordialement,
           </div>
           <div class="doc-copy">Coordination · opération</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
+        <div class="doc-pre">🔧 Billet ##000013 — Mise à jour d’intervention
+
 Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+Site : site client
+
+• Cause primaire du backup Veeam isolée sur le composant VSS / SQLWriter du serveur DC-01
+• Diagnostic complété en lecture seule avant action corrective
+• Redémarrage contrôlé exécuté dans la fenêtre approuvée
+• Serveur revenu en ligne
+• Sauvegarde relancée
+• Résultat final du job encore sous surveillance au moment de la mise à jour
+
+Point d’attention :
+Aucun snapshot n’a été utilisé durant l’intervention, le serveur concerné étant un contrôleur de domaine.</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1380,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    Le bon agent MSP n’est pas celui qui “relance juste un job”.
+    C’est celui qui <strong>isole la vraie couche fautive</strong>, respecte les garde-fous du serveur concerné,
+    puis <strong>transforme l’intervention en livrables utilisables</strong> pour les opérations, le client et le lancement produit.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1361,7 +1401,7 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas Veeam : échec VSS / SQLWriter sur contrôleur de domaine<br>
     © 2025 EAIA — Tous droits réservés
   </div>
 </footer>

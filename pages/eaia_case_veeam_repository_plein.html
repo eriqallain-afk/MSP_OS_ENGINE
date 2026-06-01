@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAIA | MSP Intelligence IT — Cas réplication Active Directory / SYSVOL sur RODC</title>
+<title>EAIA | MSP Intelligence IT — Cas Veeam repository plein / espace insuffisant</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --black: #000000;
   --dark: #080808;
@@ -628,6 +629,8 @@ nav {
   line-height: 1.9;
   color: #D2D7E1;
 }
+.doc-pre strong { color: var(--white); }
+
 .quote-section {
   background: var(--dark2);
   border-top: 1px solid var(--border);
@@ -761,6 +764,7 @@ footer {
 @media (max-width: 640px) {
   .modules-grid { grid-template-columns: 1fr; }
 }
+
 </style>
 </head>
 <body>
@@ -791,40 +795,40 @@ footer {
   <div class="hero-eyebrow">EAIA — Site de lancement</div>
 
   <h1>
-    Une réplication AD<br>
-    bloquée depuis <em>2023</em>,<br>
-    récupérée <span class="strong">sans rebuild aveugle.</span>
+    Une alerte<br>
+    de <em>sauvegarde Veeam</em><br>
+    devenue <span class="strong">preuve de méthode MSP.</span>
   </h1>
 
-  <div class="hero-product-tag">MSP INTELLIGENCE IT · ACTIVE DIRECTORY · RODC · SYSVOL · CW LIVRABLES</div>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · VEEAM · BACKUP REPOSITORY · CW · TRIAGE · LECTURE SEULE</div>
 
   <p class="hero-sub">
-    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas beaucoup plus dur qu'une alerte RMM standard :
-    un <strong>RODC multisite</strong> qui ne répliquait plus correctement, un <strong>SYSVOL non publié</strong>,
-    un <strong>8614 / tombstone lifetime</strong> côté annuaire, puis une reprise contrôlée par étapes sans redémarrage aveugle,
-    avec production des livrables complets pour l'interne, le client et le pilotage opérationnel.
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas de sauvegarde Veeam où un job en avertissement
+    cachait une cause racine simple mais critique : <strong>un repository presque plein</strong>. L’agent lit le message exact,
+    confirme la pression de capacité, applique une correction contrôlée, surveille le merge, puis génère les
+    <strong>livrables complets</strong> nécessaires pour l’interne, le client et la coordination MSP.
   </p>
 
   <div class="hero-metrics">
     <div class="hero-metric">
-      <div class="hero-metric-n">5</div>
-      <div class="hero-metric-l">Partitions AD relancées</div>
+      <div class="hero-metric-n">1</div>
+      <div class="hero-metric-l">Job analysé</div>
     </div>
     <div class="hero-metric">
       <div class="hero-metric-n">1</div>
-      <div class="hero-metric-l">RODC récupéré</div>
+      <div class="hero-metric-l">Cause racine</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">8614</div>
-      <div class="hero-metric-l">Erreur levée</div>
+      <div class="hero-metric-n">280 GB</div>
+      <div class="hero-metric-l">Espace libre</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">4114 → 4614</div>
-      <div class="hero-metric-l">Phases DFSR observées</div>
+      <div class="hero-metric-n">7 TB</div>
+      <div class="hero-metric-l">Capacité dépôt</div>
     </div>
     <div class="hero-metric">
-      <div class="hero-metric-n">0</div>
-      <div class="hero-metric-l">Rebuild immédiat</div>
+      <div class="hero-metric-n">21:00</div>
+      <div class="hero-metric-l">Prochain cycle</div>
     </div>
   </div>
 
@@ -837,12 +841,11 @@ footer {
 <div class="firm-band">
   <div class="firm-band-left">
     <div class="firm-band-name">Résumé exécutif du cas</div>
-    <div class="firm-band-desc">Entreprise multisite · contrôleur de domaine en succursale · writable DC central · récupération partielle maîtrisée</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · Veeam Backup &amp; Replication · stockage repository</div>
   </div>
   <div class="firm-products">
-    <div class="firm-product active">AD DS</div>
-    <div class="firm-product active">DFSR</div>
-    <div class="firm-product active">SYSVOL</div>
+    <div class="firm-product active">Veeam</div>
+    <div class="firm-product active">Repository</div>
     <div class="firm-product active">CW Note</div>
     <div class="firm-product active">CW Discussion</div>
     <div class="firm-product active">Email client</div>
@@ -852,12 +855,14 @@ footer {
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
-    <span>ACTIVE DIRECTORY</span> · 8614 · TOMBSTONE LIFETIME · RODC · SYSVOL ·
-    <span>DFSR NON-AUTHORITATIVE</span> · 4114 · 4614 · 4604 · REPLICATION BY PARTITION ·
-    <span>CLIENT-SAFE DISCUSSION</span> · NOTE INTERNE · MULTISITE · WRITABLE DC ·
+    <span>VEEAM</span> · WARNING · INSUFFICIENT SPACE · REPOSITORY PRESSURE ·
+    <span>LECTURE SEULE</span> · MESSAGE EXACT · CAPACITY CHECK · MERGE ·
+    <span>CW NOTE</span> · CW DISCUSSION · EMAIL CLIENT · AVIS TEAMS ·
+    <span>RUNBOOKS</span> · IT-BACKUPDRMASTER · IT-COMMANDARE-INFRA ·
+    <span>VEEAM</span> · WARNING · INSUFFICIENT SPACE · REPOSITORY PRESSURE ·
+    <span>LECTURE SEULE</span> · MESSAGE EXACT · CAPACITY CHECK · MERGE ·
+    <span>CW NOTE</span> · CW DISCUSSION · EMAIL CLIENT · AVIS TEAMS ·
+    <span>RUNBOOKS</span> · IT-BACKUPDRMASTER · IT-COMMANDARE-INFRA ·
   </div>
 </div>
 
@@ -865,16 +870,15 @@ footer {
   <div class="problem-inner">
     <div>
       <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
-      <div class="s-title">Un simple ticket<br>de réplication,<br><em>un vrai cas N3.</em></div>
+      <div class="s-title">Un warning Veeam,<br>un dépôt presque plein,<br><em>et un risque de récidive.</em></div>
       <p class="s-sub" style="margin-bottom: 24px;">
-        Le billet initial ressemblait à une alerte de supervision Active Directory.
-        En réalité, le contrôleur de domaine en succursale ne répliquait plus correctement depuis très longtemps
-        et ne publiait plus ses partages SYSVOL / NETLOGON.
+        Le signal de départ parlait d’un job de sauvegarde en avertissement. Le danger classique était de relancer la tâche
+        sans distinguer le symptôme opérationnel de la cause racine stockage.
       </p>
       <p class="s-sub">
-        Au lieu de forcer une réparation large ou un rebuild immédiat, l'agent a déroulé une séquence contrôlée :
-        lecture seule, validation de la topologie, test des lingering objects, reprise AD par partition,
-        puis récupération DFSR non-authoritative sur le seul DC affecté.
+        L’agent a fait l’inverse : <strong>lecture seule d’abord</strong>, extraction du message exact, confirmation que la
+        cmdlet PowerShell Veeam n’était pas disponible dans la session utilisée, validation d’un dépôt sous pression,
+        puis correction contrôlée par ajustement de rétention avant reprise et surveillance du merge.
       </p>
     </div>
 
@@ -882,23 +886,23 @@ footer {
       <div class="problem-pains">
         <div class="pain-item">
           <div class="pain-icon">01</div>
-          <div class="pain-text"><strong>Erreur 8614 / tombstone lifetime</strong> — la réplication depuis la succursale était bloquée depuis plus longtemps que ce qu'un simple redémarrage aurait pu régler.</div>
+          <div class="pain-text"><strong>L’alerte parlait d’un Warning</strong> — mais le message exact révélait un échec d’écriture lié à l’espace disque.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">02</div>
-          <div class="pain-text"><strong>SYSVOL / NETLOGON absents</strong> — le DC n'était pas pleinement fonctionnel pour l'authentification et les stratégies de groupe.</div>
+          <div class="pain-text"><strong>La session PowerShell n’avait pas les cmdlets Veeam</strong> — ce qui pouvait masquer le vrai diagnostic si on insistait sur le mauvais outil.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">03</div>
-          <div class="pain-text"><strong>Un seul DC writable</strong> — la récupération devait être menée depuis le DC central sain, sans transformer le RODC en source autoritative.</div>
+          <div class="pain-text"><strong>Le repository restait en zone critique</strong> — environ 280 GB libres sur 7 TB, soit une marge trop serrée pour conclure durablement.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">04</div>
-          <div class="pain-text"><strong>Remoting PowerShell instable</strong> — la connectivité réseau répondait, mais WSMan / PowerShell Remoting n'était pas fiable pour toute la collecte.</div>
+          <div class="pain-text"><strong>Le merge à 7 % était encourageant</strong> — mais insuffisant pour déclarer le cas résolu avant le prochain cycle de 21:00.</div>
         </div>
         <div class="pain-item">
           <div class="pain-icon">05</div>
-          <div class="pain-text"><strong>Décision difficile</strong> — continuer la réparation contrôlée ou basculer vers un rebuild du RODC si la publication SYSVOL ne se complétait pas.</div>
+          <div class="pain-text"><strong>La clôture devait rester propre</strong> — documenter ce qui a été corrigé, ce qui reste à surveiller et les seuils d’escalade capacité.</div>
         </div>
       </div>
     </div>
@@ -908,27 +912,27 @@ footer {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · AD REPLICATION / SYSVOL RECOVERY</div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · VEEAM REPOSITORY CAPACITY</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
         <div>
           <div class="t-line t-gray">// BILLET BRUT REÇU</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">ACTIVE DIRECTORY REPLICATION FAILURES</span></div>
-          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">RODC EN SUCCURSALE</span></div>
-          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE DISTANT MULTISITE</span></div>
-          <div class="t-line"><span class="t-gold">SIGNE FORT :</span> <span class="t-white">8614 / SYSVOL NON PUBLIÉ</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">MONITORING BACKUP / RMM</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">JOB VEEAM EN WARNING</span></div>
+          <div class="t-line"><span class="t-gold">PÉRIMÈTRE :</span> <span class="t-white">VBR + REPOSITORY LOCAL + APP-01</span></div>
+          <div class="t-line"><span class="t-gold">MESSAGE :</span> <span class="t-white">THERE IS NOT ENOUGH SPACE ON THE DISK</span></div>
           <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
-          <div class="t-line t-silver">La réplication AD est cassée côté sortie.</div>
-          <div class="t-line t-silver">Le DC central sain doit rester la référence.</div>
-          <div class="t-line t-silver">Aucune réparation DFSR large sans validation.</div>
+          <div class="t-line t-silver">Volet 1 : diagnostic lecture seule du job.</div>
+          <div class="t-line t-silver">Volet 2 : validation de capacité repository.</div>
+          <div class="t-line t-silver">Volet 3 : correction contrôlée + suivi du prochain cycle.</div>
         </div>
         <div>
           <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
-          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lingering objects vérifiés</span></div>
-          <div class="t-line"><span class="t-green">✓ 5 partitions AD reprises</span></div>
-          <div class="t-line"><span class="t-green">✓ 4114 puis 4614 observés</span></div>
-          <div class="t-line"><span class="t-red">✗ Aucun rebuild immédiat</span></div>
-          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">REPRISE CONTRÔLÉE + SUIVI SYSVOL JUSQU'AU RETOUR COMPLET</span></div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Cause racine stockage confirmée</span></div>
+          <div class="t-line"><span class="t-green">✓ Rétention ajustée de 30 à 25 jours</span></div>
+          <div class="t-line"><span class="t-green">✓ Merge observé après reprise</span></div>
+          <div class="t-line"><span class="t-red">✗ Capacité encore critique</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">CORRECTION TEMPORAIRE + SURVEILLANCE 21:00</span></div>
           <div class="t-line t-gold">▌<span class="cursor"></span></div>
         </div>
       </div>
@@ -939,11 +943,11 @@ footer {
 <section class="s-pad" id="diagnostic">
   <div class="content-wrap">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
-    <div class="s-title"><strong>Un cas d'infrastructure</strong><br>où la valeur est dans <em>l'ordre des gestes.</em></div>
+    <div class="s-title"><strong>Une lecture méthodique</strong><br>de la couche <em>backup</em> à la couche <em>capacité.</em></div>
     <p class="s-sub">
-      Ici, l'agent ne sert pas à "donner une commande".
-      Il sert à dérouler la bonne séquence : isoler le vrai problème, choisir le bon DC de référence,
-      éviter les raccourcis dangereux, puis transformer l'intervention en livrables MSP propres.
+      Le cas démontre une capacité MSP essentielle : ne pas confondre un warning Veeam avec une simple relance de job.
+      Le système lit d’abord le message exact, valide l’état du dépôt, qualifie l’environnement PowerShell, applique une
+      correction contrôlée et laisse un dossier proprement documenté pour le prochain passage planifié.
     </p>
 
     <table class="case-table">
@@ -957,40 +961,40 @@ footer {
       </thead>
       <tbody>
         <tr>
-          <td><strong>Erreur AD</strong></td>
-          <td>Le contrôleur de domaine distant ne répliquait plus correctement vers le DC central sain</td>
-          <td>Risque d'annuaire divergent et d'objets désynchronisés</td>
-          <td>Vérifier lingering objects avant toute reprise forcée</td>
+          <td><strong>Message d’erreur exact</strong></td>
+          <td>Le job signalait un échec d’écriture de fichier <code>.vbm</code> avec <strong>There is not enough space on the disk</strong>.</td>
+          <td>Le warning était en réalité porté par une cause racine stockage, pas par un souci applicatif invité.</td>
+          <td>Orienter immédiatement le diagnostic vers le repository.</td>
         </tr>
         <tr>
-          <td><strong>Portée réelle</strong></td>
-          <td>La reprise concernait les 5 partitions AD, pas un seul conteneur</td>
-          <td>Une erreur de séquence pouvait empirer l'état du domaine</td>
-          <td>Relancer la réplication partition par partition</td>
+          <td><strong>Serveur protégé</strong></td>
+          <td>Le traitement concernait <strong>APP-01</strong> dans le job <strong>VEEAM-QUOTIDIEN-SITECLIENT</strong>.</td>
+          <td>Le périmètre restait ciblé, ce qui évitait d’élargir inutilement le cas à d’autres workloads.</td>
+          <td>Documenter précisément le job et la charge affectée.</td>
         </tr>
         <tr>
-          <td><strong>Topologie</strong></td>
-          <td>Le DC central Azure était le seul contrôleur de domaine writable</td>
-          <td>Le RODC de succursale ne pouvait pas être traité comme source autoritative</td>
-          <td>Faire partir toute la reprise depuis AZ vers le RODC</td>
+          <td><strong>Validation repository</strong></td>
+          <td>Le dépôt montrait environ <strong>280 GB libres sur 7 TB</strong>, soit un espace résiduel critique.</td>
+          <td>Le prochain cycle pouvait encore échouer malgré une reprise temporaire.</td>
+          <td>Traiter la correction comme transitoire et garder le dossier à suivre.</td>
         </tr>
         <tr>
-          <td><strong>SYSVOL</strong></td>
-          <td>SYSVOL / NETLOGON absents, SysvolReady = 0, DFSR en état 2</td>
-          <td>Le DC n'était pas encore pleinement fonctionnel pour l'authentification/GPO</td>
-          <td>Lancer une récupération DFSR non-authoritative sur le seul DC affecté</td>
+          <td><strong>Contexte PowerShell</strong></td>
+          <td>La cmdlet <strong>Get-VBRBackupRepository</strong> n’était pas disponible dans la session de script utilisée.</td>
+          <td>Le diagnostic ne devait pas dépendre uniquement de la console PowerShell Veeam.</td>
+          <td>Basculer sur une validation indirecte et sur la lecture du message exact.</td>
         </tr>
         <tr>
-          <td><strong>Validation DFSR</strong></td>
-          <td>Les événements 4114 puis 4614 ont été obtenus sur le DC distant</td>
-          <td>La procédure avançait, mais la publication complète n'était pas encore terminée</td>
-          <td>Passer en mode surveillance plutôt que multiplier les manipulations</td>
+          <td><strong>Action corrective</strong></td>
+          <td>La rétention a été ajustée de <strong>30 jours à 25 jours</strong>, puis le job a été relancé.</td>
+          <td>La consolidation a pu reprendre, avec un merge observé à <strong>7 %</strong>.</td>
+          <td>Surveiller la progression sans interrompre la tâche.</td>
         </tr>
         <tr>
-          <td><strong>Sortie de crise</strong></td>
-          <td>SYSVOL a fini par être publié, mais NETLOGON restait absent au dernier check</td>
-          <td>Le domaine avançait vers le rétablissement sans être encore totalement revenu à la normale</td>
-          <td>Laisser le billet en suivi et préparer une escalade/rebuild RODC si 4604 n'arrive pas</td>
+          <td><strong>Lecture finale</strong></td>
+          <td>La prochaine sauvegarde restait planifiée à <strong>21:00</strong> et la marge libre demeurait faible.</td>
+          <td>Le cas n’était pas totalement clos tant que le prochain cycle n’était pas validé.</td>
+          <td>Produire les livrables complets et recommander une revue capacité/rétention.</td>
         </tr>
       </tbody>
     </table>
@@ -1000,8 +1004,8 @@ footer {
 <section class="s-pad" id="pipeline">
   <div class="modules-header">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
-    <div class="s-title"><strong>10 étapes.</strong><br><em>Aucune brutalité.</em></div>
-    <p class="s-sub">Le cas démontre une vraie discipline N3/MSP : annuaire, DFSR, dépendances de rôle, livrables et gestion du risque en une seule trame.</p>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une cause racine. Une méthode démontrable.</em></div>
+    <p class="s-sub">Le cas montre comment l’agent Backup/DR applique les runbooks, les garde-fous MSP et la documentation officielle pour transformer un warning en démonstration premium de méthode.</p>
   </div>
 
   <div class="modules-grid">
@@ -1009,81 +1013,81 @@ footer {
       <div class="mod-n">ÉTAPE 01</div>
       <div class="mod-icon">◎</div>
       <div class="mod-name">Ingestion</div>
-      <div class="mod-sub">Lecture du billet NOC</div>
-      <div class="mod-desc">Le billet d'alerte AD est absorbé avec site, asset, symptôme, portée et criticité réelle.</div>
-      <div class="mod-agents">Signal brut → cas N3</div>
+      <div class="mod-sub">Billet monitoring</div>
+      <div class="mod-desc">Le cas démarre par une alerte Veeam sur un job quotidien en warning pour le site client.</div>
+      <div class="mod-agents">IT-BackupDRMaster · signal brut → cas structuré</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 02</div>
       <div class="mod-icon">◇</div>
-      <div class="mod-name">Lecture seule</div>
-      <div class="mod-sub">Avant tout geste</div>
-      <div class="mod-desc">Services AD, réplication, SYSVOL, secure channel, DNS, DFSR, événements et topologie sont vérifiés sans toucher au DC.</div>
-      <div class="mod-agents">Aucune supposition</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Lecture seule d’abord</div>
+      <div class="mod-desc">L’agent demande le message exact, la VM affectée et l’heure de la session avant toute action corrective.</div>
+      <div class="mod-agents">Aucun geste destructif</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 03</div>
       <div class="mod-icon">⌁</div>
       <div class="mod-name">Qualification</div>
-      <div class="mod-sub">RODC vs writable</div>
-      <div class="mod-desc">Le DC central sain est identifié comme source de vérité; le DC distant est traité comme membre à récupérer, pas comme référence.</div>
-      <div class="mod-agents">Architecture respectée</div>
+      <div class="mod-sub">Message exact</div>
+      <div class="mod-desc">Le texte <em>There is not enough space on the disk</em> confirme que le symptôme relève du stockage repository.</div>
+      <div class="mod-agents">Runbook Veeam · erreur → cause probable</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 04</div>
       <div class="mod-icon">□</div>
-      <div class="mod-name">Validation des risques</div>
-      <div class="mod-sub">Tombstone / lingering</div>
-      <div class="mod-desc">Les lingering objects sont testés en advisory mode sur toutes les partitions avant toute reprise AD réelle.</div>
-      <div class="mod-agents">Pas d'écriture aveugle</div>
+      <div class="mod-name">Validation dépôt</div>
+      <div class="mod-sub">Capacité critique</div>
+      <div class="mod-desc">Le dépôt est validé comme presque plein, avec environ 280 GB libres sur 7 TB.</div>
+      <div class="mod-agents">Seuil critique &lt; 10 %</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 05</div>
       <div class="mod-icon">△</div>
-      <div class="mod-name">Levier contrôlé</div>
-      <div class="mod-sub">AllowDivergent temporaire</div>
-      <div class="mod-desc">Le blocage 8614 est levé temporairement sur le DC central pour reprendre la réplication de façon encadrée.</div>
-      <div class="mod-agents">Remédiation ciblée</div>
+      <div class="mod-name">Contexte outil</div>
+      <div class="mod-sub">PowerShell Veeam</div>
+      <div class="mod-desc">La cmdlet repository n’étant pas chargée, l’agent contourne proprement la limite sans perdre le diagnostic.</div>
+      <div class="mod-agents">Méthode > dépendance outil</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 06</div>
       <div class="mod-icon">✦</div>
-      <div class="mod-name">Reprise AD</div>
-      <div class="mod-sub">Partition par partition</div>
-      <div class="mod-desc">Les 5 partitions sont relancées une à une, puis le flag temporaire est retiré dès que l'annuaire répond correctement.</div>
-      <div class="mod-agents">Rigueur d'exécution</div>
+      <div class="mod-name">Correction</div>
+      <div class="mod-sub">Rétention contrôlée</div>
+      <div class="mod-desc">La rétention est réduite de 30 à 25 jours afin de libérer de la place et relancer le traitement.</div>
+      <div class="mod-agents">Action documentée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 07</div>
       <div class="mod-icon">↺</div>
-      <div class="mod-name">Sauvegarde & DFSR</div>
-      <div class="mod-sub">SYSVOL non-authoritative</div>
-      <div class="mod-desc">Le SYSVOL local est sauvegardé puis la remise non-authoritative est déroulée sur le seul RODC touché.</div>
-      <div class="mod-agents">Méthode Microsoft</div>
+      <div class="mod-name">Merge</div>
+      <div class="mod-sub">Consolidation</div>
+      <div class="mod-desc">Le job repart et entre en merge, observé à 7 %, signe que la maintenance a bien repris.</div>
+      <div class="mod-agents">Ne pas interrompre</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 08</div>
       <div class="mod-icon">✉</div>
-      <div class="mod-name">Validation des phases</div>
-      <div class="mod-sub">4114 puis 4614</div>
-      <div class="mod-desc">Les événements attendus sont observés pour prouver que la procédure avance, même sans retour complet immédiat.</div>
-      <div class="mod-agents">Diagnostic prouvé</div>
+      <div class="mod-name">Suivi</div>
+      <div class="mod-sub">Cycle suivant</div>
+      <div class="mod-desc">Le dossier reste ouvert opérationnellement jusqu’au cycle planifié de 21:00 pour confirmer Success, Warning ou Failed.</div>
+      <div class="mod-agents">Surveillance ciblée</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 09</div>
       <div class="mod-icon">◆</div>
-      <div class="mod-name">Communication MSP</div>
-      <div class="mod-sub">Interne + client</div>
-      <div class="mod-desc">client inc.</div>
-      <div class="mod-agents">Multi-publics</div>
+      <div class="mod-name">Documentation</div>
+      <div class="mod-sub">CW complet</div>
+      <div class="mod-desc">Les livrables internes, client-safe et coordination sont produits dans le bon langage MSP.</div>
+      <div class="mod-agents">TEMPLATE_BUNDLE_CW_CLOSE</div>
     </div>
     <div class="mod-card">
       <div class="mod-n">ÉTAPE 10</div>
       <div class="mod-icon">◈</div>
-      <div class="mod-name">Capitalisation</div>
-      <div class="mod-sub">Cas de lancement</div>
-      <div class="mod-desc">L'incident devient une page premium démontrant méthode, profondeur et qualité de livraison du produit MSP.</div>
-      <div class="mod-agents">Support vente + démo</div>
+      <div class="mod-name">Démonstration</div>
+      <div class="mod-sub">Lancement produit</div>
+      <div class="mod-desc">Le cas devient une page premium qui montre la capacité de triage, de méthode et de livrables des agents MSP.</div>
+      <div class="mod-agents">Produit + opérations + vente</div>
     </div>
   </div>
 </section>
@@ -1091,81 +1095,81 @@ footer {
 <section class="arsenal s-pad" id="livrables">
   <div style="max-width:1160px;margin:0 auto 56px">
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
-    <div class="s-title">Ce que le cas<br><em>démontre vraiment.</em></div>
-    <p class="s-sub">Ce n'est pas juste un diagnostic AD. C'est une démonstration de discernement MSP, de séquence technique et de production documentaire complète.</p>
+    <div class="s-title">Ce que le cas<br><em>prouve vraiment.</em></div>
+    <p class="s-sub">La valeur ne réside pas seulement dans la relance du job. Elle réside dans le diagnostic défendable, le respect des garde-fous, la documentation complète et la capacité à transformer l’intervention en actif de lancement produit.</p>
   </div>
 
   <div class="arsenal-grid">
     <div class="arsenal-block">
       <div class="arsenal-n">01</div>
       <div class="arsenal-unit">Actions effectuées</div>
-      <div class="arsenal-desc">Lecture seule, validation du writable DC, advisory lingering objects, reprise AD par partition, récupération DFSR non-authoritative et surveillance post-remédiation.</div>
+      <div class="arsenal-desc">Lecture du message exact, qualification du repository, validation de capacité, ajustement de rétention, relance et suivi du merge.</div>
       <ul class="arsenal-list">
-        <li>Precheck AD/DC complet</li>
-        <li>Tests advisory mode</li>
-        <li>5 partitions répliquées</li>
-        <li>4114 puis 4614 obtenus</li>
-        <li>SYSVOL republié partiellement</li>
+        <li>Triage lecture seule</li>
+        <li>Erreur exacte documentée</li>
+        <li>Validation 280 GB / 7 TB</li>
+        <li>Rétention 30 → 25 jours</li>
+        <li>Relance et suivi à 21:00</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">02</div>
       <div class="arsenal-unit">Garde-fous</div>
-      <div class="arsenal-desc">Le cas prouve qu'un bon agent MSP sait autant éviter les mauvaises actions que proposer les bonnes.</div>
+      <div class="arsenal-desc">Le cas illustre une discipline MSP claire : une action à la fois, zéro invention, documentation avant conclusion et prudence sur la purge de restore points.</div>
       <ul class="arsenal-list">
-        <li>Lecture seule d'abord</li>
-        <li>1 DC à la fois</li>
-        <li>Pas de rebuild aveugle</li>
-        <li>Pas de reprise DFSR globale</li>
-        <li>Flag temporaire retiré après succès</li>
+        <li>Lecture seule avant correction</li>
+        <li>Message exact avant hypothèse</li>
+        <li>Pas d’action destructive aveugle</li>
+        <li>Suivi du merge sans interruption</li>
+        <li>Dossier laissé à suivre</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">03</div>
-      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
-      <div class="arsenal-desc">L'agent livre autant de valeur technique que de valeur documentaire et client-safe.</div>
+      <div class="arsenal-unit">Résultats techniques</div>
+      <div class="arsenal-desc">La reprise du traitement démontre que la correction a débloqué le flux, mais le dépôt reste encore trop serré pour considérer le risque éliminé durablement.</div>
       <ul class="arsenal-list">
-        <li>CW Note Interne</li>
-        <li>CW Discussion</li>
-        <li>Email client</li>
-        <li>client inc.</li>
-        <li>Page de cas web premium</li>
+        <li>Cause racine confirmée</li>
+        <li>Merge observé à 7 %</li>
+        <li>Cycle suivant identifié</li>
+        <li>Dépôt encore critique</li>
+        <li>Revue capacité recommandée</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">04</div>
-      <div class="arsenal-unit">État final</div>
-      <div class="arsenal-desc">Le domaine sort du blocage initial, mais la page montre aussi l'honnêteté opérationnelle : récupération avancée, pas résolution artificiellement embellie.</div>
+      <div class="arsenal-unit">Sorties prêtes</div>
+      <div class="arsenal-desc">Le produit fournit immédiatement la matière nécessaire aux opérations, au client, au coordonnateur et au site de lancement.</div>
       <ul class="arsenal-list">
-        <li>Réplication AD reprise</li>
-        <li>SYSVOL revenu côté partage</li>
-        <li>NETLOGON encore à confirmer</li>
-        <li>SysvolReady encore à 0 au dernier check</li>
-        <li>Suivi technique maintenu</li>
+        <li>Note interne CW</li>
+        <li>Discussion CW</li>
+        <li>Email client</li>
+        <li>client inc.</li>
+        <li>Mémo coordonnateur</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">05</div>
-      <div class="arsenal-unit">Démonstration produit</div>
-      <div class="arsenal-desc">Ce cas parle aux MSP matures : vraie profondeur N3, posture prudente, qualité de closeout et narration premium.</div>
+      <div class="arsenal-unit">Runbooks mobilisés</div>
+      <div class="arsenal-desc">Le cas s’appuie sur les runbooks Veeam et sur le bundle officiel de fermeture CW pour démontrer une méthode reproductible et vendable.</div>
       <ul class="arsenal-list">
-        <li>Crédible pour les ops</li>
-        <li>Lisible pour le marketing</li>
-        <li>Prêt pour le lancement</li>
-        <li>Montre le jugement</li>
-        <li>Montre les livrables</li>
+        <li>BUNDLE_KP_BackupDRMaster_V1</li>
+        <li>RUNBOOK__IT_VEEAM_OPERATIONS_V1</li>
+        <li>TEMPLATE_BUNDLE_CW_CLOSE</li>
+        <li>RUNBOOK__Backup_Configuration</li>
+        <li>Escalade capacité infrastructure</li>
       </ul>
     </div>
     <div class="arsenal-block">
       <div class="arsenal-n">06</div>
       <div class="arsenal-unit">Valeur business</div>
-      <div class="arsenal-desc">Le produit ne vend pas "une IA qui répond". Il vend une IA qui sait traiter un vrai billet MSP jusqu'aux livrables de clôture.</div>
+      <div class="arsenal-desc">Le cas montre qu’un agent MSP solide ne fournit pas seulement un diagnostic : il fournit une méthode lisible, défendable, documentée et réutilisable en démonstration produit.</div>
       <ul class="arsenal-list">
-        <li>Réduit le risque d'erreur</li>
-        <li>Accélère la décision N3</li>
-        <li>Améliore la traçabilité</li>
-        <li>Augmente la qualité perçue</li>
-        <li>Transforme un ticket en démonstration</li>
+        <li>Plus qu’une relance</li>
+        <li>Plus qu’un log brut</li>
+        <li>Convainc opérations + vente</li>
+        <li>Démonstration premium</li>
+        <li>Compatible lancement produit</li>
       </ul>
     </div>
   </div>
@@ -1176,9 +1180,8 @@ footer {
     <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
     <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
     <p class="s-sub">
-      Cette section montre la profondeur du produit : la même intervention produit une note interne technique,
-      une discussion client-safe, un email d'état et une notice de coordination.
-      Le contenu ci-dessous est anonymisé pour un usage public de lancement.
+      Cette section expose les livrables générés à partir du cas : une note interne complète, une discussion client-safe,
+      un email de suivi, un avis Teams, un mémo coordonnateur et la méthode/runbooks utilisés. Le contenu est anonymisé pour usage public.
     </p>
 
     <div class="doc-grid">
@@ -1190,69 +1193,63 @@ footer {
           </div>
           <div class="doc-copy">Interne · complet</div>
         </div>
-        <div class="doc-pre">Billet : #[1731222]
-Client : client inc.
-Site : Succursale client inc.
-Asset : Contrôleur de domaine en succursale (RODC)
-Type : Réplication Active Directory / SYSVOL / DFSR
-Statut : Suivi requis — récupération avancée, validation finale en attente
+        <div class="doc-pre">────────────────────────────────────────────────────────
+        VEEAM / BACKUP / ESPACE DISQUE / SUIVI
+────────────────────────────────────────────────────────
 
-Contexte
+BILLET: #000015
+CLIENT: Entreprise inc.
+DATE: 08-04-2025
+
+PRÉPARATION ET DÉCOUVERTE
 ---------
-Alerte reçue pour échec de réplication Active Directory sur le contrôleur de domaine de succursale.
-Le DC central Azure a été confirmé comme seul contrôleur de domaine writable du domaine.
+Réception et analyse du billet, consultation de la fiche client.
 
-Préparation et découverte
+RÉSUMÉ
 ---------
-Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+Alerte Veeam sur le job VEEAM-QUOTIDIEN-SITECLIENT pour le serveur APP-01.
+Erreur relevée : échec d’écriture causé par un manque d’espace disque sur le dépôt de sauvegarde.
+Validation subséquente de l’espace disponible : 280 GB libres sur 7 TB.
+La prochaine sauvegarde est planifiée à 21:00.
+Le dossier est laissé en suivi pour validation du prochain cycle.
 
-Vérifications effectuées
+TRAVAUX EFFECTUÉS
 ---------
-- Services critiques AD/DNS/KDC/Netlogon/W32Time validés
-- Repadmin /replsummary et /showrepl exécutés
-- Constat initial : réplication sortante bloquée avec erreur 8614
-- Dernière réplication réussie observée datant de 2023-12-04
-- SYSVOL / NETLOGON non publiés initialement
-- SysvolReady = 0
-- DFSR State = 2
-- Vérification advisory lingering objects sur les 5 partitions
-- Aucun lingering object remonté en advisory mode
+- Analyse du message d’erreur Veeam transmis dans le billet.
+- Identification de la cause probable comme étant un manque d’espace sur le repository.
+- Validation que le module PowerShell Veeam n’était pas disponible dans la session de script utilisée.
+- Vérification de l’espace disponible confirmant un dépôt très serré en capacité.
+- Documentation du changement de rétention effectué avant la reprise partielle du traitement.
+- Mise à jour du billet avec l’état actuel et la prochaine exécution planifiée.
 
-Actions réalisées
------------------
-- Activation temporaire du flag allowDivergent sur le DC writable sain
-- Reprise contrôlée de la réplication AD partition par partition
-- Retrait du flag allowDivergent après succès
-- Sauvegarde de C:\Windows\SYSVOL sur le RODC avant remédiation DFSR
-- Démarrage de la procédure non-authoritative SYSVOL sur le RODC :
-  - msDFSR-Enabled = FALSE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4114
-  - msDFSR-Enabled = TRUE
-  - réplication AD
-  - dfsrdiag pollad
-  - validation 4614
-- Vérifications réseau complémentaires depuis le DC central :
-  SMB, RPC, WinRM, RDP accessibles
-- PowerShell Remoting / WSMan vers le RODC resté non fonctionnel
+AVERTISSEMENTS OBSERVÉS
+---------
+- Le dépôt de sauvegarde demeure en état critique de capacité.
+- L’espace libre observé est insuffisant pour considérer le risque réglé de façon durable.
+- Le résultat final du job relancé n’a pas été confirmé au moment de la mise en pause du dossier.
 
-Résultat
---------
-- Réplication AD reprise avec succès sur les partitions d'annuaire
-- 4114 puis 4614 obtenus sur le SYSVOL du RODC
-- SYSVOL publié au dernier contrôle
-- NETLOGON encore absent au dernier contrôle
-- SysvolReady encore à 0
-- DFSR toujours en état 2 au dernier contrôle
+ÉVÉNEMENT OBSERVÉ APRÈS L’INTERVENTION
+---------
+- Une phase de merge a été observée après l’ajustement de la rétention.
+- Au dernier état connu, il reste 280 GB libres sur 7 TB.
+- Le prochain passage automatique est attendu à 21:00.
 
-Prochaines étapes
------------------
-- Poursuivre la surveillance jusqu'à 4604
-- Revalider NETLOGON, SysvolReady = 1, DFSR State = 4
-- Corriger séparément le mapping de sous-réseau / site
-- Si blocage persistant, préparer rebuild / re-promo contrôlé du RODC</div>
+CONSTAT TECHNIQUE
+---------
+- Cause primaire : espace disque insuffisant sur le dépôt Veeam.
+- Le message secondaire de session non démarrée est considéré comme une conséquence de l’échec principal.
+- Le dépôt reste sous le seuil critique recommandé par le runbook interne.
+
+STATUT
+---------
+À SUIVRE
+
+SUIVI RECOMMANDÉ
+---------
+- Vérifier le résultat du prochain job planifié à 21:00.
+- Confirmer l’espace libre après l’exécution.
+- Réévaluer la rétention et/ou la capacité du dépôt si l’espace ne remonte pas suffisamment.
+- Escalader infrastructure si la pression d’espace persiste ou si un nouveau warning/failed survient.</div>
       </div>
 
       <div class="doc-card">
@@ -1264,74 +1261,167 @@ Prochaines étapes
           <div class="doc-copy">Client-safe · facturable</div>
         </div>
         <div class="doc-pre">────────────────────────────────────────────────────────
-      Validation Active Directory — suivi en cours
+       Résolution problème de sauvegarde
 ────────────────────────────────────────────────────────
 
-BILLET : #[1731222]
-DATE : 2025-03-07
-TECHNICIEN : Agent NOC-07
+BILLET: #000015
+CLIENT: Entreprise inc.
+DATE: 08-04-2025
+TECHNICIEN: Agent NOC-13
 ---------
 
-PRÉPARATION ET DÉCOUVERTE :
+PRÉPARATION ET DÉCOUVERTE
 ---------
-• Prendre connaissance de la demande et consultation de la documentation de l'entreprise.
-• Connexion au RMM et analyse de l'état global et de la présence d'alerte.
+• Prendre connaissance de la demande et consultation de la documentation.
+• Accès au RMM et lecture initiale de l'état des systèmes supervisés.
 
-TRAVAUX EFFECTUÉS :
+RÉSUMÉ
 ---------
-• Validation approfondie de l'état du contrôleur de domaine concerné et analyse de la réplication de l'annuaire.
-• Reprise contrôlée de la synchronisation entre les composants Active Directory du domaine.
-• Vérification et relance de la synchronisation SYSVOL afin de rétablir progressivement les éléments nécessaires au fonctionnement complet du contrôleur de domaine.
-• Contrôles complémentaires de connectivité et de santé des services afin d'écarter une panne générale du serveur.
-• Suivi post-remédiation maintenu afin de confirmer le retour complet à la normale.
+• Analyse d’une alerte Veeam concernant une sauvegarde en avertissement.
+• Validation que le problème était lié à un espace insuffisant sur l’emplacement de sauvegarde.
+• Mise à jour de la rétention afin de permettre la poursuite du traitement de maintenance.
+• Confirmation qu’il reste actuellement 280 GB libres sur 7 TB.
+• La prochaine sauvegarde automatique est planifiée à 21:00.
 
-RÉSULTAT / ÉTAT ACTUEL :
+TRAVAUX EFFECTUÉS
 ---------
-• La réplication de l'annuaire a été rétablie.
-• Le contrôleur de domaine est de nouveau en progression normale sur la portion SYSVOL.
-• Une validation complémentaire demeure requise avant de confirmer la fin complète de l'intervention.
+• Vérification du message d’erreur retourné par la plateforme de sauvegarde.
+• Confirmation que l’alerte provenait d’un manque d’espace disponible sur le dépôt.
+• Mise à jour de la configuration de rétention pour aider à la consolidation des points existants.
+• Validation de l’espace résiduel disponible sur le stockage de sauvegarde.
+• Documentation du prochain passage planifié afin d’assurer un suivi ciblé.
 
-SUIVI :
+AVERTISSEMENTS OBSERVÉS
 ---------
-• Le billet demeure en suivi technique jusqu'à confirmation complète du retour à la normale.</div>
+• L’espace disponible demeure très limité sur le dépôt de sauvegarde.
+• Le risque de récurrence n’est pas entièrement éliminé à ce stade.
+
+ÉVÉNEMENT OBSERVÉ APRÈS L’INTERVENTION
+---------
+• Le traitement de sauvegarde a pu reprendre partiellement après l’ajustement effectué.
+• Un nouveau cycle automatique est attendu à 21:00 pour valider la stabilité.
+
+CONSTAT TECHNIQUE
+---------
+• L’incident est associé à une saturation du stockage de sauvegarde.
+• Une surveillance du prochain cycle demeure nécessaire pour confirmer le retour à la normale.
+
+STATUT
+---------
+• À SUIVRE
+
+SUIVI RECOMMANDÉ
+---------
+• Vérifier le résultat de la prochaine sauvegarde planifiée.
+• Confirmer l’espace disponible après exécution.
+• Planifier une révision de capacité si la marge libre demeure insuffisante.</div>
       </div>
 
-      <div class="doc-card full">
+      <div class="doc-card">
         <div class="doc-top">
           <div>
             <div class="doc-label">Livrable 03</div>
-            <div class="doc-title">Email client — état / suivi</div>
-          </div>
-          <div class="doc-copy">Externe · prêt à envoyer</div>
+            <div class="doc-title">Email client</div>
+          </div>client inc.<div class="doc-copy">Externe · suivi</div>
         </div>
-        <div class="doc-pre">Objet : Billet #[1731222] — Mise à jour sur la réplication Active Directory
+        <div class="doc-pre">Objet : Suivi de la sauvegarde Veeam — site client
 
-Bonjour,
+Bonjour nom du contact,
 
-Nous avons poursuivi l'analyse et la remise en état du contrôleur de domaine concerné par l'alerte de réplication.
+Nous avons analysé l’alerte liée à la sauvegarde Veeam de votre environnement au site client.
 
-Les validations effectuées confirment que la portion principale de la réplication Active Directory a été rétablie. Les mécanismes de synchronisation associés au partage SYSVOL ont également progressé et sont actuellement en cours de finalisation.
+Nos vérifications indiquent que l’avertissement provenait d’un espace disponible limité sur l’emplacement de sauvegarde. Un ajustement contrôlé de la rétention a été effectué afin de permettre la reprise du traitement, et une consolidation des données de sauvegarde a ensuite été observée.
 
-À cette étape, l'environnement est en amélioration et nous maintenons le suivi technique afin de confirmer le retour complet à la normale avant fermeture du billet.
+À l’heure actuelle, l’espace libre demeure toutefois serré, avec environ 280 GB disponibles sur 7 TB. La prochaine sauvegarde automatique est planifiée à 21:00 et devra être surveillée afin de confirmer le retour à la normale.
 
-Nous vous transmettrons une mise à jour dès que la validation finale sera complétée.
+Nous poursuivrons le suivi de ce dossier et nous vous tiendrons informé du résultat du prochain cycle.
 
-Cordialement,
-[Signature MSP]</div>
+Merci,
+Tech</div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 04</div>
+            <div class="doc-title">Avis Teams</div>
+          </div>
+          <div class="doc-copy">Coordination · opération</div>
+        </div>
+        <div class="doc-pre">Objet : ⚠️ Maintenance en cours – Sauvegarde Veeam (Ticket ##000015)
+Client : client inc.
+
+Intervention en cours sur la sauvegarde Veeam du site client et surveillance requise au prochain cycle planifié à 21:00.
+
+⏱️ Impact : risque d’avertissement ou d’échec de sauvegarde en raison d’un espace disponible limité sur le dépôt
+
+Merci.
+
+@NOC</div>
       </div>
 
       <div class="doc-card full">
         <div class="doc-top">
           <div>
-            <div class="doc-label">Livrable 04</div>
-            <div class="doc-title">Notice Teams</div>
+            <div class="doc-label">Livrable 05</div>
+            <div class="doc-title">Mémo coordonnateur</div>
           </div>
-          <div class="doc-copy">Coordination · opération</div>
+          <div class="doc-copy">Interne · coordination</div>
         </div>
-        <div class="doc-pre">🔧 Suivi technique en cours — Billet : #[1731222]
-Client : client inc.
-Tâche principale : récupération contrôlée de la réplication AD / SYSVOL sur contrôleur de domaine en succursale
-État : réplication AD reprise; SYSVOL en progression avancée; validation finale encore requise avant clôture</div>
+        <div class="doc-pre">Mémo coordonnateur — Billet ##000015 — Entreprise inc.
+
+Alerte Veeam sur le job VEEAM-QUOTIDIEN-SITECLIENT pour APP-01.
+Cause identifiée : manque d’espace sur le dépôt de sauvegarde.
+Une réduction de la rétention de 30 à 25 jours a été effectuée et le traitement a repris avec une phase de merge observée.
+État actuel : il reste environ 280 GB libres sur 7 TB, donc la capacité demeure critique.
+La prochaine sauvegarde est planifiée à 21:00.
+Le dossier reste à suivre afin de valider le résultat du prochain cycle et confirmer si l’espace disponible se stabilise.
+Point d’attention : prévoir une réévaluation de la capacité ou de la rétention si le prochain job génère encore un warning ou un échec.</div>
+      </div>
+
+      <div class="doc-card full">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 06</div>
+            <div class="doc-title">Méthode et runbooks utilisés</div>
+          </div>
+          <div class="doc-copy">Référence · agents</div>
+        </div>
+        <div class="doc-pre">Agents mobilisés
+---------
+- IT-BackupDRMaster : triage Veeam, diagnostic repository, séquencement des actions, recommandations et livrables.
+- IT-Commandare-Infra : cible d’escalade prévue si la capacité reste sous le seuil critique.
+- Chaîne de fermeture CW : gabarits officiels appliqués pour la documentation client et interne.
+
+Runbooks / références mobilisés
+---------
+1. BUNDLE_KP_BackupDRMaster_V1
+   - Utilisé pour la vérification quotidienne Veeam
+   - Utilisé pour associer "Insufficient space" à un problème de repository
+   - Utilisé pour rappeler les seuils d’alerte et de critique sur l’espace libre
+   - Utilisé pour l’escalade repository < 10 %
+
+2. RUNBOOK__IT_VEEAM_OPERATIONS_V1
+   - Utilisé pour la méthode de lecture du message exact dans le job
+   - Utilisé pour le diagnostic d’un job en warning/failed
+   - Utilisé pour relier l’erreur d’écriture au repository plein
+
+3. TEMPLATE_BUNDLE_CW_CLOSE
+   - Utilisé pour la structure des livrables CW
+   - Utilisé pour les phrases d’ouverture obligatoires
+   - Utilisé comme référence pour la note interne, la discussion, l’email et l’avis Teams
+
+4. RUNBOOK__Backup_Configuration
+   - Utilisé en soutien pour rappeler les points de validation de configuration et de capacité repository
+
+Méthode démontrée
+---------
+- Lecture seule d’abord
+- Une action à la fois
+- Confirmation de la cause avant correction
+- Correction temporaire documentée
+- Suivi du prochain cycle
+- Documentation complète orientée MSP et démonstration produit</div>
       </div>
     </div>
   </div>
@@ -1340,9 +1430,9 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <div class="quote-section">
   <div class="quote-mark">"</div>
   <p class="quote-text">
-    La vraie démonstration d'un bon agent MSP n'est pas de réciter une commande AD.
-    C'est de <strong>choisir le bon DC de référence</strong>, de respecter la séquence DFSR,
-    puis de transformer une récupération incomplète en <strong>communication propre, exploitable et facturable</strong>.
+    Le bon agent MSP n’est pas celui qui relance un job au hasard.
+    C’est celui qui <strong>lit le message exact</strong>, identifie la vraie couche en cause,
+    applique une correction défendable, puis <strong>laisse une traçabilité exploitable</strong> pour l’opération comme pour la vente.
   </p>
   <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
 </div>
@@ -1361,7 +1451,7 @@ Tâche principale : récupération contrôlée de la réplication AD / SYSVOL su
 <footer>
   <div class="footer-brand">EA<span>|</span><em>IA</em></div>
   <div class="footer-right">
-    MSP Intelligence IT — Cas réplication AD / SYSVOL sur RODC<br>
+    MSP Intelligence IT — Cas Veeam repository plein / espace insuffisant<br>
     © 2025 EAIA — Tous droits réservés
   </div>
 </footer>
