@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas de stabilité EDR sur serveur de fichiers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,0.15);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,0.56);--muted2:rgba(255,255,255,0.2);--border:rgba(200,149,42,0.18);--border2:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1}a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)}.nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 .strong{font-weight:600;color:var(--white)}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}.hero-sub strong{color:var(--white);font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.25s}.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,0.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:0.95;letter-spacing:-0.5px;margin-bottom:24px}
+.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background 0.2s}.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:var(--white);font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,0.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.doc-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background 0.25s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px}
+.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px;color:var(--white)}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}.case-table td strong{color:var(--white);font-weight:600}
+.doc-section{padding:96px 64px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative}.doc-card.full{grid-column:1 / -1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:0.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:0.95;margin-bottom:28px}
+.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)}
+.footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-label{animation:fadeUp 0.7s ease both}.hero-eyebrow{animation:fadeUp 0.7s 0.1s ease both}.hero h1{animation:fadeUp 0.7s 0.15s ease both}
+.hero-product-tag{animation:fadeUp 0.7s 0.2s ease both}.hero-sub{animation:fadeUp 0.7s 0.25s ease both}
+.hero-metrics{animation:fadeUp 0.7s 0.3s ease both}.hero-actions{animation:fadeUp 0.7s 0.35s ease both}
+@media(max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metric{border-bottom:1px solid var(--border);border-right:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+  <div class="hero-label"><div class="hero-label-line"></div><div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div></div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Un serveur<br>de <em>fichiers critique</em><br>transformé en <span class="strong">preuve d'analyse MSP.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · EDR · VSS · CAPI2 · RMM · SÉCURITÉ · CW · ESCALADE SOC</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite un incident serveur à fort risque : accès administratifs figés, RMM instable, hard reboot nécessaire, suspicion client envers une mise à jour de sécurité, puis analyse structurée des journaux <strong>Service Control Manager, VSS, CAPI2 et SentinelOne</strong>. Le résultat : un service rétabli, une hypothèse solide, une escalade sécurité documentée et des <strong>livrables complets</strong> prêts pour ConnectWise.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">P2</div><div class="hero-metric-l">Stabilité EDR</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">IOC confirmé</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">5.5%</div><div class="hero-metric-l">Libre sur data</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">6</div><div class="hero-metric-l">Événements clés</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4</div><div class="hero-metric-l">Livrables CW/SOC</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · FILE-01 · EDR/SentinelOne · VSS/System Writer</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">SentinelOne</div>
+    <div class="firm-product active">ThreatLocker</div>
+    <div class="firm-product active">VSS/CAPI2</div>
+    <div class="firm-product active">RMM</div>
+    <div class="firm-product active">CW T2</div>
+    <div class="firm-product active">CW T3</div>
+  </div>
+</div>
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>EDR STABILITY</span> · SENTINELONE UPGRADE · DRIVER LOAD FAILURE · VSS WRITER TIMEOUT · <span>LECTURE SEULE</span> · MICRO-DIAGNOSTIC · SERVICE CONTROL MANAGER · CAPI2 513 · <span>NO IOC CONFIRMED</span> · THREATLOCKER · RMM TEST · CW DISCUSSION STAR · <span>IT-SECURITYMASTER BRIEF</span> · VENDOR ESCALATION · SERVER STORAGE · <span>EDR STABILITY</span> · SENTINELONE UPGRADE · DRIVER LOAD FAILURE · VSS WRITER TIMEOUT · <span>LECTURE SEULE</span> · MICRO-DIAGNOSTIC · SERVICE CONTROL MANAGER · CAPI2 513 · <span>NO IOC CONFIRMED</span> · THREATLOCKER · RMM TEST · CW DISCUSSION STAR · <span>IT-SECURITYMASTER BRIEF</span> · VENDOR ESCALATION · SERVER STORAGE ·
+  </div>
+</div>
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Un serveur vivant,<br>mais impossible<br><em>à administrer.</em></div>
+      <p class="s-sub" style="margin-bottom:24px">Le client signalait un serveur de fichiers critique où les partages réseau continuaient de fonctionner, mais où les accès d'administration étaient gelés : RMM, RDP, PowerShell distant, console locale et interaction hors bande.</p>
+      <p class="s-sub">L'agent a adopté une posture plus solide : <strong>rétablir le service sans surconclure</strong>, distinguer corrélation et causalité, éviter les exclusions larges, puis construire une preuve technique exploitable par l'équipe sécurité et le fournisseur EDR.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>Les accès admin étaient figés</strong> — mais les partages demeuraient accessibles, indiquant un gel partiel plutôt qu'une panne complète.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le client suspectait SentinelOne</strong> — avec un historique d'incidents similaires après mise à jour de l'agent.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Les scripts lourds dégradaient l'expérience RMM</strong> — l'agent a basculé vers des micro-collectes ciblées et non interactives.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>La tentation d'exclure trop large était élevée</strong> — l'agent a maintenu le principe d'exclusions minimales, ciblées et approuvées.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>La clôture devait rassurer sans inventer</strong> — service rétabli, compromission non confirmée, cause racine encore à valider.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · EDR STABILITY</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">CLIENT / RMM / SUPPORT</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">ACCES ADMIN FIGES · PARTAGES OK</span></div>
+          <div class="t-line"><span class="t-gold">PÉRIMÈTRE :</span> <span class="t-white">SERVEUR STOCKAGE · WINDOWS STORAGE SERVER 2016</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">DESACTIVER EDR OU EXCLURE TROP LARGE</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Volet 1 : rétablissement du service après hard reboot.</div>
+          <div class="t-line t-silver">Volet 2 : preuve technique EDR/VSS à consolider.</div>
+          <div class="t-line t-silver">Volet 3 : escalade sécurité sans accusation hâtive.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Services critiques revenus en ligne</span></div>
+          <div class="t-line"><span class="t-green">✓ Test RMM léger fonctionnel</span></div>
+          <div class="t-line"><span class="t-green">✓ Séquence SentinelOne/VSS isolée</span></div>
+          <div class="t-line"><span class="t-red">✗ Causalité initiale non prouvée</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">SERVICE RÉTABLI + ESCALADE SÉCURITÉ STRUCTURÉE</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Une analyse qui sépare</strong><br>l'incident <em>opérationnel</em> de l'hypothèse <em>sécurité.</em></div>
+    <p class="s-sub">Le système ne s'est pas arrêté à "SentinelOne a causé le problème". Il a documenté une corrélation forte, refusé de conclure à une compromission, identifié les composants Windows impactés, puis produit une escalade que le SOC ou le fournisseur peut réellement traiter.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Accès administratif</strong></td><td>RMM, RDP, WinRM et console interactive non exploitables avant intervention</td><td>Impossible de diagnostiquer par les canaux standards</td><td>Hard reboot en dernier recours, puis post-check immédiat</td></tr>
+        <tr><td><strong>Disponibilité utilisateur</strong></td><td>Les partages réseau demeuraient accessibles avant le redémarrage</td><td>Le gel touchait surtout la couche admin/interactive</td><td>Communiquer un impact contrôlé</td></tr>
+        <tr><td><strong>SentinelOne</strong></td><td>Upgrade agent en fenêtre, driver Device Control non chargé, composant kernel SentinelObliterator installé post-reboot</td><td>Corrélation technique forte avec une opération agent/driver</td><td>Escalade sécurité/vendor plutôt qu'exclusion immédiate</td></tr>
+        <tr><td><strong>VSS / System Writer</strong></td><td>Erreurs CAPI2 513 et VSS 8229 dans les minutes suivant la séquence SentinelOne</td><td>Interaction possible entre protection endpoint, VSS et opérations de remplacement driver</td><td>Orienter l'analyse vers EDR/VSS/interopérabilité</td></tr>
+        <tr><td><strong>RMM</strong></td><td>Les scripts lourds donnent une fenêtre grise; un test minimal retourne correctement</td><td>La collecte doit rester ciblée pour ne pas aggraver l'instabilité</td><td>Micro-diagnostic non interactif</td></tr>
+        <tr><td><strong>Stockage</strong></td><td>Volume de données à environ 5.5 % libre</td><td>Facteur aggravant pour scan, VSS, DFSR, backup et performance</td><td>Créer un suivi capacité séparé</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Service rétabli, preuve conservée, escalade propre.</em></div>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Billet client P2</div><div class="mod-desc">Le signal décrit un FILE-01 impossible à administrer, avec suspicion client envers une mise à jour EDR.</div><div class="mod-agents">Plainte brute → cas structuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Triage</div><div class="mod-sub">Impact réel</div><div class="mod-desc">L'agent distingue les partages encore disponibles des interfaces admin/RMM figées.</div><div class="mod-agents">P2 · pas P1 total</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Garde-fous</div><div class="mod-sub">Pas d'action large</div><div class="mod-desc">Aucune désactivation EDR permanente, aucune exclusion volume, aucune conclusion d'infection.</div><div class="mod-agents">Sécurité + méthode</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Rétablissement</div><div class="mod-sub">Hard reboot</div><div class="mod-desc">Le reboot forcé est documenté comme dernier recours et suivi d'un post-check précis.</div><div class="mod-agents">Service d'abord</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Micro-tests</div><div class="mod-sub">RMM léger</div><div class="mod-desc">Le script lourd est abandonné. L'agent réduit la collecte à des tests courts, ciblés et non intrusifs.</div><div class="mod-agents">Adaptation terrain</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">SCM</div><div class="mod-sub">Services critiques</div><div class="mod-desc">Le journal confirme le retour de WinRM, ScreenConnect, ThreatLocker, Defender, DFSR, LanmanServer et Sentinel Agent.</div><div class="mod-agents">Post-check probant</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Séquence EDR</div><div class="mod-sub">Drivers</div><div class="mod-desc">SentinelDeviceControl ne charge pas au boot; SentinelObliterator est installé quelques minutes plus tard.</div><div class="mod-agents">Piste technique solide</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">VSS/CAPI2</div><div class="mod-sub">System Writer</div><div class="mod-desc">Les erreurs CAPI2 et le timeout VSS sont corrélés temporellement à la phase post-upgrade.</div><div class="mod-agents">Interopérabilité</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Escalade</div><div class="mod-sub">IT-SecurityMaster</div><div class="mod-desc">L'agent produit un brief prêt à transmettre : version agent, timeline, questions vendor, exclusions à vérifier.</div><div class="mod-agents">SOC-ready</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Clôture</div><div class="mod-sub">T2 + T3</div><div class="mod-desc">Le cas est clôturé en Discussion STAR client-safe et Note Interne technique, sans secrets ni surdiagnostic.</div><div class="mod-agents">CW prêt à coller</div></div>
+  </div>
+</section>
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>produit vraiment.</em></div>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Triage P2, notice Teams, post-check, micro-diagnostic RMM, analyse SCM, analyse Application et préparation d'escalade sécurité.</div><ul class="arsenal-list"><li>Service restauré</li><li>RMM léger validé</li><li>SCM analysé</li><li>VSS/CAPI2 corrélé</li><li>Chronologie consolidée</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas montre une discipline forte : lecture seule d'abord, pas de désactivation EDR, pas d'exclusion large, pas de causalité inventée.</div><ul class="arsenal-list"><li>Aucune exclusion large</li><li>Aucune désactivation S1</li><li>Aucune conclusion infection</li><li>Une action à la fois</li><li>Escalade justifiée</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Résultats techniques</div><div class="arsenal-desc">Les services critiques reviennent en ligne; la séquence EDR/VSS est suffisamment documentée pour une analyse vendor.</div><ul class="arsenal-list"><li>Sentinel Agent Running</li><li>ThreatLocker Running</li><li>ScreenConnect Running</li><li>WinRM Running</li><li>DFSR/LanmanServer Running</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">Hypothèse qualifiée</div><div class="arsenal-desc">L'agent sait dire "corrélation forte" sans dire "cause prouvée" : c'est précisément ce qui rend l'escalade crédible.</div><ul class="arsenal-list"><li>Upgrade S1 en fenêtre</li><li>Driver non chargé</li><li>Kernel component installé</li><li>CAPI2/VSS ensuite</li><li>Causalité à confirmer</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Sorties prêtes à l'emploi</div><div class="arsenal-desc">Le produit livre la matière exacte pour ConnectWise, SOC, vendor, client et coordination interne.</div><ul class="arsenal-list"><li>Discussion CW T2</li><li>Note Interne CW T3</li><li>Brief IT-SecurityMaster</li><li>Escalade vendor/SOC</li><li>Message client-safe</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Le cas démontre un agent MSP crédible : il rassure, documente, protège la posture sécurité et permet une continuité opérationnelle.</div><ul class="arsenal-list"><li>Rassurance client</li><li>Qualité d'escalade</li><li>Réduction du bruit</li><li>Réutilisable en démo</li><li>Démonstration premium</li></ul></div>
+  </div>
+</section>
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">Le bon agent MSP ne désactive pas une protection parce qu'elle est soupçonnée. Il <strong>rétablit le service</strong>, préserve les preuves, distingue corrélation et causalité, puis <strong>donne au SOC et au fournisseur</strong> une chronologie exploitable.</p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit.</p>
+  <a href="mailto:eaia.eaai@gmail.com" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">MSP Intelligence IT — Cas de stabilité EDR sur serveur de fichiers<br>© 2026 EAIA — Tous droits réservés</div>
+</footer>
+</body>
+</html>

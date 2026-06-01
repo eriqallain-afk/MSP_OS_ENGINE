@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas de validation de pending reboot sur contrôleur de domaine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,0.15);--gold-line:rgba(200,149,42,0.3);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,0.56);--muted2:rgba(255,255,255,0.2);--border:rgba(200,149,42,0.18);--border2:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1}a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)}.nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,0.05)}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 .strong{font-weight:600;color:var(--white)}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}
+.hero-sub strong{color:var(--white);font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.25s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,0.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:0.95;letter-spacing:-0.5px;margin-bottom:24px}
+.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background 0.2s}
+.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:var(--white);font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}
+.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,0.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.table-wrap,.deliver-wrap,.results-wrap,.cta-wrap,.doc-wrap,.flow-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background 0.25s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px}
+.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px;color:var(--white)}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.case-table td strong{color:var(--white);font-weight:600}
+.doc-section{padding:96px 64px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative}
+.doc-card.full{grid-column:1/-1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:0.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none}
+.cta-orb::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(200,149,42,0.04)}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:0.95;margin-bottom:28px}
+.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)}
+.footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-label{animation:fadeUp 0.7s ease both}.hero-eyebrow{animation:fadeUp 0.7s 0.1s ease both}
+.hero h1{animation:fadeUp 0.7s 0.15s ease both}.hero-product-tag{animation:fadeUp 0.7s 0.2s ease both}
+.hero-sub{animation:fadeUp 0.7s 0.25s ease both}.hero-metrics{animation:fadeUp 0.7s 0.3s ease both}.hero-actions{animation:fadeUp 0.7s 0.35s ease both}
+@media(max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metric{border-bottom:1px solid var(--border);border-right:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div><div class="hero-orb-glow"></div>
+  <div class="hero-label"><div class="hero-label-line"></div><div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div></div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Une alerte<br>de <em>pending reboot</em><br>devenue <span class="strong">preuve de rigueur MSP.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · WINDOWS UPDATE · DOMAIN CONTROLLER · GO / NO-GO · CW · CLIENT-OPERATED REBOOT</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite une alerte de <strong>redémarrage en attente</strong> sur un contrôleur de domaine : confirmation locale des drapeaux système, validation des services AD, détection des bloquants avant redémarrage, puis génération des <strong>livrables complets</strong> pour ConnectWise et communication client.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">DC analysé</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">3</div><div class="hero-metric-l">Flags confirmés</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">6</div><div class="hero-metric-l">Services AD validés</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Bloquant détecté</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">NO-GO</div><div class="hero-metric-l">Puis GO conditionnel</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · DC-01 · Windows Update · validation pré-redémarrage</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">AD DS</div>
+    <div class="firm-product active">Windows Update</div>
+    <div class="firm-product active">GO / NO-GO</div>
+    <div class="firm-product active">CW Discussion</div>
+    <div class="firm-product active">CW Note</div>
+    <div class="firm-product active">Email Client</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>PENDING REBOOT</span> · WINDOWS UPDATE · DOMAIN CONTROLLER · <span>LECTURE SEULE</span> · RUNBOOK · VALIDATION DC · <span>CBS</span> · WU · PFR · GO / NO-GO · <span>CW DISCUSSION</span> · CW NOTE · EMAIL CLIENT · <span>POST-REBOOT CHECKLIST</span> · SESSION ACTIVE · SERVICES AD · <span>PENDING REBOOT</span> · WINDOWS UPDATE · DOMAIN CONTROLLER · <span>LECTURE SEULE</span> · RUNBOOK · VALIDATION DC · <span>CBS</span> · WU · PFR · GO / NO-GO · <span>CW DISCUSSION</span> · CW NOTE · EMAIL CLIENT · <span>POST-REBOOT CHECKLIST</span> · SESSION ACTIVE · SERVICES AD ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Une alerte simple,<br>mais un risque<br><em>d'erreur critique.</em></div>
+      <p class="s-sub" style="margin-bottom:24px">Le signal initial semblait banal : un <strong>pending reboot Windows Update</strong>. Pourtant, l'alerte visait un <strong>contrôleur de domaine</strong>, et le drapeau n'apparaissait pas clairement dans le RMM utilisé par le technicien.</p>
+      <p class="s-sub">L'intérêt démontré par l'agent n'est pas le redémarrage lui-même. Il réside dans la méthode : <strong>lecture seule d'abord</strong>, confirmation des vraies sources système, validation de l'état Active Directory avant toute action, identification des <strong>bloquants opérationnels</strong>, puis formulation d'un <strong>GO / NO-GO défendable</strong> avec tâches post-redémarrage.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>L'alerte NOC était vraie</strong> — mais le RMM ne montrait pas le même signal, ce qui créait un doute opérationnel.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le serveur ciblé était un DC</strong> — donc impossible d'appliquer un redémarrage "standard" sans validation Active Directory.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Trois drapeaux système distincts</strong> confirmaient le pending reboot, ce qui éliminait l'hypothèse de faux positif.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Tous les rôles FSMO étaient portés localement</strong> — le niveau d'attention devait être supérieur à un serveur membre.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>Une session administrative active restait ouverte</strong> — ce qui transformait la décision en <strong>NO-GO immédiat</strong> malgré un état technique sain.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · PENDING REBOOT ON DOMAIN CONTROLLER</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// SIGNAL BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">NOC / SCRIPT MONITOR</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">WINDOWS UPDATE PENDING REBOOT</span></div>
+          <div class="t-line"><span class="t-gold">ACTIF CIBLÉ :</span> <span class="t-white">DC-01 · SITE CLIENT</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">REBOOT PRÉMATURÉ SUR CONTRÔLEUR DE DOMAINE</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Flag local réel confirmé.</div>
+          <div class="t-line t-silver">Écart de lecture entre monitor et RMM.</div>
+          <div class="t-line t-silver">Décision basée sur le système, pas sur l'interface.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Services AD critiques validés</span></div>
+          <div class="t-line"><span class="t-green">✓ SYSVOL / NETLOGON présents</span></div>
+          <div class="t-line"><span class="t-green">✓ Aucun backup actif détecté</span></div>
+          <div class="t-line"><span class="t-red">✗ Session administrative active</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">NO-GO IMMÉDIAT · GO CONDITIONNEL APRÈS VALIDATION CLIENT</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Une validation qui distingue</strong><br>l'<em>état système réel</em> de l'<em>affichage RMM.</em></div>
+    <p class="s-sub">Le système ne se contente pas de relayer l'alerte. Il la confirme sur le serveur lui-même, mesure le risque spécifique au rôle DC, isole le vrai bloquant opérationnel, puis prépare une sortie exploitable pour le technicien et pour le client.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Écart monitor / RMM</strong></td><td>L'alerte NOC signalait un pending reboot alors que le RMM ne l'exposait pas clairement</td><td>Risque de considérer l'alerte comme un faux positif</td><td>Valider localement sur le serveur</td></tr>
+        <tr><td><strong>Drapeaux locaux</strong></td><td>CBS_RebootPending=True, WU_RebootRequired=True, PendingFileRenameOperations=True</td><td>Le redémarrage en attente est confirmé par plusieurs sources système</td><td>Classer l'alerte comme réelle</td></tr>
+        <tr><td><strong>Rôle serveur</strong></td><td>DC-01 est contrôleur de domaine et porte tous les rôles FSMO</td><td>Le niveau de prudence est plus élevé qu'un serveur membre</td><td>Appliquer le runbook DC et exiger un pré-check complet</td></tr>
+        <tr><td><strong>État AD critique</strong></td><td>NTDS, DNS, Netlogon, KDC, W32Time et DFSR sont opérationnels</td><td>Le DC est sain au moment de la validation</td><td>Le redémarrage reste techniquement envisageable</td></tr>
+        <tr><td><strong>Validation domaine</strong></td><td>SYSVOL et NETLOGON présents, dcdiag /q sans erreur, réplication sans échec apparent</td><td>Aucun indicateur de panne AD immédiate avant redémarrage</td><td>Préparer une décision GO / NO-GO structurée</td></tr>
+        <tr><td><strong>Blocage opérationnel</strong></td><td>Une session console active est encore ouverte sur DC-01</td><td>Le redémarrage peut interrompre une activité administrative</td><td>NO-GO immédiat tant que la session n'est pas validée / fermée</td></tr>
+        <tr><td><strong>Responsabilité client</strong></td><td>Le client effectue lui-même les redémarrages de ses serveurs</td><td>La sortie attendue n'est pas une remédiation mais une décision défendable</td><td>Fournir GO / NO-GO + checklist post-reboot</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Un seul serveur. Zéro improvisation.</em></div>
+    <p class="s-sub">Le cas démontre une capacité clé du produit : transformer une alerte simple en décision MSP propre, justifiée et documentée.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Billet NOC / RMM</div><div class="mod-desc">Le cas démarre par une alerte de pending reboot générée par un script monitor NOC.</div><div class="mod-agents">Signal brut → cas structuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Chargement</div><div class="mod-sub">Runbook auto</div><div class="mod-desc">L'agent charge le runbook pending reboot et la validation DC pre/post associée.</div><div class="mod-agents">Procédure adaptée au rôle</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Lecture seule</div><div class="mod-sub">Aucune remédiation</div><div class="mod-desc">Les drapeaux locaux sont validés sans reboot, sans suppression de clé et sans action intrusive.</div><div class="mod-agents">Read first</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Pre-check DC</div><div class="mod-sub">État domaine</div><div class="mod-desc">L'agent valide services AD, SYSVOL, NETLOGON, dcdiag, réplication et événements récents.</div><div class="mod-agents">Validation rôle critique</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Contexte métier</div><div class="mod-sub">Qui redémarre ?</div><div class="mod-desc">Le client est identifié comme responsable du redémarrage final, ce qui change le type de sortie attendue.</div><div class="mod-agents">Décision plutôt qu'exécution</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Blocants</div><div class="mod-sub">GO / NO-GO</div><div class="mod-desc">Une session administrative active est détectée et devient le blocant principal avant redémarrage.</div><div class="mod-agents">Risque opérationnel identifié</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Décision</div><div class="mod-sub">NO-GO immédiat</div><div class="mod-desc">Le système déclare NO-GO tant que la session n'est pas validée ou fermée par le client.</div><div class="mod-agents">Décision défendable</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">GO conditionnel</div><div class="mod-sub">Fenêtre approuvée</div><div class="mod-desc">Le cas bascule en GO uniquement après validation de la fenêtre et absence d'impact de la session active.</div><div class="mod-agents">Condition d'exécution claire</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Livrables</div><div class="mod-sub">CW + client</div><div class="mod-desc">4 sorties générées : CW Discussion, CW Note Interne, Email Client, Checklist post-reboot.</div><div class="mod-agents">Sorties prêtes à coller</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Checklist finale</div><div class="mod-sub">Post-reboot</div><div class="mod-desc">L'agent fournit les validations exactes à exiger après redémarrage pour confirmer la disparition du pending reboot.</div><div class="mod-agents">Post-check structuré</div></div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>produit vraiment.</em></div>
+    <p class="s-sub">Ici, la valeur ne réside pas dans un script de reboot. Elle réside dans la capacité à transformer une alerte ambiguë en décision opérationnelle claire, traçable et client-safe.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Validation locale des drapeaux de redémarrage, pré-check DC, vérification des services AD et qualification du blocant réel.</div><ul class="arsenal-list"><li>Lecture seule d'abord</li><li>Validation CBS / WU / PFR</li><li>dcdiag /q relu</li><li>FSMO contrôlés</li><li>Sessions utilisateur vérifiées</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas illustre une discipline MSP forte : un DC à la fois, aucune remédiation prématurée, pas de confusion entre état technique et affichage outil.</div><ul class="arsenal-list"><li>Pas de reboot automatique</li><li>Validation DC obligatoire</li><li>Aucune suppression de clés</li><li>Pas de snapshot DC</li><li>Client owner du reboot respecté</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Résultats techniques</div><div class="arsenal-desc">Le pending reboot est confirmé, l'état Active Directory est validé sain avant redémarrage, et le blocant véritable est identifié côté session active.</div><ul class="arsenal-list"><li>3 flags actifs confirmés</li><li>6 services AD OK</li><li>SYSVOL / NETLOGON présents</li><li>FSMO sur DC-01</li><li>Aucun backup actif</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">Effets observables</div><div class="arsenal-desc">Le technicien n'a plus à interpréter un RMM contradictoire : il obtient une lecture claire du serveur et une décision immédiatement exploitable.</div><ul class="arsenal-list"><li>Doute levé</li><li>Décision argumentée</li><li>Risque de reboot réduit</li><li>Client mieux informé</li><li>Post-check préparé</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Sorties prêtes à l'emploi</div><div class="arsenal-desc">Le produit livre de la matière immédiatement exploitable pour les opérations, la relation client et la clôture du billet.</div><ul class="arsenal-list"><li>CW Discussion</li><li>CW Note Interne</li><li>Email Client</li><li>Checklist post-reboot</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Le cas montre qu'un agent MSP crédible ne "pousse" pas une action. Il produit une méthode, un niveau de preuve et un livrable de qualité premium.</div><ul class="arsenal-list"><li>Plus qu'un diagnostic</li><li>Plus qu'un script</li><li>Marketing + opérations</li><li>Démonstration réutilisable</li><li>Compatible site de lancement</li></ul></div>
+  </div>
+</section>
+
+<section class="doc-section">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <p class="s-sub">Cette section expose les livrables générés à partir du cas : une discussion CW client-safe, une note interne technique complète, un courriel client et une checklist post-redémarrage.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Discussion</div></div><div class="doc-copy">Client-safe · facturable</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────────────────
+      Validation — redémarrage en attente
+────────────────────────────────────────────────────────────
+
+BILLET : #000010
+DATE : 08-02-2024
+TECHNICIEN : Agent NOC-06
+----------
+
+INITIALISATION DE L'INTERVENTION :
+----------
+• Lecture de la demande et revue de la fiche client.
+• Revue du tableau de bord RMM et analyse des équipements signalés.
+
+TRAVAUX EFFECTUÉS :
+----------
+• Validation de l'alerte de redémarrage en attente directement sur le contrôleur de domaine
+• Vérification de l'état des services critiques liés à l'authentification, au DNS et à la réplication
+• Vérification de l'état général avant redémarrage, incluant les journaux récents et l'absence de sauvegarde active
+• Identification d'une session administrative encore ouverte au moment de la validation
+• Transmission au client des conditions de type GO / NO-GO avant redémarrage et des vérifications à effectuer après redémarrage
+
+RÉSULTAT :
+----------
+• Redémarrage en attente confirmé sur le serveur
+• État des services critiques jugé sain au moment de la validation
+• Redémarrage non recommandé immédiatement tant que la session active n'est pas validée / fermée par le client
+
+RECOMMANDATION :
+----------
+• Faire effectuer le redémarrage par le client dans une fenêtre approuvée, puis confirmer les validations post-redémarrage</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Note Interne</div></div><div class="doc-copy">Interne · complet</div></div>
+        <div class="doc-pre">╔════════════════════════════════════════════════════════════╗
+INTERVENTION TECHNIQUE — VALIDATION PENDING REBOOT
+╚════════════════════════════════════════════════════════════╝
+
+Date         : 08-02-2024 · Technicien : Agent NOC-06
+Client       : client inc. · Billet CW : #000010
+Équipements  : DC-01 · Type : Audit
+
+CONTEXTE : Alerte NOC pour redémarrage Windows en attente sur le DC du site client. Le client effectue lui-même les redémarrages.
+
+DIAGNOSTIC :
+CBS_RebootPending=True, WU_RebootRequired=True, PendingFileRenameOperations=True, CCM_RebootPending=False.
+Services critiques : NTDS, DNS, Netlogon, KDC, W32Time, DFSR — opérationnels.
+SYSVOL et NETLOGON présents. Tous les rôles FSMO sur DC-01. dcdiag /q sans erreur.
+Aucun backup en cours. Aucun événement Error/Critical récent.
+Session console active présente sur le serveur.
+
+ACTIONS :
+1. Validation locale des flags de pending reboot — Confirmé
+2. Vérification services critiques AD — Running
+3. Vérification santé AD avant redémarrage — dcdiag /q sans erreur
+4. Vérification bloquants — session active détectée
+
+RÉSULTAT : À SUIVRE
+
+GO / NO-GO :
+- NO-GO immédiat tant que la session active n'est pas validée / fermée par le client
+- GO conditionnel lorsque le client confirme la fenêtre et l'absence d'impact de la session active
+
+Tâches post-redémarrage :
+- Vérifier LastBoot / Uptime
+- Vérifier NTDS, DNS, Netlogon, KDC, W32Time, DFSR
+- Vérifier SYSVOL et NETLOGON
+- Exécuter repadmin /replsummary
+- Exécuter dcdiag /q
+- Revalider les flags de pending reboot
+
+Temps total : 0h45m
+╚════════════════════════════════════════════════════════════╝</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Email Client</div></div><div class="doc-copy">Client · clair</div></div>
+        <div class="doc-pre">Objet : Alerte monitoring traitée — redémarrage en attente — Billet ##000010
+
+Bonjour nom du contact,
+
+Suite à une alerte reçue par notre département de surveillance, nous avons validé qu'un redémarrage est actuellement en attente sur un de vos contrôleurs de domaine. Cette validation a été effectuée directement sur le système concerné, afin de confirmer que l'alerte était réelle.
+
+L'état général observé avant redémarrage est bon : les services critiques liés à l'authentification et au DNS sont opérationnels, aucune sauvegarde active n'a été détectée et aucun événement critique récent n'a été relevé. En revanche, une session administrative était toujours ouverte au moment de la validation.
+
+Statut actuel : NO-GO immédiat tant que cette session active n'est pas confirmée ou fermée. Le redémarrage devient GO dès que votre équipe confirme la fenêtre d'intervention et l'absence d'impact de cette session ouverte.
+
+Après le redémarrage, nous recommandons de confirmer : état des services critiques, présence des partages de domaine, validation de la réplication, contrôle de santé du DC et confirmation que l'indicateur de redémarrage en attente a bien disparu.
+
+Cordialement,
+Tech — Administrateur système</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Checklist post-redémarrage</div></div><div class="doc-copy">Opération · validation</div></div>
+        <div class="doc-pre">POST-REBOOT — CONTRÔLE DEMANDÉ AU CLIENT / TECHNICIEN
+
+Serveur : DC-01 · Client : client inc. · Billet : #000010
+
+Validation attendue après redémarrage :
+- LastBoot récent et uptime revenu à une valeur faible
+- NTDS, DNS, Netlogon, KDC, W32Time et DFSR en état Running
+- SYSVOL et NETLOGON toujours présents
+- repadmin /replsummary conforme
+- dcdiag /q sans erreur
+- Aucun événement Error/Critical récent dans Directory Service, DNS Server et System
+- Disparition des flags CBS / Windows Update / PendingFileRenameOperations
+
+Critère de succès : Le serveur revient en ligne avec un état Active Directory sain et sans redémarrage en attente persistant.
+Critère d'escalade : Si le flag CBS demeure après redémarrage confirmé, ou si un service critique ne revient pas correctement, une nouvelle investigation doit être ouverte.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">Le bon agent MSP n'est pas celui qui redémarre un serveur dès la première alerte. C'est celui qui <strong>prouve la réalité du signal</strong>, mesure le risque spécifique au rôle, puis <strong>produit une décision GO / NO-GO</strong> que l'équipe technique et le client peuvent défendre.</p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.</p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas de validation de pending reboot sur contrôleur de domaine<br>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>
