@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas d'alerte NTFS corrélée à la sauvegarde</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,0.15);--gold-line:rgba(200,149,42,0.3);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,0.56);--muted2:rgba(255,255,255,0.2);--border:rgba(200,149,42,0.18);--border2:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1}a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)}.nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,0.05)}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 .strong{font-weight:600;color:var(--white)}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}
+.hero-sub strong{color:var(--white);font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.25s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,0.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:0.95;letter-spacing:-0.5px;margin-bottom:24px}
+.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background 0.2s}
+.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:var(--white);font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}
+.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,0.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.table-wrap,.deliver-wrap,.results-wrap,.cta-wrap,.doc-wrap,.flow-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background 0.25s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px}
+.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px;color:var(--white)}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.case-table td strong{color:var(--white);font-weight:600}
+.doc-section{padding:96px 64px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative}
+.doc-card.full{grid-column:1 / -1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.doc-pre strong{color:var(--white)}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:0.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none}
+.cta-orb::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(200,149,42,0.04)}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:0.95;margin-bottom:28px}
+.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)}
+.footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid,.modules-grid,.doc-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metric{border-bottom:1px solid var(--border);border-right:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+  <div class="hero-label">
+    <div class="hero-label-line"></div>
+    <div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+  </div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Une alerte<br>de <em>corruption NTFS</em><br>devenue <span class="strong">preuve de maîtrise MSP.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · WINDOWS SERVER · VMWARE · DATTO BCDR · CW · TRIAGE CROISÉ</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite une alerte critique sur un serveur de fichiers : validation du système en <strong>lecture seule</strong>, corrélation des journaux Windows avec l'<strong>hyperviseur VMware</strong> et la plateforme <strong>Datto BCDR</strong>, refus des remédiations risquées, puis génération des <strong>livrables complets</strong> pour clôturer proprement un incident sans impact persistant.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Serveur analysé</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">3</div><div class="hero-metric-l">Couches corrélées</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">2</div><div class="hero-metric-l">Fenêtres confirmées</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">Action risquée</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4</div><div class="hero-metric-l">Livrables complets</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · FILE-01 · ESX-01 · BCDR-01 · 27-01-2025</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">WINDOWS SERVER</div>
+    <div class="firm-product active">NTFS</div>
+    <div class="firm-product active">VMWARE</div>
+    <div class="firm-product active">DATTO BCDR</div>
+    <div class="firm-product active">CW NOTE</div>
+    <div class="firm-product active">EMAIL CLIENT</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>WINDOWS SERVER</span> · NTFS FILE SYSTEM ALERT · DISK SURPRISE REMOVED ·
+    <span>LECTURE SEULE</span> · CORRÉLATION CROISÉE · VMWARE · DATTO BCDR ·
+    <span>NO CHKDSK</span> · NO REBOOT · RECOVERY POINT SUCCESS · CW NOTE ·
+    <span>DISCUSSION CLIENT</span> · EMAIL CLIENT · NOTICE TEAMS · PAGE DE CAS ·
+    <span>WINDOWS SERVER</span> · NTFS FILE SYSTEM ALERT · DISK SURPRISE REMOVED ·
+    <span>LECTURE SEULE</span> · CORRÉLATION CROISÉE · VMWARE · DATTO BCDR ·
+    <span>NO CHKDSK</span> · NO REBOOT · RECOVERY POINT SUCCESS · CW NOTE ·
+    <span>DISCUSSION CLIENT</span> · EMAIL CLIENT · NOTICE TEAMS · PAGE DE CAS ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Une seule alerte,<br>trois couches<br><em>à départager.</em></div>
+      <p class="s-sub" style="margin-bottom:24px">Le signal initial annonçait une <strong>corruption du système de fichiers NTFS</strong> sur FILE-01. Le risque classique était de conclure trop vite à une panne disque persistante et de lancer un <strong>chkdsk</strong> ou un <strong>redémarrage</strong> avant d'avoir prouvé l'état réel des volumes.</p>
+      <p class="s-sub">L'agent a requalifié le cas à travers trois couches : <strong>Windows</strong>, <strong>VMware</strong> et <strong>Datto BCDR</strong>. Il a démontré que les volumes visibles étaient sains au moment de la validation, que l'hyperviseur ne présentait pas de panne de pathing active, et que les erreurs apparaissaient exactement pendant les fenêtres de sauvegarde.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>L'alerte parlait de corruption NTFS</strong> — mais les volumes visibles revenaient en état Healthy et not dirty lors du contrôle.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Les journaux Windows étaient bruyants</strong> — "Disk surprise removed" et erreurs NTFS transactionnelles pointaient un retrait soudain de disques temporaires.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Le côté VMware pouvait être suspecté</strong> — pourtant le pathing était actif au moment de la validation et aucun dead path n'était observé.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>La fenêtre Datto collait parfaitement</strong> — les événements se produisaient pendant les horaires de sauvegarde, avec recovery points tout de même réussis.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>La clôture devait être défendable</strong> — documenter un événement transitoire, éviter la remédiation intrusive et fournir des livrables complets.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · NTFS / VMWARE / DATTO</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">BILLET :</span> <span class="t-white">#000007</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC.</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">NTFS FILE SYSTEM CORRUPTION</span></div>
+          <div class="t-line"><span class="t-gold">ASSET :</span> <span class="t-white">FILE-01 · site client</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">CHKDSK / REBOOT LANCÉ TROP TÔT</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Volumes visibles Healthy et not dirty.</div>
+          <div class="t-line t-silver">Événements critiques pendant 12:38 et 18:00.</div>
+          <div class="t-line t-silver">Aucune panne de pathing active côté ESX-01.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Corrélation Windows / VMware / Datto établie</span></div>
+          <div class="t-line"><span class="t-green">✓ Recovery points Datto réussis</span></div>
+          <div class="t-line"><span class="t-green">✓ Aucune nouvelle erreur critique après la fenêtre</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucune preuve de corruption persistante du volume principal</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">SURVEILLANCE + LIVRABLES COMPLETS</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Une résolution qui distingue</strong><br>la panne <em>persistante</em> de l'événement <em>transitoire.</em></div>
+    <p class="s-sub">L'agent n'a pas seulement reconnu des erreurs NTFS. Il a prouvé que la couche Windows visible était revenue en état normal, que le stockage VMware n'était pas en panne active au moment du check, puis que les logs et recovery points Datto alignaient l'incident sur le workflow de sauvegarde plutôt que sur une corruption durable.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>FILE-01 — volumes visibles</strong></td><td>C: et T: montés en NTFS, état Healthy, dirty bit négatif au moment de la collecte</td><td>Le serveur n'exhibait pas une corruption persistante évidente lors de la validation</td><td>Écarter toute remédiation destructive immédiate</td></tr>
+        <tr><td><strong>Journaux Windows</strong></td><td>Événements "Disk surprise removed" suivis d'erreurs NTFS delayed write / transaction log dans les fenêtres de 12:38 et 18:00</td><td>Le système avait subi un retrait soudain de disques temporaires ou présentés dynamiquement</td><td>Corréler avec la couche hyperviseur et la couche sauvegarde</td></tr>
+        <tr><td><strong>ESX-01 — pathing</strong></td><td>Chemins actifs au moment de la vérification, aucun dead path observé</td><td>La panne n'était pas expliquée par une rupture de pathing persistante côté hôte</td><td>Faire descendre la piste stockage actif au second plan</td></tr>
+        <tr><td><strong>BCDR-01 — corrélation horaire</strong></td><td>Fenêtres de sauvegarde alignées avec les événements Windows; initiateur iSCSI Datto observé déconnecté</td><td>Le workflow Datto devenait l'explication la plus solide du retrait de disques temporaires</td><td>Traiter le cas comme incident transitoire lié à la sauvegarde</td></tr>
+        <tr><td><strong>Recovery points du 27-01-2025</strong></td><td>Points de 06:00, 12:38 et 18:00 réussis localement et dans le cloud, screenshot verification réussie</td><td>Le backup avait abouti malgré les warnings observés dans le guest</td><td>Documenter un succès de sauvegarde avec bruit de journalisation côté OS</td></tr>
+        <tr><td><strong>Post-fenêtre de sauvegarde</strong></td><td>Après 18:03, seulement des événements informationnels Volsnap/NTFS liés aux shadow copies</td><td>Aucun signe de persistance ou d'aggravation après la dernière fenêtre</td><td>Clôture en mode surveillance, sans reboot ni chkdsk</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Trois couches. Une conclusion propre.</em></div>
+    <p class="s-sub">Ce cas montre la capacité du produit à résister au réflexe « réparer vite », à prouver l'état réel d'un serveur et à livrer les bonnes sorties MSP à la fin.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Billet NOC / RMM</div><div class="mod-desc">Le cas démarre par une alerte Windows Server NTFS File System Corruption sur FILE-01.</div><div class="mod-agents">Signal brut → cas structuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Triage</div><div class="mod-sub">Lecture seule d'abord</div><div class="mod-desc">L'agent collecte l'état des volumes, disques, services et journaux Windows sans lancer de réparation.</div><div class="mod-agents">Aucun geste destructif</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Validation OS</div><div class="mod-sub">Healthy / not dirty</div><div class="mod-desc">Les volumes visibles reviennent Healthy et les bits dirty sont négatifs, ce qui casse l'hypothèse de corruption active persistante.</div><div class="mod-agents">Windows clarifié</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Corrélation logs</div><div class="mod-sub">12:38 / 18:00</div><div class="mod-desc">Les événements Disk surprise removed et NTFS transactionnels sont concentrés dans deux fenêtres précises.</div><div class="mod-agents">Fenêtres d'incident isolées</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Validation hyperviseur</div><div class="mod-sub">ESX-01</div><div class="mod-desc">Le pathing actif exclut une panne de transport persistante au moment du contrôle.</div><div class="mod-agents">VMware clarifié</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Validation Datto</div><div class="mod-sub">BCDR-01</div><div class="mod-desc">Les horaires de backup et les recovery points réussis alignent l'incident sur le workflow de sauvegarde.</div><div class="mod-agents">Datto clarifié</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Vérification post-incident</div><div class="mod-sub">Après 18:03</div><div class="mod-desc">Aucune nouvelle erreur critique Disk/NTFS n'est observée après la dernière fenêtre de sauvegarde.</div><div class="mod-agents">Persistance exclue</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Décision de risque</div><div class="mod-sub">No chkdsk / no reboot</div><div class="mod-desc">Le système choisit la sécurité : aucune action intrusive n'est justifiée au vu des preuves collectées.</div><div class="mod-agents">Maîtrise opérationnelle</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Clôture CW</div><div class="mod-sub">Interne + client</div><div class="mod-desc">Note interne, discussion client-safe, email et notice Teams générés sans retraitement manuel.</div><div class="mod-agents">Qualité MSP visible</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Démonstration</div><div class="mod-sub">Lancement produit</div><div class="mod-desc">Le traitement devient une page premium montrant la méthode, le discernement et les livrables des agents.</div><div class="mod-agents">Marketing + opérations</div></div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>produit vraiment.</em></div>
+    <p class="s-sub">La valeur ne réside pas seulement dans le diagnostic. Elle réside dans la discipline de validation, l'absence d'action destructive inutile et la capacité à fournir des livrables exploitables immédiatement.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Collecte lecture seule sur FILE-01, validation journaux Windows, vérification ESX-01, corrélation Datto BCDR-01, contrôle post-fenêtre.</div><ul class="arsenal-list"><li>Volumes / disques / dirty bit</li><li>Journaux Disk / NTFS / Volsnap</li><li>Path state sur ESX-01</li><li>Historique Datto et recovery points</li><li>Validation post-incident</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas montre une posture MSP mature : lecture seule d'abord, aucune hypothèse vendue comme un fait, aucune remédiation risquée sans preuve.</div><ul class="arsenal-list"><li>Lecture seule avant correction</li><li>Pas de chkdsk /f à chaud</li><li>Pas de reboot forcé</li><li>Hypothèse ≠ confirmation</li><li>Validation croisée avant clôture</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Preuves techniques</div><div class="arsenal-desc">Les preuves sont cohérentes entre elles : volumes sains, pathing actif, récupération Datto réussie, absence d'erreurs critiques persistantes après la fenêtre.</div><ul class="arsenal-list"><li>Healthy / not dirty</li><li>Disk surprise removed corrélé</li><li>Aucun dead path observé</li><li>Recovery points réussis</li><li>Screenshot verification réussie</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">Résultat technique</div><div class="arsenal-desc">La conclusion retenue est un événement transitoire lié au workflow de sauvegarde, et non une corruption active du volume principal.</div><ul class="arsenal-list"><li>Incident borné dans le temps</li><li>Aucun impact persistant visible</li><li>Backups du jour réussis</li><li>Serveur stable au contrôle</li><li>Surveillance seulement</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Sorties prêtes à l'emploi</div><div class="arsenal-desc">Le produit livre la matière nécessaire aux opérations et à la relation client sans réécriture manuelle.</div><ul class="arsenal-list"><li>Note interne CW</li><li>Discussion CW client-safe</li><li>Email client</li><li>Notice Teams</li><li>Page de cas premium</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Le cas démontre que l'agent produit une décision propre, défendable et présentable pour un lancement produit MSP.</div><ul class="arsenal-list"><li>Discernement plutôt que réflexe</li><li>Réassurance pour le client</li><li>Traçabilité complète</li><li>Démonstration premium</li><li>Compatible vente et opérations</li></ul></div>
+  </div>
+</section>
+
+<section class="doc-section">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <p class="s-sub">Note interne technique, discussion CW client-safe, email client et notice Teams. Contenu entièrement anonymisé pour usage public.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Note Interne</div></div><div class="doc-copy">Interne · complet</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────────────
+Validation — alerte NTFS et sauvegarde
+────────────────────────────────────────────────────────
+BILLET : #000007 / CLIENT : Entreprise inc. / SITE : site client
+ASSET : FILE-01 / DATE : 27-01-2025 / TECHNICIEN : Agent NOC-08
+
+TRAVAUX EFFECTUÉS
+• Validation lecture seule sur FILE-01 à la suite de l'alerte NTFS.
+• Vérification de l'état des volumes et disques visibles.
+• Validation des journaux système pour les événements dans les fenêtres de 12:38 et 18:00.
+• Vérification côté hyperviseur ESX-01 afin d'exclure un problème de pathing actif.
+• Corrélation réalisée avec l'historique Datto sur BCDR-01 et validation des recovery points.
+• Contrôle complémentaire après la dernière fenêtre de sauvegarde.
+
+CONSTATS
+• Volumes visibles Healthy, dirty bit négatif sur C: et T:.
+• Événements "Disk surprise removed" + erreurs NTFS transactionnelles pendant les fenêtres de sauvegarde.
+• Aucun dead path actif observé sur ESX-01.
+• Recovery points Datto du 27-01-2025 réussis localement et dans le cloud.
+• Après 18:03, seulement des entrées informationnelles Volsnap / NTFS sur shadow copies.
+
+CONCLUSION
+• Événement transitoire lié au workflow de sauvegarde Datto.
+• Aucun signe persistant de corruption active du volume principal.
+• Aucune action intrusive lancée : pas de chkdsk /f, pas de redémarrage.
+• Surveillance recommandée et réouverture si récurrence.</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Discussion</div></div><div class="doc-copy">Client-safe · facturable</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────────────
+Validation — alerte système et sauvegarde
+────────────────────────────────────────────────────────
+BILLET : #000007 / DATE : 27-01-2025 / TECHNICIEN : Agent NOC-08
+
+TRAVAUX EFFECTUÉS
+• Vérification effectuée en lecture seule sur le serveur concerné.
+• Analyse des événements observés durant les fenêtres de sauvegarde planifiées.
+• Validation croisée réalisée avec la plateforme de sauvegarde.
+• Vérification complémentaire après la dernière fenêtre.
+
+RÉSULTAT
+• Le système était stable au moment des validations.
+• Les points de sauvegarde de la journée concernée ont été confirmés réussis.
+• La cause orientée vers un événement transitoire lié au mécanisme de sauvegarde.
+• Aucune action corrective intrusive n'a été nécessaire à ce stade.
+• Surveillance recommandée seulement.</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Email client</div></div><div class="doc-copy">Client · communication</div></div>
+        <div class="doc-pre">Objet : Validation terminée — alerte système — Billet #000007
+
+Bonjour nom du contact,
+
+À la suite de l'alerte signalée sur votre serveur, nous avons effectué une vérification complète en lecture seule.
+
+Nos validations confirment que le système était stable au moment du contrôle et que les points de sauvegarde de la journée concernée ont bien été complétés avec succès.
+
+L'analyse indique qu'il s'agit vraisemblablement d'un événement ponctuel lié au mécanisme de sauvegarde, sans impact persistant observé. Aucune intervention intrusive n'a donc été requise.
+
+Nous recommandons simplement une surveillance. Si vous constatez un comportement inhabituel, merci de nous en aviser.
+
+Cordialement,
+Tech</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Notice Teams</div></div><div class="doc-copy">Coordination · opération</div></div>
+        <div class="doc-pre">✅ Intervention terminée — Ticket #000007
+Client : client inc. / Site : site client
+
+Validation terminée sur le serveur concerné. Le système était stable et les sauvegardes de la journée ont été confirmées réussies.
+
+Cause : événement transitoire lié au mécanisme de sauvegarde, sans impact persistant.
+Aucune action intrusive nécessaire. Surveillance seulement; réouvrir si récurrence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">&ldquo;</div>
+  <p class="quote-text">Le bon agent MSP n'est pas celui qui lance un <strong>chkdsk</strong> dès qu'il voit « NTFS ». C'est celui qui <strong>prouve l'état réel du système</strong>, corrèle les couches <strong>Windows, hyperviseur et sauvegarde</strong>, puis ferme le billet avec des livrables propres et défendables.</p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit.</p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas d'alerte NTFS corrélée à la sauvegarde<br>
+    &copy; 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>

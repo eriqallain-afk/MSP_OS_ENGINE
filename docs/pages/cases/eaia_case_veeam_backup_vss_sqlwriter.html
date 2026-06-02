@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas Veeam : échec VSS / SQLWriter sur contrôleur de domaine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,0.15);--gold-line:rgba(200,149,42,0.3);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,0.56);--muted2:rgba(255,255,255,0.2);--border:rgba(200,149,42,0.18);--border2:rgba(255,255,255,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0;}
+section,nav,footer,header,div{position:relative;z-index:1;}a{color:inherit;text-decoration:none;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px);}
+.nav-brand{display:flex;flex-direction:column;gap:2px;}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1;}
+.nav-logo-text .ea{color:var(--gold);}.nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px;}.nav-logo-text .ia{color:var(--silver-light);}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase;}
+.nav-links{display:flex;gap:36px;list-style:none;}.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s;}.nav-links a:hover{color:var(--gold-light);}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s;}.nav-cta:hover{background:var(--gold);color:var(--black);}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;position:relative;overflow:hidden;}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none;}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,0.05);}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none;}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px;}.hero-label{margin-bottom:36px;}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold);}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px;}
+.hero h1 em{font-style:italic;color:var(--gold-light);}.hero h1 .strong{font-weight:600;color:var(--white);}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300;}.hero-sub strong{color:var(--white);font-weight:600;}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap;}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px;}.hero-metric:last-child{border-right:none;}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1;}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.25s;}.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s;}.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim);}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.firm-band-left{display:flex;flex-direction:column;gap:6px;}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap;}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase;}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3);}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap;}
+.ticker-inner span{color:rgba(200,149,42,0.6);}@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.s-pad{padding:96px 64px;}.s-label{margin-bottom:20px;}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:0.95;letter-spacing:-0.5px;margin-bottom:24px;}
+.s-title em{font-style:italic;color:var(--gold-light);}.s-title strong{font-weight:600;}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300;}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background 0.2s;}.pain-item:last-child{border-bottom:none;}.pain-item:hover{background:var(--gold-dim);}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7;}.pain-text strong{color:var(--white);font-weight:600;}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative;}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center;}
+.t-dot{width:9px;height:9px;border-radius:50%;}.t-dot:nth-child(1){background:#FF5F57;}.t-dot:nth-child(2){background:#FEBC2E;}.t-dot:nth-child(3){background:#28C840;}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px;}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px;}
+.t-gray{color:rgba(255,255,255,0.2);}.t-gold{color:var(--gold);}.t-silver{color:var(--silver);}.t-green{color:#4ADE80;}.t-red{color:#F87171;}.t-white{color:var(--white);}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle;}@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.table-wrap,.deliver-wrap,.results-wrap,.cta-wrap,.doc-wrap,.flow-wrap{max-width:1160px;margin:0 auto;}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background 0.25s;position:relative;overflow:hidden;}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s;transform-origin:left;}
+.mod-card:hover{background:#0C0C0C;}.mod-card:hover::after{transform:scaleX(1);}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px;}
+.mod-icon{font-size:24px;margin-bottom:14px;}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px;color:var(--white);}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300;}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7;}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.arsenal-block{background:var(--dark);padding:40px 32px;}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px;}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px;}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6;}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px;}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top;}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700;}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300;}.case-table td strong{color:var(--white);font-weight:600;}
+.doc-section{padding:96px 64px;}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px;}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative;}.doc-card.full{grid-column:1/-1;}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase;}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1;}.doc-pre strong{color:var(--white);}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative;}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:0.5;margin-bottom:20px;font-style:italic;}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light);}
+.quote-text strong{color:var(--gold-light);font-style:normal;}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase;}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden;}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none;}
+.cta-orb::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(200,149,42,0.04);}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:0.95;margin-bottom:28px;}
+.cta-section h2 em{font-style:italic;color:var(--gold-light);}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300;}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px;}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark);}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold);}
+.footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px;}.footer-brand em{color:var(--silver);font-style:normal;}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-label{animation:fadeUp 0.7s ease both;}.hero-eyebrow{animation:fadeUp 0.7s 0.1s ease both;}.hero h1{animation:fadeUp 0.7s 0.15s ease both;}.hero-product-tag{animation:fadeUp 0.7s 0.2s ease both;}.hero-sub{animation:fadeUp 0.7s 0.25s ease both;}.hero-metrics{animation:fadeUp 0.7s 0.3s ease both;}.hero-actions{animation:fadeUp 0.7s 0.35s ease both;}
+@media(max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px;}.problem-inner{grid-template-columns:1fr;gap:40px;}.arsenal-grid{grid-template-columns:1fr;}.doc-grid{grid-template-columns:1fr;}.nav-links{display:none;}.hero-metric{border-bottom:1px solid var(--border);border-right:none;}footer{flex-direction:column;gap:12px;text-align:center;}.footer-right{text-align:center;}}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+  <div class="hero-label">
+    <div class="hero-label-line"></div>
+    <div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+  </div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>
+    Une alerte<br>
+    de <em>sauvegarde Veeam</em><br>
+    devenue <span class="strong">preuve de méthode MSP.</span>
+  </h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · VEEAM · VSS · SQLWRITER · CW · TRIAGE SAFE</div>
+  <p class="hero-sub">
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un échec de sauvegarde critique sur <strong>DC-01</strong> :
+    notification client immédiate, capture de l'erreur exacte, diagnostic en lecture seule, corrélation des journaux
+    <strong>VSS / SQLWRITER</strong>, validation des garde-fous propres aux contrôleurs de domaine, puis remédiation par
+    <strong>redémarrage contrôlé</strong> avec relance du job et documentation complète.
+  </p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Job critique</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">3</div><div class="hero-metric-l">Échecs corrélés</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Writer fautif</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Reboot contrôlé</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4</div><div class="hero-metric-l">Livrables complets</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · Veeam · contrôleur de domaine · VSS/SQLWriter</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">VEEAM</div>
+    <div class="firm-product active">VSS</div>
+    <div class="firm-product active">SQLWRITER</div>
+    <div class="firm-product active">CW Note</div>
+    <div class="firm-product active">CW Discussion</div>
+    <div class="firm-product active">Email Client</div>
+    <div class="firm-product active">client inc.</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>VEEAM</span> · BACKUP FAILURE · VSS · SQLWRITER ·
+    <span>LECTURE SEULE</span> · TRIAGE GUIDÉ · CORRÉLATION LOGS ·
+    <span>0x800423f4</span> · 0x800703fa · DC · NO SNAPSHOT ·
+    <span>REBOOT CONTRÔLÉ</span> · JOB RELANCÉ · CW NOTE · EMAIL CLIENT ·
+    <span>TEAMS NOTICE</span> · MÉTHODE MSP · LIVRABLES COMPLETS ·
+    <span>VEEAM</span> · BACKUP FAILURE · VSS · SQLWRITER ·
+    <span>LECTURE SEULE</span> · TRIAGE GUIDÉ · CORRÉLATION LOGS ·
+    <span>0x800423f4</span> · 0x800703fa · DC · NO SNAPSHOT ·
+    <span>REBOOT CONTRÔLÉ</span> · JOB RELANCÉ · CW NOTE · EMAIL CLIENT ·
+    <span>TEAMS NOTICE</span> · MÉTHODE MSP · LIVRABLES COMPLETS ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Une seule alerte,<br>un risque réel,<br><em>plusieurs mauvaises pistes.</em></div>
+      <p class="s-sub" style="margin-bottom:24px;">Le signal initial parlait simplement d'un job Veeam en échec. Sans méthode, l'intervention aurait pu dériver vers le repository, la connectivité ou un retry aveugle du job. Le système a forcé un triage factuel à partir du message exact et des vérifications guest.</p>
+      <p class="s-sub">Le diagnostic a rapidement montré que la panne n'était ni un problème de stockage ni un simple service Veeam arrêté, mais un <strong>échec VSS dans le guest</strong> sur <strong>SqlServerWriter</strong>, avec répétition des erreurs <strong>0x800423f4</strong> et <strong>0x800703fa</strong>. La décision utile n'était donc pas "relancer partout", mais de stabiliser proprement <strong>DC-01</strong> dans une fenêtre approuvée.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>L'erreur Veeam était spécifique</strong> — snapshot VSS impossible avec SqlServerWriter en défaut.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le serveur touché était un DC</strong> — impossible d'utiliser un snapshot comme raccourci de sécurité.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Les services étaient démarrés</strong> — ce n'était pas un simple incident de service arrêté.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Les journaux montraient une répétition</strong> — même chaîne d'erreurs sur plusieurs cycles de sauvegarde.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>Le bon geste devait être unique et défendable</strong> — redémarrage contrôlé, puis relance et monitoring du job.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · VEEAM VSS SQLWRITER</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">BACKUP MONITOR VEEAM</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">FAILURE SUR JOB DC-01</span></div>
+          <div class="t-line"><span class="t-gold">MESSAGE :</span> <span class="t-white">VSS SNAPSHOT FAILED / SQLWRITER</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">RETRY INUTILE / DIAGNOSTIC SUR MAUVAISE COUCHE</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Volet primaire : VSS guest / SqlServerWriter.</div>
+          <div class="t-line t-silver">Services VSS présents, mais writer en Failed.</div>
+          <div class="t-line t-silver">Journaux corrélés avant toute remédiation.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Notification client immédiate</span></div>
+          <div class="t-line"><span class="t-green">✓ Validation lecture seule complète</span></div>
+          <div class="t-line"><span class="t-green">✓ Reboot planifié avec raison de maintenance</span></div>
+          <div class="t-line"><span class="t-green">✓ Job relancé après retour en ligne</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">CAUSE ISOLÉE + ACTION SAFE + LIVRABLES PRÊTS</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Un échec Veeam qui devient</strong><br>un cas de <em>discernement MSP.</em></div>
+    <p class="s-sub">Le système a traversé le cas selon une logique défendable : capture de l'erreur exacte, validation des writers, confirmation de l'état des services, corrélation des événements Application, analyse du contexte de redémarrage, puis exécution d'une seule action corrective appropriée au serveur concerné.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Job Veeam</strong></td><td>Échec de création de snapshot VSS avec SqlServerWriter en défaut sur DC-01</td><td>Le job ne pouvait pas terminer par simple retry sans correction de contexte</td><td>Isoler la panne côté guest plutôt que côté repository</td></tr>
+        <tr><td><strong>Writers VSS</strong></td><td>SqlServerWriter en Failed / Non-retryable error alors que les autres writers étaient stables</td><td>Le défaut était ciblé et non généralisé à toute la pile VSS</td><td>Concentrer l'analyse sur SQLWriter et les journaux applicatifs associés</td></tr>
+        <tr><td><strong>Services système</strong></td><td>SQL Server VSS Writer et Volume Shadow Copy présents et démarrés</td><td>La cause n'était pas un simple service arrêté</td><td>Écarter les faux positifs et poursuivre l'analyse événementielle</td></tr>
+        <tr><td><strong>Journaux Application</strong></td><td>Corrélation répétée de SQLWRITER 24583 puis VSS 8229 sur plusieurs exécutions</td><td>Le problème se reproduisait à l'identique et devenait objectivable</td><td>Fonder la remédiation sur les logs plutôt que sur l'intuition</td></tr>
+        <tr><td><strong>Codes d'erreur</strong></td><td>0x800423f4 côté VSS et 0x800703fa côté SQLWriter</td><td>Le défaut provenait du contexte VSS/SQL local pendant la préparation du snapshot</td><td>Préparer une réinitialisation contrôlée du serveur</td></tr>
+        <tr><td><strong>Contexte serveur</strong></td><td>Très longue durée de fonctionnement, aucun indicateur RebootPending ou RebootRequired</td><td>Pas de reboot Windows en attente, mais un composant potentiellement bloqué depuis longtemps</td><td>Valider puis exécuter un reboot de maintenance dans la fenêtre approuvée</td></tr>
+        <tr><td><strong>Garde-fou DC</strong></td><td>Le serveur concerné est un contrôleur de domaine</td><td>Un snapshot préventif aurait été contraire aux règles d'exploitation</td><td>Interdire tout snapshot et privilégier le redémarrage contrôlé</td></tr>
+        <tr><td><strong>Résultat post-action</strong></td><td>DC-01 revient en ligne et la sauvegarde peut être relancée</td><td>La remédiation débloque le traitement sans action destructive</td><td>Maintenir la surveillance du job et documenter le résultat final</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une méthode sûre, visible et réutilisable.</em></div>
+    <p class="s-sub">Le cas démontre comment l'agent structure l'intervention de bout en bout, sans invention, sans action prématurée et avec des sorties immédiatement exploitables.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Billet / monitoring</div><div class="mod-desc">Le cas démarre par une alerte de sauvegarde Veeam en échec sur DC-01.</div><div class="mod-agents">Signal brut → cas structuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Notification</div><div class="mod-sub">Client d'abord</div><div class="mod-desc">Le client est avisé immédiatement qu'une analyse est en cours sur ses sauvegardes.</div><div class="mod-agents">Confiance et visibilité</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Erreur exacte</div><div class="mod-sub">Base factuelle</div><div class="mod-desc">Le message Veeam complet est capturé pour éviter toute hypothèse sur la cause du failure.</div><div class="mod-agents">Zéro invention</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Validation VSS</div><div class="mod-sub">Guest checks</div><div class="mod-desc">L'état des writers VSS est vérifié sur le serveur, et SqlServerWriter ressort comme unique writer en défaut.</div><div class="mod-agents">Lecture seule d'abord</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Services</div><div class="mod-sub">Écarter les faux positifs</div><div class="mod-desc">Les services SQL Server VSS Writer et VSS sont validés afin d'éviter un diagnostic trop rapide.</div><div class="mod-agents">Cause ciblée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Corrélation logs</div><div class="mod-sub">Application log</div><div class="mod-desc">Les événements SQLWRITER 24583 et VSS 8229 sont corrélés sur plusieurs cycles du job.</div><div class="mod-agents">Preuve technique</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Contexte reboot</div><div class="mod-sub">Décision encadrée</div><div class="mod-desc">L'uptime prolongée du serveur et l'absence de reboot pending orientent vers un redémarrage de maintenance planifié.</div><div class="mod-agents">Une action à la fois</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Garde-fous</div><div class="mod-sub">DC sans snapshot</div><div class="mod-desc">Le rôle de contrôleur de domaine interdit l'usage de snapshot et impose une remédiation propre.</div><div class="mod-agents">Discipline d'exploitation</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Reboot + relance</div><div class="mod-sub">Fenêtre approuvée</div><div class="mod-desc">Le redémarrage est exécuté avec raison planifiée, le serveur revient en ligne et la sauvegarde est relancée.</div><div class="mod-agents">Remédiation safe</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Livrables</div><div class="mod-sub">Ops + relation client</div><div class="mod-desc">Note CW, discussion client-safe, email et notice Teams générés et prêts à coller.</div><div class="mod-agents">Marketing + opérations</div></div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>démontre réellement.</em></div>
+    <p class="s-sub">Le produit ne montre pas seulement un triage Veeam. Il montre une méthode d'intervention complète : diagnostic, garde-fous, communication, remédiation contrôlée et narration exploitable pour les équipes MSP.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Capture de l'erreur exacte, validation VSS, analyse services, corrélation des logs, contrôle du contexte de redémarrage, reboot approuvé et relance du job.</div><ul class="arsenal-list"><li>Erreur exacte Veeam validée</li><li>Writer fautif isolé</li><li>Services confirmés</li><li>Logs Application corrélés</li><li>Job relancé après reboot</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas met en avant une discipline MSP visible : lecture seule d'abord, une action à la fois, client informé et aucune action incompatible avec un DC.</div><ul class="arsenal-list"><li>Lecture seule avant correction</li><li>Une seule action corrective</li><li>Notification client immédiate</li><li>Aucun snapshot sur DC</li><li>Monitoring post-action</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Résultats techniques</div><div class="arsenal-desc">La panne est ramenée à sa vraie couche technique : VSS guest / SQLWriter, avec redémarrage contrôlé comme remédiation la plus propre et la plus défendable.</div><ul class="arsenal-list"><li>SqlServerWriter isolé</li><li>0x800423f4 confirmé</li><li>0x800703fa corrélé</li><li>Repository exclu de la cause primaire</li><li>Serveur revenu en ligne</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">Coordination client</div><div class="arsenal-desc">Communication immédiate, message de maintenance interne, discussion client-safe et suivi du résultat final annoncé.</div><ul class="arsenal-list"><li>Email de prise en charge</li><li>Message de maintenance interne</li><li>Discussion client-safe</li><li>Réassurance sans jargon inutile</li><li>Suivi du résultat final annoncé</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Sorties prêtes à l'emploi</div><div class="arsenal-desc">Les livrables sont rédigés au format MSP et peuvent être repris tels quels sur le site de lancement comme démonstration produit.</div><ul class="arsenal-list"><li>Note interne CW</li><li>Discussion CW</li><li>Email client</li><li>Notice Teams</li><li>Page premium HTML</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">La démonstration prouve qu'un agent MSP crédible n'automatise pas seulement des commandes : il automatise le discernement, les garde-fous et la qualité des livrables.</div><ul class="arsenal-list"><li>Crédibilité opérationnelle</li><li>Traçabilité des décisions</li><li>Qualité de communication</li><li>Cas réutilisable en vente</li><li>Compatible lancement produit</li></ul></div>
+  </div>
+</section>
+
+<section class="doc-section">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <p class="s-sub">Cette section expose les livrables générés à partir du cas : documentation interne, discussion client-safe, email au contact et coordination Teams. Le contenu est anonymisé pour usage public et aligné sur le contexte réel de l'intervention.</p>
+    <div class="doc-grid">
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Note Interne</div></div><div class="doc-copy">Interne · complet</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────────────
+        BACKUP VEEAM / VSS / SQLWRITER / TRIAGE
+────────────────────────────────────────────────────────
+
+BILLET: #000013
+CLIENT: Entreprise inc.
+DATE: 22-08-2024
+
+PRÉPARATION ET DÉCOUVERTE
+---------
+Prise de connaissance de la demande et consultation de la documentation du client.
+
+RÉSUMÉ
+---------
+Alerte de sauvegarde Veeam en échec sur le job du serveur DC-01.
+Le diagnostic a permis d'isoler un échec applicatif VSS dans le guest, plus précisément sur SqlServerWriter, sans indication d'un problème de repository.
+La séquence d'intervention a été menée en lecture seule d'abord, puis avec une seule action corrective planifiée et exécutée : redémarrage contrôlé du serveur.
+Après retour en ligne, la sauvegarde a été relancée et le suivi du résultat final est resté en cours.
+
+TRAVAUX EFFECTUÉS
+---------
+• Validation du message d'erreur exact dans Veeam : échec de snapshot VSS avec SqlServerWriter en défaut
+• Vérification de l'état des writers VSS sur DC-01
+• Confirmation que SqlServerWriter était en Failed / Non-retryable error
+• Vérification des services SQL Server VSS Writer et Volume Shadow Copy
+• Analyse ciblée des journaux Application pour VSS et SQLWRITER
+• Corrélation répétée des événements SQLWRITER 24583 et VSS 8229
+• Validation de l'uptime du serveur et de l'absence de RebootPending / RebootRequired
+• Décision d'un redémarrage contrôlé en fenêtre approuvée
+• Exécution du redémarrage avec raison planifiée et référence du billet
+• Relance de la sauvegarde après retour en ligne
+
+STATUT
+---------
+Stabilisation en cours.
+Sauvegarde relancée après remédiation contrôlée.
+Résultat final du job à confirmer.</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Discussion</div></div><div class="doc-copy">Client-safe · facturable</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────────────
+        SAUVEGARDE VEEAM / INTERVENTION CORRECTIVE
+────────────────────────────────────────────────────────
+
+BILLET: #000013
+CLIENT: Entreprise inc.
+DATE: 22-08-2024
+TECHNICIEN: Agent NOC-14
+
+TRAVAUX EFFECTUÉS:
+• Prise en charge d'une alerte de sauvegarde Veeam en échec touchant le serveur DC-01
+• Validation de la cause de l'échec au niveau du composant de traitement applicatif
+• Planification puis exécution d'un redémarrage contrôlé en fenêtre approuvée
+• Retour en ligne du serveur confirmé après l'intervention
+• Relance du traitement de sauvegarde et maintien du suivi
+
+RÉSULTAT:
+• La cause primaire de l'échec a été identifiée
+• Le serveur concerné a été redémarré de manière contrôlée
+• La sauvegarde a pu être relancée après retour en ligne</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Email client</div></div><div class="doc-copy">Relation client · complet</div></div>
+        <div class="doc-pre">Objet : Mise à jour — intervention en cours sur vos sauvegardes
+
+Bonjour nom du contact,
+
+Nous vous confirmons que nous avons poursuivi l'analyse du problème de sauvegarde touchant votre environnement.
+
+Nos vérifications ont permis d'identifier le composant du serveur concerné qui empêchait l'exécution normale de la sauvegarde. Une fenêtre approuvée a été utilisée pour effectuer un redémarrage contrôlé du serveur DC-01.
+
+Le serveur est maintenant revenu en ligne et la sauvegarde a été relancée avec succès du point de vue opérationnel.
+
+Merci,
+Tech</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Notice Teams</div></div><div class="doc-copy">Coordination · opération</div></div>
+        <div class="doc-pre">🔧 Billet ##000013 — Mise à jour d'intervention
+
+Client : client inc.
+Site : site client
+
+• Cause primaire du backup Veeam isolée sur le composant VSS / SQLWriter du serveur DC-01
+• Diagnostic complété en lecture seule avant action corrective
+• Redémarrage contrôlé exécuté dans la fenêtre approuvée
+• Serveur revenu en ligne
+• Sauvegarde relancée
+
+Point d'attention :
+Aucun snapshot n'a été utilisé durant l'intervention, le serveur concerné étant un contrôleur de domaine.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">&ldquo;</div>
+  <p class="quote-text">Le bon agent MSP n'est pas celui qui "relance juste un job". C'est celui qui <strong>isole la vraie couche fautive</strong>, respecte les garde-fous du serveur concerné, puis <strong>transforme l'intervention en livrables utilisables</strong> pour les opérations, le client et le lancement produit.</p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.</p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas Veeam : échec VSS / SQLWriter sur contrôleur de domaine<br>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>

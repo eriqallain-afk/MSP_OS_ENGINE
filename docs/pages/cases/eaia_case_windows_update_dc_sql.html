@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas Windows Update sur serveur critique mixte DC + SQL</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,0.15);--gold-line:rgba(200,149,42,0.3);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,0.56);--muted2:rgba(255,255,255,0.2);--border:rgba(200,149,42,0.18);--border2:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1}a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)}.nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,0.05)}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 .strong{font-weight:600;color:var(--white)}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}
+.hero-sub strong{color:var(--white);font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.25s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,0.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:0.95;letter-spacing:-0.5px;margin-bottom:24px}
+.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background 0.2s}
+.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:var(--white);font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}
+.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,0.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.table-wrap,.deliver-wrap,.results-wrap,.cta-wrap,.doc-wrap,.flow-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background 0.25s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px}
+.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px;color:var(--white)}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.case-table td strong{color:var(--white);font-weight:600}
+.doc-section{padding:96px 64px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative}
+.doc-card.full{grid-column:1 / -1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.doc-pre strong{color:var(--white)}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:0.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none}
+.cta-orb::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(200,149,42,0.04)}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:0.95;margin-bottom:28px}
+.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)}
+.footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-label{animation:fadeUp 0.7s ease both}.hero-eyebrow{animation:fadeUp 0.7s 0.1s ease both}.hero h1{animation:fadeUp 0.7s 0.15s ease both}.hero-product-tag{animation:fadeUp 0.7s 0.2s ease both}.hero-sub{animation:fadeUp 0.7s 0.25s ease both}.hero-metrics{animation:fadeUp 0.7s 0.3s ease both}.hero-actions{animation:fadeUp 0.7s 0.35s ease both}
+@media(max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metric{border-bottom:1px solid var(--border);border-right:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+  <div class="hero-label">
+    <div class="hero-label-line"></div>
+    <div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+  </div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Une alerte<br>de <em>Windows Update</em><br>devenue <span class="strong">preuve de méthode MSP.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · WINDOWS SERVER · ACTIVE DIRECTORY · SQL SERVER · CW · LECTURE SEULE</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite une alerte de mises à jour manquantes sur un <strong>serveur critique mixte</strong> hébergeant à la fois un rôle de domaine et des composants SQL. L'agent ne redémarre pas à l'aveugle : il confirme d'abord l'état des services critiques, isole le vrai périmètre SQL, requalifie l'alerte en <strong>finalisation d'updates avec reboot contrôlé</strong>, puis génère les <strong>livrables complets</strong> prêts pour les opérations MSP.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Serveur critique</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">2</div><div class="hero-metric-l">Rôles validés</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4</div><div class="hero-metric-l">Passes de diagnostic</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">0</div><div class="hero-metric-l">Action risquée prématurée</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Décision de reboot cadrée</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · DC + SQL sur le même hôte · alerte RMM · reboot conditionnel</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">Windows Update</div>
+    <div class="firm-product active">AD DS</div>
+    <div class="firm-product active">DNS</div>
+    <div class="firm-product active">SQL Server</div>
+    <div class="firm-product active">CW Note</div>
+    <div class="firm-product active">CW Discussion</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>WINDOWS UPDATE</span> · PENDING REBOOT · ACTIVE DIRECTORY · SQL SERVER ·
+    <span>LECTURE SEULE</span> · DC POST-CHECK · INSTANCE INVENTORY ·
+    <span>WUAUSERV</span> · SQL BROWSER · CW NOTE · CW DISCUSSION ·
+    <span>EMAIL CLIENT</span> · NOTICE TEAMS · REBOOT CONTRÔLÉ ·
+    <span>WINDOWS UPDATE</span> · PENDING REBOOT · ACTIVE DIRECTORY · SQL SERVER ·
+    <span>LECTURE SEULE</span> · DC POST-CHECK · INSTANCE INVENTORY ·
+    <span>WUAUSERV</span> · SQL BROWSER · CW NOTE · CW DISCUSSION ·
+    <span>EMAIL CLIENT</span> · NOTICE TEAMS · REBOOT CONTRÔLÉ ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Une simple alerte,<br>mais un serveur<br><em>à très haut risque.</em></div>
+      <p class="s-sub" style="margin-bottom:24px">Le signal brut indiquait des mises à jour manquantes. Le piège classique consistait à conclure trop vite qu'un redémarrage pouvait être lancé immédiatement, alors que le même hôte supportait des fonctions de domaine et des services SQL utiles à l'exploitation.</p>
+      <p class="s-sub">L'agent a donc traité le cas comme un <strong>serveur critique mixte</strong> : validation lecture seule de la couche Active Directory, vérification des services DNS et SYSVOL, lecture du pending reboot, puis qualification des instances SQL pour distinguer <strong>instance héritée désactivée</strong> et <strong>instance active réellement en service</strong>.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>L'alerte paraissait banale</strong> — mais elle touchait un hôte jouant à la fois un rôle de domaine et un rôle SQL.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le reboot pouvait être légitime</strong> — sans être acceptable tant que l'état AD, DNS et SQL n'était pas prouvé.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Une ancienne instance SQL apparaissait arrêtée</strong> — ce qui pouvait être un faux signal ou un vrai blocage selon son statut réel.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Windows Update restait en transition</strong> — un indice important montrant que le système n'était pas encore dans un état stable de décision.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>La valeur attendue n'était pas un script</strong> — mais une décision défendable, traçable et exploitable côté MSP.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · WINDOWS UPDATE ON MIXED DC/SQL</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">BILLET :</span> <span class="t-white">#000017</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC.</span></div>
+          <div class="t-line"><span class="t-gold">SITE :</span> <span class="t-white">SITE CLIENT</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">WINDOWS UPDATE MISSING - SERVER</span></div>
+          <div class="t-line"><span class="t-gold">RISQUE :</span> <span class="t-white">DC + SQL SUR LE MÊME HÔTE</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">AD et DNS observés sains en lecture seule.</div>
+          <div class="t-line t-silver">Pending reboot confirmé mais non exécuté.</div>
+          <div class="t-line t-silver">Une instance SQL active identifiée, une héritée désactivée.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Reboot prématuré évité</span></div>
+          <div class="t-line"><span class="t-green">✓ Couche AD validée</span></div>
+          <div class="t-line"><span class="t-green">✓ Périmètre SQL clarifié</span></div>
+          <div class="t-line"><span class="t-green">✓ Livrables MSP prêts</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucune remédiation risquée sans fenêtre valide</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">ALERTE REQUALIFIÉE + REBOOT CONTRÔLÉ PRÉPARÉ</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Une résolution qui refuse</strong><br>le <em>reboot réflexe</em> sur serveur critique.</div>
+    <p class="s-sub">Le cas montre une compétence centrale du produit : savoir prouver qu'un serveur critique est suffisamment sain pour envisager une action de maintenance, sans confondre une alerte de patching avec une panne d'annuaire ou une panne SQL.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Signal initial</strong></td><td>Alerte RMM de mises à jour manquantes sur un serveur Windows critique</td><td>Risque de reboot précipité sur un hôte sensible</td><td>Basculer immédiatement en lecture seule renforcée</td></tr>
+        <tr><td><strong>Couche AD / DNS</strong></td><td>Services critiques de domaine observés actifs, partages SYSVOL et NETLOGON présents</td><td>Aucun indice de panne Active Directory bloquante à ce stade</td><td>Conserver la couche annuaire comme saine sous réserve de post-check après maintenance</td></tr>
+        <tr><td><strong>État Windows Update</strong></td><td>Pending reboot confirmé, service Windows Update observé en transition lors des premières lectures</td><td>L'alerte est cohérente avec une finalisation d'updates plutôt qu'avec une panne générique</td><td>Reporter toute décision tant que l'état ne devient pas suffisamment stable</td></tr>
+        <tr><td><strong>Inventaire SQL</strong></td><td>Présence d'une instance active et d'une instance héritée désactivée, avec SQL Browser démarré</td><td>Le bruit de diagnostic initial ne doit pas être interprété comme un incident SQL total</td><td>Requalifier les statuts SQL avant d'envisager un reboot</td></tr>
+        <tr><td><strong>Validation base de données</strong></td><td>Bases observées en ligne lors de la lecture initiale de l'instance active</td><td>Confirme que la couche applicative critique reste cohérente au moment du diagnostic</td><td>Autoriser une maintenance uniquement dans un cadre contrôlé</td></tr>
+        <tr><td><strong>Décision finale</strong></td><td>Aucune panne AD ou SQL bloquante confirmée; reboot conditionnel à effectuer uniquement avec fenêtre valide et post-check obligatoire</td><td>Le produit transforme une alerte ambiguë en décision MSP exploitable</td><td>Préparer la remédiation, produire les livrables et garder la traçabilité complète</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une alerte requalifiée, une décision maîtrisée.</em></div>
+    <p class="s-sub">Le cas démontre que l'agent ne saute pas à la remédiation. Il réduit d'abord le risque, prouve le contexte, puis prépare la bonne suite opérationnelle.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Ticket NOC / RMM</div><div class="mod-desc">Le cas démarre avec une alerte standard de Windows Update manquant sur un serveur de production.</div><div class="mod-agents">Signal brut → cas structuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Contexte</div><div class="mod-sub">Serveur critique mixte</div><div class="mod-desc">Le système identifie immédiatement que le même hôte porte un rôle DC et un rôle SQL.</div><div class="mod-agents">Changement de niveau de prudence</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Lecture seule</div><div class="mod-sub">Avant toute action</div><div class="mod-desc">Services AD/DNS, partages SYSVOL, pending reboot, journaux et état Windows Update sont vérifiés sans remédiation.</div><div class="mod-agents">Aucun geste destructif</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Qualification SQL</div><div class="mod-sub">Inventaire réel</div><div class="mod-desc">L'agent sépare l'instance SQL active de l'instance héritée désactivée et évite une fausse interprétation des services.</div><div class="mod-agents">Réduction du bruit</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Validation applicative</div><div class="mod-sub">Bases en ligne</div><div class="mod-desc">Les bases observées en ligne confirment que l'instance active ne présente pas de rupture évidente au moment du diagnostic.</div><div class="mod-agents">Preuve de stabilité</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Refus du réflexe</div><div class="mod-sub">Pas de reboot immédiat</div><div class="mod-desc">Le pending reboot n'autorise pas à lui seul une action. La décision reste suspendue tant que le serveur n'est pas suffisamment qualifié.</div><div class="mod-agents">Discipline MSP visible</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Lecture consolidée</div><div class="mod-sub">Requalification</div><div class="mod-desc">L'alerte est relue comme une finalisation probable de mises à jour, sans preuve d'incident AD ou SQL bloquant.</div><div class="mod-agents">Diagnostic défendable</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Cadre d'exécution</div><div class="mod-sub">Fenêtre + post-check</div><div class="mod-desc">L'agent prépare un reboot conditionnel : un serveur à la fois, backup au besoin, post-check DC et SQL obligatoires.</div><div class="mod-agents">Guardrails appliqués</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Livrables</div><div class="mod-sub">MSP-ready</div><div class="mod-desc">Le cas produit immédiatement les sorties opérationnelles : note interne, discussion client-safe, email et notice Teams.</div><div class="mod-agents">Valeur directe</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Démonstration</div><div class="mod-sub">Lancement produit</div><div class="mod-desc">L'intervention devient une page premium qui montre méthode, discernement et niveau de finition des agents MSP.</div><div class="mod-agents">Marketing + opérations</div></div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>prouve vraiment.</em></div>
+    <p class="s-sub">La valeur du cas ne se limite pas au diagnostic. Elle réside dans la capacité à éviter un mauvais geste, à formaliser une décision sûre et à la transmettre dans le bon langage MSP.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Qualification lecture seule de Windows Update, AD/DNS et SQL sur un serveur critique mixte avant toute remédiation.</div><ul class="arsenal-list"><li>Pending reboot confirmé</li><li>Services AD/DNS validés</li><li>SYSVOL / NETLOGON confirmés</li><li>Inventaire SQL clarifié</li><li>Bases observées en ligne</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas met en avant une discipline MSP forte sur serveur critique avec rôles mixtes.</div><ul class="arsenal-list"><li>Lecture seule d'abord</li><li>Pas de reboot à l'aveugle</li><li>Un serveur critique à la fois</li><li>Post-check DC obligatoire</li><li>SQL validé avant maintenance</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Résultats techniques</div><div class="arsenal-desc">L'agent transforme une alerte ambiguë en état technique lisible et exploitable.</div><ul class="arsenal-list"><li>AD non bloquant</li><li>DNS opérationnel</li><li>Pending reboot expliqué</li><li>Instance SQL active identifiée</li><li>Instance héritée requalifiée</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">Décision produite</div><div class="arsenal-desc">Le produit ne donne pas seulement un diagnostic. Il livre une décision opérationnelle cadrée pour la maintenance.</div><ul class="arsenal-list"><li>Reboot conditionnel</li><li>Fenêtre requise</li><li>Validation finale WU</li><li>Post-check DC + SQL</li><li>Traçabilité complète</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Sorties prêtes à l'emploi</div><div class="arsenal-desc">Les opérations et la relation client disposent de contenu immédiatement réutilisable.</div><ul class="arsenal-list"><li>Note interne CW</li><li>Discussion client-safe</li><li>Email client</li><li>Notice Teams</li><li>Page de cas premium</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Ce cas illustre qu'un agent MSP crédible vend du discernement, de la réduction de risque et de la clarté d'exécution.</div><ul class="arsenal-list"><li>Moins de gestes risqués</li><li>Meilleure défense technique</li><li>Communication propre</li><li>Démo réutilisable</li><li>Compatible lancement produit</li></ul></div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">&ldquo;</div>
+  <p class="quote-text">Le bon agent MSP n'est pas celui qui redémarre vite. C'est celui qui <strong>réduit le risque avant l'action</strong>, prouve l'état réel du serveur critique, puis <strong>transforme une alerte ambiguë en décision exploitable.</strong></p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit — avec assez de profondeur pour convaincre les opérations autant que le marketing.</p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas Windows Update sur serveur critique mixte DC + SQL<br>
+    &copy; 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>
