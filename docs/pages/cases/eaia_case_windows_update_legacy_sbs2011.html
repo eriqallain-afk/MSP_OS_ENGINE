@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas Windows Update sur serveur legacy SBS 2011</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000000;--dark:#080808;--dark2:#0E0E0E;--dark3:#141414;--gold:#C8952A;--gold-light:#E4B84A;--gold-dim:rgba(200,149,42,0.15);--gold-line:rgba(200,149,42,0.3);--silver:#B8BCC8;--silver-light:#D8DCE8;--white:#FFFFFF;--muted:rgba(255,255,255,0.56);--muted2:rgba(255,255,255,0.2);--border:rgba(200,149,42,0.18);--border2:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,149,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,149,42,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+section,nav,footer,header,div{position:relative;z-index:1}a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 64px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(24px)}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:4px;line-height:1}
+.nav-logo-text .ea{color:var(--gold)}.nav-logo-text .sep{color:rgba(200,149,42,0.5);margin:0 2px}.nav-logo-text .ia{color:var(--silver-light)}
+.nav-tagline{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(200,149,42,0.5);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 64px 56px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;top:-20%;right:-8%;width:700px;height:700px;border-radius:50%;border:1px solid rgba(200,149,42,0.08);pointer-events:none}
+.hero-orb::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(200,149,42,0.05)}
+.hero-orb-glow{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,149,42,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-label,.s-label{display:flex;align-items:center;gap:16px}.hero-label{margin-bottom:36px}
+.hero-label-line,.s-label-line{width:48px;height:1px;background:var(--gold)}
+.hero-label-text,.s-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--silver);letter-spacing:8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;max-width:980px}
+.hero h1 em{font-style:italic;color:var(--gold-light)}.hero h1 .strong{font-weight:600;color:var(--white)}
+.hero-product-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:40px;margin-top:16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;line-height:1.8;margin-bottom:52px;font-weight:300}
+.hero-sub strong{color:var(--white);font-weight:600}
+.hero-metrics{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.hero-metric{padding:20px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.hero-metric:last-child{border-right:none}
+.hero-metric-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--gold-light);line-height:1}
+.hero-metric-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.25s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(200,149,42,0.4);color:var(--gold);padding:16px 44px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+.firm-band{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.firm-band-left{display:flex;flex-direction:column;gap:6px}
+.firm-band-name{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.firm-band-desc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase}
+.firm-products{display:flex;gap:2px;flex-wrap:wrap}
+.firm-product{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:6px 14px;border:1px solid rgba(200,149,42,0.15);color:rgba(200,149,42,0.5);text-transform:uppercase}
+.firm-product.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.ticker{overflow:hidden;border-bottom:1px solid var(--border2);padding:12px 0;background:var(--dark3)}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 35s linear infinite;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.2);white-space:nowrap}
+.ticker-inner span{color:rgba(200,149,42,0.6)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s-pad{padding:96px 64px}.s-label{margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:0.95;letter-spacing:-0.5px;margin-bottom:24px}
+.s-title em{font-style:italic;color:var(--gold-light)}.s-title strong{font-weight:600}
+.s-sub{color:var(--muted);font-size:16px;max-width:780px;line-height:1.8;font-weight:300}
+.problem{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.problem-pains{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.pain-item{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:background 0.2s}
+.pain-item:last-child{border-bottom:none}.pain-item:hover{background:var(--gold-dim)}
+.pain-icon{font-size:11px;color:var(--gold);margin-top:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.pain-text{font-size:14px;color:var(--muted);line-height:1.7}.pain-text strong{color:var(--white);font-weight:600}
+.terminal{background:#050505;border:1px solid rgba(200,149,42,0.25);padding:28px;position:relative}
+.terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.t-bar{display:flex;gap:8px;margin-bottom:20px;align-items:center}
+.t-dot{width:9px;height:9px;border-radius:50%}
+.t-dot:nth-child(1){background:#FF5F57}.t-dot:nth-child(2){background:#FEBC2E}.t-dot:nth-child(3){background:#28C840}
+.t-bar-title{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px}
+.t-line{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;margin-bottom:2px}
+.t-gray{color:rgba(255,255,255,0.2)}.t-gold{color:var(--gold)}.t-silver{color:var(--silver)}.t-green{color:#4ADE80}.t-red{color:#F87171}.t-white{color:var(--white)}
+.cursor{display:inline-block;width:7px;height:12px;background:var(--gold);animation:blink 1.2s infinite;vertical-align:middle}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.modules-header,.content-wrap,.table-wrap,.deliver-wrap,.results-wrap,.cta-wrap,.doc-wrap,.flow-wrap{max-width:1160px;margin:0 auto}
+.modules-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.mod-card{background:var(--dark);padding:30px 24px;transition:background 0.25s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.mod-card:hover{background:#0C0C0C}.mod-card:hover::after{transform:scaleX(1)}
+.mod-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.35);letter-spacing:2px;margin-bottom:18px}
+.mod-icon{font-size:24px;margin-bottom:14px}
+.mod-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px;color:var(--white)}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.mod-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300}
+.mod-agents{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;line-height:1.7}
+.arsenal{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arsenal-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.arsenal-block{background:var(--dark);padding:40px 32px}
+.arsenal-n{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.arsenal-unit{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(200,149,42,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+.arsenal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300;margin-bottom:16px}
+.arsenal-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.arsenal-list li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);padding-left:14px;position:relative;line-height:1.6}
+.arsenal-list li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.case-table{width:100%;border-collapse:collapse;background:var(--dark);border:1px solid var(--border);margin-top:36px}
+.case-table th,.case-table td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--border2);vertical-align:top}
+.case-table th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.case-table td{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.case-table td strong{color:var(--white);font-weight:600}
+.doc-section{padding:96px 64px}
+.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.doc-card{background:var(--dark);border:1px solid var(--border);padding:28px;position:relative}
+.doc-card.full{grid-column:1 / -1}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.doc-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.doc-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600}
+.doc-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.24);letter-spacing:2px;text-transform:uppercase}
+.doc-pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:#D2D7E1}
+.doc-pre strong{color:var(--white)}
+.quote-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center;position:relative}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(200,149,42,0.08);line-height:0.5;margin-bottom:20px;font-style:italic}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-weight:300;font-style:italic;max-width:920px;margin:0 auto 28px;line-height:1.6;color:var(--silver-light)}
+.quote-text strong{color:var(--gold-light);font-style:normal}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase}
+.cta-section{padding:120px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,149,42,0.06);pointer-events:none}
+.cta-orb::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(200,149,42,0.04)}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:300;line-height:0.95;margin-bottom:28px}
+.cta-section h2 em{font-style:italic;color:var(--gold-light)}
+.cta-section p{color:var(--muted);font-size:17px;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300}
+.cta-note{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:2px}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:var(--gold)}
+.footer-brand span{color:rgba(200,149,42,0.5);margin:0 4px}.footer-brand em{color:var(--silver);font-style:normal}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:2px;text-align:right;line-height:1.8}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-label{animation:fadeUp 0.7s ease both}.hero-eyebrow{animation:fadeUp 0.7s 0.1s ease both}.hero h1{animation:fadeUp 0.7s 0.15s ease both}.hero-product-tag{animation:fadeUp 0.7s 0.2s ease both}.hero-sub{animation:fadeUp 0.7s 0.25s ease both}.hero-metrics{animation:fadeUp 0.7s 0.3s ease both}.hero-actions{animation:fadeUp 0.7s 0.35s ease both}
+@media(max-width:1080px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:960px){nav,.hero,.s-pad,.firm-band,.quote-section,.cta-section,.doc-section{padding-left:24px;padding-right:24px}.problem-inner{grid-template-columns:1fr;gap:40px}.arsenal-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metric{border-bottom:1px solid var(--border);border-right:none}footer{flex-direction:column;gap:12px;text-align:center}.footer-right{text-align:center}}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+  <div class="hero-label">
+    <div class="hero-label-line"></div>
+    <div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+  </div>
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+  <h1>Une alerte<br>de <em>Windows Update</em><br>devenue <span class="strong">preuve de méthode MSP.</span></h1>
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · WINDOWS PATCHING · READ-ONLY TRIAGE · PRE-REBOOT CHECK · CW · RMM</div>
+  <p class="hero-sub">Cette page montre comment <strong>MSP Intelligence IT</strong> traite un billet de maintenance sur un <strong>serveur legacy SBS 2011</strong> : qualification de l'alerte, collecte <strong>lecture seule</strong>, validation des sessions et accès ouverts avant redémarrage, confirmation du reboot réel, puis clôture avec <strong>livrables complets</strong> et recommandation de <strong>migration</strong>.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="hero-metric-n">1</div><div class="hero-metric-l">Serveur traité</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">2</div><div class="hero-metric-l">Validations reboot</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">4</div><div class="hero-metric-l">Contrôles clés</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">100%</div><div class="hero-metric-l">OS compliance</div></div>
+    <div class="hero-metric"><div class="hero-metric-n">15+</div><div class="hero-metric-l">Ans de plateforme</div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · serveur legacy SBS 2011 anonymisé en DC-01</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">Windows Update</div>
+    <div class="firm-product active">Read-Only</div>
+    <div class="firm-product active">Pre-Reboot</div>
+    <div class="firm-product active">CW Note</div>
+    <div class="firm-product active">CW Discussion</div>
+    <div class="firm-product active">Mémo</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>WINDOWS UPDATE</span> · PENDING REBOOT · PRE-REBOOT CHECK ·
+    <span>SESSIONS SMB</span> · OPEN HANDLES · RMM SAFE SCRIPT ·
+    <span>CONTROLLED REBOOT</span> · SCREENCONNECT VALIDATION · CW NOTE ·
+    <span>CLIENT DISCUSSION</span> · COORDINATOR MEMO · MIGRATION RECOMMENDED ·
+    <span>WINDOWS UPDATE</span> · PENDING REBOOT · PRE-REBOOT CHECK ·
+    <span>SESSIONS SMB</span> · OPEN HANDLES · RMM SAFE SCRIPT ·
+    <span>CONTROLLED REBOOT</span> · SCREENCONNECT VALIDATION · CW NOTE ·
+    <span>CLIENT DISCUSSION</span> · COORDINATOR MEMO · MIGRATION RECOMMENDED ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Une alerte simple,<br>un contexte legacy,<br><em>et plusieurs pièges.</em></div>
+      <p class="s-sub" style="margin-bottom:24px">Le signal initial semblait banal : <strong>Windows Update Installation Failure</strong> sur un seul serveur. Mais le cas mélangeait en réalité un état de <strong>pending reboot</strong>, des handles SMB encore ouverts, une télémétrie RMM partiellement en retard et une plateforme <strong>SBS 2011</strong> vieille d'environ quinze ans.</p>
+      <p class="s-sub">La valeur de l'agent ne se limite pas au redémarrage. Elle réside dans la méthode : <strong>lecture seule d'abord</strong>, qualification du vrai blocage, contrôle du risque utilisateur avant reboot, confirmation visuelle du redémarrage réel, puis clôture propre avec une recommandation stratégique de <strong>migration</strong>.</p>
+    </div>
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item"><div class="pain-icon">01</div><div class="pain-text"><strong>L'alerte semblait pointer Windows Update</strong> — alors que les services n'étaient pas forcément la vraie cause.</div></div>
+        <div class="pain-item"><div class="pain-icon">02</div><div class="pain-text"><strong>Le premier script a échoué au parsing RMM</strong> — ce qui imposait une version de collecte plus robuste et compatible runner.</div></div>
+        <div class="pain-item"><div class="pain-icon">03</div><div class="pain-text"><strong>Des sessions et partages restaient ouverts</strong> — le reboot ne pouvait pas être lancé proprement sans contrôle préalable.</div></div>
+        <div class="pain-item"><div class="pain-icon">04</div><div class="pain-text"><strong>Le RMM ne reflétait pas immédiatement le reboot</strong> — une validation live en session était nécessaire pour éviter une fausse conclusion.</div></div>
+        <div class="pain-item"><div class="pain-icon">05</div><div class="pain-text"><strong>Le serveur est un SBS 2011 legacy</strong> — résoudre le billet ne supprime pas le risque structurel de plateforme obsolète.</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · WINDOWS UPDATE LEGACY SERVER</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET BRUT REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">SOURCE :</span> <span class="t-white">RMM / MONITORING WINDOWS UPDATE</span></div>
+          <div class="t-line"><span class="t-gold">BILLET :</span> <span class="t-white">#000018</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC. · SITE CLIENT</span></div>
+          <div class="t-line"><span class="t-gold">SERVEUR :</span> <span class="t-white">DC-01 · SBS 2011</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Pending reboot confirmé.</div>
+          <div class="t-line t-silver">Sessions et handles réseau vérifiés avant action.</div>
+          <div class="t-line t-silver">Validation live du reboot réel nécessaire.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Collecte RMM-safe relancée</span></div>
+          <div class="t-line"><span class="t-green">✓ Contrôle pré-reboot exécuté</span></div>
+          <div class="t-line"><span class="t-green">✓ Reboot réel confirmé en session</span></div>
+          <div class="t-line"><span class="t-green">✓ Compliance patching validée à 100%</span></div>
+          <div class="t-line"><span class="t-red">✗ Plateforme toujours legacy</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">BILLET RÉSOLU + RECOMMANDATION DE MIGRATION</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Un incident de patching</strong><br>traité avec une méthode <em>défendable.</em></div>
+    <p class="s-sub">Ce cas montre comment l'agent transforme une alerte générique en intervention traçable : collecte sûre, décision sous garde-fous, validation du risque avant reboot, confirmation du résultat technique, puis lecture stratégique de l'actif vieillissant.</p>
+    <table class="case-table">
+      <thead><tr><th>Élément</th><th>Constat</th><th>Impact</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Monitor initial</strong></td><td>Alerte "Windows Update Installation Failure" sur DC-01</td><td>Le symptôme pouvait orienter à tort vers une panne Windows Update franche</td><td>Confirmer en lecture seule avant toute remédiation</td></tr>
+        <tr><td><strong>Collecte RMM</strong></td><td>Le premier bloc a échoué au parsing; une version ASCII / RMM-safe a été utilisée</td><td>Sans adaptation, le runner pouvait donner un faux négatif technique</td><td>Stabiliser la collecte avant d'interpréter l'état réel du serveur</td></tr>
+        <tr><td><strong>État Windows</strong></td><td>Services contrôlés, espace disque suffisant, PendingFileRenameOperations détecté</td><td>Le cœur du problème ressemblait davantage à un reboot en attente qu'à un service cassé</td><td>Orienter la suite vers un redémarrage contrôlé</td></tr>
+        <tr><td><strong>Contrôle pré-reboot</strong></td><td>Sessions actives et handles SMB observés sur des partages ouverts</td><td>Un reboot immédiat risquait d'interrompre des accès encore en cours</td><td>Vérifier / avertir avant lancement du redémarrage</td></tr>
+        <tr><td><strong>Validation du reboot</strong></td><td>Le RMM a d'abord semblé incohérent; le redémarrage a ensuite été confirmé visuellement en session</td><td>Sans preuve live, le post-check pouvait être interprété trop tôt</td><td>Ne retenir comme preuve que le reboot réellement observé</td></tr>
+        <tr><td><strong>Résultat final</strong></td><td>Le volet OS Patching montre le serveur à 100% compliant avec la policy</td><td>Le billet peut être clôturé proprement</td><td>Résolution + recommandation de migration du SBS 2011</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Une seule machine. Zéro improvisation.</em></div>
+    <p class="s-sub">Le cas démontre la capacité produit à opérer avec garde-fous, à corriger sans deviner et à générer les livrables complets attendus par un MSP.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="mod-card"><div class="mod-n">ÉTAPE 01</div><div class="mod-icon">◎</div><div class="mod-name">Ingestion</div><div class="mod-sub">Billet NOC / RMM</div><div class="mod-desc">Le cas démarre avec une alerte Windows Update sur un serveur legacy identifié comme DC-01.</div><div class="mod-agents">Signal brut → cas structuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 02</div><div class="mod-icon">◇</div><div class="mod-name">Triage</div><div class="mod-sub">Lecture seule d'abord</div><div class="mod-desc">L'agent vérifie espace disque, services Windows Update, pending reboot et événements sans toucher à la configuration.</div><div class="mod-agents">Aucun geste prématuré</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 03</div><div class="mod-icon">⌁</div><div class="mod-name">Durcissement</div><div class="mod-sub">Runner RMM</div><div class="mod-desc">Le script de collecte est simplifié pour contourner l'échec de parsing et obtenir enfin un état fiable.</div><div class="mod-agents">Compatibilité terrain</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 04</div><div class="mod-icon">□</div><div class="mod-name">Qualification</div><div class="mod-sub">Vrai problème</div><div class="mod-desc">Le cas est requalifié comme pending reboot persistant plutôt qu'échec simple du service Windows Update.</div><div class="mod-agents">Diagnostic nuancé</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 05</div><div class="mod-icon">△</div><div class="mod-name">Pré-reboot</div><div class="mod-sub">Sessions / fichiers</div><div class="mod-desc">Les sessions interactives, connexions SMB et handles ouverts sont vérifiés avant toute action risquée.</div><div class="mod-agents">Protection utilisateur</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 06</div><div class="mod-icon">✦</div><div class="mod-name">Décision</div><div class="mod-sub">GO / NO-GO</div><div class="mod-desc">Le reboot est retenu seulement après validation des accès encore présents et préparation d'un redémarrage contrôlé.</div><div class="mod-agents">Un risque à la fois</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 07</div><div class="mod-icon">↺</div><div class="mod-name">Exécution</div><div class="mod-sub">Reboot contrôlé</div><div class="mod-desc">Le redémarrage est lancé avec traçabilité, puis confirmé en direct lorsque le RMM reste ambigu.</div><div class="mod-agents">Preuve &gt; supposition</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 08</div><div class="mod-icon">✉</div><div class="mod-name">Post-check</div><div class="mod-sub">Validation finale</div><div class="mod-desc">Les contrôles post-reboot et le volet patching servent à confirmer l'état final plutôt qu'un simple ressenti.</div><div class="mod-agents">Validation croisée</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 09</div><div class="mod-icon">◆</div><div class="mod-name">Clôture</div><div class="mod-sub">CW propre</div><div class="mod-desc">Le billet est clôturé avec note interne, discussion client-safe et mémo coordonnateur déjà prêts à l'emploi.</div><div class="mod-agents">Qualité MSP visible</div></div>
+    <div class="mod-card"><div class="mod-n">ÉTAPE 10</div><div class="mod-icon">◈</div><div class="mod-name">Conseil</div><div class="mod-sub">Vision long terme</div><div class="mod-desc">L'intervention se termine sur une recommandation de migration, car un SBS 2011 compliant reste un actif à risque.</div><div class="mod-agents">Ops + stratégie</div></div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>prouve vraiment.</em></div>
+    <p class="s-sub">La démonstration ne repose pas seulement sur une conformité finale. Elle montre la méthode, la gestion du risque, la preuve du redémarrage réel et la qualité des sorties MSP générées.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-block"><div class="arsenal-n">01</div><div class="arsenal-unit">Actions effectuées</div><div class="arsenal-desc">Qualification du pending reboot, collecte RMM-safe, contrôle des sessions et des partages, redémarrage contrôlé, validation du volet patching.</div><ul class="arsenal-list"><li>Collecte lecture seule</li><li>Analyse Windows Update</li><li>Contrôle pré-reboot</li><li>Reboot confirmé en session</li><li>Validation compliance finale</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">02</div><div class="arsenal-unit">Garde-fous</div><div class="arsenal-desc">Le cas illustre la discipline MSP : un seul serveur, aucune remédiation destructive avant confirmation, et validation explicite avant étape risquée.</div><ul class="arsenal-list"><li>Lecture seule d'abord</li><li>1 serveur à la fois</li><li>Pre-check avant reboot</li><li>Validation live du redémarrage</li><li>Aucune improvisation</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">03</div><div class="arsenal-unit">Constats techniques</div><div class="arsenal-desc">Le cas révèle un pending reboot persistant, des accès SMB encore présents avant redémarrage et une télémétrie RMM en décalage avec la réalité terrain.</div><ul class="arsenal-list"><li>Pending reboot identifié</li><li>Handles réseau vérifiés</li><li>RMM vs session comparés</li><li>Compliance patching validée</li><li>Plateforme legacy reconnue</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">04</div><div class="arsenal-unit">Résultat visible</div><div class="arsenal-desc">Le billet est résolu, le serveur est conforme à la policy et l'intervention produit des livrables exploitables sans retraitement supplémentaire.</div><ul class="arsenal-list"><li>Billet résolu</li><li>OS compliance 100%</li><li>Clôture client-safe</li><li>Mémo coordonnateur prêt</li><li>Cas marketing réutilisable</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">05</div><div class="arsenal-unit">Livrables générés</div><div class="arsenal-desc">Le système produit les sorties complètes attendues dans un flux MSP : note interne, discussion client, mémo de coordination et avis Teams.</div><ul class="arsenal-list"><li>Note interne CW</li><li>Discussion CW</li><li>Mémo coordonnateur</li><li>Notice Teams</li><li>Page de cas premium</li></ul></div>
+    <div class="arsenal-block"><div class="arsenal-n">06</div><div class="arsenal-unit">Valeur business</div><div class="arsenal-desc">Le cas montre qu'un agent MSP crédible traite l'incident, protège l'utilisateur, documente correctement et révèle le risque structurel restant.</div><ul class="arsenal-list"><li>Discernement opérationnel</li><li>Traçabilité complète</li><li>Convainc opérations + vente</li><li>Met en lumière l'obsolescence</li><li>Ouvre la conversation migration</li></ul></div>
+  </div>
+</section>
+
+<section class="doc-section">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <p class="s-sub">Cette section expose les livrables générés à partir du cas : une note interne détaillée, une discussion client-safe, un mémo coordonnateur et une notice Teams.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 01</div><div class="doc-title">CW Note Interne</div></div><div class="doc-copy">Interne · complet</div></div>
+        <div class="doc-pre">═══════════════════════════════════════════════════════════════
+INTERVENTION TECHNIQUE — WINDOWS UPDATE INSTALLATION FAILURE
+═══════════════════════════════════════════════════════════════
+
+INFORMATIONS GÉNÉRALES
+Date/Heure  : 13-11-2024
+Technicien  : Agent NOC-18
+Client      : client inc.
+Billet CW   : #000018
+Site        : site client
+Équipement  : DC-01
+Type        : Troubleshooting / maintenance corrective
+
+CONTEXTE INITIAL
+Alerte de type Windows Update Installation Failure sur DC-01.
+Plateforme legacy : Windows Small Business Server 2011.
+
+DIAGNOSTIC / ANALYSE
+Validation lecture seule effectuée :
+- espace disque suffisant;
+- services Windows Update contrôlés;
+- pending reboot détecté via PendingFileRenameOperations;
+- vérification des sessions utilisateurs et des accès SMB avant redémarrage;
+- validation côté sauvegarde : aucune tâche active expliquant la lenteur;
+- confirmation visuelle du redémarrage réel en session.
+
+ACTIONS TECHNIQUES
+01) Revue de l'alerte NOC et collecte read-only Windows Update
+    Résultat : état pending reboot confirmé.
+02) Vérification pré-redémarrage des sessions et accès ouverts
+    Résultat : connexions SMB présentes; reboot différé jusqu'à validation du risque.
+03) Redémarrage contrôlé puis validation visuelle en session
+    Résultat : reboot réel confirmé malgré une remontée RMM ambiguë.
+04) Validation post-redémarrage et revue du volet OS Patching
+    Résultat : conformité policy validée à 100%.
+
+RÉSULTAT FINAL
+État : RÉSOLU
+
+SUIVI REQUIS
+□ Recommander une migration de la plateforme SBS 2011
+□ Positionner l'actif comme candidat de remplacement à moyen terme
+□ Surveiller les prochains cycles de patching sur cette plateforme legacy</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-top"><div><div class="doc-label">Livrable 02</div><div class="doc-title">CW Discussion</div></div><div class="doc-copy">Client-safe · facturable</div></div>
+        <div class="doc-pre">────────────────────────────────────────────────────────
+       Vérification et remise en conformité des mises à jour
+────────────────────────────────────────────────────────
+
+BILLET : #000018
+DATE : 13-11-2024
+TECHNICIEN : Agent NOC-18
+
+TRAVAUX EFFECTUÉS
+• Validation de l'état général du serveur et revue de la situation signalée
+• Vérifications effectuées avant redémarrage afin de limiter l'impact sur les accès en cours
+• Redémarrage contrôlé réalisé pour compléter le cycle de maintenance
+• Validation finale effectuée dans l'outil de gestion des correctifs après retour en ligne
+
+RÉSULTAT / ÉTAT ACTUEL
+• Le problème signalé au billet est résolu
+• Le serveur est maintenant conforme à 100% à la politique de mises à jour
+• Aucun autre correctif immédiat n'est requis
+
+PROCHAINES ÉTAPES / RECOMMANDATIONS
+• La plateforme SBS 2011 concernée est ancienne
+• Une planification de migration est recommandée</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 03</div><div class="doc-title">Mémo au coordonnateur</div></div><div class="doc-copy">Interne · coordination</div></div>
+        <div class="doc-pre">Mémo coordonnateur — Billet #000018
+
+Client : client inc. / Site : site client / DC-01 / Date : 13-11-2024
+
+Billet résolu. Validation finale : le serveur est conforme à 100% dans le volet OS Patching.
+
+Points à retenir :
+- Comportement lent durant l'intervention
+- RMM en retard sur certaines données de dernier redémarrage
+- Redémarrage réel confirmé en session avant conclusion
+- Plateforme SBS 2011, actif legacy d'environ quinze ans
+
+Recommandation :
+- Ouvrir une discussion de modernisation / migration
+- Positionner DC-01 comme candidat à remplacement prioritaire à moyen terme</div>
+      </div>
+      <div class="doc-card full">
+        <div class="doc-top"><div><div class="doc-label">Livrable 04</div><div class="doc-title">Notice Teams</div></div><div class="doc-copy">Coordination · opération</div></div>
+        <div class="doc-pre">🔧 Billet #000018 — client inc. — site client
+
+Validation lecture seule complétée. Redémarrage contrôlé effectué et confirmé en session.
+Le serveur est maintenant conforme à 100% à la policy de patching. Billet résolu.
+À noter : plateforme SBS 2011 legacy. Migration recommandée.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">&ldquo;</div>
+  <p class="quote-text">Le bon agent MSP n'est pas celui qui lance un reboot au premier signal. C'est celui qui <strong>qualifie le vrai blocage</strong>, protège les accès encore actifs, puis <strong>prouve le résultat</strong> avant de recommander la prochaine décision structurante : la migration.</p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site, la vente ou la démo produit.</p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas Windows Update sur serveur legacy SBS 2011<br>
+    &copy; 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+</body>
+</html>
