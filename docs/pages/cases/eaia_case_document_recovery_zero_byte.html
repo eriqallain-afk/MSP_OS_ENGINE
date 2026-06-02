@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAIA | MSP Intelligence IT — Cas de récupération documentaire zéro ko</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+:root {
+  --black: #000000;
+  --dark: #080808;
+  --dark2: #0E0E0E;
+  --dark3: #141414;
+  --gold: #C8952A;
+  --gold-light: #E4B84A;
+  --gold-dim: rgba(200,149,42,0.15);
+  --gold-line: rgba(200,149,42,0.3);
+  --silver: #B8BCC8;
+  --silver-light: #D8DCE8;
+  --white: #FFFFFF;
+  --muted: rgba(255,255,255,0.56);
+  --muted2: rgba(255,255,255,0.2);
+  --border: rgba(200,149,42,0.18);
+  --border2: rgba(255,255,255,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,149,42,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,149,42,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+section, nav, footer, header, div { position: relative; z-index: 1; }
+a { color: inherit; text-decoration: none; }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 64px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.92);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(24px);
+}
+.nav-brand { display: flex; flex-direction: column; gap: 2px; }
+.nav-logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  line-height: 1;
+}
+.nav-logo-text .ea { color: var(--gold); }
+.nav-logo-text .sep { color: rgba(200,149,42,0.5); margin: 0 2px; }
+.nav-logo-text .ia { color: var(--silver-light); }
+.nav-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  color: rgba(200,149,42,0.5);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold-light); }
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 10px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+.hero {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 64px 64px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  top: -20%;
+  right: -8%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.08);
+  pointer-events: none;
+}
+.hero-orb::before {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.05);
+}
+.hero-orb-glow {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(200,149,42,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-label, .s-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-label { margin-bottom: 36px; }
+.hero-label-line, .s-label-line { width: 48px; height: 1px; background: var(--gold); }
+.hero-label-text, .s-label-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--silver);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  max-width: 980px;
+}
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero h1 .strong { font-weight: 600; color: var(--white); }
+.hero-product-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  margin-top: 16px;
+}
+.hero-sub {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 760px;
+  line-height: 1.8;
+  margin-bottom: 52px;
+  font-weight: 300;
+}
+.hero-sub strong { color: var(--white); font-weight: 600; }
+.hero-metrics {
+  display: flex;
+  gap: 0;
+  margin-bottom: 56px;
+  border: 1px solid var(--border);
+  width: fit-content;
+  flex-wrap: wrap;
+}
+.hero-metric {
+  padding: 20px 32px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero-metric:last-child { border-right: none; }
+.hero-metric-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.hero-metric-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  padding: 16px 44px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.25s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-outline {
+  border: 1px solid rgba(200,149,42,0.4);
+  color: var(--gold);
+  padding: 16px 44px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.25s;
+}
+.btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+.firm-band {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.firm-band-left { display: flex; flex-direction: column; gap: 6px; }
+.firm-band-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.firm-band-desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.firm-products {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.firm-product {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border: 1px solid rgba(200,149,42,0.15);
+  color: rgba(200,149,42,0.5);
+  text-transform: uppercase;
+}
+.firm-product.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-dim);
+}
+.ticker {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border2);
+  padding: 12px 0;
+  background: var(--dark3);
+}
+.ticker-inner {
+  display: inline-flex;
+  gap: 48px;
+  animation: ticker 35s linear infinite;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.2);
+  white-space: nowrap;
+}
+.ticker-inner span { color: rgba(200,149,42,0.6); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.s-pad { padding: 96px 64px; }
+.s-label { margin-bottom: 20px; }
+.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+.s-title em { font-style: italic; color: var(--gold-light); }
+.s-title strong { font-weight: 600; }
+.s-sub {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 780px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+.problem {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.problem-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.problem-pains {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.pain-item {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: background 0.2s;
+}
+.pain-item:last-child { border-bottom: none; }
+.pain-item:hover { background: var(--gold-dim); }
+.pain-icon {
+  font-size: 11px;
+  color: var(--gold);
+  margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+.pain-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.pain-text strong { color: var(--white); font-weight: 600; }
+
+.terminal {
+  background: #050505;
+  border: 1px solid rgba(200,149,42,0.25);
+  padding: 28px;
+  position: relative;
+}
+.terminal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.t-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
+.t-dot { width: 9px; height: 9px; border-radius: 50%; }
+.t-dot:nth-child(1) { background: #FF5F57; }
+.t-dot:nth-child(2) { background: #FEBC2E; }
+.t-dot:nth-child(3) { background: #28C840; }
+.t-bar-title {
+  margin-left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+}
+.t-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  line-height: 1.8;
+  margin-bottom: 2px;
+}
+.t-gray { color: rgba(255,255,255,0.2); }
+.t-gold { color: var(--gold); }
+.t-silver { color: var(--silver); }
+.t-green { color: #4ADE80; }
+.t-red { color: #F87171; }
+.t-white { color: var(--white); }
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 12px;
+  background: var(--gold);
+  animation: blink 1.2s infinite;
+  vertical-align: middle;
+}
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+.modules-header, .content-wrap, .table-wrap, .deliver-wrap, .results-wrap, .cta-wrap, .doc-wrap, .flow-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.modules-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.mod-card {
+  background: var(--dark);
+  padding: 30px 24px;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.mod-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+  transform-origin: left;
+}
+.mod-card:hover { background: #0C0C0C; }
+.mod-card:hover::after { transform: scaleX(1); }
+.mod-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(200,149,42,0.35);
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.mod-icon { font-size: 24px; margin-bottom: 14px; }
+.mod-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  color: var(--white);
+}
+.mod-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.mod-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 300;
+}
+.mod-agents {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 12px;
+  line-height: 1.7;
+}
+.arsenal {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.arsenal-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.arsenal-block {
+  background: var(--dark);
+  padding: 40px 32px;
+}
+.arsenal-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 68px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.arsenal-unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(200,149,42,0.6);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.arsenal-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+.arsenal-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.arsenal-list li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.6;
+}
+.arsenal-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+.case-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  margin-top: 36px;
+}
+.case-table th, .case-table td {
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  vertical-align: top;
+}
+.case-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.case-table td {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.case-table td strong { color: var(--white); font-weight: 600; }
+
+.doc-section {
+  padding: 96px 64px;
+}
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+.doc-card {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  padding: 28px;
+  position: relative;
+}
+.doc-card.full { grid-column: 1 / -1; }
+.doc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.doc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.doc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+.doc-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.24);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.doc-pre {
+  white-space: pre-wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #D2D7E1;
+}
+.doc-pre strong { color: var(--white); }
+
+.quote-section {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 64px;
+  text-align: center;
+  position: relative;
+}
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  color: rgba(200,149,42,0.08);
+  line-height: 0.5;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 300;
+  font-style: italic;
+  max-width: 920px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+  color: var(--silver-light);
+}
+.quote-text strong { color: var(--gold-light); font-style: normal; }
+.quote-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.cta-section {
+  padding: 120px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.06);
+  pointer-events: none;
+}
+.cta-orb::before {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,149,42,0.04);
+}
+.cta-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 300;
+  line-height: 0.95;
+  margin-bottom: 28px;
+}
+.cta-section h2 em { font-style: italic; color: var(--gold-light); }
+.cta-section p {
+  color: var(--muted);
+  font-size: 17px;
+  margin-bottom: 48px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+  font-weight: 300;
+}
+.cta-note {
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 2px;
+}
+footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--dark);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--gold);
+}
+.footer-brand span { color: rgba(200,149,42,0.5); margin: 0 4px; }
+.footer-brand em { color: var(--silver); font-style: normal; }
+.footer-right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 2px;
+  text-align: right;
+  line-height: 1.8;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-label{ animation: fadeUp 0.7s ease both; }
+.hero-eyebrow{ animation: fadeUp 0.7s 0.1s ease both; }
+.hero h1{ animation: fadeUp 0.7s 0.15s ease both; }
+.hero-product-tag{ animation: fadeUp 0.7s 0.2s ease both; }
+.hero-sub{ animation: fadeUp 0.7s 0.25s ease both; }
+.hero-metrics{ animation: fadeUp 0.7s 0.3s ease both; }
+.hero-actions{ animation: fadeUp 0.7s 0.35s ease both; }
+
+@media (max-width: 1080px) {
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 960px) {
+  nav, .hero, .s-pad, .firm-band, .quote-section, .cta-section, .doc-section { padding-left: 24px; padding-right: 24px; }
+  .problem-inner { grid-template-columns: 1fr; gap: 40px; }
+  .arsenal-grid { grid-template-columns: 1fr; }
+  .doc-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-metric { border-bottom: 1px solid var(--border); border-right: none; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-right { text-align: center; }
+}
+@media (max-width: 640px) {
+  .modules-grid { grid-template-columns: 1fr; }
+}
+
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-text"><span class="ea">EA</span><span class="sep"> | </span><span class="ia">IA</span></div>
+    <div class="nav-tagline">Intelligence artificielle opérationnelle</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cas">Cas</a></li>
+    <li><a href="#diagnostic">Diagnostic</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#livrables">Livrables</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Démo — 30 min</a>
+</nav>
+
+<section class="hero" id="cas">
+  <div class="hero-orb"></div>
+  <div class="hero-orb-glow"></div>
+
+  <div class="hero-label">
+    <div class="hero-label-line"></div>
+    <div class="hero-label-text">Démonstrateur public · MSP Intelligence IT · Cas réel anonymisé</div>
+  </div>
+
+  <div class="hero-eyebrow">EAIA — Site de lancement</div>
+
+  <h1>
+    Un document<br>
+    devenu <em>0 Ko</em><br>
+    prouvé par une <span class="strong">méthode MSP.</span>
+  </h1>
+
+  <div class="hero-product-tag">MSP INTELLIGENCE IT · FILE SERVER · PREVIOUS VERSIONS · RDS · OUTLOOK · RECOVERY ANALYSIS</div>
+
+  <p class="hero-sub">
+    Cette page montre comment <strong>MSP Intelligence IT</strong> traite un cas sensible de récupération documentaire :
+    validation en <strong>lecture seule</strong> sur <strong>FS-01</strong>, corrélation avec les <strong>versions antérieures</strong>,
+    lecture du <strong>fichier temporaire</strong>, comparaison avec la <strong>pièce jointe Outlook</strong>, puis génération de
+    <strong>livrables complets</strong> qui expliquent clairement ce qui est prouvé, ce qui reste possible et pourquoi.
+  </p>
+
+  <div class="hero-metrics">
+    <div class="hero-metric">
+      <div class="hero-metric-n">4</div>
+      <div class="hero-metric-l">Sources corrélées</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">3</div>
+      <div class="hero-metric-l">Constats convergents</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">0</div>
+      <div class="hero-metric-l">Version exploitable</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">07:50</div>
+      <div class="hero-metric-l">Heure pivot</div>
+    </div>
+    <div class="hero-metric">
+      <div class="hero-metric-n">2</div>
+      <div class="hero-metric-l">Pistes restantes</div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#diagnostic" class="btn-gold">Voir le cas complet</a>
+    <a href="#contact" class="btn-outline">Demander une démo</a>
+  </div>
+</section>
+
+<div class="firm-band">
+  <div class="firm-band-left">
+    <div class="firm-band-name">Résumé exécutif du cas</div>
+    <div class="firm-band-desc">Entreprise inc. · site client · récupération documentaire · lecture seule · dossier confidentiel</div>
+  </div>
+  <div class="firm-products">
+    <div class="firm-product active">FS-01</div>
+    <div class="firm-product active">RDS-01</div>
+    <div class="firm-product active">OUTLOOK</div>
+    <div class="firm-product active">CW NOTE</div>
+    <div class="firm-product active">CW DISCUSSION</div>
+    <div class="firm-product active">MÉMO TECH</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>LECTURE SEULE</span> · PREVIOUS VERSIONS · ZERO-BYTE FILE ·
+    <span>FICHIER TMP</span> · OUTLOOK ATTACHMENT · HEURE PIVOT 07:50:11 ·
+    <span>ANALYSE DE PREUVE</span> · BACKUP REASONING · LIVRABLES MSP ·
+    <span>LECTURE SEULE</span> · PREVIOUS VERSIONS · ZERO-BYTE FILE ·
+    <span>FICHIER TMP</span> · OUTLOOK ATTACHMENT · HEURE PIVOT 07:50:11 ·
+    <span>ANALYSE DE PREUVE</span> · BACKUP REASONING · LIVRABLES MSP ·
+  </div>
+</div>
+
+<section class="problem s-pad">
+  <div class="problem-inner">
+    <div>
+      <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Le point de départ</div></div>
+      <div class="s-title">Un fichier vide,<br>une demande urgente,<br><em>et plusieurs pistes trompeuses.</em></div>
+      <p class="s-sub" style="margin-bottom: 24px;">
+        Le signal initial parlait d'un document confidentiel à récupérer. Le risque classique était de conclure trop vite à
+        une simple corruption, de tenter des actions destructrices, ou d'annoncer qu'un backup réglerait forcément la situation
+        sans avoir démontré l'état réel des objets observés.
+      </p>
+      <p class="s-sub">
+        L'agent a isolé la chronologie utile : le fichier apparaît pour la première fois sur <strong>FS-01</strong> à <strong>07:50:11</strong>,
+        déjà à <strong>0 Ko</strong>, avec un <strong>.tmp</strong> vide au même moment et une <strong>pièce jointe Outlook</strong> également vide.
+        C'est cette convergence qui transforme un billet de récupération en démonstration de méthode, de prudence et de capacité de clôture.
+      </p>
+    </div>
+
+    <div>
+      <div class="problem-pains">
+        <div class="pain-item">
+          <div class="pain-icon">01</div>
+          <div class="pain-text"><strong>Le fichier semblait récupérable</strong> — mais la taille à 0 Ko devait être confirmée à chaque niveau avant toute conclusion.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">02</div>
+          <div class="pain-text"><strong>Les versions antérieures étaient actives</strong> — ce qui pouvait donner un faux sentiment de récupérabilité si elles montraient toutes le même état vide.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">03</div>
+          <div class="pain-text"><strong>Le fichier temporaire était présent</strong> — mais il fallait déterminer s'il portait du contenu utile ou seulement la trace d'un enregistrement incomplet.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">04</div>
+          <div class="pain-text"><strong>Le contexte RDS était ambigu</strong> — l'utilisatrice utilise aussi deux postes, ce qui impose de distinguer le serveur de fichiers des sources locales possibles.</div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">05</div>
+          <div class="pain-text"><strong>Le backup ne devait pas être survendu</strong> — si le fichier est né vide à cet emplacement, une sauvegarde postérieure a de fortes chances d'être vide elle aussi.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1160px;margin:56px auto 0">
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <div class="t-bar-title">MSP-INTELLIGENCE-IT · CASEFLOW · DOCUMENT RECOVERY ZERO-BYTE</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <div class="t-line t-gray">// BILLET REÇU</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-gold">BILLET :</span> <span class="t-white">#000002</span></div>
+          <div class="t-line"><span class="t-gold">CLIENT :</span> <span class="t-white">ENTREPRISE INC.</span></div>
+          <div class="t-line"><span class="t-gold">SYMPTÔME :</span> <span class="t-white">DOCUMENT CONFIDENTIEL À RÉCUPÉRER</span></div>
+          <div class="t-line"><span class="t-gold">PÉRIMÈTRE :</span> <span class="t-white">FS-01 · RDS-01 · OUTLOOK · BACKUP-01</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gray">// REQUALIFICATION PAR L'AGENT</span></div>
+          <div class="t-line t-silver">Le fichier apparaît à 07:50:11 déjà vide.</div>
+          <div class="t-line t-silver">Le .tmp corrélé est vide lui aussi.</div>
+          <div class="t-line t-silver">La pièce jointe observée est vide également.</div>
+        </div>
+        <div>
+          <div class="t-line t-gray">// DÉCISION OPÉRATIONNELLE</div>
+          <div class="t-line" style="margin-top:8px"><span class="t-green">✓ Lecture seule jusqu'au bout</span></div>
+          <div class="t-line"><span class="t-green">✓ Constat de preuve multi-source</span></div>
+          <div class="t-line"><span class="t-green">✓ Raisonnement backup documenté</span></div>
+          <div class="t-line"><span class="t-red">✗ Aucune version serveur exploitable</span></div>
+          <div class="t-line" style="margin-top:12px"><span class="t-gold">RÉSULTAT :</span> <span class="t-white">CONCLUSION DÉFENDABLE + PISTES RESTANTES CLAIRES</span></div>
+          <div class="t-line t-gold">▌<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-pad" id="diagnostic">
+  <div class="content-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Diagnostic structuré</div></div>
+    <div class="s-title"><strong>Une analyse qui prouve</strong><br>ce qui est <em>perdu</em>, ce qui reste <em>possible.</em></div>
+    <p class="s-sub">
+      Le système ne s'est pas contenté de lire la taille du document. Il a corrélé l'existence du fichier, des versions antérieures,
+      du fichier temporaire, de la pièce jointe et du contexte d'accès pour distinguer une vraie corruption d'un objet apparu
+      directement vide sur le partage.
+    </p>
+
+    <table class="case-table">
+      <thead>
+        <tr>
+          <th>Élément</th>
+          <th>Constat</th>
+          <th>Impact</th>
+          <th>Décision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FS-01 — fichier principal</strong></td>
+          <td>Le document existe sur le partage, mais sa taille observée est de 0 Ko à 09-01-2024 07:50:11</td>
+          <td>Le fichier présent n'est pas exploitable côté serveur</td>
+          <td>Interdire toute remédiation intrusive et documenter le constat de base</td>
+        </tr>
+        <tr>
+          <td><strong>Versions antérieures</strong></td>
+          <td>Les versions disponibles après l'heure pivot montrent le même état vide</td>
+          <td>La fonctionnalité est active mais ne fournit aucune version utile du document</td>
+          <td>Écarter la récupération via Previous Versions pour ce chemin</td>
+        </tr>
+        <tr>
+          <td><strong>Version précédente immédiate</strong></td>
+          <td>Juste avant 07:50:11, ni le dossier ni le fichier n'existent à cet emplacement</td>
+          <td>Le document n'a pas existé plus tôt à ce chemin dans un état valide observable</td>
+          <td>Conclure que l'objet apparaît directement vide sur le partage</td>
+        </tr>
+        <tr>
+          <td><strong>Fichier temporaire</strong></td>
+          <td>Le .tmp corrélé porte le même créneau horaire et une taille de 0 Ko</td>
+          <td>Il ne contient pas de charge utile récupérable; il ressemble à un artefact de save incomplet</td>
+          <td>Expliquer qu'il a probablement servi de fichier de travail / d'enregistrement abandonné</td>
+        </tr>
+        <tr>
+          <td><strong>Pièce jointe Outlook</strong></td>
+          <td>La pièce jointe observée du même document est vide elle aussi</td>
+          <td>La perte de contenu est probablement antérieure ou concomitante à l'envoi</td>
+          <td>Élargir le constat au-delà du seul serveur de fichiers</td>
+        </tr>
+        <tr>
+          <td><strong>Hypothèse backup</strong></td>
+          <td>Si une sauvegarde a été prise plusieurs heures après, elle a de fortes chances de refléter le même état vide</td>
+          <td>Le backup postérieur ne doit pas être présenté comme solution certaine</td>
+          <td>Nuancer : seule une source antérieure ou distincte pourrait encore aider</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s-pad" id="pipeline">
+  <div class="modules-header">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Pipeline de traitement</div></div>
+    <div class="s-title"><strong>10 étapes.</strong><br><em>Lecture seule, preuve, clôture propre.</em></div>
+    <p class="s-sub">Le cas démontre une capacité clé du produit : ne pas promettre une récupération imaginaire, mais établir un diagnostic défendable et produire des livrables immédiatement exploitables.</p>
+  </div>
+
+  <div class="modules-grid">
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 01</div>
+      <div class="mod-icon">◎</div>
+      <div class="mod-name">Ingestion</div>
+      <div class="mod-sub">Billet support</div>
+      <div class="mod-desc">Le cas démarre par une demande de récupération d'un document confidentiel signalé comme corrompu ou vide.</div>
+      <div class="mod-agents">Signal brut → cas structuré</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 02</div>
+      <div class="mod-icon">◇</div>
+      <div class="mod-name">Triage</div>
+      <div class="mod-sub">Lecture seule d'abord</div>
+      <div class="mod-desc">L'agent valide la présence du document sur FS-01, son horodatage, sa taille et l'état du chemin de stockage.</div>
+      <div class="mod-agents">Aucun geste destructif</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 03</div>
+      <div class="mod-icon">⌁</div>
+      <div class="mod-name">Validation VSS</div>
+      <div class="mod-sub">Previous Versions</div>
+      <div class="mod-desc">Le système confirme que les versions antérieures sont actives puis vérifie si une version exploitable existe réellement.</div>
+      <div class="mod-agents">Fonction activée ≠ copie récupérable</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 04</div>
+      <div class="mod-icon">□</div>
+      <div class="mod-name">Chronologie</div>
+      <div class="mod-sub">Heure pivot</div>
+      <div class="mod-desc">La version juste avant 07:50:11 est examinée pour savoir si le dossier et le fichier existaient déjà sur ce chemin.</div>
+      <div class="mod-agents">Première apparition prouvée</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 05</div>
+      <div class="mod-icon">△</div>
+      <div class="mod-name">Corrélation .tmp</div>
+      <div class="mod-sub">Save incomplet</div>
+      <div class="mod-desc">Le fichier temporaire est lu, comparé et interprété comme artefact probable d'ouverture ou d'enregistrement non complétés.</div>
+      <div class="mod-agents">Trace utile, pas contenu utile</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 06</div>
+      <div class="mod-icon">✦</div>
+      <div class="mod-name">Corrélation Outlook</div>
+      <div class="mod-sub">Contexte utilisateur</div>
+      <div class="mod-desc">La pièce jointe du message est contrôlée pour déterminer si le document était déjà vide au moment de l'envoi.</div>
+      <div class="mod-agents">Convergence inter-sources</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 07</div>
+      <div class="mod-icon">↺</div>
+      <div class="mod-name">Raisonnement backup</div>
+      <div class="mod-sub">Nuance défendable</div>
+      <div class="mod-desc">L'agent explique pourquoi une sauvegarde postérieure a probablement capturé le même état vide, tout en précisant les exceptions plausibles.</div>
+      <div class="mod-agents">Ne pas survendre la restauration</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 08</div>
+      <div class="mod-icon">✉</div>
+      <div class="mod-name">Pistes restantes</div>
+      <div class="mod-sub">RDS / postes / backup</div>
+      <div class="mod-desc">Le système réoriente proprement la suite vers les postes locaux, une éventuelle récupération applicative et les backups réellement antérieurs.</div>
+      <div class="mod-agents">Escalade juste</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 09</div>
+      <div class="mod-icon">◆</div>
+      <div class="mod-name">Clôture CW</div>
+      <div class="mod-sub">Interne + facturable</div>
+      <div class="mod-desc">Le cas produit une note interne, une discussion client-safe et un mémo de continuité technique cohérents entre eux.</div>
+      <div class="mod-agents">Qualité MSP visible</div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-n">ÉTAPE 10</div>
+      <div class="mod-icon">◈</div>
+      <div class="mod-name">Démonstration</div>
+      <div class="mod-sub">Lancement produit</div>
+      <div class="mod-desc">Le traitement devient une page premium montrant discernement, méthode d'enquête et qualité documentaire des agents MSP.</div>
+      <div class="mod-agents">Marketing + opérations</div>
+    </div>
+  </div>
+</section>
+
+<section class="arsenal s-pad" id="livrables">
+  <div style="max-width:1160px;margin:0 auto 56px">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables et résultats</div></div>
+    <div class="s-title">Ce que le cas<br><em>prouve vraiment.</em></div>
+    <p class="s-sub">Ici, la valeur ne réside pas dans une récupération miraculeuse. Elle réside dans la capacité à prouver l'état réel du document, à encadrer correctement les attentes et à guider la suite sans ambiguïté.</p>
+  </div>
+
+  <div class="arsenal-grid">
+    <div class="arsenal-block">
+      <div class="arsenal-n">01</div>
+      <div class="arsenal-unit">Actions effectuées</div>
+      <div class="arsenal-desc">Validation du fichier, des versions antérieures, du .tmp, du contexte Outlook et de la chronologie d'apparition sur le partage.</div>
+      <ul class="arsenal-list">
+        <li>Lecture seule de bout en bout</li>
+        <li>Vérification Previous Versions</li>
+        <li>Contrôle du .tmp corrélé</li>
+        <li>Analyse de la pièce jointe</li>
+        <li>Qualification de l'heure pivot</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">02</div>
+      <div class="arsenal-unit">Garde-fous</div>
+      <div class="arsenal-desc">Le cas illustre une discipline MSP forte : aucune modification, aucune promesse de récupération non prouvée, aucune exposition de données sensibles.</div>
+      <ul class="arsenal-list">
+        <li>Lecture seule avant tout</li>
+        <li>Zéro données confidentielles copiées</li>
+        <li>Nuance explicite sur le backup</li>
+        <li>Pas de remédiation destructive</li>
+        <li>Analyse défendable pour CW</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">03</div>
+      <div class="arsenal-unit">Résultats techniques</div>
+      <div class="arsenal-desc">Le système établit qu'aucune version serveur exploitable n'a été retrouvée et que le document apparaît directement vide à cet emplacement.</div>
+      <ul class="arsenal-list">
+        <li>Fichier principal à 0 Ko</li>
+        <li>Fichier temporaire à 0 Ko</li>
+        <li>Pièce jointe vide également</li>
+        <li>Dossier absent avant l'heure pivot</li>
+        <li>Raisonnement backup documenté</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">04</div>
+      <div class="arsenal-unit">Effets observables</div>
+      <div class="arsenal-desc">Le technicien reçoit une conclusion claire, réutilisable et opposable, qui réduit les allers-retours et protège la relation client.</div>
+      <ul class="arsenal-list">
+        <li>Attentes mieux cadrées</li>
+        <li>Moins d'hypothèses floues</li>
+        <li>Meilleure défense du constat</li>
+        <li>Prochaine étape clarifiée</li>
+        <li>Communication maîtrisée</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">05</div>
+      <div class="arsenal-unit">Sorties prêtes à l'emploi</div>
+      <div class="arsenal-desc">Le produit livre de la matière immédiatement exploitable par le technicien, les opérations et la clôture ConnectWise.</div>
+      <ul class="arsenal-list">
+        <li>Note interne CW</li>
+        <li>Discussion client-safe</li>
+        <li>Mémo technicien</li>
+        <li>Notice Teams</li>
+        <li>Page de cas premium</li>
+      </ul>
+    </div>
+    <div class="arsenal-block">
+      <div class="arsenal-n">06</div>
+      <div class="arsenal-unit">Valeur business</div>
+      <div class="arsenal-desc">Le cas montre qu'un agent MSP crédible ne vend pas seulement de la récupération : il vend du discernement, de la méthode, de la traçabilité et de la clarté client.</div>
+      <ul class="arsenal-list">
+        <li>Plus qu'un diagnostic</li>
+        <li>Plus qu'un rapport brut</li>
+        <li>Convainc opérations + vente</li>
+        <li>Démonstration réutilisable</li>
+        <li>Compatible lancement produit</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="doc-section">
+  <div class="doc-wrap">
+    <div class="s-label"><div class="s-label-line"></div><div class="s-label-text">Livrables complets</div></div>
+    <div class="s-title"><strong>Les sorties réelles,</strong><br><em>dans le bon format MSP.</em></div>
+    <p class="s-sub">
+      Cette section expose les livrables générés à partir du cas : une note interne détaillée, une discussion facturable,
+      un mémo pour le technicien et une notice de coordination. Le contenu est anonymisé pour usage public.
+    </p>
+
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 01</div>
+            <div class="doc-title">CW Note Interne</div>
+          </div>
+          <div class="doc-copy">Interne · complet</div>
+        </div>
+        <div class="doc-pre">BILLET:
+-------
+#000002
+
+CLIENT:
+-------
+Entreprise inc.
+
+DATE:
+-------
+09-01-2024
+
+
+────────────────────────────────────────────────────────
+   Intervention:     RÉCUPÉRATION DOCUMENT / VALIDATION VERSIONS ANTÉRIEURES / ANALYSE CONTEXTE
+────────────────────────────────────────────────────────
+
+
+CONTEXTE
+
+Demande reçue pour récupération d'un document confidentiel signalé vide.
+Contrainte identifiée : accès indisponible au serveur de sauvegarde au moment de l'intervention.
+
+
+VALIDATION EFFECTUÉE
+
+Validation en lecture seule du document sur FS-01.
+Vérification de l'activation des versions antérieures sur le serveur concerné.
+Contrôle des versions antérieures disponibles pour le dossier et le fichier visés.
+Vérification du fichier principal et du fichier temporaire associé.
+Analyse du contexte d'ouverture depuis Outlook et des informations disponibles sur l'environnement d'accès.
+Validation additionnelle : la pièce jointe consultée liée au document est également vide.
+Validation additionnelle : la version antérieure immédiatement avant 09-01-2024 07:50:11 ne contient ni le dossier ni le fichier.
+
+
+CONSTATS
+
+Le fichier recherché est présent sur le partage, mais avec une taille de 0 Ko.
+Horodatage observé sur le fichier : 09-01-2024 à 07:50:11.
+Le fichier temporaire associé observé au même créneau horaire est également à 0 Ko.
+Les versions antérieures disponibles après ce moment montrent le même état, sans version exploitable retrouvée.
+La version antérieure immédiatement avant 07:50:11 ne contient ni le dossier ni le fichier.
+La pièce jointe liée au document consultée dans le message est également vide.
+Aucun profil RDS correspondant au nom du contact n'a été retrouvé durant la vérification; l'ouverture initiale pourrait donc avoir été faite localement sur un des deux postes utilisés.
+
+
+ANALYSE
+
+Les constats ne pointent pas vers un document valide devenu vide plus tard sur le serveur.
+Le dossier et le fichier apparaissent pour la première fois à cet emplacement à 07:50:11, déjà en état vide.
+L'hypothèse la plus probable est une création ou un enregistrement incomplet du document au moment de sa première apparition sur le partage.
+Le fait que le fichier principal, le fichier temporaire associé et la pièce jointe observée soient tous vides suggère que le contenu n'a probablement pas été écrit correctement avant ou pendant l'enregistrement et/ou l'envoi.
+Le fichier temporaire a vraisemblablement servi de fichier de travail temporaire lors de l'ouverture ou de l'enregistrement, puis est resté en place à la suite d'une fermeture ou d'un enregistrement non complétés.
+Dans ce contexte, toute sauvegarde prise après 09-01-2024 07:50:11 aurait vraisemblablement capturé elle aussi un fichier vide.
+Une exception demeure possible uniquement si la solution de sauvegarde conserve un point de restauration antérieur hors de ce chemin précis, ou si une copie distincte existe sur POSTE-01, POSTE-02, dans un cache applicatif ou dans une autre source indépendante.
+
+
+IMPACT
+
+Aucune modification appliquée sur les données.
+Intervention effectuée en lecture seule uniquement.
+Aucune restauration ni remédiation exécutée pendant cette étape.
+
+
+PROCHAINES ÉTAPES RECOMMANDÉES
+
+Vérifier POSTE-01 et POSTE-02 pour rechercher une copie locale, un fichier temporaire ou une récupération automatique.
+Vérifier les emplacements de récupération applicative et toute copie locale non nulle créée avant ou autour du créneau observé.
+Dès rétablissement de l'accès au système de sauvegarde, effectuer une recherche ciblée pour confirmer s'il existe un point antérieur distinct exploitable.
+Documenter le constat final au billet comme perte probable de contenu avant ou au moment de la première création visible sur le partage, sous réserve de découverte d'une copie locale.
+
+
+STATUT
+
+Constat technique complété.
+Aucune version exploitable retrouvée côté serveur de fichiers.
+Poursuite recommandée sur les postes locaux et sur la sauvegarde interne dès accès rétabli.</div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 02</div>
+            <div class="doc-title">CW Discussion</div>
+          </div>
+          <div class="doc-copy">Client-safe · facturable</div>
+        </div>
+        <div class="doc-pre">INTERVENTION: Validation et analyse de récupération d'un document
+DATE: 09-01-2024
+TECHNICIEN: Agent NOC-05
+
+PRÉPARATION ET DÉCOUVERTE.
+---------
+Lecture du billet reçu et accès à la documentation d'infrastructure.
+
+TRAVAUX EFFECTUÉS:
+• Validation en lecture seule du document demandé sur le serveur de fichiers
+• Vérification des versions antérieures disponibles pour le dossier et le fichier concernés
+• Contrôle du fichier temporaire associé au même créneau horaire
+• Validation du contexte lié à la pièce jointe correspondante et comparaison avec le fichier présent sur le partage
+• Analyse des éléments disponibles afin de déterminer si une version exploitable pouvait être récupérée côté serveur
+• Recommandation de poursuite des recherches sur les postes utilisés par nom du contact ainsi que dans la solution de sauvegarde interne dès que l'accès sera rétabli
+
+RÉSULTAT:
+• Le document présent sur le serveur a été confirmé à 0 Ko
+• Les versions antérieures consultées montrent le même état et ne permettent pas de récupérer une version exploitable
+• Les constats indiquent que le document apparaît directement vide à cet emplacement
+• Les meilleures pistes restantes sont une copie locale sur poste utilisateur ou un point de restauration antérieur dans la sauvegarde interne</div>
+      </div>
+
+      <div class="doc-card full">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 03</div>
+            <div class="doc-title">Mémo pour le technicien</div>
+          </div>
+          <div class="doc-copy">Interne · cross-device</div>
+        </div>
+        <div class="doc-pre">Mémo technique — récupération du fichier
+
+Résumé du constat
+- Le fichier apparaît sur le partage le 09-01-2024 à 07:50:11 déjà à 0 Ko.
+- Le fichier temporaire associé est aussi à 0 Ko.
+- Les versions antérieures après cette heure montrent toutes le même état.
+- La version antérieure juste avant cette heure ne contient ni le dossier ni le fichier.
+- La pièce jointe observée liée au document est également vide.
+- Aucun profil RDS évident au nom du contact n'a été retrouvé; il est possible que l'ouverture initiale ait eu lieu localement sur POSTE-01 ou POSTE-02.
+
+Interprétation
+- Le scénario le plus probable est un enregistrement initial incomplet ou une création vide du document au moment de sa première apparition sur le partage.
+- Ce n'est pas le portrait d'un bon document devenu vide plus tard sur FS-01.
+- Un backup pris après 07:50:11 a de fortes chances de contenir lui aussi un fichier vide.
+- Seules exceptions plausibles : copie locale sur poste, récupération applicative locale, ou point de restauration antérieur distinct dans la sauvegarde.
+
+Pistes restantes
+- Vérifier POSTE-01 et POSTE-02.
+- Rechercher toute copie locale du document, fichier temporaire, récupération automatique ou export connexe.
+- Vérifier les éléments envoyés/reçus et toute autre source documentaire connexe.
+- Refaire une validation dans la sauvegarde interne dès que l'accès à BACKUP-01 sera rétabli.
+
+Conclusion
+- Côté serveur de fichiers, la piste est négative.
+- Les meilleures chances restantes sont maintenant côté poste local et côté sauvegarde antérieure distincte.</div>
+      </div>
+
+      <div class="doc-card full">
+        <div class="doc-top">
+          <div>
+            <div class="doc-label">Livrable 04</div>
+            <div class="doc-title">Notice Teams</div>
+          </div>
+          <div class="doc-copy">Coordination · opération</div>
+        </div>
+        <div class="doc-pre">🔧 Maintenance en cours — Billet : #000002
+Client : client inc.
+Tâche principale : Validation de récupération documentaire sur FS-01 et analyse des versions antérieures
+Impact : Aucun changement serveur — analyse en lecture seule, document observé vide sur le partage et dans les versions disponibles
+
+Mise à jour :
+- Le fichier apparaît à 07:50:11 déjà à 0 Ko.
+- Les versions antérieures disponibles montrent le même état.
+- Le fichier temporaire corrélé et la pièce jointe observée sont également vides.
+- Les prochaines pistes restantes sont les postes locaux de l'utilisatrice et la sauvegarde si un point réellement antérieur existe.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">
+    Le bon agent MSP n'est pas celui qui promet une restauration magique.
+    C'est celui qui <strong>prouve l'état réel du document</strong>, explique pourquoi une sauvegarde tardive
+    ne changera probablement rien, puis <strong>oriente proprement les dernières pistes utiles</strong>.
+  </p>
+  <div class="quote-attr">EAIA · MSP Intelligence IT · démonstrateur public anonymisé</div>
+</div>
+
+<section class="cta-section" id="contact">
+  <div class="cta-orb"></div>
+  <h2>Tu veux des cas<br><em>comme celui-ci</em><br>sur ton site de lancement ?</h2>
+  <p>
+    EAIA transforme de vrais billets MSP en démonstrations premium prêtes pour le site,
+    la vente ou la démo produit — avec le niveau de fond nécessaire pour convaincre les opérations autant que le marketing.
+  </p>
+  <a href="mailto:info@ea-ia.ca" class="btn-gold">Demander une démo</a>
+  <p class="cta-note">Page premium · contenu anonymisé · compatible site existant, GitHub Pages et lancement produit</p>
+</section>
+
+<footer>
+  <div class="footer-brand">EA<span>|</span><em>IA</em></div>
+  <div class="footer-right">
+    MSP Intelligence IT — Cas de récupération documentaire zéro ko<br>
+    © 2026 EAIA — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>
