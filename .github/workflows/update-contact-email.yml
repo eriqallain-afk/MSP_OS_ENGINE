@@ -25,9 +25,9 @@ jobs:
 
           exts = {'.html', '.htm', '.md', '.txt', '.yml', '.yaml', '.json', '.css', '.js'}
           replacements = {
-              'contact@eaia.ca': 'info@ea-ia.ca',
+              'info@ea-ia.ca': 'info@ea-ia.ca',
               'contact@ea-ia.ca': 'info@ea-ia.ca',
-              'eaia.eaai@gmail.com': 'info@ea-ia.ca',
+              'info@ea-ia.ca': 'info@ea-ia.ca',
               'support@eaia.ca': 'info@ea-ia.ca',
           }
 

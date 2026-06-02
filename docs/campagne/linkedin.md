@@ -99,7 +99,7 @@ On vous montre un billet — le vôtre si vous voulez — traité par les agents
 
 Disponible cette semaine.
 
-📩 eaia.eaai@gmail.com
+📩 info@ea-ia.ca
 Objet : Démo MSP Intelligence IT
 
 #MSP #IntelligenceArtificielle #Demo #EAIA #ITops
